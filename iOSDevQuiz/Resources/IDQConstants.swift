@@ -43,6 +43,11 @@ struct IDQConstants {
     static let errorColor: UIColor = UIColor(named: "errorColor")!
     
     
+    //MARK: Images
+    
+    ///Transparent miniature of the app icon with the orange, branding color
+    static let appIconMiniature: UIImage = UIImage(named: "appIconMiniature")!
+    
     //MARK: Font
     public static func setFont(fontSize: CGFloat, isBold: Bool) -> UIFont {
         if isBold {
