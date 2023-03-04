@@ -59,5 +59,6 @@ final class IDQTabBarController: UITabBarController {
         }
         setViewControllers(navControllers, animated: true)
     }
+    
 }
 

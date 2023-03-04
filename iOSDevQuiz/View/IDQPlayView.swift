@@ -7,7 +7,27 @@
 
 import UIKit
 
+protocol IDQPlayViewDelegate: AnyObject {
+    func idqPlayView(_ playView: IDQPlayView, didTapOnButton: UIButton)
+}
+
+/// The view that handles showing the main game related buttons like start quiz, game options, resources and related UI
 class IDQPlayView: UIView {
+    
+    public weak var delegate: IDQPlayViewDelegate?
+    
+    private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
+    private let menuButtonHight: CGFloat = 48.0
+    private let menuButtonCornerRadius: CGFloat = 8.0
+    private let menuButtonFontSize: CGFloat = 24.0
+    
+    private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
+    
+    private let topBackgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let appIconMiniImageView: UIImageView = {
         let imageView = UIImageView()
@@ -23,7 +43,7 @@ class IDQPlayView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.brandingColor
-        label.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: 21, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -41,14 +61,26 @@ class IDQPlayView: UIView {
     
     private let startGameButton: UIButton = {
         let button = UIButton()
-        
         return button
     }()
+    
+    private let quizOptionsButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    private let questionBankButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        setupButtons([startGameButton, quizOptionsButton, questionBankButton], titles: ["Start Quiz", "Options", "Resources"])
     }
     
     required init?(coder: NSCoder) {
@@ -58,11 +90,20 @@ class IDQPlayView: UIView {
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
-    }
+        topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
+        topBackgroundView.layer.cornerRadius = topBackgroundSize/2
+        topBackgroundView.gradient(IDQConstants.highlightedContentBackgroundColor.cgColor, IDQConstants.contentBackgroundColor.cgColor, direction: .bottomLeftToTopRight)    }
+    
+    //MARK: - Private
     
     private func setupConstraints() {
-        addSubviews(appIconMiniImageView, titleLabel, subTitle)
+        addSubviews(topBackgroundView, appIconMiniImageView, titleLabel, subTitle, startGameButton, quizOptionsButton, questionBankButton)
         NSLayoutConstraint.activate([
+            topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
+            topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
+            topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
+            
             appIconMiniImageView.heightAnchor.constraint(equalToConstant: 64),
             appIconMiniImageView.widthAnchor.constraint(equalToConstant: 64),
             appIconMiniImageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -77,252 +118,80 @@ class IDQPlayView: UIView {
             titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.80),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             titleLabel.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 0),
+            
+            startGameButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
+            startGameButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            startGameButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            startGameButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
+            
+            quizOptionsButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
+            quizOptionsButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            quizOptionsButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            quizOptionsButton.topAnchor.constraint(equalTo: startGameButton.bottomAnchor, constant: 14),
+            
+            questionBankButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
+            questionBankButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            questionBankButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            questionBankButton.topAnchor.constraint(equalTo: quizOptionsButton.bottomAnchor, constant: 14),
         ])
         //playView.delegate = self
     }
     
+    private func setupButtons(_ buttons: [UIButton], titles: [String]) {
+        var i: Int = 0
+        for button in buttons {
+            if i == 0 {
+                setupButton(button, title: titles[i], isHeroButton: true)
+            } else {
+                setupButton(button, title: titles[i])
+            }
+            i = i + 1
+        }
+    }
+    
+    private func setupButton(_ button: UIButton, title: String, isHeroButton: Bool = false) {
+        button.frame.size = CGSize(width: menuButtonWidth, height: menuButtonHight)
+        button.layer.cornerRadius = menuButtonCornerRadius
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isAccessibilityElement = true
+        button.accessibilityLabel = title
+        if isHeroButton {
+            let color1: UIColor = IDQConstants.lightOrange
+            let color2: UIColor = IDQConstants.darkOrange
+            button.addAttributedTitle(title: title, fontSize: menuButtonFontSize, fontColor: IDQConstants.backgroundColor, highlightColor: IDQConstants.contentBackgroundColor)
+            button.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
+        } else {
+            let backgroundColor: UIColor = IDQConstants.contentBackgroundColor
+            button.backgroundColor = backgroundColor
+            button.addAttributedTitle(title: title, fontSize: menuButtonFontSize, fontColor: IDQConstants.basicFontColor, highlightColor: IDQConstants.highlightFontColor)
+        }
+        switch button {
+        case startGameButton:
+            button.addTarget(self, action: #selector(startButtonTapped(_:)), for: .touchUpInside)
+        case quizOptionsButton:
+            button.addTarget(self, action: #selector(optionsButtonTapped(_:)), for: .touchUpInside)
+        case questionBankButton:
+            button.addTarget(self, action: #selector(questionBankButtonTapped(_:)), for: .touchUpInside)
+        default:
+            print("ERROR - UNKNOWN value: Unknown button found while trying to setup setupButtons in IDQPlayView")
+        }
+    }
+    
+    @objc
+    private func startButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @objc
+    private func optionsButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @objc
+    private func questionBankButtonTapped(_ sender: UIButton) {
+        
+    }
+    
     
 }
-
-//
-//  RMEpisodeDetailView.swift
-//  RickAndMorty
-//
-//  Created by Daniel Karath on 2/15/23.
-//
-/*
- import UIKit
- 
- protocol RMEpisodeDetailViewDelegate: AnyObject {
- func rmEpisodeDetailView(
- _ detailView: RMEpisodeDetailView,
- didSelect character: RMCharacter
- )
- }
- 
- final class RMEpisodeDetailView: UIView {
- 
- public weak var delegate: RMEpisodeDetailViewDelegate?
- 
- private var viewModel: RMEpisodeDetailViewViewModel? {
- didSet {
- spinner.stopAnimating()
- self.collectionView?.reloadData()
- self.collectionView?.isHidden = false
- UIView.animate(withDuration: 0.33, delay: 0) {
- self.collectionView?.alpha = 1.0
- }
- }
- }
- 
- private var collectionView: UICollectionView?
- 
- private let spinner: UIActivityIndicatorView = {
- let spinner = UIActivityIndicatorView(style: .large)
- spinner.hidesWhenStopped = true
- spinner.translatesAutoresizingMaskIntoConstraints = false
- return spinner
- }()
- 
- //MARK: - Init
- override init(frame: CGRect) {
- super.init(frame: frame)
- translatesAutoresizingMaskIntoConstraints = false
- backgroundColor = RMConstants.darkBackgroundColor
- let collectionView = createCollectionView()
- addSubviews(collectionView, spinner)
- self.collectionView = collectionView
- addConstraints()
- 
- spinner.startAnimating()
- }
- 
- required init?(coder: NSCoder) {
- fatalError("Unsupported")
- }
- 
- //MARK: - Private
- 
- private func addConstraints() {
- guard let collectionView = collectionView else {
- return
- }
- NSLayoutConstraint.activate([
- spinner.heightAnchor.constraint(equalToConstant: 100),
- spinner.widthAnchor.constraint(equalToConstant: 100),
- spinner.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
- spinner.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0),
- 
- collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
- collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
- collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
- collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
- ])
- }
- 
- private func createCollectionView() -> UICollectionView {
- let layout = UICollectionViewCompositionalLayout { section, _ in
- return self.layout(for: section)
- }
- let collectionView = UICollectionView(
- frame: .zero,
- collectionViewLayout: layout
- )
- collectionView.translatesAutoresizingMaskIntoConstraints = false
- collectionView.isHidden = true
- collectionView.alpha = 0.0
- collectionView.delegate = self
- collectionView.dataSource = self
- collectionView.register(RMEpisodeInfoCollectionViewCell.self, forCellWithReuseIdentifier: RMEpisodeInfoCollectionViewCell.cellIdentifier)
- collectionView.register(RMCharacterMiniatureCollectionViewCell .self, forCellWithReuseIdentifier: RMCharacterMiniatureCollectionViewCell.cellIdentifier)
- return collectionView
- }
- 
- //MARK: - Public
- 
- public func configure(with viewModel: RMEpisodeDetailViewViewModel) {
- self.viewModel = viewModel
- }
- 
- }
- 
- //MARK: - extensions
- 
- extension RMEpisodeDetailView {
- func layout(for section: Int) -> NSCollectionLayoutSection {
- guard let sections = viewModel?.cellViewModels else {
- return createEpisodeInfoLayout()
- }
- 
- switch sections[section] {
- case .information:
- return createEpisodeInfoLayout()
- case .characters:
- return createEpisodeCharacterLayout()
- default:
- return createEpisodeInfoLayout()
- }
- }
- 
- public func createEpisodeInfoLayout() -> NSCollectionLayoutSection  {
- let item = NSCollectionLayoutItem(layoutSize: .init(
- widthDimension: .fractionalWidth(1.0),
- heightDimension: .fractionalHeight(1))
- )
- 
- item.contentInsets = NSDirectionalEdgeInsets(
- top: 4,
- leading: 2,
- bottom: 4,
- trailing: 2
- )
- 
- let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
- widthDimension: .fractionalWidth(1),
- heightDimension: .absolute(40)),
- subitems: [item]
- )
- 
- let section = NSCollectionLayoutSection(group: group)
- 
- return section
- }
- 
- public func createEpisodeCharacterLayout() -> NSCollectionLayoutSection  {
- let item = NSCollectionLayoutItem(layoutSize: .init(
- widthDimension: .fractionalWidth(0.25),
- heightDimension: .fractionalHeight(1))
- )
- 
- item.contentInsets = NSDirectionalEdgeInsets(
- top: 2,
- leading: 2,
- bottom: 2,
- trailing: 2
- )
- 
- let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
- widthDimension: .fractionalWidth(1),
- heightDimension: .absolute(150)),
- subitems: [item]
- )
- 
- let section = NSCollectionLayoutSection(group: group)
- 
- return section
- }
- 
- }
- 
- extension RMEpisodeDetailView: UICollectionViewDelegate, UICollectionViewDataSource {
- 
- func numberOfSections(in collectionView: UICollectionView) -> Int {
- return viewModel?.cellViewModels.count ?? 0
- }
- 
- func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
- guard let sections = viewModel?.cellViewModels else {
- return 0
- }
- 
- let sectionType = sections[section]
- 
- switch sectionType {
- case .information(let viewModels):
- return viewModels.count
- case .characters(let viewModels):
- return viewModels.count
- default:
- return 0
- }
- }
- 
- func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
- guard let sections = viewModel?.cellViewModels else {
- fatalError("No view model found")
- }
- 
- let sectionType = sections[indexPath.section]
- 
- switch sectionType {
- case .information(let viewModels):
- let cellViewModel = viewModels[indexPath.row]
- guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMEpisodeInfoCollectionViewCell.cellIdentifier, for: indexPath) as? RMEpisodeInfoCollectionViewCell else {
- fatalError()
- }
- cell.configure(with: cellViewModel)
- return cell
- case .characters(let viewModels):
- let cellViewModel = viewModels[indexPath.row]
- guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterMiniatureCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterMiniatureCollectionViewCell else {
- fatalError()
- }
- cell.configure(with: cellViewModel)
- return cell
- }
- }
- 
- func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
- collectionView.deselectItem(at: indexPath, animated: true)
- guard let viewModel = viewModel else {
- return
- }
- let sections = viewModel.cellViewModels
- 
- 
- let sectionType = sections[indexPath.section]
- 
- switch sectionType {
- case .information(let viewModels):
- break
- case .characters:
- guard let character = viewModel.character(at: indexPath.row) else {
- return
- }
- delegate?.rmEpisodeDetailView(self, didSelect: character)
- }
- 
- }
- 
- }
- */
