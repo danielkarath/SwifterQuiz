@@ -21,6 +21,11 @@
 		3914C92E29B0ED260001377B /* IDQGameOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C92D29B0ED260001377B /* IDQGameOptionsViewController.swift */; };
 		3914C93029B0FBE90001377B /* IDQExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C92F29B0FBE90001377B /* IDQExtensions.swift */; };
 		3914C93329B10B300001377B /* IDQPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C93229B10B300001377B /* IDQPlayView.swift */; };
+		3952D1DE29B8AC220061C5C9 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */; };
+		3952D1E129B8C6A10061C5C9 /* IDQPlayViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E029B8C6A10061C5C9 /* IDQPlayViewViewModel.swift */; };
+		3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E329B8C70D0061C5C9 /* IDQGame.swift */; };
+		3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */; };
+		3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		3914C92D29B0ED260001377B /* IDQGameOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameOptionsViewController.swift; sourceTree = "<group>"; };
 		3914C92F29B0FBE90001377B /* IDQExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQExtensions.swift; sourceTree = "<group>"; };
 		3914C93229B10B300001377B /* IDQPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQPlayView.swift; sourceTree = "<group>"; };
+		3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
+		3952D1E029B8C6A10061C5C9 /* IDQPlayViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQPlayViewViewModel.swift; sourceTree = "<group>"; };
+		3952D1E329B8C70D0061C5C9 /* IDQGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGame.swift; sourceTree = "<group>"; };
+		3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuestion.swift; sourceTree = "<group>"; };
+		3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				3914C92129B0DC300001377B /* Resources */,
+				3952D1E229B8C7050061C5C9 /* Model */,
+				3952D1DF29B8C6710061C5C9 /* ViewModel */,
 				3914C93129B10B190001377B /* View */,
 				3914C91F29B0DBD70001377B /* Controllers */,
 				3914C91929B0D7E50001377B /* Info.plist */,
@@ -126,9 +138,36 @@
 		3914C93129B10B190001377B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3914C93229B10B300001377B /* IDQPlayView.swift */,
+				3952D1DC29B8ABB10061C5C9 /* PlayViews */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3952D1DC29B8ABB10061C5C9 /* PlayViews */ = {
+			isa = PBXGroup;
+			children = (
+				3914C93229B10B300001377B /* IDQPlayView.swift */,
+				3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */,
+			);
+			path = PlayViews;
+			sourceTree = "<group>";
+		};
+		3952D1DF29B8C6710061C5C9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3952D1E029B8C6A10061C5C9 /* IDQPlayViewViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3952D1E229B8C7050061C5C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3952D1E329B8C70D0061C5C9 /* IDQGame.swift */,
+				3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */,
+				3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,14 +242,19 @@
 			files = (
 				3914C92929B0EBF10001377B /* IDQSettingsViewController.swift in Sources */,
 				3914C90D29B0D7E40001377B /* IDQTabBarController.swift in Sources */,
+				3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */,
+				3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */,
 				3914C93029B0FBE90001377B /* IDQExtensions.swift in Sources */,
 				3914C93329B10B300001377B /* IDQPlayView.swift in Sources */,
 				3914C92529B0EB8A0001377B /* IDQGameViewController.swift in Sources */,
 				3914C92729B0EBD20001377B /* IDQStatsViewController.swift in Sources */,
 				3914C90929B0D7E40001377B /* AppDelegate.swift in Sources */,
+				3952D1DE29B8AC220061C5C9 /* StartButtonView.swift in Sources */,
 				3914C92329B0DCE60001377B /* IDQConstants.swift in Sources */,
 				3914C92E29B0ED260001377B /* IDQGameOptionsViewController.swift in Sources */,
+				3952D1E129B8C6A10061C5C9 /* IDQPlayViewViewModel.swift in Sources */,
 				3914C91329B0D7E40001377B /* iOSDevQuiz.xcdatamodeld in Sources */,
+				3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,
 				3914C92C29B0ECFB0001377B /* IDQPlayViewController.swift in Sources */,
 			);
@@ -358,7 +402,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -388,7 +431,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -11,10 +11,13 @@ final class IDQPlayViewController: UIViewController {
 
     private let playView = IDQPlayView()
     
+    private let viewModel = IDQPlayViewViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = IDQConstants.backgroundColor
         setupConstraints()
+        playView.delegate = self
     }
     
     private func setupConstraints() {
@@ -28,4 +31,19 @@ final class IDQPlayViewController: UIViewController {
         //playView.delegate = self
     }
 
+}
+
+extension IDQPlayViewController: IDQPlayViewDelegate {
+    
+    func idqPlayView(_ playView: IDQPlayView, didSelect game: IDQGame?) {
+        guard let game = game else {
+            return
+        }
+        let questions = viewModel.generateQuestions(game: game)
+        let detailVC = IDQGameViewController(questions: questions)
+        detailVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    
 }

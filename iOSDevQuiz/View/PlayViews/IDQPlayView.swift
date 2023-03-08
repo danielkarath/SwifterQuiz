@@ -8,13 +8,15 @@
 import UIKit
 
 protocol IDQPlayViewDelegate: AnyObject {
-    func idqPlayView(_ playView: IDQPlayView, didTapOnButton: UIButton)
+    func idqPlayView(_ playView: IDQPlayView, didSelect game: IDQGame?)
 }
 
 /// The view that handles showing the main game related buttons like start quiz, game options, resources and related UI
 class IDQPlayView: UIView {
     
     public weak var delegate: IDQPlayViewDelegate?
+        
+    private let startButtonView = StartButtonView()
     
     private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
     private let menuButtonHight: CGFloat = 48.0
@@ -59,11 +61,6 @@ class IDQPlayView: UIView {
         return label
     }()
     
-    private let startGameButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
-    
     private let quizOptionsButton: UIButton = {
         let button = UIButton()
         return button
@@ -80,7 +77,8 @@ class IDQPlayView: UIView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
-        setupButtons([startGameButton, quizOptionsButton, questionBankButton], titles: ["Start Quiz", "Options", "Resources"])
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
+        addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -92,12 +90,13 @@ class IDQPlayView: UIView {
         backgroundColor = IDQConstants.backgroundColor
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
         topBackgroundView.layer.cornerRadius = topBackgroundSize/2
-        topBackgroundView.gradient(IDQConstants.highlightedContentBackgroundColor.cgColor, IDQConstants.contentBackgroundColor.cgColor, direction: .bottomLeftToTopRight)    }
+        topBackgroundView.gradient(IDQConstants.highlightedContentBackgroundColor.cgColor, IDQConstants.contentBackgroundColor.cgColor, direction: .bottomLeftToTopRight)
+    }
     
     //MARK: - Private
     
     private func setupConstraints() {
-        addSubviews(topBackgroundView, appIconMiniImageView, titleLabel, subTitle, startGameButton, quizOptionsButton, questionBankButton)
+        addSubviews(topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -119,15 +118,15 @@ class IDQPlayView: UIView {
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             titleLabel.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 0),
             
-            startGameButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
-            startGameButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
-            startGameButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            startGameButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
+            startButtonView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
+            startButtonView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            startButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            startButtonView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
             
             quizOptionsButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
             quizOptionsButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
             quizOptionsButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            quizOptionsButton.topAnchor.constraint(equalTo: startGameButton.bottomAnchor, constant: 14),
+            quizOptionsButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: CGFloat(56+menuButtonHight)),
             
             questionBankButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
             questionBankButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
@@ -167,8 +166,6 @@ class IDQPlayView: UIView {
             button.addAttributedTitle(title: title, fontSize: menuButtonFontSize, fontColor: IDQConstants.basicFontColor, highlightColor: IDQConstants.highlightFontColor)
         }
         switch button {
-        case startGameButton:
-            button.addTarget(self, action: #selector(startButtonTapped(_:)), for: .touchUpInside)
         case quizOptionsButton:
             button.addTarget(self, action: #selector(optionsButtonTapped(_:)), for: .touchUpInside)
         case questionBankButton:
@@ -179,11 +176,6 @@ class IDQPlayView: UIView {
     }
     
     @objc
-    private func startButtonTapped(_ sender: UIButton) {
-        
-    }
-    
-    @objc
     private func optionsButtonTapped(_ sender: UIButton) {
         
     }
@@ -191,6 +183,16 @@ class IDQPlayView: UIView {
     @objc
     private func questionBankButtonTapped(_ sender: UIButton) {
         
+    }
+    
+    @objc
+    private func startViewTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        let idqGameList: [IDQGame] = [
+            IDQGame(gameName: "Default", type: .basic, questionTimer: .gazelle, topics: [.basics], numberOfQuestions: 10),
+            IDQGame(gameName: "Count Down", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics], numberOfQuestions: 15),
+            IDQGame(gameName: "True Or False", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics, .architecturalPatterns, .coreData, .combine, .cloudKit], numberOfQuestions: 15),
+        ]
+        delegate?.idqPlayView(self, didSelect: idqGameList[0])
     }
     
     
