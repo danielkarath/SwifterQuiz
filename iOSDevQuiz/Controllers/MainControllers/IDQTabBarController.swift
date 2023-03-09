@@ -31,7 +31,7 @@ final class IDQTabBarController: UITabBarController {
         tabBar.addSubview(fullBlurView)
         fullBlurView.frame = tabBar.bounds
         let viewControllers: [UIViewController] = [IDQStatsViewController(), IDQPlayViewController(), IDQSettingsViewController()]
-        let menuIcons: [UIImage] = [UIImage(systemName: "chart.xyaxis.line")!, UIImage(systemName: "swift")!, UIImage(systemName: "gearshape.fill")!]
+        let menuIcons: [UIImage] = [UIImage(systemName: "chart.xyaxis.line")!, UIImage(systemName: "list.bullet.clipboard.fill")!, UIImage(systemName: "gearshape.fill")!]
         let titles: [String] = ["Stats", "Quiz", "Settings"]
         var navControllers: [UINavigationController] = []
         var i: Int = 0

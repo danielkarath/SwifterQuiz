@@ -60,7 +60,7 @@ class StartButtonView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        label.font = IDQConstants.setFont(fontSize: UIScreen.main.bounds.width/20, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: UIScreen.main.bounds.width/20, isBold: false)
         label.text = "Test your Swift skills"
         label.isAccessibilityElement = false
         return label
@@ -97,10 +97,10 @@ class StartButtonView: UIView {
         NSLayoutConstraint.activate([
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 12),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 18),
-            backgroundImageView.widthAnchor.constraint(equalToConstant: frame.size.width/3),
-            backgroundImageView.heightAnchor.constraint(equalToConstant: frame.size.width/3),
+            backgroundImageView.widthAnchor.constraint(equalToConstant: frame.size.width/3.25),
+            backgroundImageView.heightAnchor.constraint(equalToConstant: frame.size.width/3.25),
             
-            smallIconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            smallIconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             smallIconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             smallIconImageView.widthAnchor.constraint(equalToConstant: 24),
             smallIconImageView.heightAnchor.constraint(equalToConstant: 24),

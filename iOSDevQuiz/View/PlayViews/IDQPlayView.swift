@@ -11,7 +11,7 @@ protocol IDQPlayViewDelegate: AnyObject {
     func idqPlayView(_ playView: IDQPlayView, didSelect game: IDQGame?)
 }
 
-/// The view that handles showing the main game related buttons like start quiz, game options, resources and related UI
+/// The view that handles showing the main game related buttons like start quiz, game options, resources and related UI.
 class IDQPlayView: UIView {
     
     public weak var delegate: IDQPlayViewDelegate?

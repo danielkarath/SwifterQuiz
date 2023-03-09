@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum IDQQuestionDifficulty {
-    case easy
-    case medium
-    case hard
+enum IDQQuestionDifficulty: String {
+    case easy = "easy"
+    case medium = "medium"
+    case hard = "hard"
 }
 
 struct IDQQuestion {
