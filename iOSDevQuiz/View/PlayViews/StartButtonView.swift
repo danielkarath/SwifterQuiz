@@ -79,8 +79,8 @@ class StartButtonView: UIView {
     }
     
     private func setupView() {
-        let color1: UIColor = IDQConstants.lightOrange
-        let color2: UIColor = IDQConstants.darkOrange
+        let color1: UIColor = IDQConstants.highlightedLightOrange
+        let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
         frame.size = CGSize(width: menuButtonWidth, height: 1.80*menuButtonHight)
         layer.cornerRadius = menuButtonCornerRadius

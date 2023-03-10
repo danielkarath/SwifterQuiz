@@ -15,7 +15,7 @@ enum IDQGameType {
     case custom
 }
 
-enum IDQGameQuestionTimer: Int {
+enum IDQGameQuestionTimer: CFTimeInterval {
     case cheetah = 15
     case gazelle = 30
     case zebra = 45

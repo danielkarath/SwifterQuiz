@@ -50,6 +50,7 @@ extension UIView {
         gradientLayer.frame.size = CGSize(width: self.layer.frame.size.width, height: self.layer.frame.size.height)
         gradientLayer.cornerRadius = self.layer.cornerRadius
         gradientLayer.frame = self.bounds
+        self.layer.mask = gradientLayer
         gradientLayer.layoutIfNeeded()
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
@@ -80,6 +81,12 @@ extension UIButton {
         self.setAttributedTitle(attributedTextHighlighted, for: .highlighted)
         self.contentHorizontalAlignment = .center
         self.contentVerticalAlignment = .center
+    }
+}
+
+extension Array where Element == UIColor {
+    func toCGColors() -> [CGColor] {
+        return self.map { $0.cgColor }
     }
 }
 

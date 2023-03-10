@@ -49,7 +49,6 @@ final class IDQGameViewController: UIViewController {
     }
 
     private func startQuiz() {
-        print("startQuiz executed")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             let question = self.questions[0]
             self.quizView.configure(with: question, game: self.game)

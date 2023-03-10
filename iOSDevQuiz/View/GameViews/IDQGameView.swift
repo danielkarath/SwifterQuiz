@@ -15,9 +15,10 @@ final class IDQGameView: UIView {
         
     public weak var delegate: IDQGameViewDelegate?
     
+    private let countDownView = CountDownView()
+    
     private var question: IDQQuestion? {
         didSet {
-            print("Question didSet()")
             spinner.stopAnimating()
             UIView.animate(withDuration: 0.25, delay: 0) {
                 self.difficultyLabel.text = self.question?.difficulty.rawValue
@@ -63,26 +64,28 @@ final class IDQGameView: UIView {
         return label
     }()
     
-    private let timerOuterView: UIView = {
-        let view = UIView()
+    private let circularTimerView: UIView = {
+        let circleSize: CGFloat = 140
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: circleSize, height: circleSize))
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = IDQConstants.contentBackgroundColor
-        view.layer.cornerRadius = 4
+        view.backgroundColor = IDQConstants.backgroundColor
+        view.layer.cornerRadius = circleSize/2
         view.frame.size.width = UIScreen.main.bounds.width-32
         return view
     }()
     
-    private let timerInnerView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 140, height: 24))
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = IDQConstants.brandingColor
-        view.layer.cornerRadius = 4
-        view.frame.size.width = 4
-        return view
+    private let countDownLabel: UILabel = {
+        let label = UILabel()
+        label.text = " "
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.textColor = IDQConstants.basicFontColor
+        label.font = IDQConstants.setFont(fontSize: 24, isBold: true)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private var questionCountdownTimer = Timer()
-    private var countDownCount = 0
     
     //MARK: - Init
         
@@ -103,8 +106,7 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(questionLabel, difficultyLabel, timerOuterView) //timerInnerView
-        timerOuterView.addSubview(timerInnerView)
+        addSubviews(questionLabel, difficultyLabel, countDownView)
         NSLayoutConstraint.activate([
             questionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 64),
             questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
@@ -115,48 +117,18 @@ final class IDQGameView: UIView {
             difficultyLabel.widthAnchor.constraint(equalToConstant: 96),
             difficultyLabel.heightAnchor.constraint(equalToConstant: 24),
             
-            timerOuterView.heightAnchor.constraint(equalToConstant: 24),
-            timerOuterView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width-64),
-            timerOuterView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
-            timerOuterView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            
-//            timerInnerView.heightAnchor.constraint(equalToConstant: 24),
-//            timerInnerView.widthAnchor.constraint(equalToConstant: 140),
-//            timerInnerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
-//            timerInnerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            countDownView.heightAnchor.constraint(equalToConstant: 140),
+            countDownView.widthAnchor.constraint(equalToConstant: 140),
+            countDownView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -64),
+            countDownView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
+
             
         ])
     }
     
     public func configure(with question: IDQQuestion, game: IDQGame) {
         self.question = question
-        let questionDeadline: Int = game.questionTimer.rawValue
-        
-        
-        UIView.animate(withDuration: TimeInterval(questionDeadline)) {
-            self.timerInnerView.frame.size.width = UIScreen.main.bounds.width-64
-        }
-        
-        
-        /*
-        self.questionCountdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            if self.countDownCount < questionDeadline {
-                DispatchQueue.main.async {
-                    self.timerInnerView.frame.size.width = CGFloat((CGFloat(self.countDownCount) / CGFloat(questionDeadline))*(UIScreen.main.bounds.width-64))
-                   
-                }
-                self.countDownCount += 1
-            } else {
-                timer.invalidate()
-                self.countDownCount = 0
-                DispatchQueue.main.async {
-                    self.timerInnerView.frame.size.width = 1
-                }
-            }
-        }
-        */
-        
-        
+        countDownView.setupTimer(game: game)
     }
-
+   
 }
