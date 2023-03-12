@@ -44,7 +44,7 @@ class IDQPlayView: UIView {
         label.text = "iOS Developer Quiz"
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.textColor = IDQConstants.brandingColor
+        label.textColor = IDQConstants.highlightedDarkOrange
         label.font = IDQConstants.setFont(fontSize: 21, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

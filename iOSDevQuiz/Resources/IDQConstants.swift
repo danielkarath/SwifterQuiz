@@ -10,6 +10,12 @@ import UIKit
 /// The constants used everywhere in the app like UIColors, Font sizes, etc
 struct IDQConstants {
         
+    //MARK: - Keywords
+    static let keywords: [String] = [
+        "deinit()",
+        "init()"
+    ]
+    
     //MARK: - Background colors
     
     ///The backgroundColor is the UIColor for simple background areas.
@@ -36,7 +42,7 @@ struct IDQConstants {
     //MARK: - Branding Colors
     
     ///The brandingColor is for the very main UI element of the app.
-    static let brandingColor: UIColor = UIColor(named: "brandingColor")!
+    static let keywordColor: UIColor = UIColor(named: "keywordColor") ?? UIColor(red: 230/255, green: 90/255, blue: 135/255, alpha: 1.0)
     
     ///The correctColor is representative for the correctly answered questions
     static let correctColor: UIColor = UIColor(named: "correctColor")!

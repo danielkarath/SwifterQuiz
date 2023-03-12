@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3909BBAC29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */; };
 		3914C90929B0D7E40001377B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C90829B0D7E40001377B /* AppDelegate.swift */; };
 		3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C90A29B0D7E40001377B /* SceneDelegate.swift */; };
 		3914C90D29B0D7E40001377B /* IDQTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C90C29B0D7E40001377B /* IDQTabBarController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameAnswerCollectionViewCell.swift; sourceTree = "<group>"; };
 		3914C90529B0D7E40001377B /* iOSDevQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSDevQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3914C90829B0D7E40001377B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3914C90A29B0D7E40001377B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				39E2256E29B8F71500830F1A /* IDQGameView.swift */,
 				392415C029BA9E9B006D6590 /* CountDownView.swift */,
+				3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */,
 			);
 			path = GameViews;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				3914C92529B0EB8A0001377B /* IDQGameViewController.swift in Sources */,
 				3914C92729B0EBD20001377B /* IDQStatsViewController.swift in Sources */,
 				3914C90929B0D7E40001377B /* AppDelegate.swift in Sources */,
+				3909BBAC29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift in Sources */,
 				39E2256F29B8F71500830F1A /* IDQGameView.swift in Sources */,
 				3952D1DE29B8AC220061C5C9 /* StartButtonView.swift in Sources */,
 				3914C92329B0DCE60001377B /* IDQConstants.swift in Sources */,

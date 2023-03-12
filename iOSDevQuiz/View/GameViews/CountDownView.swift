@@ -11,7 +11,7 @@ class CountDownView: UIView {
     
     private let colors: [UIColor] = [IDQConstants.correctColor, IDQConstants.highlightedLightOrange, IDQConstants.errorColor]
     
-    private let viewSize: CGFloat = 140
+    private let viewSize: CGFloat = 40
     
     private var questionCountdownTimer = Timer()
     
@@ -28,7 +28,11 @@ class CountDownView: UIView {
     
     private let circularView: UIView = {
         let view = UIView()
-        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        view.alpha = 0.80
+        view.backgroundColor = IDQConstants.highlightedDarkOrange
+        view.layer.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         return view
     }()
     
@@ -52,14 +56,19 @@ class CountDownView: UIView {
     //MARK: - Private
     
     private func setupConstraints() {
-        addSubviews(countDownLabel)
+        addSubviews(countDownLabel, circularView)
         NSLayoutConstraint.activate([
             countDownLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             countDownLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: viewSize * 0.07),
             countDownLabel.heightAnchor.constraint(equalToConstant: viewSize),
             countDownLabel.widthAnchor.constraint(equalToConstant: viewSize),
+            
+            
+            circularView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            circularView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0),
         ])
     }
+    
     
     private func circleAnimation(_ view: UIView, colors: [CGColor], duration: CFTimeInterval) {
         guard !colors.isEmpty else {return}
@@ -118,12 +127,15 @@ class CountDownView: UIView {
                 } else {
                     //self.countDownView.changeTimer(remainingTime)
                     self.countDownLabel.text = String(remainingTime)
-                    if remainingTime <= duration/7 {
-                        self.countDownLabel.textColor = IDQConstants.errorColor
-                    } else if remainingTime <= duration/5 {
-                        self.countDownLabel.textColor = IDQConstants.lightOrange
-                    } else if remainingTime <= duration/3 {
-                        self.countDownLabel.textColor = IDQConstants.highlightedLightOrange
+                    
+                    if remainingTime == 10 {
+                        let targetSize: CGFloat = self.viewSize * 2.5
+                        self.circularView.pulseAnimation(targetSize: targetSize)
+                        
+                    }
+                    if remainingTime == 5 {
+                        let targetSize: CGFloat = self.viewSize * 5.0
+                        self.circularView.pulseAnimation(targetSize: targetSize)
                     }
                 }
             }

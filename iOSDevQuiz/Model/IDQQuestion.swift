@@ -26,10 +26,10 @@ let idqQuestionList: [IDQQuestion] = [
 ]
 
 let idqAnswerList: [IDQAnswer] = [
-    IDQAnswer(answer: "deinit() is called to create a new instance of a particular type", isCorrect: false, topic: .basics),
-    IDQAnswer(answer: "The deinit() is called to unconditionally stop execution.", isCorrect: false, topic: .basics),
-    IDQAnswer(answer: "The deinit() method is called on the app delegate when the app is about to move from the active to inactive state.", isCorrect: false, topic: .basics),
-    IDQAnswer(answer: "A deinitializer is called immediately before a class instance is deallocated.", isCorrect: true, topic: .basics),
+    IDQAnswer(text: "deinit() is called to create a new instance of a particular type", isCorrect: false, topic: .basics),
+    IDQAnswer(text: "The deinit() is called to unconditionally stop execution.", isCorrect: false, topic: .basics),
+    IDQAnswer(text: "The deinit() method is called on the app delegate when the app is about to move from the active to inactive state.", isCorrect: false, topic: .basics),
+    IDQAnswer(text: "A deinitializer is called immediately before a class instance is deallocated.", isCorrect: true, topic: .basics),
     
     
 ]

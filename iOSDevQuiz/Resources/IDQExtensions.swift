@@ -54,6 +54,32 @@ extension UIView {
         gradientLayer.layoutIfNeeded()
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
+    
+    func pulseAnimation(targetSize: CGFloat, duration: TimeInterval = 1.0, resetAfter: Bool = true) {
+        let originalWidth: CGFloat = self.frame.size.width
+        let originalHeight: CGFloat = self.frame.size.width
+        let originalAlpha: CGFloat = self.alpha
+        
+        let targetCoordinate: CGFloat = self.frame.origin.x - targetSize/2
+        
+        if self.isHidden {
+            self.isHidden = false
+        }
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.0
+            self.layer.frame.size = CGSize(width: targetSize, height: targetSize)
+            self.frame = CGRect(x: targetCoordinate, y: targetCoordinate, width: targetSize, height: targetSize)
+            self.layer.cornerRadius = targetSize/2
+        }, completion: { finished in
+            if resetAfter {
+                self.isHidden = true
+                self.alpha = originalAlpha
+                self.layer.frame.size = CGSize(width: originalWidth, height: originalHeight)
+                self.frame = CGRect(x: targetCoordinate + targetSize/2, y: targetCoordinate + targetSize/2, width: originalWidth, height: originalHeight)
+                self.layer.cornerRadius = 0
+            }
+        })
+    }
 }
 
 
@@ -83,6 +109,26 @@ extension UIButton {
         self.contentVerticalAlignment = .center
     }
 }
+
+extension UILabel {
+    func configureFor(_ keywords: [String], color: UIColor = IDQConstants.keywordColor) {
+        guard let labelText = text else {
+            return
+        }
+        
+        let attributedString = NSMutableAttributedString(string: labelText)
+        
+        for word in keywords {
+            let range = (labelText as NSString).range(of: word)
+            attributedString.addAttribute(.foregroundColor, value: color, range: range)
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: font.pointSize), range: range)
+        }
+        
+        attributedText = attributedString
+    }
+}
+
+
 
 extension Array where Element == UIColor {
     func toCGColors() -> [CGColor] {

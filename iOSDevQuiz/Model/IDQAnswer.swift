@@ -8,7 +8,7 @@
 import Foundation
 
 struct IDQAnswer {
-    let answer: String
+    let text: String
     let isCorrect: Bool
     let topic: IDQTopic
 }
