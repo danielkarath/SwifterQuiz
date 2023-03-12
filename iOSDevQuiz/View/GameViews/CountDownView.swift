@@ -134,8 +134,8 @@ class CountDownView: UIView {
                         
                     }
                     if remainingTime == 5 {
-                        let targetSize: CGFloat = self.viewSize * 5.0
-                        self.circularView.pulseAnimation(targetSize: targetSize)
+                        let targetSize: CGFloat = self.viewSize * 12.0
+                        self.circularView.pulseAnimation(targetSize: targetSize, duration: 1.60)
                     }
                 }
             }

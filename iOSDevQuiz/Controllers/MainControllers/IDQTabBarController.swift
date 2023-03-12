@@ -30,9 +30,9 @@ final class IDQTabBarController: UITabBarController {
         tabBar.backgroundColor = IDQConstants.contentBackgroundColor.withAlphaComponent(0.20)
         tabBar.addSubview(fullBlurView)
         fullBlurView.frame = tabBar.bounds
-        let viewControllers: [UIViewController] = [IDQStatsViewController(), IDQPlayViewController(), IDQSettingsViewController()]
-        let menuIcons: [UIImage] = [UIImage(systemName: "chart.xyaxis.line")!, UIImage(systemName: "list.bullet.clipboard.fill")!, UIImage(systemName: "gearshape.fill")!]
-        let titles: [String] = ["Stats", "Quiz", "Settings"]
+        let viewControllers: [UIViewController] = [IDQPlayViewController(), IDQStatsViewController(), IDQSettingsViewController()]
+        let menuIcons: [UIImage] = [UIImage(systemName: "list.bullet.clipboard.fill")!, UIImage(systemName: "chart.xyaxis.line")!, UIImage(systemName: "gearshape.fill")!]
+        let titles: [String] = ["Quiz", "Stats", "Settings"]
         var navControllers: [UINavigationController] = []
         var i: Int = 0
         var j: Int = 0
@@ -42,6 +42,7 @@ final class IDQTabBarController: UITabBarController {
             navControllers.append(UINavigationController(rootViewController: viewControllers[i]))
             i = i + 1
         }
+        
         for navController in navControllers {
             navController.navigationBar.prefersLargeTitles = true
             navController.navigationBar.titleTextAttributes = [.foregroundColor: IDQConstants.highlightedDarkOrange]
@@ -57,6 +58,7 @@ final class IDQTabBarController: UITabBarController {
             )
             j = j + 1
         }
+        
         setViewControllers(navControllers, animated: true)
     }
     

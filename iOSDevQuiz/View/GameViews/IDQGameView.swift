@@ -23,7 +23,7 @@ final class IDQGameView: UIView {
             spinner.stopAnimating()
             self.answerCollectionView?.reloadData()
             self.answerCollectionView?.isHidden = false
-            
+            self.passButton.isHidden = false
             var shuffledAnswers = question.answers
             for i in 0..<shuffledAnswers.count {
                 let j = Int(arc4random_uniform(UInt32(shuffledAnswers.count - i))) + i
@@ -37,6 +37,7 @@ final class IDQGameView: UIView {
                 self.difficultyLabel.text = self.question?.difficulty.rawValue
                 self.questionLabel.text = self.question?.question
                 self.answerCollectionView?.alpha = 1.0
+                self.passButton.alpha = 1.0
             }
         }
     }
@@ -78,6 +79,23 @@ final class IDQGameView: UIView {
         label.font = IDQConstants.setFont(fontSize: 14, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private let passButton: UIButton = {
+        let button = UIButton()
+        button.isHidden = true
+        button.alpha = 0.0
+        let width: CGFloat = 60
+        let height: CGFloat = width * 1.33
+        button.frame.size = CGSize(width: width * 2, height: height * 2) //.size = CGSize(width: width, height: height)
+        button.setTitleColor(IDQConstants.darkOrange, for: .normal)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: 15, isBold: false)
+        button.setTitle("Pass", for: .normal)
+        button.setTitle("Pass", for: .highlighted)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = false
+        button.isUserInteractionEnabled = false
+        return button
     }()
     
     private var answerCollectionView: UICollectionView?
@@ -127,7 +145,7 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(questionLabel, difficultyLabel, countDownView)
+        addSubviews(questionLabel, difficultyLabel, countDownView, passButton)
         guard let collectionView = answerCollectionView else {
             return
         }
@@ -150,6 +168,11 @@ final class IDQGameView: UIView {
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128),
+            
+            passButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
+            passButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            passButton.widthAnchor.constraint(equalToConstant: 60),
+            passButton.heightAnchor.constraint(equalToConstant: 25),
         ])
     }
     
@@ -211,10 +234,11 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         return CGSize(width: width, height: width * 1.5)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collectionView.deselectItem(at: indexPath, animated: true)
-//        let selectedCharacter = characters[indexPath.row]
-//        delegate?.didSelectCharacter(selectedCharacter)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        guard !answers.isEmpty, answers.count > 3 else { return }
+        let selectedAnswer = answers[indexPath.row]
+        print("Answer selected: \(selectedAnswer.text)")
+    }
     
 }
