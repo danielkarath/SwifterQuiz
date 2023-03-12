@@ -114,4 +114,15 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    public func didSelect(answer: IDQAnswer) -> Bool {
+        guard answer.isCorrect != nil else {
+            fatalError("Error at IDQGameAnswerCollectionViewCell - didSelect\nSelected answer does not have isCorrect value")
+        }
+        if answer.isCorrect {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }

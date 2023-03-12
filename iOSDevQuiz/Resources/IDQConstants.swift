@@ -11,11 +11,75 @@ import UIKit
 struct IDQConstants {
         
     //MARK: - Keywords
-    static let keywords: [String] = [
-        "deinit()",
-        "init()"
-    ]
     
+    static let keywords: [(keword: String, keyColor: UIColor)] = [
+        ("deinit()", funcKeywordColor),
+        ("init()", funcKeywordColor),
+                
+        ("CustomStringConvertible", otherKeywordColor),
+        ("Equatable", otherKeywordColor),
+        ("Hashable", otherKeywordColor),
+        ("Comparable", otherKeywordColor),
+        ("Collection", otherKeywordColor),
+        ("Sequence", otherKeywordColor),
+        ("IteratorProtocol", otherKeywordColor),
+        ("Codable", otherKeywordColor),
+        ("Encodable", otherKeywordColor),
+        ("Decodable", otherKeywordColor),
+        ("Error", otherKeywordColor),
+        ("ExpressibleByArrayLiteral", otherKeywordColor),
+        ("ExpressibleByBooleanLiteral", otherKeywordColor),
+        ("ExpressibleByDictionaryLiteral", otherKeywordColor),
+        ("ExpressibleByFloatLiteral", otherKeywordColor),
+        ("ExpressibleByIntegerLiteral", otherKeywordColor),
+        ("ExpressibleByNilLiteral", otherKeywordColor),
+        ("ExpressibleByStringLiteral", otherKeywordColor),
+        ("BinaryInteger", otherKeywordColor),
+        ("SignedInteger", otherKeywordColor),
+        ("UnsignedInteger", otherKeywordColor),
+        ("FloatingPoint", otherKeywordColor),
+        ("RandomNumberGenerator", otherKeywordColor),
+        ("RawRepresentable", otherKeywordColor),
+        ("Strideable", otherKeywordColor),
+        ("CustomReflectable", otherKeywordColor),
+        ("CustomPlaygroundDisplayConvertible", otherKeywordColor),
+        ("AnyObject", otherKeywordColor),
+        ("AnyHashable", otherKeywordColor),
+        ("DynamicCallable", otherKeywordColor),
+        
+        ("Int", classTypeKeywordColor),
+        ("Double", classTypeKeywordColor),
+        ("Float", classTypeKeywordColor),
+        ("Bool", classTypeKeywordColor),
+        ("String", classTypeKeywordColor),
+        ("Character", classTypeKeywordColor),
+        ("Optional", classTypeKeywordColor),
+        ("Array", classTypeKeywordColor),
+        ("Dictionary", classTypeKeywordColor),
+        ("Set", classTypeKeywordColor),
+        ("Tuple", classTypeKeywordColor),
+        ("Enum", classTypeKeywordColor),
+        ("Struct", classTypeKeywordColor),
+        ("Class", classTypeKeywordColor),
+        ("Protocol", classTypeKeywordColor),
+        ("Extension", classTypeKeywordColor),
+        ("Function", classTypeKeywordColor),
+        ("Closure", classTypeKeywordColor),
+        ("Any", classTypeKeywordColor),
+        ("AnyObject", classTypeKeywordColor),
+        ("Typealias", classTypeKeywordColor),
+        ("Range", classTypeKeywordColor),
+        ("ClosedRange", classTypeKeywordColor),
+        ("CountableRange", classTypeKeywordColor),
+        ("CountableClosedRange", classTypeKeywordColor),
+        ("Error", classTypeKeywordColor),
+        ("Sequence", classTypeKeywordColor),
+        ("IteratorProtocol", classTypeKeywordColor),
+        ("Collection", classTypeKeywordColor),
+        ("MutableCollection", classTypeKeywordColor),
+        ("UserDefaults", classTypeKeywordColor)
+    ]
+
     //MARK: - Background colors
     
     ///The backgroundColor is the UIColor for simple background areas.
@@ -42,7 +106,11 @@ struct IDQConstants {
     //MARK: - Branding Colors
     
     ///The brandingColor is for the very main UI element of the app.
-    static let keywordColor: UIColor = UIColor(named: "keywordColor") ?? UIColor(red: 230/255, green: 90/255, blue: 135/255, alpha: 1.0)
+    static let funcKeywordColor: UIColor = UIColor(named: "funcKeywordColor") ?? UIColor(red: 230/255, green: 90/255, blue: 135/255, alpha: 1.0)
+    
+    static let classTypeKeywordColor: UIColor = UIColor(named: "classTypeKeywordColor") ?? UIColor(red: 180/255, green: 135/255, blue: 235/255, alpha: 1.0)
+    
+    static let otherKeywordColor: UIColor = UIColor(named: "otherKeywordColor") ?? UIColor(red: 140/255, green: 130/255, blue: 240/255, alpha: 1.0)
     
     ///The correctColor is representative for the correctly answered questions
     static let correctColor: UIColor = UIColor(named: "correctColor")!

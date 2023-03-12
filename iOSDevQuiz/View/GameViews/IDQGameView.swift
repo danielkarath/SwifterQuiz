@@ -236,9 +236,14 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IDQGameAnswerCollectionViewCell.cellidentifier, for: indexPath) as? IDQGameAnswerCollectionViewCell else {
+            fatalError("Unsupported cell")
+        }
         guard !answers.isEmpty, answers.count > 3 else { return }
         let selectedAnswer = answers[indexPath.row]
-        print("Answer selected: \(selectedAnswer.text)")
+        let isCorrect = cell.didSelect(answer: selectedAnswer)
+        delegate?.idqGameView(self, didSelect: selectedAnswer)
+        print("Answer selected: \(isCorrect)")
     }
     
 }
