@@ -36,7 +36,7 @@ enum IDQTopic {
     case widgetKit
     case mapKit
     case healthKit
-    case architecturalPatterns
+    case designPatterns
     
 }
 

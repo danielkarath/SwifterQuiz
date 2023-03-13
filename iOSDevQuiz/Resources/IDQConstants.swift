@@ -9,13 +9,25 @@ import UIKit
 
 /// The constants used everywhere in the app like UIColors, Font sizes, etc
 struct IDQConstants {
-        
+     
     //MARK: - Keywords
     
     static let keywords: [(keword: String, keyColor: UIColor)] = [
         ("deinit()", funcKeywordColor),
         ("init()", funcKeywordColor),
         ("@frozen", funcKeywordColor),
+        ("lazy", funcKeywordColor),
+        
+        ("append", propertyKeywordColor),
+        ("insert", propertyKeywordColor),
+        ("addElement", propertyKeywordColor),
+        ("zip", propertyKeywordColor),
+        ("removeCheckpoints", propertyKeywordColor),
+        
+        ("applicationDidBecomeActive", variableKeywordColor),
+        ("willFinishLaunchingWithOptions", variableKeywordColor),
+        ("sceneDidBecomeActive", variableKeywordColor),
+        ("didFinishLaunchingWithOptions", variableKeywordColor),
                 
         ("CustomStringConvertible", otherKeywordColor),
         ("Equatable", otherKeywordColor),
@@ -78,7 +90,9 @@ struct IDQConstants {
         ("IteratorProtocol", classTypeKeywordColor),
         ("Collection", classTypeKeywordColor),
         ("MutableCollection", classTypeKeywordColor),
-        ("UserDefaults", classTypeKeywordColor)
+        ("UserDefaults", classTypeKeywordColor),
+        ("Result", classTypeKeywordColor),
+        ("UUID", classTypeKeywordColor)
     ]
 
     //MARK: - Background colors
@@ -112,6 +126,10 @@ struct IDQConstants {
     static let classTypeKeywordColor: UIColor = UIColor(named: "classTypeKeywordColor") ?? UIColor(red: 180/255, green: 135/255, blue: 235/255, alpha: 1.0)
     
     static let otherKeywordColor: UIColor = UIColor(named: "otherKeywordColor") ?? UIColor(red: 140/255, green: 130/255, blue: 240/255, alpha: 1.0)
+    
+    static let propertyKeywordColor: UIColor = UIColor(named: "propertyKeywordColor") ?? UIColor(red: 85/255, green: 100/255, blue: 225/255, alpha: 1.0)
+    
+    static let variableKeywordColor: UIColor = UIColor(named: "variableKeywordColor") ?? UIColor(red: 60/255, green: 130/255, blue: 250/255, alpha: 1.0)
     
     ///The correctColor is representative for the correctly answered questions
     static let correctColor: UIColor = UIColor(named: "correctColor")!

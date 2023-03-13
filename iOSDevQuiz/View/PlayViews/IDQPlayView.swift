@@ -190,7 +190,7 @@ class IDQPlayView: UIView {
         let idqGameList: [IDQGame] = [
             IDQGame(gameName: "Default", type: .basic, questionTimer: .gazelle, topics: [.basics], numberOfQuestions: 10),
             IDQGame(gameName: "Count Down", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics], numberOfQuestions: 15),
-            IDQGame(gameName: "True Or False", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics, .architecturalPatterns, .coreData, .combine, .cloudKit], numberOfQuestions: 15),
+            IDQGame(gameName: "True Or False", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics, .designPatterns, .coreData, .combine, .cloudKit], numberOfQuestions: 15),
         ]
         delegate?.idqPlayView(self, didSelect: idqGameList[0])
     }
