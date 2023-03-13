@@ -15,6 +15,7 @@ struct IDQConstants {
     static let keywords: [(keword: String, keyColor: UIColor)] = [
         ("deinit()", funcKeywordColor),
         ("init()", funcKeywordColor),
+        ("@frozen", funcKeywordColor),
                 
         ("CustomStringConvertible", otherKeywordColor),
         ("Equatable", otherKeywordColor),

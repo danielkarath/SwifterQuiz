@@ -118,10 +118,12 @@ extension UILabel {
         
         let attributedString = NSMutableAttributedString(string: labelText)
         
+        let fontSize: CGFloat = self.font.pointSize
+        
         for (word, color) in keywordColors {
             let range = (labelText as NSString).range(of: word)
             attributedString.addAttribute(.foregroundColor, value: color, range: range)
-            attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: 15, isBold: true), range: range)
+            attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
         }
         
         attributedText = attributedString
