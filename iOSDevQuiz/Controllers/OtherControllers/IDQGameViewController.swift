@@ -50,8 +50,7 @@ final class IDQGameViewController: UIViewController {
 
     private func startQuiz() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let question = self.questions[0]
-            self.quizView.configure(with: question, game: self.game)
+            self.quizView.configure(with: self.questions, game: self.game)
         }
     }
 

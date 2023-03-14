@@ -36,6 +36,8 @@ class CountDownView: UIView {
         return view
     }()
     
+    private let strokeLayer = CAShapeLayer()
+    
     //MARK: - Init
         
     override init(frame: CGRect) {
@@ -70,26 +72,25 @@ class CountDownView: UIView {
     }
     
     
-    private func circleAnimation(_ view: UIView, colors: [CGColor], duration: CFTimeInterval) {
+    private func circleAnimation(_ view: UIView, layer: CAShapeLayer, colors: [CGColor], duration: CFTimeInterval) {
         guard !colors.isEmpty else {return}
         let lineWidth: CGFloat = view.layer.frame.size.width/10
-        let strokeLayer = CAShapeLayer()
-        strokeLayer.fillColor = UIColor.clear.cgColor
-        strokeLayer.strokeColor = colors.last
-        strokeLayer.lineWidth = lineWidth
+        layer.fillColor = UIColor.clear.cgColor
+        layer.strokeColor = colors.last
+        layer.lineWidth = lineWidth
         
-        strokeLayer.path = CGPath.init(roundedRect: view.bounds, cornerWidth: view.layer.frame.size.width/2, cornerHeight: view.layer.frame.size.height/2, transform: nil)
+        layer.path = CGPath.init(roundedRect: view.bounds, cornerWidth: view.layer.frame.size.width/2, cornerHeight: view.layer.frame.size.height/2, transform: nil)
         
-        view.layer.addSublayer(strokeLayer)
+        view.layer.addSublayer(layer)
         
         // Create animation layer and add it to the stroke layer.
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = CGFloat(0.0)
-        animation.toValue = CGFloat(1.0)
-        animation.duration = duration
-        animation.fillMode = CAMediaTimingFillMode.forwards
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        strokeLayer.add(animation, forKey: "circleAnimation")
+        let circleAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        circleAnimation.fromValue = CGFloat(0.0)
+        circleAnimation.toValue = CGFloat(1.0)
+        circleAnimation.duration = duration
+        circleAnimation.fillMode = CAMediaTimingFillMode.forwards
+        circleAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        strokeLayer.add(circleAnimation, forKey: "circleAnimation")
         
         // Keyframe animation to change the color at 50% of the animation duration.
         let colorAnimation = CAKeyframeAnimation(keyPath: "strokeColor")
@@ -116,14 +117,14 @@ class CountDownView: UIView {
     private func startAnimation(with duration: Int) {
         var remainingTime: Int = duration
         UIView.animate(withDuration: TimeInterval(duration)) {
-            self.circleAnimation(self, colors: self.colors.toCGColors(), duration: CFTimeInterval(duration))
+            self.circleAnimation(self, layer: self.strokeLayer, colors: self.colors.toCGColors(), duration: CFTimeInterval(duration))
             
             self.questionCountdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {_ in
                 remainingTime -= 1
                 if remainingTime <= 0 {
                     self.countDownLabel.text = "0"
                     self.countDownLabel.textColor = IDQConstants.errorColor
-                    self.questionCountdownTimer.invalidate()
+                    self.stopTimer()
                 } else {
                     //self.countDownView.changeTimer(remainingTime)
                     self.countDownLabel.text = String(remainingTime)
@@ -147,6 +148,15 @@ class CountDownView: UIView {
     public func setupTimer(game: IDQGame) {
         startAnimation(with: Int(game.questionTimer.rawValue))
         countDownLabel.text = String(Int(game.questionTimer.rawValue))
+    }
+    
+    public func stopTimer() {
+        if questionCountdownTimer.isValid {
+            questionCountdownTimer.invalidate()
+            countDownLabel.textColor = IDQConstants.basicFontColor
+            strokeLayer.removeAllAnimations()
+            strokeLayer.removeFromSuperlayer()
+        }
     }
     
     

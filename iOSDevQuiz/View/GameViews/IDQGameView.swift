@@ -17,6 +17,12 @@ final class IDQGameView: UIView {
     
     private let countDownView = CountDownView()
     
+    private var quizRound: Int = 0
+    
+    private var questions: [IDQQuestion] = []
+    
+    private var game: IDQGame?
+    
     private var question: IDQQuestion? {
         didSet {
             guard let question = question else { return }
@@ -49,6 +55,17 @@ final class IDQGameView: UIView {
         spinner.hidesWhenStopped = true
         spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
+    }()
+    
+    private let questionNumberLabel: UILabel = {
+        let label = UILabel()
+        label.text = " "
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.textColor = IDQConstants.secondaryFontColor
+        label.font = IDQConstants.setFont(fontSize: 14, isBold: false)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private let questionImageView: UIImageView = {
@@ -145,7 +162,7 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(questionLabel, difficultyLabel, countDownView, passButton)
+        addSubviews(questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel)
         guard let collectionView = answerCollectionView else {
             return
         }
@@ -173,13 +190,27 @@ final class IDQGameView: UIView {
             passButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             passButton.widthAnchor.constraint(equalToConstant: 60),
             passButton.heightAnchor.constraint(equalToConstant: 25),
+            
+            questionNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: -16),
+            questionNumberLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            questionNumberLabel.widthAnchor.constraint(equalToConstant: 64),
+            questionNumberLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
-    public func configure(with question: IDQQuestion, game: IDQGame) {
-        self.question = question
+    public func configure(with questions: [IDQQuestion], game: IDQGame) {
+        guard !questions.isEmpty, game != nil else {
+            fatalError("Wrong configuration at IDQGameView configure")
+        }
+        self.questions = questions
+        self.game = game
+        self.question = questions[quizRound]
         questionLabel.configureFor(IDQConstants.keywords)
         countDownView.setupTimer(game: game)
+        if quizRound != game.numberOfQuestions-1 {
+            questionNumberLabel.text = String(quizRound+1)
+            quizRound += 1
+        }
     }
    
 }
@@ -239,11 +270,13 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IDQGameAnswerCollectionViewCell.cellidentifier, for: indexPath) as? IDQGameAnswerCollectionViewCell else {
             fatalError("Unsupported cell")
         }
-        guard !answers.isEmpty, answers.count > 3 else { return }
+        guard !answers.isEmpty, answers.count > 3, self.game != nil else { return }
         let selectedAnswer = answers[indexPath.row]
         let isCorrect = cell.didSelect(answer: selectedAnswer)
         delegate?.idqGameView(self, didSelect: selectedAnswer)
         print("Answer selected: \(isCorrect)")
+        countDownView.stopTimer()
+        configure(with: questions, game: game!)
     }
     
 }

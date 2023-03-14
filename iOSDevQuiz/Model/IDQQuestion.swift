@@ -98,9 +98,9 @@ let idqAnswerList: [IDQAnswer] = [
     
     //What is @frozen stands for in Swift?
     IDQAnswer(text: "@frozen is a way to mark a function in Swift as being thread-safe and able to be called concurrently from multiple threads.", isCorrect: false, topic: .basics),
-    IDQAnswer(text: "@frozen is an attribute that can be applied to classes in Swift, indicating that the class is immutable and cannot be extended in the future.", isCorrect: false, topic: .basics),
+    IDQAnswer(text: "It's an attribute that can be applied to classes, indicating that the class is immutable and cannot be extended in the future.", isCorrect: false, topic: .basics),
     IDQAnswer(text: "The @frozen attribute prevents the app from executing the function it is applied to more than once per app launch", isCorrect: false, topic: .basics),
-    IDQAnswer(text: " is an attribute in Swift that indicates that the annotated type or member is immutable and cannot be extended or modified in the future.", isCorrect: true, topic: .basics),
+    IDQAnswer(text: "It's an attribute that indicates that the annotated type or member is immutable and cannot be extended or modified in the future.", isCorrect: true, topic: .basics),
     
     //To which of these protocols does NOT conform to a String?
     IDQAnswer(text: "Equatable", isCorrect: false, topic: .basics),
@@ -117,10 +117,10 @@ let idqAnswerList: [IDQAnswer] = [
     IDQAnswer(text: "A UUID is a universally unique identifier which has 128-bit value that is used to identify information in a unique and standardized way.", isCorrect: true, topic: .basics),
     
     //What is the lazy property in Swift?
-    IDQAnswer(text: "A lazy property in Swift is a property that is only accessible within the scope of a particular function or method.", isCorrect: false, topic: .basics),
-    IDQAnswer(text: "A lazy property in Swift is a property that is automatically deallocated from memory when it is no longer needed.", isCorrect: false, topic: .basics),
+    IDQAnswer(text: "It's a property that is only accessible within the scope of a particular function or method.", isCorrect: false, topic: .basics),
+    IDQAnswer(text: "A property that is automatically deallocated from memory when it is no longer needed.", isCorrect: false, topic: .basics),
     IDQAnswer(text: "There is no lazy property in Swift", isCorrect: false, topic: .basics),
-    IDQAnswer(text: "A lazy property in Swift is a property that is only initialized when it is accessed for the first time.", isCorrect: true, topic: .basics),
+    IDQAnswer(text: "It's a property that is only initialized when it is accessed for the first time.", isCorrect: true, topic: .basics),
     
     //How can you add an element to an array?
     IDQAnswer(text: "You can add an element to an array in Swift by using the append(_: at:) method to add the new element to a specific index.", isCorrect: false, topic: .basics),

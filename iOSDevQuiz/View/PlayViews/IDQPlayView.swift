@@ -25,6 +25,8 @@ class IDQPlayView: UIView {
     
     private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
     
+    private let gradientView = UIView()
+    
     private let topBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +88,8 @@ class IDQPlayView: UIView {
     }
     
     private func setupView() {
+        let color1: UIColor = IDQConstants.highlightedLightOrange
+        let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
@@ -194,6 +198,4 @@ class IDQPlayView: UIView {
         ]
         delegate?.idqPlayView(self, didSelect: idqGameList[0])
     }
-    
-    
 }
