@@ -62,8 +62,8 @@ final class IDQGameView: UIView {
         label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.textColor = IDQConstants.secondaryFontColor
-        label.font = IDQConstants.setFont(fontSize: 14, isBold: false)
+        label.textColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.15)
+        label.font = IDQConstants.setFont(fontSize: 140, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -92,7 +92,7 @@ final class IDQGameView: UIView {
         label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .left
-        label.textColor = IDQConstants.highlightedDarkOrange
+        label.textColor = IDQConstants.secondaryFontColor
         label.font = IDQConstants.setFont(fontSize: 14, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -191,10 +191,10 @@ final class IDQGameView: UIView {
             passButton.widthAnchor.constraint(equalToConstant: 60),
             passButton.heightAnchor.constraint(equalToConstant: 25),
             
-            questionNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: -16),
-            questionNumberLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            questionNumberLabel.widthAnchor.constraint(equalToConstant: 64),
-            questionNumberLabel.heightAnchor.constraint(equalToConstant: 30)
+            questionNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: -12),
+            questionNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 12),
+            questionNumberLabel.widthAnchor.constraint(equalToConstant: 150),
+            questionNumberLabel.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     

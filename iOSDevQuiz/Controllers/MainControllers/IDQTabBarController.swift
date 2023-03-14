@@ -48,6 +48,7 @@ final class IDQTabBarController: UITabBarController {
             navController.navigationBar.titleTextAttributes = [.foregroundColor: IDQConstants.highlightedDarkOrange]
             navController.navigationBar.largeTitleTextAttributes = [.foregroundColor: IDQConstants.highlightedDarkOrange]
             navController.navigationBar.backgroundColor = IDQConstants.backgroundColor.withAlphaComponent(0.0)
+            navController.navigationBar.tintColor = IDQConstants.highlightedDarkOrange
             tabBar.tintColor = IDQConstants.highlightedDarkOrange
             tabBar.layer.cornerRadius = tabBar.layer.frame.height/2
             tabBar.layer.masksToBounds = true

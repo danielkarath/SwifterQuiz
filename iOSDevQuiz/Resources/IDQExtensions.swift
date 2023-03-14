@@ -111,16 +111,19 @@ extension UIButton {
 }
 
 extension UILabel {
-    func configureFor(_ keywordColors: [(String, UIColor)]) {
+    //func configureFor(_ keywordColors: [(String, UIColor)])
+    
+    
+    func configureFor(_ keywordColors: [String]) {
         guard let labelText = text else {
             return
         }
-        
+        let color = IDQConstants.highlightedDarkOrange
         let attributedString = NSMutableAttributedString(string: labelText)
         
         let fontSize: CGFloat = self.font.pointSize
         
-        for (word, color) in keywordColors {
+        for (word) in keywordColors {
             let range = (labelText as NSString).range(of: word)
             attributedString.addAttribute(.foregroundColor, value: color, range: range)
             attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
