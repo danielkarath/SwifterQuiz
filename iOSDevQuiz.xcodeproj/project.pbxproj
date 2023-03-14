@@ -29,6 +29,7 @@
 		3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E329B8C70D0061C5C9 /* IDQGame.swift */; };
 		3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */; };
 		3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */; };
+		396B6A9329C127990098A4E5 /* IDQAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B6A9229C127990098A4E5 /* IDQAnswerView.swift */; };
 		39E2256F29B8F71500830F1A /* IDQGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2256E29B8F71500830F1A /* IDQGameView.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		3952D1E329B8C70D0061C5C9 /* IDQGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGame.swift; sourceTree = "<group>"; };
 		3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuestion.swift; sourceTree = "<group>"; };
 		3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswer.swift; sourceTree = "<group>"; };
+		396B6A9229C127990098A4E5 /* IDQAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerView.swift; sourceTree = "<group>"; };
 		39E2256E29B8F71500830F1A /* IDQGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +188,7 @@
 				39E2256E29B8F71500830F1A /* IDQGameView.swift */,
 				392415C029BA9E9B006D6590 /* CountDownView.swift */,
 				3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */,
+				396B6A9229C127990098A4E5 /* IDQAnswerView.swift */,
 			);
 			path = GameViews;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3914C92929B0EBF10001377B /* IDQSettingsViewController.swift in Sources */,
+				396B6A9329C127990098A4E5 /* IDQAnswerView.swift in Sources */,
 				3914C90D29B0D7E40001377B /* IDQTabBarController.swift in Sources */,
 				3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */,
 				3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */,

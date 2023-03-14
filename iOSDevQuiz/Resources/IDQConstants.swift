@@ -128,7 +128,7 @@ struct IDQConstants {
     static let variableKeywordColor: UIColor = UIColor(named: "variableKeywordColor") ?? UIColor(red: 60/255, green: 130/255, blue: 250/255, alpha: 1.0)
     
     ///The correctColor is representative for the correctly answered questions
-    static let correctColor: UIColor = UIColor(named: "correctColor")!
+    static let correctColor: UIColor = UIColor(named: "correctColor") ?? UIColor(red: 10/255, green: 190/255, blue: 35/255, alpha: 1.0)
     
     ///The errorColor is representative for the wrongly answered questions
     static let errorColor: UIColor = UIColor(named: "errorColor")!

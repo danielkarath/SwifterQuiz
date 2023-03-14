@@ -45,10 +45,10 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         fatalError("IDQPlayView is unsupported!")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        answerLabel.text = nil
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        answerLabel.text = nil
+//    }
     
     //MARK: - Private
     
@@ -56,6 +56,7 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         let color1: UIColor = IDQConstants.highlightedLightOrange
         let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 16
         backgroundColor = IDQConstants.contentBackgroundColor
         clipsToBounds = true
@@ -119,8 +120,12 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
             fatalError("Error at IDQGameAnswerCollectionViewCell - didSelect\nSelected answer does not have isCorrect value")
         }
         if answer.isCorrect {
+            print("The answer is correct")
+            answerLabel.text = "Correct"
             return true
         } else {
+            print("The answer is NOT correct")
+            answerLabel.text = "Incorrect"
             return false
         }
     }

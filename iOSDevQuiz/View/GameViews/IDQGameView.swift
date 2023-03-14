@@ -17,6 +17,8 @@ final class IDQGameView: UIView {
     
     private let countDownView = CountDownView()
     
+    private let answerView = IDQAnswerView()
+    
     private var quizRound: Int = 0
     
     private var questions: [IDQQuestion] = []
@@ -66,14 +68,6 @@ final class IDQGameView: UIView {
         label.font = IDQConstants.setFont(fontSize: 140, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    
-    private let questionImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = IDQConstants.appIconMiniature
-        imageView.contentMode = .scaleAspectFit
-        return imageView
     }()
     
     private let questionLabel: UILabel = {
@@ -162,7 +156,7 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel)
+        addSubviews(questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerView)
         guard let collectionView = answerCollectionView else {
             return
         }
@@ -194,7 +188,12 @@ final class IDQGameView: UIView {
             questionNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: -12),
             questionNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 12),
             questionNumberLabel.widthAnchor.constraint(equalToConstant: 150),
-            questionNumberLabel.heightAnchor.constraint(equalToConstant: 150)
+            questionNumberLabel.heightAnchor.constraint(equalToConstant: 150),
+            
+            answerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 200),
+            answerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            answerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            answerView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
     
@@ -273,10 +272,13 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         guard !answers.isEmpty, answers.count > 3, self.game != nil else { return }
         let selectedAnswer = answers[indexPath.row]
         let isCorrect = cell.didSelect(answer: selectedAnswer)
-        delegate?.idqGameView(self, didSelect: selectedAnswer)
-        print("Answer selected: \(isCorrect)")
         countDownView.stopTimer()
-        configure(with: questions, game: game!)
+        UIView.animate(withDuration: 0.5) {
+            var center = self.answerView.center
+            center.y -= 200
+            self.answerView.center = center
+        }
+        //configure(with: questions, game: game!)
     }
     
 }
