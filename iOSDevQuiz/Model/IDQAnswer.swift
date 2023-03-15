@@ -10,5 +10,4 @@ import Foundation
 struct IDQAnswer {
     let text: String
     let isCorrect: Bool
-    let topic: IDQTopic
 }

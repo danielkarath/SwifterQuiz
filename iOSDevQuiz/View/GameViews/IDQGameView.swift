@@ -213,7 +213,7 @@ final class IDQGameView: UIView {
             questionNumberLabel.widthAnchor.constraint(equalToConstant: 150),
             questionNumberLabel.heightAnchor.constraint(equalToConstant: 150),
             
-            answerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 200),
+            answerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 240),
             answerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             answerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             answerView.heightAnchor.constraint(equalToConstant: 200)
@@ -307,14 +307,14 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IDQGameAnswerCollectionViewCell.cellidentifier, for: indexPath) as? IDQGameAnswerCollectionViewCell else {
             fatalError("Unsupported cell")
         }
-        guard !answers.isEmpty, answers.count > 3, self.game != nil else { return }
+        guard !answers.isEmpty, answers.count > 3, self.game != nil, self.question != nil else { return }
         let selectedAnswer = answers[indexPath.row]
         let isCorrect = cell.didSelect(answer: selectedAnswer)
         countDownView.stopTimer()
-        answerView.idqAnswerView(answerView, answer: selectedAnswer)
+        answerView.idqAnswerView(answerView, question: question!, answer: selectedAnswer)
         configure(overlay: overlayView)
         UIView.animate(withDuration: 0.5) {
-            self.answerView.transform = CGAffineTransform(translationX: 0, y: -200)
+            self.answerView.transform = CGAffineTransform(translationX: 0, y: -240)
         }
     }
     
