@@ -56,7 +56,19 @@ final class IDQGameView: UIView {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.hidesWhenStopped = true
         spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.layer.zPosition = 9
         return spinner
+    }()
+    
+    private let overlayView: UIView = {
+        let view = UIView()
+        view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.20)
+        view.isUserInteractionEnabled = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        view.layer.zPosition = 7
+        return view
     }()
     
     private let questionNumberLabel: UILabel = {
@@ -67,6 +79,7 @@ final class IDQGameView: UIView {
         label.textColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.15)
         label.font = IDQConstants.setFont(fontSize: 140, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.zPosition = 2
         return label
     }()
     
@@ -78,6 +91,7 @@ final class IDQGameView: UIView {
         label.textColor = IDQConstants.highlightFontColor
         label.font = IDQConstants.setFont(fontSize: 20, isBold: false)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.zPosition = 3
         return label
     }()
     
@@ -89,6 +103,7 @@ final class IDQGameView: UIView {
         label.textColor = IDQConstants.secondaryFontColor
         label.font = IDQConstants.setFont(fontSize: 14, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.zPosition = 4
         return label
     }()
     
@@ -106,6 +121,7 @@ final class IDQGameView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isEnabled = false
         button.isUserInteractionEnabled = false
+        button.layer.zPosition = 6
         return button
     }()
     
@@ -121,6 +137,8 @@ final class IDQGameView: UIView {
         addSubview(collectionView)
         setupConstraints()
         setupCollectionView(collectionView)
+        answerView.delegate = self
+        answerView.layer.zPosition = 8
     }
     
     required init?(coder: NSCoder) {
@@ -156,11 +174,16 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerView)
+        addSubviews(overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerView)
         guard let collectionView = answerCollectionView else {
             return
         }
         NSLayoutConstraint.activate([
+            overlayView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            overlayView.topAnchor.constraint(equalTo: topAnchor, constant: -100),
+            overlayView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
             questionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 64),
             questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
             questionLabel.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-64)*0.95),
@@ -196,6 +219,21 @@ final class IDQGameView: UIView {
             answerView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
+    
+    private func configure(overlay view: UIView) {
+        guard let collectionView = answerCollectionView else { return }
+        let elements: [UIView] = [passButton, collectionView]
+        let shouldOverlay: Bool = view.isHidden ? true : false
+        for element in elements {
+            element.isUserInteractionEnabled = !shouldOverlay
+            view.isHidden = !shouldOverlay
+        }
+        for cell in collectionView.visibleCells {
+            cell.isUserInteractionEnabled = !shouldOverlay
+        }
+    }
+    
+    //MARK: - Public
     
     public func configure(with questions: [IDQQuestion], game: IDQGame) {
         guard !questions.isEmpty, game != nil else {
@@ -273,12 +311,24 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         let selectedAnswer = answers[indexPath.row]
         let isCorrect = cell.didSelect(answer: selectedAnswer)
         countDownView.stopTimer()
+        answerView.idqAnswerView(answerView, answer: selectedAnswer)
+        configure(overlay: overlayView)
         UIView.animate(withDuration: 0.5) {
-            var center = self.answerView.center
-            center.y -= 200
-            self.answerView.center = center
+            self.answerView.transform = CGAffineTransform(translationX: 0, y: -200)
         }
-        //configure(with: questions, game: game!)
     }
+    
+}
+
+extension IDQGameView: IDQIDQAnswerViewDelegate {
+    
+    func didTapContinue(_ answerView: IDQAnswerView) {
+        UIView.animate(withDuration: 0.30) {
+            self.answerView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+        configure(overlay: overlayView)
+        configure(with: questions, game: game!)
+    }
+    
     
 }

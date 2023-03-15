@@ -116,23 +116,23 @@ struct IDQConstants {
     
     //MARK: - Branding Colors
     
-    ///The brandingColor is for the very main UI element of the app.
-    static let funcKeywordColor: UIColor = UIColor(named: "funcKeywordColor") ?? UIColor(red: 230/255, green: 90/255, blue: 135/255, alpha: 1.0)
-    
-    static let classTypeKeywordColor: UIColor = UIColor(named: "classTypeKeywordColor") ?? UIColor(red: 180/255, green: 135/255, blue: 235/255, alpha: 1.0)
-    
-    static let otherKeywordColor: UIColor = UIColor(named: "otherKeywordColor") ?? UIColor(red: 140/255, green: 130/255, blue: 240/255, alpha: 1.0)
-    
-    static let propertyKeywordColor: UIColor = UIColor(named: "propertyKeywordColor") ?? UIColor(red: 85/255, green: 100/255, blue: 225/255, alpha: 1.0)
-    
-    static let variableKeywordColor: UIColor = UIColor(named: "variableKeywordColor") ?? UIColor(red: 60/255, green: 130/255, blue: 250/255, alpha: 1.0)
-    
     ///The correctColor is representative for the correctly answered questions
     static let correctColor: UIColor = UIColor(named: "correctColor") ?? UIColor(red: 10/255, green: 190/255, blue: 35/255, alpha: 1.0)
     
-    ///The errorColor is representative for the wrongly answered questions
-    static let errorColor: UIColor = UIColor(named: "errorColor")!
+    ///The backgroundCorrectColor is for the background color for the correctly answered questions IDQAnswerView
+    static let backgroundCorrectColor: UIColor = UIColor(named: "backgroundCorrectColor") ?? UIColor(red: 10/255, green: 190/255, blue: 35/255, alpha: 0.50)
     
+    ///The backgroundCorrectColor is for the background color for the correctly answered questions IDQAnswerView
+    static let buttonCorrectColor1: UIColor = UIColor(named: "buttonCorrectColor1") ?? UIColor(red: 10/255, green: 190/255, blue: 35/255, alpha: 0.50)
+    
+    ///The backgroundCorrectColor is for the background color for the correctly answered questions IDQAnswerView
+    static let buttonCorrectColor2: UIColor = UIColor(named: "buttonCorrectColor2") ?? UIColor(red: 10/255, green: 190/255, blue: 35/255, alpha: 0.50)
+    
+    ///The errorColor is representative for the wrongly answered questions
+    static let errorColor: UIColor = UIColor(named: "errorColor") ?? UIColor(red: 245/255, green: 61/255, blue: 73/255, alpha: 1.0)
+    
+    ///The backgroundErrorColor is for the background color for the wrongly answered questions IDQAnswerView
+    static let backgroundErrorColor: UIColor = UIColor(named: "backgroundErrorColor")  ?? UIColor(red: 245/255, green: 61/255, blue: 73/255, alpha: 0.50)
     
     //MARK: - Gradient Colors
     

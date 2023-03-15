@@ -7,14 +7,18 @@
 
 import UIKit
 
+protocol IDQIDQAnswerViewDelegate: AnyObject {
+    func didTapContinue(_ answerView: IDQAnswerView)
+}
+
 class IDQAnswerView: UIView {
+    
+    public weak var delegate: IDQIDQAnswerViewDelegate?
 
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
-        imageView.tintColor = IDQConstants.correctColor
-        imageView.image = UIImage(systemName: "circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -22,11 +26,10 @@ class IDQAnswerView: UIView {
     
     private let resultLabel: UILabel = {
         let label = UILabel()
-        label.text = "Awesome!"
+        label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .left
         label.font = IDQConstants.setFont(fontSize: 20, isBold: true)
-        label.textColor = IDQConstants.correctColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -44,20 +47,19 @@ class IDQAnswerView: UIView {
     
     private let continueButton: UIButton = {
         let button = UIButton()
-        let width: CGFloat = 60
-        let height: CGFloat = width * 1.33
-        button.frame.size = CGSize(width: width * 2, height: height * 2) //.size = CGSize(width: width, height: height)
+        button.frame.size = CGSize(width: UIScreen.main.bounds.width-32, height: 40) //.size = CGSize(width: width, height: height)
         button.layer.cornerRadius = 8
         button.setTitleColor(IDQConstants.contentBackgroundColor, for: .normal)
-        button.backgroundColor = IDQConstants.correctColor
+        button.backgroundColor = IDQConstants.secondaryFontColor
         button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
         button.setTitle("CONTINUE", for: .normal)
         button.setTitle("CONTINUE", for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.isEnabled = false
-        button.isUserInteractionEnabled = false
+        button.isUserInteractionEnabled = true
         return button
     }()
+    
+    private var continueTimer = Timer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,6 +79,7 @@ class IDQAnswerView: UIView {
         self.layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 200)
         backgroundColor = IDQConstants.contentBackgroundColor
         layer.cornerRadius = 16
+        continueButton.addTarget(self, action: #selector(continueButtonTapped(_:)), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -102,6 +105,48 @@ class IDQAnswerView: UIView {
             continueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             continueButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    @objc
+    private func continueButtonTapped(_ sender: UIButton) {
+        print("next game")
+        sender.isUserInteractionEnabled = false
+        continueTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) {_ in
+            sender.isUserInteractionEnabled = true
+            self.continueTimer.invalidate()
+        }
+        delegate?.didTapContinue(self)
+    }
+    
+    //MARK: - Public
+    
+    public func idqAnswerView(_ view: IDQAnswerView, answer: IDQAnswer?) {
+        print("JAJJJJ")
+        guard let answer = answer else {
+            return
+        }
+        let labels: [UILabel] = [resultLabel, detailLabel]
+        if answer.isCorrect {
+            DispatchQueue.main.async {
+                self.resultImageView.tintColor = IDQConstants.correctColor
+                self.resultImageView.image = UIImage(systemName: "checkmark.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
+                self.resultLabel.text = "Awesome!"
+                for label in labels {
+                    label.textColor = IDQConstants.correctColor
+                }
+                self.continueButton.backgroundColor = IDQConstants.correctColor
+            }
+        } else{
+            DispatchQueue.main.async {
+                self.resultImageView.tintColor = IDQConstants.errorColor
+                self.resultImageView.image = UIImage(systemName: "x.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
+                self.resultLabel.text = "Incorrect"
+                for label in labels {
+                    label.textColor = IDQConstants.errorColor
+                }
+                self.continueButton.backgroundColor = IDQConstants.errorColor
+            }
+        }
     }
     
 }

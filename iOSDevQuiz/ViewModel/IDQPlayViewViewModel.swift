@@ -34,6 +34,10 @@ final class IDQPlayViewViewModel {
         for _ in 0..<game.numberOfQuestions {
             let selectedQuestion = optionalQuestions.randomElement()
             questions.append(selectedQuestion!)
+            
+            if let index = optionalQuestions.firstIndex(where: { $0.question == selectedQuestion?.question }) {
+                optionalQuestions.remove(at: index)
+            }
         }
         return questions
     }

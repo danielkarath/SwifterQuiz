@@ -120,12 +120,8 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
             fatalError("Error at IDQGameAnswerCollectionViewCell - didSelect\nSelected answer does not have isCorrect value")
         }
         if answer.isCorrect {
-            print("The answer is correct")
-            answerLabel.text = "Correct"
             return true
         } else {
-            print("The answer is NOT correct")
-            answerLabel.text = "Incorrect"
             return false
         }
     }
