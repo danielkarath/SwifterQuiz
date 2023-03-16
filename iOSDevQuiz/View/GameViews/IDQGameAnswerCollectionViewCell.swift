@@ -45,10 +45,10 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         fatalError("IDQPlayView is unsupported!")
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        answerLabel.text = nil
-//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        answerLabel.text = nil
+    }
     
     //MARK: - Private
     

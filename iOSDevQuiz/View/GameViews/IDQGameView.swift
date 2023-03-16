@@ -213,10 +213,10 @@ final class IDQGameView: UIView {
             questionNumberLabel.widthAnchor.constraint(equalToConstant: 150),
             questionNumberLabel.heightAnchor.constraint(equalToConstant: 150),
             
-            answerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 240),
+            answerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300),
             answerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             answerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            answerView.heightAnchor.constraint(equalToConstant: 200)
+            answerView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     
@@ -313,9 +313,9 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         countDownView.stopTimer()
         answerView.idqAnswerView(answerView, question: question!, answer: selectedAnswer)
         configure(overlay: overlayView)
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
             self.answerView.transform = CGAffineTransform(translationX: 0, y: -240)
-        }
+        }, completion: nil)
     }
     
 }

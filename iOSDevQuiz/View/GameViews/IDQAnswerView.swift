@@ -42,6 +42,7 @@ class IDQAnswerView: UIView {
         label.text = "This is some explanation to the result so you can better understand it or whatever."
         label.numberOfLines = 0
         label.textAlignment = .left
+        label.contentMode = .top
         label.font = IDQConstants.setFont(fontSize: 14, isBold: false)
         label.textColor = IDQConstants.correctColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +50,16 @@ class IDQAnswerView: UIView {
     }()
     
     private let referenceButton: UIButton = {
+        let button = UIButton()
+        button.frame.size = CGSize(width: 24, height: 24)
+        button.clipsToBounds = true
+        button.setTitle("", for: .normal)
+        button.isUserInteractionEnabled = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let bookmarkButton: UIButton = {
         let button = UIButton()
         button.frame.size = CGSize(width: 24, height: 24)
         button.clipsToBounds = true
@@ -73,6 +84,10 @@ class IDQAnswerView: UIView {
     }()
     
     let referenceImageView = UIImageView(image: UIImage(systemName: "book.closed.fill"))
+    let bookmarkUnfilledImageView = UIImageView(image: UIImage(systemName: "bookmark"))
+    let bookmarkFilledImageView = UIImageView(image: UIImage(systemName: "bookmark.fill"))
+    
+    private var isBookmarked: Bool = false
     
     private var continueTimer = Timer()
     
@@ -85,6 +100,7 @@ class IDQAnswerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("Unsupported")
     }
+    
     
     //MARK: - Private
     
@@ -100,12 +116,20 @@ class IDQAnswerView: UIView {
         referenceImageView.contentMode = .scaleAspectFit
         referenceButton.addSubview(referenceImageView)
         
+        bookmarkUnfilledImageView.tintColor = IDQConstants.correctColor
+        bookmarkUnfilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
+        bookmarkFilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
+        bookmarkUnfilledImageView.contentMode = .scaleAspectFit
+        bookmarkFilledImageView.contentMode = .scaleAspectFit
+        bookmarkButton.addSubview(bookmarkUnfilledImageView)
+        
         referenceButton.addTarget(self, action: #selector(referenceButtonTapped(_:)), for: .touchUpInside)
+        bookmarkButton.addTarget(self, action: #selector(bookmarkButtonTapped(_:)), for: .touchUpInside)
         continueButton.addTarget(self, action: #selector(continueButtonTapped(_:)), for: .touchUpInside)
     }
     
     private func setupConstraints() {
-        addSubviews(resultLabel, resultImageView, continueButton, detailLabel, referenceButton)
+        addSubviews(resultLabel, resultImageView, continueButton, detailLabel, referenceButton, bookmarkButton)
         NSLayoutConstraint.activate([
             resultImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             resultImageView.widthAnchor.constraint(equalToConstant: 32),
@@ -122,16 +146,31 @@ class IDQAnswerView: UIView {
             referenceButton.heightAnchor.constraint(equalToConstant: 24),
             referenceButton.widthAnchor.constraint(equalToConstant: 24),
             
+            bookmarkButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
+            bookmarkButton.trailingAnchor.constraint(equalTo: referenceButton.leadingAnchor, constant: -16),
+            bookmarkButton.heightAnchor.constraint(equalToConstant: 24),
+            bookmarkButton.widthAnchor.constraint(equalToConstant: 24),
+            
             detailLabel.topAnchor.constraint(equalTo: resultImageView.bottomAnchor, constant: 4),
             detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             detailLabel.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -8),
             
-            continueButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            continueButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -92),
             continueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             continueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            continueButton.heightAnchor.constraint(equalToConstant: 40)
+            continueButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    private func resetView() {
+        if isBookmarked {
+            DispatchQueue.main.async {
+                self.bookmarkFilledImageView.removeFromSuperview()
+                self.bookmarkButton.addSubview(self.bookmarkUnfilledImageView)
+                self.isBookmarked = false
+            }
+        }
     }
     
     @objc
@@ -155,19 +194,37 @@ class IDQAnswerView: UIView {
         }
     }
     
+    @objc
+    private func bookmarkButtonTapped(_ sender: UIButton) {
+        guard let question = self.question, self.question != nil else {return}
+        if !isBookmarked {
+            DispatchQueue.main.async {
+                self.bookmarkUnfilledImageView.removeFromSuperview()
+                self.bookmarkButton.addSubview(self.bookmarkFilledImageView)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.bookmarkFilledImageView.removeFromSuperview()
+                self.bookmarkButton.addSubview(self.bookmarkUnfilledImageView)
+            }
+        }
+        isBookmarked.toggle()
+    }
     //MARK: - Public
     
     public func idqAnswerView(_ view: IDQAnswerView, question: IDQQuestion, answer: IDQAnswer?) {
         guard let answer = answer, question != nil else {
             return
         }
+        resetView()
         self.question = question
         let labels: [UILabel] = [resultLabel, detailLabel]
         detailLabel.text = question.explanation
         if answer.isCorrect {
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.resultImageView.tintColor = IDQConstants.correctColor
                 self.referenceImageView.tintColor = IDQConstants.correctColor
+                self.bookmarkButton.tintColor = IDQConstants.correctColor
                 self.resultImageView.image = UIImage(systemName: "checkmark.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
                 let haapyArray = ["Awesome!", "Excellent!", "Correct", "Hoooray!", "Well done!", "Great job!", "Bravo!", "Very cool!"]
                 let randomIndex = Int.random(in: 0..<haapyArray.count)
@@ -182,6 +239,7 @@ class IDQAnswerView: UIView {
             DispatchQueue.main.async {
                 self.resultImageView.tintColor = IDQConstants.errorColor
                 self.referenceImageView.tintColor = IDQConstants.errorColor
+                self.bookmarkButton.tintColor = IDQConstants.errorColor
                 self.resultImageView.image = UIImage(systemName: "x.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
                 let haapyArray = ["Incorrect", "Incorrect", "Incorrect", "Wrong answer", "Oopsie"]
                 let randomIndex = Int.random(in: 0..<haapyArray.count)
