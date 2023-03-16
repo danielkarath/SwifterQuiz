@@ -114,7 +114,7 @@ class IDQAnswerView: UIView {
             
             resultLabel.leadingAnchor.constraint(equalTo: resultImageView.trailingAnchor, constant: 12),
             resultLabel.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 2),
-            resultLabel.widthAnchor.constraint(equalToConstant: 120),
+            resultLabel.widthAnchor.constraint(equalToConstant: 160),
             resultLabel.heightAnchor.constraint(equalToConstant: 40),
             
             referenceButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
@@ -169,7 +169,10 @@ class IDQAnswerView: UIView {
                 self.resultImageView.tintColor = IDQConstants.correctColor
                 self.referenceImageView.tintColor = IDQConstants.correctColor
                 self.resultImageView.image = UIImage(systemName: "checkmark.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
-                self.resultLabel.text = "Awesome!"
+                let haapyArray = ["Awesome!", "Excellent!", "Correct", "Hoooray!", "Well done!", "Great job!", "Bravo!", "Very cool!"]
+                let randomIndex = Int.random(in: 0..<haapyArray.count)
+                self.resultLabel.text = haapyArray[randomIndex]
+                
                 for label in labels {
                     label.textColor = IDQConstants.correctColor
                 }
@@ -180,7 +183,9 @@ class IDQAnswerView: UIView {
                 self.resultImageView.tintColor = IDQConstants.errorColor
                 self.referenceImageView.tintColor = IDQConstants.errorColor
                 self.resultImageView.image = UIImage(systemName: "x.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
-                self.resultLabel.text = "Incorrect"
+                let haapyArray = ["Incorrect", "Incorrect", "Incorrect", "Wrong answer", "Oopsie"]
+                let randomIndex = Int.random(in: 0..<haapyArray.count)
+                self.resultLabel.text = haapyArray[randomIndex]
                 for label in labels {
                     label.textColor = IDQConstants.errorColor
                 }
