@@ -69,6 +69,16 @@ class IDQAnswerView: UIView {
         return button
     }()
     
+    private let discardQuestionButton: UIButton = {
+        let button = UIButton()
+        button.frame.size = CGSize(width: 24, height: 24)
+        button.clipsToBounds = true
+        button.setTitle("", for: .normal)
+        button.isUserInteractionEnabled = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private let continueButton: UIButton = {
         let button = UIButton()
         button.frame.size = CGSize(width: UIScreen.main.bounds.width-32, height: 40) //.size = CGSize(width: width, height: height)
@@ -84,8 +94,11 @@ class IDQAnswerView: UIView {
     }()
     
     let referenceImageView = UIImageView(image: UIImage(systemName: "book.closed.fill"))
+    
     let bookmarkUnfilledImageView = UIImageView(image: UIImage(systemName: "bookmark"))
     let bookmarkFilledImageView = UIImageView(image: UIImage(systemName: "bookmark.fill"))
+    
+    let noSignImageView = UIImageView(image: UIImage(systemName: "nosign"))
     
     private var isBookmarked: Bool = false
     
@@ -123,13 +136,19 @@ class IDQAnswerView: UIView {
         bookmarkFilledImageView.contentMode = .scaleAspectFit
         bookmarkButton.addSubview(bookmarkUnfilledImageView)
         
+        noSignImageView.tintColor = IDQConstants.correctColor
+        noSignImageView.frame = CGRect(x: discardQuestionButton.layer.frame.minX, y: discardQuestionButton.layer.frame.minY, width: 24, height: 24)
+        noSignImageView.contentMode = .scaleAspectFit
+        discardQuestionButton.addSubview(noSignImageView)
+        
+        discardQuestionButton.addTarget(self, action: #selector(discardQuestionButtonButtonTapped(_:)), for: .touchUpInside)
         referenceButton.addTarget(self, action: #selector(referenceButtonTapped(_:)), for: .touchUpInside)
         bookmarkButton.addTarget(self, action: #selector(bookmarkButtonTapped(_:)), for: .touchUpInside)
         continueButton.addTarget(self, action: #selector(continueButtonTapped(_:)), for: .touchUpInside)
     }
     
     private func setupConstraints() {
-        addSubviews(resultLabel, resultImageView, continueButton, detailLabel, referenceButton, bookmarkButton)
+        addSubviews(resultLabel, resultImageView, continueButton, detailLabel, referenceButton, bookmarkButton, discardQuestionButton)
         NSLayoutConstraint.activate([
             resultImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             resultImageView.widthAnchor.constraint(equalToConstant: 32),
@@ -150,6 +169,11 @@ class IDQAnswerView: UIView {
             bookmarkButton.trailingAnchor.constraint(equalTo: referenceButton.leadingAnchor, constant: -16),
             bookmarkButton.heightAnchor.constraint(equalToConstant: 24),
             bookmarkButton.widthAnchor.constraint(equalToConstant: 24),
+            
+            discardQuestionButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
+            discardQuestionButton.trailingAnchor.constraint(equalTo: bookmarkButton.leadingAnchor, constant: -16),
+            discardQuestionButton.heightAnchor.constraint(equalToConstant: 24),
+            discardQuestionButton.widthAnchor.constraint(equalToConstant: 24),
             
             detailLabel.topAnchor.constraint(equalTo: resultImageView.bottomAnchor, constant: 4),
             detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -210,6 +234,13 @@ class IDQAnswerView: UIView {
         }
         isBookmarked.toggle()
     }
+    
+    @objc
+    private func discardQuestionButtonButtonTapped(_ sender: UIButton) {
+        guard let question = self.question, self.question != nil else {return}
+        print("Discard button tapped")
+    }
+    
     //MARK: - Public
     
     public func idqAnswerView(_ view: IDQAnswerView, question: IDQQuestion, answer: IDQAnswer?) {
@@ -225,6 +256,7 @@ class IDQAnswerView: UIView {
                 self.resultImageView.tintColor = IDQConstants.correctColor
                 self.referenceImageView.tintColor = IDQConstants.correctColor
                 self.bookmarkButton.tintColor = IDQConstants.correctColor
+                self.noSignImageView.tintColor = IDQConstants.correctColor
                 self.resultImageView.image = UIImage(systemName: "checkmark.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
                 let haapyArray = ["Awesome!", "Excellent!", "Correct", "Hoooray!", "Well done!", "Great job!", "Bravo!", "Very cool!"]
                 let randomIndex = Int.random(in: 0..<haapyArray.count)
@@ -240,6 +272,7 @@ class IDQAnswerView: UIView {
                 self.resultImageView.tintColor = IDQConstants.errorColor
                 self.referenceImageView.tintColor = IDQConstants.errorColor
                 self.bookmarkButton.tintColor = IDQConstants.errorColor
+                self.noSignImageView.tintColor = IDQConstants.errorColor
                 self.resultImageView.image = UIImage(systemName: "x.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
                 let haapyArray = ["Incorrect", "Incorrect", "Incorrect", "Wrong answer", "Oopsie"]
                 let randomIndex = Int.random(in: 0..<haapyArray.count)
