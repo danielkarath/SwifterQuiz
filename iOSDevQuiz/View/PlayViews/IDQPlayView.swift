@@ -27,6 +27,15 @@ class IDQPlayView: UIView {
     
     private let gradientView = UIView()
     
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.tintColor = IDQConstants.basicFontColor
+        spinner.layer.zPosition = 9
+        return spinner
+    }()
+    
     private let topBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false

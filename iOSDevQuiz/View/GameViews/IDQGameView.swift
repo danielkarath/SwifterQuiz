@@ -56,6 +56,7 @@ final class IDQGameView: UIView {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.hidesWhenStopped = true
         spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.tintColor = IDQConstants.basicFontColor
         spinner.layer.zPosition = 9
         return spinner
     }()
@@ -174,7 +175,7 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerView)
+        addSubviews(spinner, overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerView)
         guard let collectionView = answerCollectionView else {
             return
         }
@@ -213,6 +214,11 @@ final class IDQGameView: UIView {
             questionNumberLabel.widthAnchor.constraint(equalToConstant: 150),
             questionNumberLabel.heightAnchor.constraint(equalToConstant: 150),
             
+            spinner.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0),
+            spinner.widthAnchor.constraint(equalToConstant: 32),
+            spinner.heightAnchor.constraint(equalToConstant: 32),
+            
             answerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300),
             answerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             answerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
@@ -248,6 +254,7 @@ final class IDQGameView: UIView {
             questionNumberLabel.text = String(quizRound+1)
             quizRound += 1
         }
+        self.spinner.stopAnimating()
     }
    
 }
@@ -326,6 +333,7 @@ extension IDQGameView: IDQIDQAnswerViewDelegate {
         UIView.animate(withDuration: 0.30) {
             self.answerView.transform = CGAffineTransform(translationX: 0, y: 0)
         }
+        spinner.startAnimating()
         configure(overlay: overlayView)
         configure(with: questions, game: game!)
     }
