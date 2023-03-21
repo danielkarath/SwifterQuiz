@@ -201,6 +201,7 @@ class IDQPlayView: UIView {
     @objc
     private func startViewTapped(_ gestureRecognizer: UITapGestureRecognizer) {
         let idqGameList: [IDQGame] = [
+            IDQGame(gameName: "Tester", type: .basic, questionTimer: .gazelle, topics: [.basics], numberOfQuestions: 2),
             IDQGame(gameName: "Default", type: .basic, questionTimer: .gazelle, topics: [.basics], numberOfQuestions: 10),
             IDQGame(gameName: "Count Down", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics], numberOfQuestions: 15),
             IDQGame(gameName: "True Or False", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics, .designPatterns, .coreData, .combine, .cloudKit], numberOfQuestions: 15),

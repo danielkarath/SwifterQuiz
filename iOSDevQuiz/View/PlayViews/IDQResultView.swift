@@ -8,8 +8,12 @@
 import UIKit
 
 class IDQResultView: UIView {
-    
-    private var quiz: IDQQuiz?
+        
+    private var quiz: IDQQuiz? {
+        didSet {
+            questionsCollectionView.reloadData()
+        }
+    }
     
     private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
     
@@ -45,7 +49,7 @@ class IDQResultView: UIView {
         let label = UILabel()
         label.text = "Questions"
         label.numberOfLines = 1
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.textColor = IDQConstants.basicFontColor
         label.font = IDQConstants.setFont(fontSize: 13, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,6 +65,7 @@ class IDQResultView: UIView {
             forCellWithReuseIdentifier: IDQResultCollectionViewCell.cellIdentifier
         )
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        collectionView.backgroundColor = .clear.withAlphaComponent(0.0)
         collectionView.alpha = 1.0
         collectionView.isHidden = false
         return collectionView
@@ -99,6 +104,9 @@ class IDQResultView: UIView {
     //MARK: - Private
     
     private func setupConstraints() {
+        
+        let collectionViewLeadingAnchor: CGFloat = 8
+        
         addSubviews(topBackgroundView, titleLabel, congratulationsLabel, QuestionsSubTitleLabel, questionsCollectionView)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
@@ -119,11 +127,11 @@ class IDQResultView: UIView {
             QuestionsSubTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
             QuestionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
             QuestionsSubTitleLabel.widthAnchor.constraint(equalToConstant: 160),
-            QuestionsSubTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
+            QuestionsSubTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor+8),
             
-            questionsCollectionView.topAnchor.constraint(equalTo: QuestionsSubTitleLabel.bottomAnchor, constant: 8),
-            questionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
-            questionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
+            questionsCollectionView.topAnchor.constraint(equalTo: QuestionsSubTitleLabel.bottomAnchor, constant: 2),
+            questionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor),
+            questionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
             questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -64)
             
         ])
@@ -132,23 +140,36 @@ class IDQResultView: UIView {
     //MARK: - Public
     
     public func configure(quiz: IDQQuiz) {
+        self.quiz = quiz
         titleLabel.text = "Total Score: \(quiz.totalScore)"
     }
 }
 
-extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return quiz?.questions.count ?? 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IDQResultCollectionViewCell.cellIdentifier, for: indexPath) as? IDQResultCollectionViewCell else {
             fatalError("Unsupported cell")
         }
-
-//        let viewModel = cellViewModels[indexPath.row]
-//        cell.configure(with: viewModel)
+        if quiz != nil {
+            cell.configure(with: quiz!, index: indexPath.row)
+        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let screenBounds = UIScreen.main.bounds
+        let width = (screenBounds.width-32)
+        return CGSize(width: width, height: width * 0.40)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        //let selectedQuestion = questions[indexPath.row]
+        //delegate?.didSelectEpisode(selectedQuestion)
     }
 }

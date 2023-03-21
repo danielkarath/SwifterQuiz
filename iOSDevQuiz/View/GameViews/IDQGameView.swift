@@ -269,10 +269,9 @@ final class IDQGameView: UIView {
         self.game = game
         questionLabel.configureFor(IDQConstants.keywords)
         countDownView.setupTimer(game: game)
-        
-        if viewModel.didTapContinue(game: game) {
-            self.question = questions[viewModel.quizRound]
-            questionNumberLabel.text = String(viewModel.quizRound+1)
+        if viewModel.isLastQuestion(game: game) {
+            self.question = questions[viewModel.quizRound-1]
+            questionNumberLabel.text = String(viewModel.quizRound)
         } else {
             setupQuizResults()
         }
@@ -345,8 +344,6 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         } else {
             self.isCorrectArray.append(false)
         }
-        print("Questions count: \(questions.count)")
-        print("Answer count: \(isCorrectArray.count)")
         countDownView.stopTimer()
         answerView.idqAnswerView(answerView, question: question!, answer: selectedAnswer)
         configure(overlay: overlayView)

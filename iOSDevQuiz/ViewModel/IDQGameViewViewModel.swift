@@ -54,16 +54,16 @@ final class IDQGameViewViewModel {
         return quiz
     }
     
-    public func didTapContinue(game: IDQGame) -> Bool {
-        var wasLastQuestion: Bool?
+    public func isLastQuestion(game: IDQGame) -> Bool {
+        var shouldDisplayResults: Bool?
         if quizRound != game.numberOfQuestions {
             quizRound += 1
-            wasLastQuestion = false
+            shouldDisplayResults = true
         } else {
             quizRound = 0
-            wasLastQuestion = true
+            shouldDisplayResults = false
         }
-        guard let wasLastQuestion = wasLastQuestion else { return false } 
+        guard let wasLastQuestion = shouldDisplayResults else { return false }
         return wasLastQuestion
     }
     

@@ -51,7 +51,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         label.contentMode = .topLeft
         label.numberOfLines = 0
         label.text = "Some question"
-        label.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: 16, isBold: true)
         label.textColor = IDQConstants.basicFontColor
         return label
     }()
@@ -60,12 +60,13 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.layer.cornerRadius = 8
+        translatesAutoresizingMaskIntoConstraints = false
+        contentView.layer.cornerRadius = 16
+        contentView.clipsToBounds = true
         contentView.backgroundColor = IDQConstants.backgroundColor
         contentView.addSubviews(questionLabel, imageOuterView, difficultyLabel)
-        imageOuterView.addSubview(questionTypeImageView)
+       // imageOuterView.addSubview(questionTypeImageView)
         addConstraints()
-        imageOuterView.gradient(IDQConstants.contentBackgroundColor.cgColor, IDQConstants.darkOrange.cgColor, direction: .vertical)
     }
     
     required init?(coder: NSCoder) {
@@ -75,15 +76,15 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     private func addConstraints() {
         NSLayoutConstraint.activate([
             
-            imageOuterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 140),
+            imageOuterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             imageOuterView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             imageOuterView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             imageOuterView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             
-            questionTypeImageView.leadingAnchor.constraint(equalTo: imageOuterView.leadingAnchor, constant: 20),
-            questionTypeImageView.trailingAnchor.constraint(equalTo: imageOuterView.trailingAnchor, constant: 0),
-            questionTypeImageView.bottomAnchor.constraint(equalTo: imageOuterView.bottomAnchor, constant: 0),
-            questionTypeImageView.topAnchor.constraint(equalTo: imageOuterView.topAnchor, constant: 0),
+//            questionTypeImageView.leadingAnchor.constraint(equalTo: imageOuterView.leadingAnchor, constant: 20),
+//            questionTypeImageView.trailingAnchor.constraint(equalTo: imageOuterView.trailingAnchor, constant: 0),
+//            questionTypeImageView.bottomAnchor.constraint(equalTo: imageOuterView.bottomAnchor, constant: 0),
+//            questionTypeImageView.topAnchor.constraint(equalTo: imageOuterView.topAnchor, constant: 0),
             
             difficultyLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             difficultyLabel.widthAnchor.constraint(equalToConstant: 60),
@@ -98,10 +99,27 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    private func setupBackgroundGradient(with isCorrect: Bool) {
+        let isCorrectColor: UIColor = isCorrect ? IDQConstants.correctColor.withAlphaComponent(0.50) : IDQConstants.errorColor.withAlphaComponent(0.20)
+        imageOuterView.frame.size = CGSize(width: contentView.layer.frame.width, height: contentView.layer.frame.height)
+        imageOuterView.gradient(IDQConstants.contentBackgroundColor.cgColor, isCorrectColor.cgColor, direction: .horizontal)
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         questionLabel.text = nil
         difficultyLabel.text = nil
+        imageOuterView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+
+    }
+    
+    public func configure(with quiz: IDQQuiz, index: Int) {
+        guard quiz.questions.count >= index + 1 else { return }
+        let question: IDQQuestion = quiz.questions[index].question
+        let isCorrect: Bool = quiz.questions[index].answeredCorrectly
+        setupBackgroundGradient(with: isCorrect)
+        questionLabel.text = question.question
+        difficultyLabel.text = question.difficulty.rawValue
     }
     
 }

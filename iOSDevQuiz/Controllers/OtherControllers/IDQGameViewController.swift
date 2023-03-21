@@ -12,7 +12,7 @@ final class IDQGameViewController: UIViewController {
     private let questions: [IDQQuestion]
     private let game: IDQGame
     
-    private let viewModel = IDQResultViewViewModel()
+    //private let viewModel = IDQResultViewViewModel()
     
     private let qameView = IDQGameView()
         
