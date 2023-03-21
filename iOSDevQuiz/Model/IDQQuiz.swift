@@ -9,8 +9,8 @@ import Foundation
 
 struct IDQQuiz {
     let gamestyle: IDQGame
-    var questions: [IDQQuestion]
-    var totalScore: Int
-    var time: Int
+    let questions: [(question: IDQQuestion, answeredCorrectly: Bool)]
+    let totalScore: Int
+    let time: Int
     let date: Date
 }

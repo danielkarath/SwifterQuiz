@@ -15,15 +15,17 @@ final class IDQGameView: UIView {
         
     public weak var delegate: IDQGameViewDelegate?
     
+    private let viewModel = IDQGameViewViewModel()
+    
     private let countDownView = CountDownView()
     
     private let answerView = IDQAnswerView()
     
-    private var quizRound: Int = 0
-    
     private var questions: [IDQQuestion] = []
     
     private var game: IDQGame?
+    
+    private var isCorrectArray: [Bool] = []
         
     private var totalScore: Int = 0
     
@@ -82,7 +84,7 @@ final class IDQGameView: UIView {
         let label = UILabel()
         label.text = " "
         label.numberOfLines = 1
-        label.textAlignment = .center
+        label.textAlignment = .right
         label.textColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.15)
         label.font = IDQConstants.setFont(fontSize: 140, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -216,8 +218,8 @@ final class IDQGameView: UIView {
             passButton.heightAnchor.constraint(equalToConstant: 25),
             
             questionNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: -12),
-            questionNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 12),
-            questionNumberLabel.widthAnchor.constraint(equalToConstant: 150),
+            questionNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2),
+            questionNumberLabel.widthAnchor.constraint(equalToConstant: 200),
             questionNumberLabel.heightAnchor.constraint(equalToConstant: 150),
             
             spinner.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -234,12 +236,12 @@ final class IDQGameView: UIView {
     
     private func setupQuizResults() {
         guard let game = self.game else { return }
-        let quiz = IDQQuiz(
-            gamestyle: game,
+        let quiz = viewModel.getQuizResults(
+            game: game,
             questions: questions,
-            totalScore: self.totalScore,
-            time: self.quizDuration,
-            date: quizDate
+            isCorrect: isCorrectArray,
+            totalScore: totalScore,
+            quizDuration: quizDuration
         )
         delegate?.idqGameView(self, didFinish: quiz)
     }
@@ -265,19 +267,17 @@ final class IDQGameView: UIView {
         }
         self.questions = questions
         self.game = game
-        self.question = questions[quizRound]
         questionLabel.configureFor(IDQConstants.keywords)
         countDownView.setupTimer(game: game)
-        if quizRound != game.numberOfQuestions-1 {
-            questionNumberLabel.text = String(quizRound+1)
-            quizRound += 1
+        
+        if viewModel.didTapContinue(game: game) {
+            self.question = questions[viewModel.quizRound]
+            questionNumberLabel.text = String(viewModel.quizRound+1)
         } else {
             setupQuizResults()
-            //Logic to move to a Result VC
         }
         self.spinner.stopAnimating()
     }
-   
 }
 
 extension IDQGameView {
@@ -341,7 +341,12 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         let isCorrect = cell.didSelect(answer: selectedAnswer)
         if isCorrect {
             self.totalScore += 1
+            self.isCorrectArray.append(true)
+        } else {
+            self.isCorrectArray.append(false)
         }
+        print("Questions count: \(questions.count)")
+        print("Answer count: \(isCorrectArray.count)")
         countDownView.stopTimer()
         answerView.idqAnswerView(answerView, question: question!, answer: selectedAnswer)
         configure(overlay: overlayView)
