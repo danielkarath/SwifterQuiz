@@ -11,7 +11,6 @@ struct IDQQuiz {
     let gamestyle: IDQGame
     var questions: [IDQQuestion]
     var totalScore: Int
-    var performance: IDQQuestionDifficulty
-    var time: TimeInterval
+    var time: Int
     let date: Date
 }

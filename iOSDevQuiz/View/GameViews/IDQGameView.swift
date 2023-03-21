@@ -24,7 +24,12 @@ final class IDQGameView: UIView {
     private var questions: [IDQQuestion] = []
     
     private var game: IDQGame?
+        
+    private var totalScore: Int = 0
     
+    private var quizDuration: Int = 0
+    
+    private let quizDate: Date = Date()
     
     private var question: IDQQuestion? {
         didSet {
@@ -227,6 +232,18 @@ final class IDQGameView: UIView {
         ])
     }
     
+    private func setupQuizResults() {
+        guard let game = self.game else { return }
+        let quiz = IDQQuiz(
+            gamestyle: game,
+            questions: questions,
+            totalScore: self.totalScore,
+            time: self.quizDuration,
+            date: quizDate
+        )
+        delegate?.idqGameView(self, didFinish: quiz)
+    }
+    
     private func configure(overlay view: UIView) {
         guard let collectionView = answerCollectionView else { return }
         let elements: [UIView] = [passButton, collectionView]
@@ -255,17 +272,7 @@ final class IDQGameView: UIView {
             questionNumberLabel.text = String(quizRound+1)
             quizRound += 1
         } else {
-            print("Should move to new VC")
-            var quiz: IDQQuiz = IDQQuiz(
-                gamestyle: game,
-                questions: questions,
-                totalScore: 6,
-                performance: .easy,
-                time: 30.0,
-                date: .now
-            )
-            print("delegate: \(delegate)")
-            delegate?.idqGameView(self, didFinish: quiz)
+            setupQuizResults()
             //Logic to move to a Result VC
         }
         self.spinner.stopAnimating()
@@ -330,7 +337,11 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         guard !answers.isEmpty, answers.count > 3, self.game != nil, self.question != nil else { return }
         let selectedAnswer = answers[indexPath.row]
+        self.quizDuration = countDownView.timeSpent
         let isCorrect = cell.didSelect(answer: selectedAnswer)
+        if isCorrect {
+            self.totalScore += 1
+        }
         countDownView.stopTimer()
         answerView.idqAnswerView(answerView, question: question!, answer: selectedAnswer)
         configure(overlay: overlayView)

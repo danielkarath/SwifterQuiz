@@ -6,14 +6,9 @@
 //
 import UIKit
 
-protocol IDQResultViewViewModelDelegate: AnyObject {
-    func didGenerateGame()
-}
 
 final class IDQResultViewViewModel {
-    
-    public weak var delegate: IDQResultViewViewModelDelegate?
-    
+        
     //MARK: - Init
     init(
         

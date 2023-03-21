@@ -8,9 +8,7 @@
 import UIKit
 
 class StartButtonView: UIView {
-    
-    public weak var delegate: IDQPlayViewDelegate?
-    
+        
     private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
     private let menuButtonHight: CGFloat = 48.0
     private let menuButtonCornerRadius: CGFloat = 8.0
@@ -113,9 +111,5 @@ class StartButtonView: UIView {
         ])
     }
     
-    @objc
-    private func startViewTapped(_ gestureRecognizer: UITapGestureRecognizer) {
-        //delegate?.idqPlayView(didTapOn: self)
-    }
    
 }

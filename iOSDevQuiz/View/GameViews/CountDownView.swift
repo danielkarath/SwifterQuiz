@@ -121,6 +121,7 @@ class CountDownView: UIView {
             
             self.questionCountdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {_ in
                 remainingTime -= 1
+                self.timeSpent = remainingTime
                 if remainingTime <= 0 {
                     self.countDownLabel.text = "0"
                     self.countDownLabel.textColor = IDQConstants.errorColor
@@ -145,12 +146,15 @@ class CountDownView: UIView {
     
     //MARK: - Public
     
+    public var timeSpent: Int = 0
+    
     public func setupTimer(game: IDQGame) {
         startAnimation(with: Int(game.questionTimer.rawValue))
         countDownLabel.text = String(Int(game.questionTimer.rawValue))
     }
     
     public func stopTimer() {
+        timeSpent = 0
         if questionCountdownTimer.isValid {
             questionCountdownTimer.invalidate()
             countDownLabel.textColor = IDQConstants.basicFontColor

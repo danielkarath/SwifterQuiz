@@ -34,6 +34,7 @@
 		39962B2B29C9CC93001350F8 /* IDQGameResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2A29C9CC93001350F8 /* IDQGameResultViewController.swift */; };
 		39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2C29C9CD38001350F8 /* IDQResultView.swift */; };
 		39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */; };
+		39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */; };
 		39E2256F29B8F71500830F1A /* IDQGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2256E29B8F71500830F1A /* IDQGameView.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		39962B2A29C9CC93001350F8 /* IDQGameResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameResultViewController.swift; sourceTree = "<group>"; };
 		39962B2C29C9CD38001350F8 /* IDQResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultView.swift; sourceTree = "<group>"; };
 		39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultViewViewModel.swift; sourceTree = "<group>"; };
+		39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		39E2256E29B8F71500830F1A /* IDQGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 				3914C93229B10B300001377B /* IDQPlayView.swift */,
 				3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */,
 				39962B2C29C9CD38001350F8 /* IDQResultView.swift */,
+				39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */,
 			);
 			path = PlayViews;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				3914C92E29B0ED260001377B /* IDQGameOptionsViewController.swift in Sources */,
 				3952D1E129B8C6A10061C5C9 /* IDQPlayViewViewModel.swift in Sources */,
 				3914C91329B0D7E40001377B /* iOSDevQuiz.xcdatamodeld in Sources */,
+				39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */,
 				3948B15729B942D600E2841F /* IDQGameViewViewModel.swift in Sources */,
 				3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,

@@ -198,7 +198,6 @@ class IDQAnswerView: UIView {
     
     @objc
     private func continueButtonTapped(_ sender: UIButton) {
-        print("next game")
         sender.isUserInteractionEnabled = false
         continueTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) {_ in
             sender.isUserInteractionEnabled = true
