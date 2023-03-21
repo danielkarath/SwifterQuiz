@@ -129,7 +129,6 @@ class IDQAnswerView: UIView {
         referenceImageView.contentMode = .scaleAspectFit
         referenceButton.addSubview(referenceImageView)
         
-        bookmarkUnfilledImageView.tintColor = IDQConstants.correctColor
         bookmarkUnfilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
         bookmarkFilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
         bookmarkUnfilledImageView.contentMode = .scaleAspectFit

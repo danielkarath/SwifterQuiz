@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IDQGameViewDelegate: AnyObject {
-    func idqGameView(_ gameView: IDQGameView, didSelect game: IDQAnswer)
+    func idqGameView(_ gameView: IDQGameView, didFinish quiz: IDQQuiz)
 }
 
 final class IDQGameView: UIView {
@@ -24,6 +24,7 @@ final class IDQGameView: UIView {
     private var questions: [IDQQuestion] = []
     
     private var game: IDQGame?
+    
     
     private var question: IDQQuestion? {
         didSet {
@@ -253,6 +254,19 @@ final class IDQGameView: UIView {
         if quizRound != game.numberOfQuestions-1 {
             questionNumberLabel.text = String(quizRound+1)
             quizRound += 1
+        } else {
+            print("Should move to new VC")
+            var quiz: IDQQuiz = IDQQuiz(
+                gamestyle: game,
+                questions: questions,
+                totalScore: 6,
+                performance: .easy,
+                time: 30.0,
+                date: .now
+            )
+            print("delegate: \(delegate)")
+            delegate?.idqGameView(self, didFinish: quiz)
+            //Logic to move to a Result VC
         }
         self.spinner.stopAnimating()
     }
