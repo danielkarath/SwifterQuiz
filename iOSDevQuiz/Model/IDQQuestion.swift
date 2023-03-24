@@ -23,6 +23,63 @@ struct IDQQuestion {
 }
 
 let idqQuestionList: [IDQQuestion] = [
+    
+    IDQQuestion(
+        question: "The process that refers to the creation of a data object to a specific state or value is called __________.",
+        explanation: "Initialization is the creation of a data object.",
+        reference: "https://en.wikipedia.org/wiki/Initialization_(programming)",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "version control", isCorrect: false),
+            IDQAnswer(text: "refactoring", isCorrect: false),
+            IDQAnswer(text: "inheritance", isCorrect: false ),
+            IDQAnswer(text: "initialization", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The __________ type represents a single extended grapheme cluster, which is a sequence of one or more Unicode scalars that produce a single human-readable letter or symbol.",
+        explanation: "The Character type represents a character made up of one or more Unicode scalar values.",
+        reference: "https://developer.apple.com/documentation/swift/character",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "UInt", isCorrect: false),
+            IDQAnswer(text: "AnyObject", isCorrect: false),
+            IDQAnswer(text: "string", isCorrect: false ),
+            IDQAnswer(text: "character", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is type annotation?",
+        explanation: "The Character type represents a character made up of one or more Unicode scalar values, grouped by a Unicode boundary algorithm.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/#Type-Annotation",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "The creation of an optional type data object", isCorrect: false),
+            IDQAnswer(text: "Creating new types by combining existing types.", isCorrect: false),
+            IDQAnswer(text: "Automatically inferring the type of a variable or function parameter.", isCorrect: false ),
+            IDQAnswer(text: "Explicitly specifying the type of a variable or function parameter.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "How can you create a multi-line String object in Swift?",
+        explanation: "The Character type represents a character made up of one or more Unicode scalar values, grouped by a Unicode boundary algorithm.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/stringsandcharacters/#Multiline-String-Literals",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "By the combination of a backslash and an asterisk,", isCorrect: false),
+            IDQAnswer(text: "By using the backslash character at the end of each line,", isCorrect: false),
+            IDQAnswer(text: "By separating each line with a semicolon", isCorrect: false ),
+            IDQAnswer(text: "By enclosing the string in triple quotes", isCorrect: true)
+        ]
+    ),
+    
     IDQQuestion(
         question: "What is the method deinit() used for?",
         explanation: "A deinitializer is called immediately before a class instance is deallocated.",
@@ -322,7 +379,7 @@ let idqQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "In MVC (design pattern) what is the role of the Controller?",
+        question: "In the MVC design pattern what is the role of the Controller?",
         explanation: "The Controller mediates between the view and the model via the delegation pattern.",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
         difficulty: .easy,
@@ -335,5 +392,32 @@ let idqQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "What is the difference between the MVVM and the Viper design patterns?",
+        explanation: "The 'R' in VIPER stands for Router which alone handles navigation between screens.",
+        reference: "https://www.kodeco.com/8440907-getting-started-with-the-viper-architecture-pattern",
+        difficulty: .medium,
+        topic: .designPatterns,
+        answers: [
+            IDQAnswer(text: "MVVM separates the business logic from the data model.", isCorrect: false),
+            IDQAnswer(text: "MVVM further separates view logic from the data logic than VIPER.", isCorrect: false),
+            IDQAnswer(text: "MVVM and VIPER are the same, just have different namings.", isCorrect: false),
+            IDQAnswer(text: "VIPER separates the navigation logic of the application.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Which is NOT a component in the VIPER design pattern?",
+        explanation: "VIPER as View-Interactor-Presenter-Entity-Router",
+        reference: "https://www.kodeco.com/8440907-getting-started-with-the-viper-architecture-pattern",
+        difficulty: .medium,
+        topic: .designPatterns,
+        answers: [
+            IDQAnswer(text: "Entity", isCorrect: false),
+            IDQAnswer(text: "Presenter", isCorrect: false),
+            IDQAnswer(text: "Interactor", isCorrect: false),
+            IDQAnswer(text: "Model", isCorrect: true)
+        ]
+    ),
     
 ]
