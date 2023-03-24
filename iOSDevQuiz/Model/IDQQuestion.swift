@@ -307,5 +307,33 @@ let idqQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "In MVC (design pattern) what does the V stand for?",
+        explanation: "In the Model-View-Controller (MVC) design pattern the V stands for View",
+        reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
+        difficulty: .easy,
+        topic: .designPatterns,
+        answers: [
+            IDQAnswer(text: "Viewcontroller", isCorrect: false),
+            IDQAnswer(text: "Version Control", isCorrect: false),
+            IDQAnswer(text: "Vector", isCorrect: false),
+            IDQAnswer(text: "View", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In MVC (design pattern) what is the role of the Controller?",
+        explanation: "The Controller mediates between the view and the model via the delegation pattern.",
+        reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
+        difficulty: .easy,
+        topic: .designPatterns,
+        answers: [
+            IDQAnswer(text: "There is no Controller in MVC.", isCorrect: false),
+            IDQAnswer(text: "The Controller represents the data and the logic of the application.", isCorrect: false),
+            IDQAnswer(text: "The Controller represents the user interface of the application.", isCorrect: false),
+            IDQAnswer(text: "The Controller acts as an intermediary between the model and the view.", isCorrect: true)
+        ]
+    ),
+    
     
 ]

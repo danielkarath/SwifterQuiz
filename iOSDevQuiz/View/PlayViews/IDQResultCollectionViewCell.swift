@@ -60,7 +60,6 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
         contentView.layer.cornerRadius = 16
         contentView.clipsToBounds = true
         contentView.backgroundColor = IDQConstants.backgroundColor
