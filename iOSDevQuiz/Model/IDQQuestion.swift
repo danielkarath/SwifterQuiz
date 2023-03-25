@@ -39,6 +39,34 @@ let idqQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
+        question: "What is the logical 'or' operator in Swift?",
+        explanation: "The logical OR operator is || in Swift",
+        reference: "https://developer.apple.com/documentation/swift/operator-declarations",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "??", isCorrect: false),
+            IDQAnswer(text: "OR", isCorrect: false),
+            IDQAnswer(text: "or", isCorrect: false ),
+            IDQAnswer(text: "||", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is the ternary conditional?",
+        explanation: "condition ? valueIfTrue : valueIfFalse",
+        reference: "https://developer.apple.com/documentation/swift/operator-declarations",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "??", isCorrect: false),
+            IDQAnswer(text: "OR", isCorrect: false),
+            IDQAnswer(text: "or", isCorrect: false ),
+            IDQAnswer(text: "A conditional operator that takes three operands and evaluates a Boolean expression.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
         question: "The __________ type represents a single extended grapheme cluster, which is a sequence of one or more Unicode scalars that produce a single human-readable letter or symbol.",
         explanation: "The Character type represents a character made up of one or more Unicode scalar values.",
         reference: "https://developer.apple.com/documentation/swift/character",
@@ -417,6 +445,20 @@ let idqQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Presenter", isCorrect: false),
             IDQAnswer(text: "Interactor", isCorrect: false),
             IDQAnswer(text: "Model", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is a singleton?",
+        explanation: "A software design pattern that restricts the instantiation of a class to a singular instance.",
+        reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Singleton.html",
+        difficulty: .medium,
+        topic: .designPatterns,
+        answers: [
+            IDQAnswer(text: "A networking protocol used for transferring large files between computers.", isCorrect: false),
+            IDQAnswer(text: "A design pattern where multiple instances of a class can exist simultaneously. ", isCorrect: false),
+            IDQAnswer(text: "A programming language that only supports single-threaded applications.", isCorrect: false),
+            IDQAnswer(text: "A design pattern that restricts the instantiation of a class to one object", isCorrect: true)
         ]
     ),
     

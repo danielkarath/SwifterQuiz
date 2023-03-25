@@ -19,6 +19,7 @@ final class IDQPlayViewViewModel {
     public func generateQuestions(game: IDQGame) -> [IDQQuestion] {
         var questions: [IDQQuestion] = []
         var optionalQuestions: [IDQQuestion] = []
+        print("idqQuestionList count: \(idqQuestionList.count)")
         for question in idqQuestionList {
             if game.topics.contains(question.topic) {
                 optionalQuestions.append(question)
