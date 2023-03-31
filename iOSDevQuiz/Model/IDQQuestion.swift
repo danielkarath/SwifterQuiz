@@ -462,4 +462,21 @@ let idqQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    
+    
+    
+    IDQQuestion(
+        question: "What methods are required to be implemented when adopting the UICollectionViewDataSource protocol?",
+        explanation: "At a minimum, all data source objects must implement the collectionView(_:numberOfItemsInSection:) and collectionView(_:cellForItemAt:) methods.",
+        reference: "https://developer.apple.com/documentation/uikit/uicollectionviewdatasource",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "The UICollectionViewDataSource protocol has no required methods.", isCorrect: false),
+            IDQAnswer(text: "The collectionView(_:didSelectItemAt:), collectionView(_:numberOfItemsInSection:) and collectionView(_:cellForItemAt:) methods.", isCorrect: false),
+            IDQAnswer(text: "The collectionView(_:numberOfItemsInSection:) and collectionView(_:layout:sizeForItemAt:) methods", isCorrect: false),
+            IDQAnswer(text: "The collectionView(_:numberOfItemsInSection:) and collectionView(_:cellForItemAt:) methods.", isCorrect: true)
+        ]
+    ),
+    
 ]

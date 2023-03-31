@@ -119,7 +119,6 @@ class IDQAnswerView: UIView {
     
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = IDQConstants.contentBackgroundColor
         self.layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 240)
         backgroundColor = IDQConstants.contentBackgroundColor
         layer.cornerRadius = 16
@@ -236,7 +235,7 @@ class IDQAnswerView: UIView {
     @objc
     private func discardQuestionButtonButtonTapped(_ sender: UIButton) {
         guard let question = self.question, self.question != nil else {return}
-        print("Discard button tapped")
+        
     }
     
     //MARK: - Public

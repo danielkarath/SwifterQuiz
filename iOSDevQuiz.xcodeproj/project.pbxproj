@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3901BE7229D705930099CE86 /* IDQAnswerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901BE7129D705930099CE86 /* IDQAnswerViewViewModel.swift */; };
 		3909BBAC29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */; };
 		3914C90929B0D7E40001377B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C90829B0D7E40001377B /* AppDelegate.swift */; };
 		3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C90A29B0D7E40001377B /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3901BE7129D705930099CE86 /* IDQAnswerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerViewViewModel.swift; sourceTree = "<group>"; };
 		3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameAnswerCollectionViewCell.swift; sourceTree = "<group>"; };
 		3914C90529B0D7E40001377B /* iOSDevQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSDevQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3914C90829B0D7E40001377B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				3948B15629B942D600E2841F /* IDQGameViewViewModel.swift */,
 				39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */,
 				39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */,
+				3901BE7129D705930099CE86 /* IDQAnswerViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */,
 				3948B15729B942D600E2841F /* IDQGameViewViewModel.swift in Sources */,
 				3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */,
+				3901BE7229D705930099CE86 /* IDQAnswerViewViewModel.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,
 				392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */,
 				3914C92C29B0ECFB0001377B /* IDQPlayViewController.swift in Sources */,

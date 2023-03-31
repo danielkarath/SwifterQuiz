@@ -364,6 +364,4 @@ extension IDQGameView: IDQIDQAnswerViewDelegate {
         configure(overlay: overlayView)
         configure(with: questions, game: game!)
     }
-    
-    
 }

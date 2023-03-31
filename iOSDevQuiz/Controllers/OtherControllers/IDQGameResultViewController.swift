@@ -8,6 +8,8 @@
 import UIKit
 
 final class IDQGameResultViewController: UIViewController {
+
+    //private let viewModel: IDQResultViewViewModel
     
     private let quiz: IDQQuiz
     private let resultView = IDQResultView()
@@ -44,4 +46,3 @@ final class IDQGameResultViewController: UIViewController {
         ])
     }
 }
-
