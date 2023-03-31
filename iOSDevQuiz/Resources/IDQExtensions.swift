@@ -124,8 +124,6 @@ extension UIButton {
 }
 
 extension UILabel {
-    //func configureFor(_ keywordColors: [(String, UIColor)])
-    
     
     func configureFor(_ keywordColors: [String]) {
         guard let labelText = text else {
@@ -146,8 +144,6 @@ extension UILabel {
     }
     
 }
-
-
 
 extension Array where Element == UIColor {
     func toCGColors() -> [CGColor] {

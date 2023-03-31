@@ -5,7 +5,8 @@
 //  Created by Daniel Karath on 3/8/23.
 //
 
-import Foundation
+import UIKit
+
 
 enum IDQGameType {
     case basic
@@ -24,7 +25,8 @@ enum IDQGameQuestionTimer: CFTimeInterval {
 
 enum IDQTopic {
     case basics
-    case coreData
+    case uikit
+    case swiftui
     case cloudKit
     case combine
     case rxSwift
@@ -32,11 +34,10 @@ enum IDQTopic {
     case coreML
     case coreAnimation
     case avFoundation
-    case siriKit
     case widgetKit
+    case arkit
     case mapKit
     case healthKit
-    case designPatterns
     
 }
 

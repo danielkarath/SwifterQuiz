@@ -341,7 +341,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "Delegation is a design pattern that enables a class or structure to hand off (or delegate) some of its responsibilities to an instance of another type.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/#Delegation",
         difficulty: .easy,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "A delegate in Swift is a data structure that allows for the efficient storage and retrieval of key-value pairs.", isCorrect: false),
             IDQAnswer(text: "The delegate is an object that broadcasts information to other objects without having to know about them directly. ", isCorrect: false),
@@ -355,7 +355,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "Notifications can have multiple observers, they are flexible and notifications are delivered asynchronously.",
         reference: nil,
         difficulty: .easy,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "The notification pattern allows direct control over who receives the notifications while the delegate pattern does not.", isCorrect: false),
             IDQAnswer(text: "The notification pattern is generally more efficient then the delegate pattern as it involves fewer objects.", isCorrect: false),
@@ -369,7 +369,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "Both the notification pattern and key-value observing pattern is capable of it.",
         reference: nil,
         difficulty: .medium,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "delegate pattern", isCorrect: false),
             IDQAnswer(text: "key-value observing pattern", isCorrect: false),
@@ -383,7 +383,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "KVO: Key-Value Observing which is a commonly used design pattern.",
         reference: "https://developer.apple.com/documentation/swift/using-key-value-observing-in-swift",
         difficulty: .easy,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "Key-View Object", isCorrect: false),
             IDQAnswer(text: "Key-View Observer", isCorrect: false),
@@ -397,7 +397,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "In the Model-View-Controller (MVC) design pattern the V stands for View",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
         difficulty: .easy,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "Viewcontroller", isCorrect: false),
             IDQAnswer(text: "Version Control", isCorrect: false),
@@ -411,7 +411,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "The Controller mediates between the view and the model via the delegation pattern.",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
         difficulty: .easy,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "There is no Controller in MVC.", isCorrect: false),
             IDQAnswer(text: "The Controller represents the data and the logic of the application.", isCorrect: false),
@@ -425,7 +425,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "The 'R' in VIPER stands for Router which alone handles navigation between screens.",
         reference: "https://www.kodeco.com/8440907-getting-started-with-the-viper-architecture-pattern",
         difficulty: .medium,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "MVVM separates the business logic from the data model.", isCorrect: false),
             IDQAnswer(text: "MVVM further separates view logic from the data logic than VIPER.", isCorrect: false),
@@ -439,7 +439,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "VIPER as View-Interactor-Presenter-Entity-Router",
         reference: "https://www.kodeco.com/8440907-getting-started-with-the-viper-architecture-pattern",
         difficulty: .medium,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "Entity", isCorrect: false),
             IDQAnswer(text: "Presenter", isCorrect: false),
@@ -453,7 +453,7 @@ let idqQuestionList: [IDQQuestion] = [
         explanation: "A software design pattern that restricts the instantiation of a class to a singular instance.",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Singleton.html",
         difficulty: .medium,
-        topic: .designPatterns,
+        topic: .basics,
         answers: [
             IDQAnswer(text: "A networking protocol used for transferring large files between computers.", isCorrect: false),
             IDQAnswer(text: "A design pattern where multiple instances of a class can exist simultaneously. ", isCorrect: false),

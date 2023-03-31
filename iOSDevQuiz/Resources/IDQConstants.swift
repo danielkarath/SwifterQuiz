@@ -150,6 +150,15 @@ struct IDQConstants {
     ///Transparent miniature of the app icon with the orange, branding color
     static let appIconMiniature: UIImage = UIImage(named: "appIconMiniature")!
     
+    /// UIKit icon
+    static let uikitImage: UIImage = UIImage(named: "uikitIcon")!
+    
+    ///MLCore image
+    static let mlImage: UIImage = UIImage(named: "mlIcon")!
+    
+    /// ARKit icon
+    static let arkitImage: UIImage = UIImage(named: "arkitIcon")!
+    
     //MARK: Font
     public static func setFont(fontSize: CGFloat, isBold: Bool) -> UIFont {
         if isBold {
