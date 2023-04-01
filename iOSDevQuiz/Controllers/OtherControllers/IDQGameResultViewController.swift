@@ -24,9 +24,9 @@ final class IDQGameResultViewController: UIViewController {
     }
     
     //MARK: - Life cycle
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
     }
     
     override func viewDidLoad() {
@@ -34,6 +34,18 @@ final class IDQGameResultViewController: UIViewController {
         view.backgroundColor = IDQConstants.backgroundColor
         setupConstraints()
         resultView.configure(quiz: quiz)
+        resultView.delegate = self
+        setupNavItems()
+    }
+    
+    private func setupNavItems() {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        let chevronImage = UIImage(systemName: "chevron.left")!
+        //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
+        let menuButton = UIBarButtonItem(image: chevronImage, title: "Menu", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
+        menuButton.titlePositionAdjustment(for: .default)
+        menuButton.title = "Menu"
+        navigationItem.leftBarButtonItem = menuButton
     }
     
     private func setupConstraints() {
@@ -45,4 +57,16 @@ final class IDQGameResultViewController: UIViewController {
             resultView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
         ])
     }
+    
+    @objc
+    private func menuButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension IDQGameResultViewController: IDQResultViewDelegate {
+    func idqResultView(_: IDQResultView, didTap button: UIButton) {
+        
+    }
+    
 }

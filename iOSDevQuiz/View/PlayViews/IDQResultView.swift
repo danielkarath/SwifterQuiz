@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol IDQResultViewDelegate: AnyObject {
+    func idqResultView(_: IDQResultView, didTap button: UIButton)
+}
+
 class IDQResultView: UIView {
-        
+    
+    public weak var delegate: IDQResultViewDelegate?
+    
     private var quiz: IDQQuiz? {
         didSet {
             questionsCollectionView.reloadData()
