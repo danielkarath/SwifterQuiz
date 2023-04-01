@@ -38,7 +38,12 @@ final class IDQGameViewController: UIViewController {
         setupConstraints()
         startQuiz()
         qameView.delegate = self
-        //playView.delegate = self
+        let chevronImage = UIImage(systemName: "chevron.left")!
+        //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
+        let menuButton = UIBarButtonItem(image: chevronImage, title: "Exit Quiz", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
+        menuButton.titlePositionAdjustment(for: .default)
+        menuButton.title = "Exit Quiz"
+        navigationItem.leftBarButtonItem = menuButton
     }
     
     private func setupConstraints() {
@@ -55,6 +60,11 @@ final class IDQGameViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.qameView.configure(with: self.questions, game: self.game)
         }
+    }
+    
+    @objc
+    private func menuButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
     }
 
 }

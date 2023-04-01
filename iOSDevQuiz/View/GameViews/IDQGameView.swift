@@ -259,6 +259,14 @@ final class IDQGameView: UIView {
         }
     }
     
+    /// Play haptic for a given type
+    /// - Parameter type: Type to vibrate for
+    private func vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
+        generator.notificationOccurred(type)
+    }
+    
     //MARK: - Public
     
     public func configure(with questions: [IDQQuestion], game: IDQGame) {
@@ -339,9 +347,11 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         self.quizDuration = countDownView.timeSpent
         let isCorrect = cell.didSelect(answer: selectedAnswer)
         if isCorrect {
+            self.vibrate(for: .success)
             self.totalScore += 1
             self.isCorrectArray.append(true)
         } else {
+            self.vibrate(for: .error)
             self.isCorrectArray.append(false)
         }
         countDownView.stopTimer()

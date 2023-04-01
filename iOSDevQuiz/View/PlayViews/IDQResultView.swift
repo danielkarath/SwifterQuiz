@@ -13,6 +13,8 @@ protocol IDQResultViewDelegate: AnyObject {
 
 class IDQResultView: UIView {
     
+    private let viewModel = IDQResultViewViewModel()
+    
     public weak var delegate: IDQResultViewDelegate?
     
     private var quiz: IDQQuiz? {
@@ -35,14 +37,14 @@ class IDQResultView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.highlightedDarkOrange
-        label.font = IDQConstants.setFont(fontSize: 21, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: 48, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let congratulationsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Congratulations! You've scored "
+        label.text = "You've scored "
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.secondaryFontColor
@@ -125,10 +127,10 @@ class IDQResultView: UIView {
             congratulationsLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             congratulationsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 80),
             
-            titleLabel.heightAnchor.constraint(equalToConstant: 26),
+            titleLabel.heightAnchor.constraint(equalToConstant: 80),
             titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.80),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            titleLabel.topAnchor.constraint(equalTo: congratulationsLabel.bottomAnchor, constant: 0),
+            titleLabel.topAnchor.constraint(equalTo: congratulationsLabel.bottomAnchor, constant: -8),
             
             QuestionsSubTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
             QuestionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
@@ -147,8 +149,9 @@ class IDQResultView: UIView {
     
     public func configure(quiz: IDQQuiz) {
         self.quiz = quiz
-        titleLabel.text = "Total Score: \(quiz.totalScore)"
+        viewModel.countAnimation(titleLabel, duration: 3.0, quiz: quiz)
     }
+    
 }
 
 extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
