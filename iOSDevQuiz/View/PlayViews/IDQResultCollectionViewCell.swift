@@ -15,9 +15,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         imageView.layer.zPosition = 4
         imageView.layer.cornerRadius = 2
         imageView.clipsToBounds = true
-        //imageView.backgroundColor = IDQConstants.contentBackgroundColor
         imageView.contentMode = .scaleToFill
-        imageView.image = IDQConstants.arkitImage
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -137,7 +135,9 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         questionLabel.text = nil
         difficultyLabel.text = nil
-        imageOuterView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        questionTypeImageView.image = nil
+        isCorrectImageView.image = nil
+        //imageOuterView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
 
     }
     
@@ -148,6 +148,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         setupIsCorrectIcon(isCorrect: isCorrect)
         questionLabel.text = question.question
         difficultyLabel.text = question.difficulty.rawValue
+        questionTypeImageView.image = question.topic.image
     }
     
 }

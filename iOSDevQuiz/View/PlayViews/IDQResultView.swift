@@ -132,7 +132,7 @@ class IDQResultView: UIView {
             questionsCollectionView.topAnchor.constraint(equalTo: QuestionsSubTitleLabel.bottomAnchor, constant: 2),
             questionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor),
             questionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
-            questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -64)
+            questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128)
             
         ])
     }

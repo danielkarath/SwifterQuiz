@@ -39,6 +39,39 @@ enum IDQTopic {
     case mapKit
     case healthKit
     
+    var image: UIImage {
+        switch self {
+        case .basics:
+            return IDQConstants.uikitImage
+        case .uikit:
+            return IDQConstants.uikitImage
+        case .swiftui:
+            return IDQConstants.uikitImage
+        case .cloudKit:
+            return IDQConstants.uikitImage
+        case .combine:
+            return IDQConstants.uikitImage
+        case .rxSwift:
+            return IDQConstants.uikitImage
+        case .metal:
+            return IDQConstants.uikitImage
+        case .coreML:
+            return IDQConstants.mlImage
+        case .coreAnimation:
+            return IDQConstants.uikitImage
+        case .avFoundation:
+            return IDQConstants.uikitImage
+        case .widgetKit:
+            return IDQConstants.uikitImage
+        case .arkit:
+            return IDQConstants.arkitImage
+        case .mapKit:
+            return IDQConstants.uikitImage
+        case .healthKit:
+            return IDQConstants.uikitImage
+        }
+    }
+    
 }
 
 struct IDQGame: Equatable {
