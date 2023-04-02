@@ -8,6 +8,7 @@ import UIKit
 
 protocol IDQExitQuizViewDelegate: AnyObject {
     func didTapExitButton(_ idqExitQuizView: IDQExitQuizView)
+    func didTapRejoinButton(_ idqExitQuizView: IDQExitQuizView)
 }
 
 class IDQExitQuizView: UIView {
@@ -56,11 +57,26 @@ class IDQExitQuizView: UIView {
         button.frame.size = CGSize(width: UIScreen.main.bounds.width-32, height: 40) //.size = CGSize(width: width, height: height)
         button.layer.cornerRadius = 8
         button.setTitleColor(IDQConstants.contentBackgroundColor, for: .normal)
-        button.backgroundColor = IDQConstants.secondaryFontColor
         button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
         button.backgroundColor = IDQConstants.errorColor
         button.setTitle("END QUIZ", for: .normal)
         button.setTitle("END QUIZ", for: .highlighted)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isUserInteractionEnabled = true
+        return button
+    }()
+    
+    private let rejoinButton: UIButton = {
+        let button = UIButton()
+        button.frame.size = CGSize(width: UIScreen.main.bounds.width-32, height: 40) //.size = CGSize(width: width, height: height)
+        button.layer.cornerRadius = 8
+        button.setTitleColor(IDQConstants.basicFontColor, for: .normal)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        button.backgroundColor = IDQConstants.contentBackgroundColor
+        button.setTitle("CONTINUE QUIZ", for: .normal)
+        button.setTitle("CONTINUE QUIZ", for: .highlighted)
+        button.layer.borderWidth = 2.0
+        button.layer.borderColor = IDQConstants.basicFontColor.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isUserInteractionEnabled = true
         return button
@@ -87,10 +103,11 @@ class IDQExitQuizView: UIView {
         backgroundColor = IDQConstants.contentBackgroundColor
         layer.cornerRadius = 16
         exitButton.addTarget(self, action: #selector(exitButtonTapped(_:)), for: .touchUpInside)
+        rejoinButton.addTarget(self, action: #selector(rejoinButtonTapped(_:)), for: .touchUpInside)
     }
     
     private func setupConstraints() {
-        addSubviews(exitTitleLabel, exitImageView, exitButton, detailLabel)
+        addSubviews(exitTitleLabel, exitImageView, exitButton, detailLabel, rejoinButton)
         NSLayoutConstraint.activate([
             exitImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             exitImageView.widthAnchor.constraint(equalToConstant: 32),
@@ -107,18 +124,26 @@ class IDQExitQuizView: UIView {
             detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             detailLabel.heightAnchor.constraint(equalToConstant: 60),
             
+            rejoinButton.bottomAnchor.constraint(equalTo: exitButton.topAnchor, constant: -16),
+            rejoinButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            rejoinButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            rejoinButton.heightAnchor.constraint(equalToConstant: 50),
+            
             exitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -92),
             exitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             exitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            exitButton.heightAnchor.constraint(equalToConstant: 50)
+            exitButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
     @objc
     private func exitButtonTapped(_ sender: UIButton) {
-        sender.isUserInteractionEnabled = false
         delegate?.didTapExitButton(self)
     }
     
+    @objc
+    private func rejoinButtonTapped(_ sender: UIButton) {
+        delegate?.didTapRejoinButton(self)
+    }
 }
 

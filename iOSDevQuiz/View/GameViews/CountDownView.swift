@@ -170,5 +170,20 @@ class CountDownView: UIView {
         }
     }
     
+    public func pauseTimer() {
+        if questionCountdownTimer.isValid {
+            questionCountdownTimer.invalidate()
+            strokeLayer.removeAllAnimations()
+            strokeLayer.removeFromSuperlayer()
+        }
+    }
+    
+    public func unpauseTimer(game: IDQGame) {
+        if !questionCountdownTimer.isValid {
+            let reducedTime = Double(game.questionTimer.rawValue - Double(timeSpent))
+            startAnimation(with: Int(timeSpent))
+            countDownLabel.text = String(timeSpent)
+        }
+    }
     
 }

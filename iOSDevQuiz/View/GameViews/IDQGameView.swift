@@ -245,10 +245,10 @@ final class IDQGameView: UIView {
             answerResultView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             answerResultView.heightAnchor.constraint(equalToConstant: 300),
             
-            exitView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300),
+            exitView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 350),
             exitView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             exitView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            exitView.heightAnchor.constraint(equalToConstant: 300)
+            exitView.heightAnchor.constraint(equalToConstant: 350)
         ])
     }
     
@@ -297,11 +297,19 @@ final class IDQGameView: UIView {
     
     @objc
     private func didTapExit() {
-        countDownView.stopTimer()
+        countDownView.pauseTimer()
         configure(overlay: overlayView)
-        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
-            self.exitView.transform = CGAffineTransform(translationX: 0, y: -240)
+        UIView.animate(withDuration: 0.80, delay: 0.0, usingSpringWithDamping: 0.86, initialSpringVelocity: 0.2, options: [], animations: {
+            self.exitView.transform = CGAffineTransform(translationX: 0, y: -290)
         }, completion: nil)
+    }
+    
+    private func didTapRejoinQuiz() {
+        countDownView.unpauseTimer(game: game!)
+        UIView.animate(withDuration: 0.30) {
+            self.exitView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+        configure(overlay: overlayView)
     }
     
     private func configure(overlay view: UIView) {
@@ -429,6 +437,10 @@ extension IDQGameView: CountDownViewDelegate {
 }
 
 extension IDQGameView: IDQExitQuizViewDelegate {
+    func didTapRejoinButton(_ idqExitQuizView: IDQExitQuizView) {
+        didTapRejoinQuiz()
+    }
+    
     func didTapExitButton(_ idqExitQuizView: IDQExitQuizView) {
         delegate?.idqGameView(self, didTapExit: true)
     }
