@@ -14,9 +14,17 @@ protocol IDQAnswerResultViewDelegate: AnyObject {
 
 class IDQAnswerResultView: UIView {
     
+    enum AnswerViewDesignType {
+        case correct
+        case incorrect
+        case warning
+    }
+    
     public weak var delegate: IDQAnswerResultViewDelegate?
 
     private var question: IDQQuestion?
+    
+    private var designType: AnswerViewDesignType?
     
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
@@ -195,6 +203,49 @@ class IDQAnswerResultView: UIView {
         }
     }
     
+    private func configure(_view: IDQAnswerResultView, with design: AnswerViewDesignType) {
+        var titleStringArray: [String] = []
+        var backgroundColor: UIColor?
+        var tintColor: UIColor?
+        var iconName: String?
+        self.designType = design
+        
+        switch design {
+        case .correct:
+            titleStringArray = ["Awesome!", "Excellent!", "Correct", "Hoooray!", "Well done!", "Great job!", "Bravo!", "Very cool!"]
+            backgroundColor = IDQConstants.correctBackgroundColor
+            tintColor = IDQConstants.correctColor
+            iconName = "checkmark.circle.fill"
+        case .incorrect:
+            titleStringArray =  ["Incorrect", "Incorrect", "Incorrect", "Wrong answer", "Oopsie"]
+            backgroundColor = IDQConstants.errorBackgroundColor
+            tintColor = IDQConstants.errorColor
+            iconName = "x.circle.fill"
+        case .warning:
+            titleStringArray =  ["Run out of time"]
+            backgroundColor = IDQConstants.warningBackgroundColor
+            tintColor = IDQConstants.warningColor
+            iconName = "clock.badge.exclamationmark"
+        default:
+            backgroundColor = IDQConstants.warningBackgroundColor
+            tintColor = IDQConstants.warningColor
+            iconName = "clock.badge.exclamationmark"
+        }
+        
+        self.backgroundColor = backgroundColor
+        self.resultImageView.tintColor = tintColor
+        self.referenceImageView.tintColor = tintColor
+        self.bookmarkButton.tintColor = tintColor
+        self.noSignImageView.tintColor = tintColor
+        self.resultImageView.image = UIImage(systemName: iconName!)?.withTintColor(tintColor!, renderingMode: .alwaysTemplate)
+        let randomIndex = Int.random(in: 0..<titleStringArray.count)
+        self.resultLabel.text = titleStringArray[randomIndex]
+        for label in [resultLabel, detailLabel] {
+            label.textColor = tintColor
+        }
+        self.continueButton.backgroundColor = tintColor
+    }
+    
     @objc
     private func continueButtonTapped(_ sender: UIButton) {
         sender.isUserInteractionEnabled = false
@@ -207,11 +258,14 @@ class IDQAnswerResultView: UIView {
     
     @objc
     private func referenceButtonTapped(_ sender: UIButton) {
-        guard let question = self.question, self.question != nil else {return}
+        guard let question = self.question, self.question != nil, designType != nil else {return}
         let safariViewController = SFSafariViewController(url: URL(string: question.reference!)!)
         safariViewController.modalPresentationStyle = .popover
         if let viewController = self.getViewController() {
             viewController.present(safariViewController, animated: true, completion: nil)
+        }
+        if referenceImageView.image != UIImage(systemName: "book.fill") {
+            referenceImageView.image = UIImage(systemName: "book.fill")
         }
     }
     
@@ -242,84 +296,19 @@ class IDQAnswerResultView: UIView {
     public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, answeredCorrectly: Bool) {
         resetView()
         self.question = question
-        let labels: [UILabel] = [resultLabel, detailLabel]
         detailLabel.text = question.explanation
         if answeredCorrectly {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.backgroundColor = IDQConstants.correctBackgroundColor
-                self.resultImageView.tintColor = IDQConstants.correctColor
-                self.referenceImageView.tintColor = IDQConstants.correctColor
-                self.bookmarkButton.tintColor = IDQConstants.correctColor
-                self.noSignImageView.tintColor = IDQConstants.correctColor
-                self.resultImageView.image = UIImage(systemName: "checkmark.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
-                let haapyArray = ["Awesome!", "Excellent!", "Correct", "Hoooray!", "Well done!", "Great job!", "Bravo!", "Very cool!"]
-                let randomIndex = Int.random(in: 0..<haapyArray.count)
-                self.resultLabel.text = haapyArray[randomIndex]
-                
-                for label in labels {
-                    label.textColor = IDQConstants.correctColor
-                }
-                self.continueButton.backgroundColor = IDQConstants.correctColor
-            }
+            configure(_view: self, with: .correct)
         } else{
-            DispatchQueue.main.async {
-                self.backgroundColor = IDQConstants.errorBackgroundColor
-                self.resultImageView.tintColor = IDQConstants.errorColor
-                self.referenceImageView.tintColor = IDQConstants.errorColor
-                self.bookmarkButton.tintColor = IDQConstants.errorColor
-                self.noSignImageView.tintColor = IDQConstants.errorColor
-                self.resultImageView.image = UIImage(systemName: "x.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate)
-                let haapyArray = ["Incorrect", "Incorrect", "Incorrect", "Wrong answer", "Oopsie"]
-                let randomIndex = Int.random(in: 0..<haapyArray.count)
-                self.resultLabel.text = haapyArray[randomIndex]
-                for label in labels {
-                    label.textColor = IDQConstants.errorColor
-                }
-                self.continueButton.backgroundColor = IDQConstants.errorColor
-            }
+            configure(_view: self, with: .incorrect)
         }
     }
     
     public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, didNotAnswer: IDQAnswerResultViewViewModel.DidNotAnswer) {
         resetView()
         self.question = question
-        let labels: [UILabel] = [resultLabel, detailLabel]
         detailLabel.text = question.explanation
-        
-        switch didNotAnswer {
-        case .runOutOfTime:
-            DispatchQueue.main.async {
-                self.backgroundColor = IDQConstants.warningBackgroundColor
-                self.resultImageView.tintColor = IDQConstants.warningColor
-                self.referenceImageView.tintColor = IDQConstants.warningColor
-                self.bookmarkButton.tintColor = IDQConstants.warningColor
-                self.noSignImageView.tintColor = IDQConstants.warningColor
-                self.resultImageView.image = UIImage(systemName: "clock.badge.exclamationmark")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate)
-                let haapyArray = ["Run out of time"]
-                let randomIndex = Int.random(in: 0..<haapyArray.count)
-                self.resultLabel.text = haapyArray[randomIndex]
-                for label in labels {
-                    label.textColor = IDQConstants.warningColor
-                }
-                self.continueButton.backgroundColor = IDQConstants.warningColor
-            }
-        case .passed:
-            DispatchQueue.main.async {
-                self.backgroundColor = IDQConstants.warningBackgroundColor
-                self.resultImageView.tintColor = IDQConstants.warningColor
-                self.referenceImageView.tintColor = IDQConstants.warningColor
-                self.bookmarkButton.tintColor = IDQConstants.warningColor
-                self.noSignImageView.tintColor = IDQConstants.warningColor
-                self.resultImageView.image = UIImage(systemName: "questionmark.app.dashed")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate)
-                let haapyArray = ["Question passed"]
-                let randomIndex = Int.random(in: 0..<haapyArray.count)
-                self.resultLabel.text = haapyArray[randomIndex]
-                for label in labels {
-                    label.textColor = IDQConstants.warningColor
-                }
-                self.continueButton.backgroundColor = IDQConstants.warningColor
-            }
-        }
+        configure(_view: self, with: .warning)
     }
     
 }

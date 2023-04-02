@@ -76,7 +76,7 @@ final class IDQGameView: UIView {
     private let overlayView: UIView = {
         let view = UIView()
         view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.20)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.30)
         view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true

@@ -15,8 +15,6 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
-        imageView.backgroundColor = IDQConstants.backgroundColor.withAlphaComponent(0.25)
-        //imageView.image = UIImage(systemName: "triangle.fill") //triangle.fill diamond.fill circle.fill square.fill
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -79,26 +77,20 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     
     private func setupAnswerIcon(_ imageView: UIImageView, answerSerial: Int) {
         var icon: UIImage?
-        var tintColor: UIColor = IDQConstants.darkOrange
         switch answerSerial {
         case 0:
-            tintColor = IDQConstants.highlightedLightOrange.withAlphaComponent(0.90)
             icon = UIImage(systemName: "circle.fill")?.withTintColor(tintColor, renderingMode: .alwaysTemplate)
         case 1:
-            tintColor = IDQConstants.lightOrange.withAlphaComponent(0.90)
             icon = UIImage(systemName: "square.fill")?.withTintColor(tintColor, renderingMode: .alwaysTemplate)
         case 2:
-            tintColor = IDQConstants.highlightedDarkOrange.withAlphaComponent(0.90)
             icon = UIImage(systemName: "triangle.fill")?.withTintColor(tintColor, renderingMode: .alwaysTemplate)
         case 3:
-            tintColor = IDQConstants.darkOrange.withAlphaComponent(0.90)
             icon = UIImage(systemName: "diamond.fill")?.withTintColor(tintColor, renderingMode: .alwaysTemplate)
         default:
-            tintColor = IDQConstants.darkOrange.withAlphaComponent(0.90)
             icon = UIImage(systemName: "triangle.fill")?.withTintColor(tintColor, renderingMode: .alwaysTemplate)
         }
         imageView.image = icon
-        imageView.tintColor = tintColor
+        imageView.tintColor = IDQConstants.backgroundColor
     }
     
     
