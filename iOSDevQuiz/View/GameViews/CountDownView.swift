@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol CountDownViewDelegate: AnyObject {
+    func countDownView(_: CountDownView, didReachDeadline: Bool)
+}
+
 class CountDownView: UIView {
+    
+    public weak var delegate: CountDownViewDelegate?
     
     private let colors: [UIColor] = [IDQConstants.correctColor, IDQConstants.highlightedLightOrange, IDQConstants.errorColor]
     
@@ -126,6 +132,7 @@ class CountDownView: UIView {
                     self.countDownLabel.text = "0"
                     self.countDownLabel.textColor = IDQConstants.errorColor
                     self.stopTimer()
+                    self.delegate?.countDownView(self, didReachDeadline: true)
                 } else {
                     //self.countDownView.changeTimer(remainingTime)
                     self.countDownLabel.text = String(remainingTime)

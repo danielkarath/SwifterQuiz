@@ -239,17 +239,14 @@ class IDQAnswerView: UIView {
     }
     
     //MARK: - Public
-    
-    public func idqAnswerView(_ view: IDQAnswerView, question: IDQQuestion, answer: IDQAnswer?) {
-        guard let answer = answer, question != nil else {
-            return
-        }
+    public func idqAnswerView(_ view: IDQAnswerView, question: IDQQuestion, answeredCorrectly: Bool) {
         resetView()
         self.question = question
         let labels: [UILabel] = [resultLabel, detailLabel]
         detailLabel.text = question.explanation
-        if answer.isCorrect {
+        if answeredCorrectly {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.backgroundColor = IDQConstants.correctBackgroundColor
                 self.resultImageView.tintColor = IDQConstants.correctColor
                 self.referenceImageView.tintColor = IDQConstants.correctColor
                 self.bookmarkButton.tintColor = IDQConstants.correctColor
@@ -266,6 +263,7 @@ class IDQAnswerView: UIView {
             }
         } else{
             DispatchQueue.main.async {
+                self.backgroundColor = IDQConstants.errorBackgroundColor
                 self.resultImageView.tintColor = IDQConstants.errorColor
                 self.referenceImageView.tintColor = IDQConstants.errorColor
                 self.bookmarkButton.tintColor = IDQConstants.errorColor
@@ -278,6 +276,48 @@ class IDQAnswerView: UIView {
                     label.textColor = IDQConstants.errorColor
                 }
                 self.continueButton.backgroundColor = IDQConstants.errorColor
+            }
+        }
+    }
+    
+    public func idqAnswerView(_ view: IDQAnswerView, question: IDQQuestion, didNotAnswer: IDQAnswerViewViewModel.DidNotAnswer) {
+        resetView()
+        self.question = question
+        let labels: [UILabel] = [resultLabel, detailLabel]
+        detailLabel.text = question.explanation
+        
+        switch didNotAnswer {
+        case .runOutOfTime:
+            DispatchQueue.main.async {
+                self.backgroundColor = IDQConstants.warningBackgroundColor
+                self.resultImageView.tintColor = IDQConstants.warningColor
+                self.referenceImageView.tintColor = IDQConstants.warningColor
+                self.bookmarkButton.tintColor = IDQConstants.warningColor
+                self.noSignImageView.tintColor = IDQConstants.warningColor
+                self.resultImageView.image = UIImage(systemName: "clock.badge.exclamationmark")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate)
+                let haapyArray = ["Run out of time"]
+                let randomIndex = Int.random(in: 0..<haapyArray.count)
+                self.resultLabel.text = haapyArray[randomIndex]
+                for label in labels {
+                    label.textColor = IDQConstants.warningColor
+                }
+                self.continueButton.backgroundColor = IDQConstants.warningColor
+            }
+        case .passed:
+            DispatchQueue.main.async {
+                self.backgroundColor = IDQConstants.warningBackgroundColor
+                self.resultImageView.tintColor = IDQConstants.warningColor
+                self.referenceImageView.tintColor = IDQConstants.warningColor
+                self.bookmarkButton.tintColor = IDQConstants.warningColor
+                self.noSignImageView.tintColor = IDQConstants.warningColor
+                self.resultImageView.image = UIImage(systemName: "questionmark.app.dashed")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate)
+                let haapyArray = ["Question passed"]
+                let randomIndex = Int.random(in: 0..<haapyArray.count)
+                self.resultLabel.text = haapyArray[randomIndex]
+                for label in labels {
+                    label.textColor = IDQConstants.warningColor
+                }
+                self.continueButton.backgroundColor = IDQConstants.warningColor
             }
         }
     }

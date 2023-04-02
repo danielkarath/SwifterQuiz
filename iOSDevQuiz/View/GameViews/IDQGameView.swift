@@ -147,6 +147,7 @@ final class IDQGameView: UIView {
         setupConstraints()
         setupCollectionView(collectionView)
         answerView.delegate = self
+        countDownView.delegate = self
         answerView.layer.zPosition = 8
     }
     
@@ -244,6 +245,35 @@ final class IDQGameView: UIView {
             quizDuration: quizDuration
         )
         delegate?.idqGameView(self, didFinish: quiz)
+    }
+    
+    private func didTapAnswer(cell: IDQGameAnswerCollectionViewCell, selectedAnswer: IDQAnswer) {
+        self.quizDuration = countDownView.timeSpent
+        let isCorrect = cell.didSelect(answer: selectedAnswer)
+        if isCorrect {
+            self.totalScore += 1
+            self.isCorrectArray.append(true)
+        } else {
+            self.vibrate(for: .error)
+            self.isCorrectArray.append(false)
+        }
+        displayQuestionResults(isCorrectlyAnswered: selectedAnswer.isCorrect, answeredInTime: true)
+    }
+    
+    private func displayQuestionResults(isCorrectlyAnswered: Bool, answeredInTime: Bool) {
+        countDownView.stopTimer()
+        configure(overlay: overlayView)
+        if !answeredInTime {
+            self.answerView.idqAnswerView(answerView, question: question!, didNotAnswer: .runOutOfTime)
+            self.vibrate(for: .error)
+            self.isCorrectArray.append(false)
+        } else {
+            answerView.idqAnswerView(answerView, question: question!, answeredCorrectly: isCorrectlyAnswered)
+        }
+       
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
+            self.answerView.transform = CGAffineTransform(translationX: 0, y: -240)
+        }, completion: nil)
     }
     
     private func configure(overlay view: UIView) {
@@ -344,22 +374,7 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         guard !answers.isEmpty, answers.count > 3, self.game != nil, self.question != nil else { return }
         let selectedAnswer = answers[indexPath.row]
-        self.quizDuration = countDownView.timeSpent
-        let isCorrect = cell.didSelect(answer: selectedAnswer)
-        if isCorrect {
-            self.vibrate(for: .success)
-            self.totalScore += 1
-            self.isCorrectArray.append(true)
-        } else {
-            self.vibrate(for: .error)
-            self.isCorrectArray.append(false)
-        }
-        countDownView.stopTimer()
-        answerView.idqAnswerView(answerView, question: question!, answer: selectedAnswer)
-        configure(overlay: overlayView)
-        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
-            self.answerView.transform = CGAffineTransform(translationX: 0, y: -240)
-        }, completion: nil)
+        didTapAnswer(cell: cell, selectedAnswer: selectedAnswer)
     }
     
 }
@@ -373,5 +388,14 @@ extension IDQGameView: IDQIDQAnswerViewDelegate {
         spinner.startAnimating()
         configure(overlay: overlayView)
         configure(with: questions, game: game!)
+    }
+}
+
+extension IDQGameView: CountDownViewDelegate {
+    func countDownView(_: CountDownView, didReachDeadline: Bool) {
+        if didReachDeadline {
+            print("Did reach deadline!!!!")
+            displayQuestionResults(isCorrectlyAnswered: false, answeredInTime: false)
+        }
     }
 }
