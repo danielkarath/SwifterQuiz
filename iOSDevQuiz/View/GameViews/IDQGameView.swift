@@ -9,17 +9,21 @@ import UIKit
 
 protocol IDQGameViewDelegate: AnyObject {
     func idqGameView(_ gameView: IDQGameView, didFinish quiz: IDQQuiz)
+    func idqGameView(_ gameView: IDQGameView, didTapExit: Bool)
+    func idqGameView(_ gameView: IDQGameView, questionCounter: Int)
 }
 
 final class IDQGameView: UIView {
         
     public weak var delegate: IDQGameViewDelegate?
-    
+        
     private let viewModel = IDQGameViewViewModel()
     
     private let countDownView = CountDownView()
     
-    private let answerView = IDQAnswerView()
+    private let answerResultView = IDQAnswerResultView()
+    
+    private let exitView = IDQExitQuizView()
     
     private var questions: [IDQQuestion] = []
     
@@ -146,18 +150,26 @@ final class IDQGameView: UIView {
         addSubview(collectionView)
         setupConstraints()
         setupCollectionView(collectionView)
-        answerView.delegate = self
+        answerResultView.delegate = self
+        exitView.delegate = self
         countDownView.delegate = self
-        answerView.layer.zPosition = 8
+        answerResultView.layer.zPosition = 8
+        exitView.layer.zPosition = 9
     }
     
     required init?(coder: NSCoder) {
         fatalError("Unsupported")
     }
     
+    //MARK: - deinit
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
+        NotificationCenter.default.addObserver(self, selector: #selector(didTapExit), name: .exitQuizPressed, object: nil)
     }
     
     private func createCollectionView() -> UICollectionView {
@@ -184,7 +196,7 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(spinner, overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerView)
+        addSubviews(spinner, overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerResultView, exitView)
         guard let collectionView = answerCollectionView else {
             return
         }
@@ -228,10 +240,15 @@ final class IDQGameView: UIView {
             spinner.widthAnchor.constraint(equalToConstant: 32),
             spinner.heightAnchor.constraint(equalToConstant: 32),
             
-            answerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300),
-            answerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            answerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            answerView.heightAnchor.constraint(equalToConstant: 300)
+            answerResultView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300),
+            answerResultView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            answerResultView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            answerResultView.heightAnchor.constraint(equalToConstant: 300),
+            
+            exitView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300),
+            exitView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            exitView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            exitView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     
@@ -261,18 +278,29 @@ final class IDQGameView: UIView {
     }
     
     private func displayQuestionResults(isCorrectlyAnswered: Bool, answeredInTime: Bool) {
+        print("round count: \(viewModel.quizRound)")
+        delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
         countDownView.stopTimer()
         configure(overlay: overlayView)
         if !answeredInTime {
-            self.answerView.idqAnswerView(answerView, question: question!, didNotAnswer: .runOutOfTime)
+            self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .runOutOfTime)
             self.vibrate(for: .error)
             self.isCorrectArray.append(false)
         } else {
-            answerView.idqAnswerView(answerView, question: question!, answeredCorrectly: isCorrectlyAnswered)
+            answerResultView.idqAnswerResultView(answerResultView, question: question!, answeredCorrectly: isCorrectlyAnswered)
         }
        
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
-            self.answerView.transform = CGAffineTransform(translationX: 0, y: -240)
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
+        }, completion: nil)
+    }
+    
+    @objc
+    private func didTapExit() {
+        countDownView.stopTimer()
+        configure(overlay: overlayView)
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
+            self.exitView.transform = CGAffineTransform(translationX: 0, y: -240)
         }, completion: nil)
     }
     
@@ -379,11 +407,11 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
     
 }
 
-extension IDQGameView: IDQIDQAnswerViewDelegate {
+extension IDQGameView: IDQAnswerResultViewDelegate {
     
-    func didTapContinue(_ answerView: IDQAnswerView) {
+    func didTapContinue(_ answerResultView: IDQAnswerResultView) {
         UIView.animate(withDuration: 0.30) {
-            self.answerView.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: 0)
         }
         spinner.startAnimating()
         configure(overlay: overlayView)
@@ -398,4 +426,12 @@ extension IDQGameView: CountDownViewDelegate {
             displayQuestionResults(isCorrectlyAnswered: false, answeredInTime: false)
         }
     }
+}
+
+extension IDQGameView: IDQExitQuizViewDelegate {
+    func didTapExitButton(_ idqExitQuizView: IDQExitQuizView) {
+        delegate?.idqGameView(self, didTapExit: true)
+    }
+    
+    
 }

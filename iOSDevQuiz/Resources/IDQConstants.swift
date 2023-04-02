@@ -116,7 +116,7 @@ struct IDQConstants {
     ///The correctColor is representative for the correctly answered questions
     static let correctColor: UIColor = UIColor(named: "correctColor") ?? UIColor(red: 10/255, green: 190/255, blue: 35/255, alpha: 1.0)
     
-    ///The correctBackgroundColor is for the background color for the correctly answered questions IDQAnswerView
+    ///The correctBackgroundColor is for the background color for the correctly answered questions IDQAnswerResultView
     static let correctBackgroundColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
         if traitCollection.userInterfaceStyle == .dark {
             return UIColor(named: "correctBackgroundColor") ?? UIColor(red: 240/255, green: 255/255, blue: 235/255, alpha: 1.00)
@@ -128,7 +128,7 @@ struct IDQConstants {
     ///The errorColor is representative for the wrongly answered questions
     static let errorColor: UIColor = UIColor(named: "errorColor") ?? UIColor(red: 245/255, green: 61/255, blue: 73/255, alpha: 1.0)
     
-    //////The errorBackgroundColor is for the background color for the correctly answered questions IDQAnswerView
+    //////The errorBackgroundColor is for the background color for the correctly answered questions IDQAnswerResultView
     static let errorBackgroundColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
         if traitCollection.userInterfaceStyle == .dark {
             return UIColor(named: "errorBackgroundColor") ?? UIColor(red: 44/255, green: 30/255, blue: 33/255, alpha: 1.0)
@@ -140,7 +140,7 @@ struct IDQConstants {
     ///The warningColor is representative for the missed or passed, unanswered questions
     static let warningColor: UIColor = UIColor(named: "warningColor") ?? UIColor(red: 245/255, green: 130/255, blue: 55/255, alpha: 1.0)
     
-    ///The backgroundErrorColor is for the background color for the wrongly answered questions IDQAnswerView
+    ///The backgroundErrorColor is for the background color for the wrongly answered questions IDQAnswerResultView
     static let warningBackgroundColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
         if traitCollection.userInterfaceStyle == .dark {
             return UIColor(named: "warningBackgroundColor")  ?? UIColor(red: 38/255, green: 37/255, blue: 35/255, alpha: 1.00)

@@ -11,10 +11,12 @@ final class IDQGameViewController: UIViewController {
     
     private let questions: [IDQQuestion]
     private let game: IDQGame
-    
+        
     //private let viewModel = IDQResultViewViewModel()
     
     private let qameView = IDQGameView()
+    
+    private var quizRoundCounter: Int = 0
         
     init(questions: [IDQQuestion], game: IDQGame) {
         self.questions = questions
@@ -40,9 +42,9 @@ final class IDQGameViewController: UIViewController {
         qameView.delegate = self
         let chevronImage = UIImage(systemName: "chevron.left")!
         //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
-        let menuButton = UIBarButtonItem(image: chevronImage, title: "Exit Quiz", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
+        let menuButton = UIBarButtonItem(image: chevronImage, title: "End Quiz", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
         menuButton.titlePositionAdjustment(for: .default)
-        menuButton.title = "Exit Quiz"
+        menuButton.title = "End Quiz"
         navigationItem.leftBarButtonItem = menuButton
     }
     
@@ -64,12 +66,26 @@ final class IDQGameViewController: UIViewController {
     
     @objc
     private func menuButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
+        if quizRoundCounter > 0 {
+            NotificationCenter.default.post(name: .exitQuizPressed, object: nil)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
 
 }
 
 extension IDQGameViewController: IDQGameViewDelegate {
+    
+    func idqGameView(_ gameView: IDQGameView, questionCounter: Int) {
+        print("Counter: \(questionCounter)")
+        quizRoundCounter = questionCounter
+    }
+    
+    func idqGameView(_ gameView: IDQGameView, didTapExit: Bool) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     func idqGameView(_ gameView: IDQGameView, didFinish quiz: IDQQuiz) {
         let detailVC = IDQGameResultViewController(quiz: quiz)
         detailVC.navigationItem.largeTitleDisplayMode = .never

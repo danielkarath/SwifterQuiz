@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3901BE7229D705930099CE86 /* IDQAnswerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901BE7129D705930099CE86 /* IDQAnswerViewViewModel.swift */; };
+		3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */; };
 		3909BBAC29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */; };
 		3914C90929B0D7E40001377B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C90829B0D7E40001377B /* AppDelegate.swift */; };
 		3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C90A29B0D7E40001377B /* SceneDelegate.swift */; };
@@ -31,7 +31,8 @@
 		3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E329B8C70D0061C5C9 /* IDQGame.swift */; };
 		3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */; };
 		3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */; };
-		396B6A9329C127990098A4E5 /* IDQAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B6A9229C127990098A4E5 /* IDQAnswerView.swift */; };
+		396B6A9329C127990098A4E5 /* IDQAnswerResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */; };
+		39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39743AEB29D9AD0600D1C341 /* IDQExitQuizView.swift */; };
 		39962B2B29C9CC93001350F8 /* IDQGameResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2A29C9CC93001350F8 /* IDQGameResultViewController.swift */; };
 		39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2C29C9CD38001350F8 /* IDQResultView.swift */; };
 		39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */; };
@@ -41,7 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3901BE7129D705930099CE86 /* IDQAnswerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerViewViewModel.swift; sourceTree = "<group>"; };
+		3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultViewViewModel.swift; sourceTree = "<group>"; };
 		3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameAnswerCollectionViewCell.swift; sourceTree = "<group>"; };
 		3914C90529B0D7E40001377B /* iOSDevQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSDevQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3914C90829B0D7E40001377B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,7 +68,8 @@
 		3952D1E329B8C70D0061C5C9 /* IDQGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGame.swift; sourceTree = "<group>"; };
 		3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuestion.swift; sourceTree = "<group>"; };
 		3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswer.swift; sourceTree = "<group>"; };
-		396B6A9229C127990098A4E5 /* IDQAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerView.swift; sourceTree = "<group>"; };
+		396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultView.swift; sourceTree = "<group>"; };
+		39743AEB29D9AD0600D1C341 /* IDQExitQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQExitQuizView.swift; sourceTree = "<group>"; };
 		39962B2A29C9CC93001350F8 /* IDQGameResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameResultViewController.swift; sourceTree = "<group>"; };
 		39962B2C29C9CD38001350F8 /* IDQResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultView.swift; sourceTree = "<group>"; };
 		39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultViewViewModel.swift; sourceTree = "<group>"; };
@@ -187,7 +189,7 @@
 				3948B15629B942D600E2841F /* IDQGameViewViewModel.swift */,
 				39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */,
 				39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */,
-				3901BE7129D705930099CE86 /* IDQAnswerViewViewModel.swift */,
+				3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -209,7 +211,8 @@
 				39E2256E29B8F71500830F1A /* IDQGameView.swift */,
 				392415C029BA9E9B006D6590 /* CountDownView.swift */,
 				3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */,
-				396B6A9229C127990098A4E5 /* IDQAnswerView.swift */,
+				396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */,
+				39743AEB29D9AD0600D1C341 /* IDQExitQuizView.swift */,
 			);
 			path = GameViews;
 			sourceTree = "<group>";
@@ -285,7 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3914C92929B0EBF10001377B /* IDQSettingsViewController.swift in Sources */,
-				396B6A9329C127990098A4E5 /* IDQAnswerView.swift in Sources */,
+				396B6A9329C127990098A4E5 /* IDQAnswerResultView.swift in Sources */,
 				3914C90D29B0D7E40001377B /* IDQTabBarController.swift in Sources */,
 				3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */,
 				3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */,
@@ -306,9 +309,10 @@
 				3952D1E129B8C6A10061C5C9 /* IDQPlayViewViewModel.swift in Sources */,
 				3914C91329B0D7E40001377B /* iOSDevQuiz.xcdatamodeld in Sources */,
 				39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */,
+				39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */,
 				3948B15729B942D600E2841F /* IDQGameViewViewModel.swift in Sources */,
 				3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */,
-				3901BE7229D705930099CE86 /* IDQAnswerViewViewModel.swift in Sources */,
+				3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,
 				392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */,
 				3914C92C29B0ECFB0001377B /* IDQPlayViewController.swift in Sources */,

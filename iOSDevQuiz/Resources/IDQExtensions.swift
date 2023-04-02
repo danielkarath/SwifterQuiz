@@ -220,3 +220,8 @@ extension Bundle {
         return object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
 }
+
+extension Notification.Name {
+    static let exitQuizPressed = Notification.Name("ExitQuizPressedNotification")
+}
+

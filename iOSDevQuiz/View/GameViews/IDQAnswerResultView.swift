@@ -1,5 +1,5 @@
 //
-//  IDQAnswerView.swift
+//  IDQAnswerResultView.swift
 //  iOSDevQuiz
 //
 //  Created by Daniel Karath on 3/14/23.
@@ -8,13 +8,13 @@
 import UIKit
 import SafariServices
 
-protocol IDQIDQAnswerViewDelegate: AnyObject {
-    func didTapContinue(_ answerView: IDQAnswerView)
+protocol IDQAnswerResultViewDelegate: AnyObject {
+    func didTapContinue(_ answerResultView: IDQAnswerResultView)
 }
 
-class IDQAnswerView: UIView {
+class IDQAnswerResultView: UIView {
     
-    public weak var delegate: IDQIDQAnswerViewDelegate?
+    public weak var delegate: IDQAnswerResultViewDelegate?
 
     private var question: IDQQuestion?
     
@@ -239,7 +239,7 @@ class IDQAnswerView: UIView {
     }
     
     //MARK: - Public
-    public func idqAnswerView(_ view: IDQAnswerView, question: IDQQuestion, answeredCorrectly: Bool) {
+    public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, answeredCorrectly: Bool) {
         resetView()
         self.question = question
         let labels: [UILabel] = [resultLabel, detailLabel]
@@ -280,7 +280,7 @@ class IDQAnswerView: UIView {
         }
     }
     
-    public func idqAnswerView(_ view: IDQAnswerView, question: IDQQuestion, didNotAnswer: IDQAnswerViewViewModel.DidNotAnswer) {
+    public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, didNotAnswer: IDQAnswerResultViewViewModel.DidNotAnswer) {
         resetView()
         self.question = question
         let labels: [UILabel] = [resultLabel, detailLabel]
