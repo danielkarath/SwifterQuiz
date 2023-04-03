@@ -278,7 +278,6 @@ final class IDQGameView: UIView {
     }
     
     private func displayQuestionResults(isCorrectlyAnswered: Bool, answeredInTime: Bool) {
-        print("round count: \(viewModel.quizRound)")
         delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
         countDownView.stopTimer()
         configure(overlay: overlayView)
@@ -441,7 +440,8 @@ extension IDQGameView: IDQExitQuizViewDelegate {
         didTapRejoinQuiz()
     }
     
-    func didTapExitButton(_ idqExitQuizView: IDQExitQuizView) {
+    func didConfirmExit(_ idqExitQuizView: IDQExitQuizView) {
+        countDownView.stopTimer()
         delegate?.idqGameView(self, didTapExit: true)
     }
     

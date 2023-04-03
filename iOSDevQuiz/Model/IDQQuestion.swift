@@ -25,7 +25,7 @@ struct IDQQuestion {
 let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
-        question: "The process that refers to the creation of a data object to a specific state or value is called __________.",
+        question: "The creation of a data object to a specific state or value is called __________.",
         explanation: "Initialization is the creation of a data object.",
         reference: "https://en.wikipedia.org/wiki/Initialization_(programming)",
         difficulty: .easy,
@@ -53,16 +53,16 @@ let idqQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "What is the ternary conditional?",
+        question: "What do we use the ternary operator for?",
         explanation: "condition ? valueIfTrue : valueIfFalse",
         reference: "https://developer.apple.com/documentation/swift/operator-declarations",
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "??", isCorrect: false),
-            IDQAnswer(text: "OR", isCorrect: false),
-            IDQAnswer(text: "or", isCorrect: false ),
-            IDQAnswer(text: "A conditional operator that takes three operands and evaluates a Boolean expression.", isCorrect: true)
+            IDQAnswer(text: "To unwraps optional values safely.", isCorrect: false),
+            IDQAnswer(text: "To manage multiple async tasks.", isCorrect: false),
+            IDQAnswer(text: "To ensure that certain conditions are met before executing the rest of the code in a function or method.", isCorrect: false ),
+            IDQAnswer(text: "It allows you to write a concise expression to choose one of two values based on a condition.", isCorrect: true)
         ]
     ),
     
@@ -75,8 +75,22 @@ let idqQuestionList: [IDQQuestion] = [
         answers: [
             IDQAnswer(text: "UInt", isCorrect: false),
             IDQAnswer(text: "AnyObject", isCorrect: false),
-            IDQAnswer(text: "string", isCorrect: false ),
-            IDQAnswer(text: "character", isCorrect: true)
+            IDQAnswer(text: "String", isCorrect: false ),
+            IDQAnswer(text: "Character", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is the difference between Any and AnyObject?",
+        explanation: "Any is a protocol that represents any type at all, including class types, struct types, enum types, and protocol types.. AnyObject is a protocol that represents any instance of a class type.",
+        reference: "https://developer.apple.com/documentation/swift/anyobject",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "Any can represent any instance of a class.\nAnyObject can represent any type including value types.", isCorrect: false),
+            IDQAnswer(text: "Any can only represent value types.\nAnyObject can represent any instance of a class.", isCorrect: false),
+            IDQAnswer(text: "Any represents class types, AnyObject represents struct.", isCorrect: false ),
+            IDQAnswer(text: "Any can represent any type including value types.\nAnyObject can represent any instance of a class.", isCorrect: true)
         ]
     ),
     
@@ -143,24 +157,24 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Defines methods for converting an object to and from a binary format.", isCorrect: false),
-            IDQAnswer(text: "Provides methods for performing cryptographic operations.", isCorrect: false),
-            IDQAnswer(text: "Provides a standardized way to decode objects from JSON.", isCorrect: false),
-            IDQAnswer(text: "Provides a standardized way to encode and decode objects to and from JSON, or other data formats.", isCorrect: true)
+            IDQAnswer(text: "It defines methods for converting an object to and from a binary format.", isCorrect: false),
+            IDQAnswer(text: "It provides methods for performing cryptographic operations.", isCorrect: false),
+            IDQAnswer(text: "It provides a standardized way to decode objects from JSON.", isCorrect: false),
+            IDQAnswer(text: "It provides a standardized way to encode and decode objects to and from JSON, or other data formats.", isCorrect: true)
         ]
     ),
     
     IDQQuestion(
-        question: "What are enums used for?",
+        question: "What are enums in Swift?",
         explanation: "Enum stands for enumeration, and it defines a common type for a group of related values",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/",
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Enums are a tool to debug errors in Swift programming language.", isCorrect: false),
-            IDQAnswer(text: "Enums are a type of array used to store multiple values of the same type.", isCorrect: false),
+            IDQAnswer(text: "Enums are a tool to debug errors.", isCorrect: false),
+            IDQAnswer(text: "A type of array used to store multiple values of the same type.", isCorrect: false),
             IDQAnswer(text: "A collection type that can store multiple values of the same type in an ordered list.", isCorrect: false),
-            IDQAnswer(text: "Enums are a way to define a group of related values in Swift.", isCorrect: true)
+            IDQAnswer(text: "Enums are a way to define a group of related values.", isCorrect: true)
         ]
     ),
     
@@ -202,8 +216,8 @@ let idqQuestionList: [IDQQuestion] = [
         answers: [
             IDQAnswer(text: "A Float is a data type that can only store positive numbers.", isCorrect: false),
             IDQAnswer(text: "Float is a one-precision while Dpuble is a double-precision floating point number.", isCorrect: false),
-            IDQAnswer(text: "Float had been depricated in iOS 7.", isCorrect: false),
-            IDQAnswer(text: "A Float is a data type that uses 32 bits of memory while a Double uses 64 bits of memory.", isCorrect: true)
+            IDQAnswer(text: "Both are floating-point numbers, but Float had been depricated in iOS 7.", isCorrect: false),
+            IDQAnswer(text: "A Float uses 32 bits while a Double uses 64 bits of memory.", isCorrect: true)
         ]
     ),
     
@@ -229,7 +243,7 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .hard,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "The @frozen attribute grants a public getter but private setter to the object it's applied to", isCorrect: false),
+            IDQAnswer(text: "It grants a public getter but private setter to the object it's applied to", isCorrect: false),
             IDQAnswer(text: "There is no @frozen attribute in Swift", isCorrect: false),
             IDQAnswer(text: "It prevents the app from executing the function it's applied to more than once per app launch", isCorrect: false),
             IDQAnswer(text: "It indicates that the annotated type or member is immutable.", isCorrect: true)
@@ -245,7 +259,7 @@ let idqQuestionList: [IDQQuestion] = [
         topic: .basics,
         answers: [
             IDQAnswer(text: "Comparable ", isCorrect: false),
-            IDQAnswer(text: "TextOutputStreamable", isCorrect: false),
+            IDQAnswer(text: "TextOutputStreamable ", isCorrect: false),
             IDQAnswer(text: "Hashable ", isCorrect: false),
             IDQAnswer(text: "It conforms to all of the listed protocols", isCorrect: true),
         ]
@@ -260,7 +274,7 @@ let idqQuestionList: [IDQQuestion] = [
         topic: .basics,
         answers: [
             IDQAnswer(text: "A function to encode and decode Unicode characters.", isCorrect: false),
-            IDQAnswer(text: "A UUID is a data type used for storing GPS coordinates.", isCorrect: false),
+            IDQAnswer(text: "A data type used for storing GPS coordinates.", isCorrect: false),
             IDQAnswer(text: "A unique 256-bit value that provides identifiable data about an iCloud user.", isCorrect: false),
             IDQAnswer(text: "A unique 128-bit value that is used to identify information in a unique and standardized way.", isCorrect: true)
         ]
@@ -281,22 +295,22 @@ let idqQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "You can add an element to an array in Swift by using __________",
+        question: "You can add an element to a specific index of an array by using __________ method",
         explanation: "The append(_:) method adds a new element to the end of the Array and the insert(_: at: ) adds a new element to a specific index.",
         reference: "https://developer.apple.com/documentation/swift/array/insert(_:at:)-3erb3",
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "the append(_: at:) method to add the new element to a specific index.", isCorrect: false),
-            IDQAnswer(text: "the addElement(_:) method to add the new element to the beginning of the array.", isCorrect: false),
-            IDQAnswer(text: "the append(_:) method to add the new element to the beginning of the array.", isCorrect: false),
-            IDQAnswer(text: "the insert(_: at:) method to insert the new element at a specific index.", isCorrect: true)
+            IDQAnswer(text: "the append(_: at:) ", isCorrect: false),
+            IDQAnswer(text: "the addElement(_:) ", isCorrect: false),
+            IDQAnswer(text: "the append(_:) ", isCorrect: false),
+            IDQAnswer(text: "the insert(_: at:) ", isCorrect: true)
         ]
     ),
     
     IDQQuestion(
-        question: "The zip() function in Swift is used to __________",
-        explanation: "The zip() function merges two sequences into a single sequence of tuples.",
+        question: "The zip() method in Swift is used to __________",
+        explanation: "The zip() method combines two arrays into a single array of tuples, where each tuple contains one element from each of the input arrays at the same index.",
         reference: "https://developer.apple.com/documentation/swift/zip(_:_:)",
         difficulty: .medium,
         topic: .basics,
@@ -304,7 +318,7 @@ let idqQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "compress data into a smaller size before transmitting it over a network.", isCorrect: false),
             IDQAnswer(text: "convert an array of strings into an array of integers, by mapping each string to its corresponding ASCII code.", isCorrect: false),
             IDQAnswer(text: "extract files from a compressed archive.", isCorrect: false),
-            IDQAnswer(text: "combine two arrays into a single array of tuples, where each tuple contains one element from each of the input arrays at the same index.", isCorrect: true)
+            IDQAnswer(text: "merge two sequences into a single sequence of tuples.", isCorrect: true)
         ]
     ),
     
@@ -323,7 +337,7 @@ let idqQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "The guard statement in Swift is __________",
+        question: "The guard statement is __________",
         explanation: "With the guard statement we can implement checks into our code that prevents the current scope from continuing if certain conditions are not met.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/statements/#Guard-Statement",
         difficulty: .easy,
@@ -332,21 +346,21 @@ let idqQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "a method that is used to encrypt data.", isCorrect: false),
             IDQAnswer(text: "a type of loop that repeats a block of code until a condition is met.", isCorrect: false),
             IDQAnswer(text: "A control flow statement that is always executed first in it's function or method.", isCorrect: false),
-            IDQAnswer(text: "A control flow statement that is used to exit early from a function, method, or loop if a condition isn't met.", isCorrect: true)
+            IDQAnswer(text: "A control flow statement that is used to exit early from a function, method or loop if a condition isn't met.", isCorrect: true)
         ]
     ),
     
     IDQQuestion(
         question: "What is a delegate in Swift?",
-        explanation: "Delegation is a design pattern that enables a class or structure to hand off (or delegate) some of its responsibilities to an instance of another type.",
+        explanation: "Delegation is a design pattern that enables a class or structure to hand off (or delegate) some of its responsibilities to an instance of another type. Think of a delegator as a boss and a delegate as an employee.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/#Delegation",
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A delegate in Swift is a data structure that allows for the efficient storage and retrieval of key-value pairs.", isCorrect: false),
-            IDQAnswer(text: "The delegate is an object that broadcasts information to other objects without having to know about them directly. ", isCorrect: false),
-            IDQAnswer(text: "A delegate is handled for a specific task by an other object called the delegator. Think of a delegate as a boss and a delegator as an employee.", isCorrect: false),
-            IDQAnswer(text: "A delegate is an object that is responsible for handling specific tasks on behalf of another object, called the delegator. Think of a delegator as a boss and a delegate as an employee.", isCorrect: true)
+            IDQAnswer(text: "A data structure that allows for the efficient storage and retrieval of key-value pairs.", isCorrect: false),
+            IDQAnswer(text: "An object that broadcasts information to other objects without having to know about them directly.", isCorrect: false),
+            IDQAnswer(text: "A delegator is an object that is responsible for handling specific tasks on behalf of another object, called the delegate.", isCorrect: false),
+            IDQAnswer(text: "A delegate is an object that is responsible for handling specific tasks on behalf of another object, called the delegator.", isCorrect: true)
         ]
     ),
     
@@ -357,8 +371,8 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "The notification pattern allows direct control over who receives the notifications while the delegate pattern does not.", isCorrect: false),
-            IDQAnswer(text: "The notification pattern is generally more efficient then the delegate pattern as it involves fewer objects.", isCorrect: false),
+            IDQAnswer(text: "The notification pattern allows direct control over who receives the notifications.", isCorrect: false),
+            IDQAnswer(text: "The notification pattern is generally more efficient then the delegate pattern.", isCorrect: false),
             IDQAnswer(text: "The delegate pattern is in every way superior to the notification pattern", isCorrect: false),
             IDQAnswer(text: "Notifications can have multiple observers, which allows for more flexibility", isCorrect: true)
         ]
@@ -414,9 +428,9 @@ let idqQuestionList: [IDQQuestion] = [
         topic: .basics,
         answers: [
             IDQAnswer(text: "There is no Controller in MVC.", isCorrect: false),
-            IDQAnswer(text: "The Controller represents the data and the logic of the application.", isCorrect: false),
-            IDQAnswer(text: "The Controller represents the user interface of the application.", isCorrect: false),
-            IDQAnswer(text: "The Controller acts as an intermediary between the model and the view.", isCorrect: true)
+            IDQAnswer(text: "It represents the data and the logic of the application.", isCorrect: false),
+            IDQAnswer(text: "It represents the user interface of the application.", isCorrect: false),
+            IDQAnswer(text: "It acts as an intermediary between the model and the view.", isCorrect: true)
         ]
     ),
     
@@ -441,10 +455,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Entity", isCorrect: false),
-            IDQAnswer(text: "Presenter", isCorrect: false),
-            IDQAnswer(text: "Interactor", isCorrect: false),
-            IDQAnswer(text: "Model", isCorrect: true)
+            IDQAnswer(text: "Entity ", isCorrect: false),
+            IDQAnswer(text: "Presenter ", isCorrect: false),
+            IDQAnswer(text: "Interactor ", isCorrect: false),
+            IDQAnswer(text: "Model ", isCorrect: true)
         ]
     ),
     
@@ -473,9 +487,9 @@ let idqQuestionList: [IDQQuestion] = [
         topic: .basics,
         answers: [
             IDQAnswer(text: "The UICollectionViewDataSource protocol has no required methods.", isCorrect: false),
-            IDQAnswer(text: "The collectionView(_:didSelectItemAt:), collectionView(_:numberOfItemsInSection:) and collectionView(_:cellForItemAt:) methods.", isCorrect: false),
-            IDQAnswer(text: "The collectionView(_:numberOfItemsInSection:) and collectionView(_:layout:sizeForItemAt:) methods", isCorrect: false),
-            IDQAnswer(text: "The collectionView(_:numberOfItemsInSection:) and collectionView(_:cellForItemAt:) methods.", isCorrect: true)
+            IDQAnswer(text: "collectionView(_:didSelectItemAt:)\ncollectionView(_:numberOfItemsInSection:)\n collectionView(_:cellForItemAt:)", isCorrect: false),
+            IDQAnswer(text: "collectionView(_:numberOfItemsInSection:)\ncollectionView(_:layout:sizeForItemAt:)", isCorrect: false),
+            IDQAnswer(text: "collectionView(_:numberOfItemsInSection:)\ncollectionView(_:cellForItemAt:)", isCorrect: true)
         ]
     ),
     

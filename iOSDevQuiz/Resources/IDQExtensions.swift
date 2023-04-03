@@ -134,13 +134,23 @@ extension UILabel {
         
         let fontSize: CGFloat = self.font.pointSize
         
-        for (word) in keywordColors {
-            let range = (labelText as NSString).range(of: word)
-            attributedString.addAttribute(.foregroundColor, value: color, range: range)
-            attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+        let words = labelText.split(separator: " ")
+        for word in words {
+            if keywordColors.contains(String(word)) {
+                let range = (labelText as NSString).range(of: String(word))
+                attributedString.addAttribute(.foregroundColor, value: color, range: range)
+                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+            }
         }
-        
         attributedText = attributedString
+        
+//        for (word) in keywordColors {
+//            let range = (labelText as NSString).range(of: word)
+//            attributedString.addAttribute(.foregroundColor, value: color, range: range)
+//            attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+//        }
+//
+//        attributedText = attributedString
     }
     
 }

@@ -7,7 +7,7 @@
 import UIKit
 
 protocol IDQExitQuizViewDelegate: AnyObject {
-    func didTapExitButton(_ idqExitQuizView: IDQExitQuizView)
+    func didConfirmExit(_ idqExitQuizView: IDQExitQuizView)
     func didTapRejoinButton(_ idqExitQuizView: IDQExitQuizView)
 }
 
@@ -138,7 +138,7 @@ class IDQExitQuizView: UIView {
     
     @objc
     private func exitButtonTapped(_ sender: UIButton) {
-        delegate?.didTapExitButton(self)
+        delegate?.didConfirmExit(self)
     }
     
     @objc

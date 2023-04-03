@@ -19,6 +19,7 @@ final class IDQTabBarController: UITabBarController {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         setupTabs()
+        print("Number of questions we have so far: \(idqQuestionList.count)")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

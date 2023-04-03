@@ -265,7 +265,9 @@ class IDQAnswerResultView: UIView {
             viewController.present(safariViewController, animated: true, completion: nil)
         }
         if referenceImageView.image != UIImage(systemName: "book.fill") {
-            referenceImageView.image = UIImage(systemName: "book.fill")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
+                self.referenceImageView.image = UIImage(systemName: "book.fill")
+            }
         }
     }
     
