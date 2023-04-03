@@ -24,6 +24,8 @@ struct IDQQuestion {
 
 let idqQuestionList: [IDQQuestion] = [
     
+    //MARK: - Basics
+    
     IDQQuestion(
         question: "The creation of a data object to a specific state or value is called __________.",
         explanation: "Initialization is the creation of a data object.",
@@ -59,7 +61,7 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "To unwraps optional values safely.", isCorrect: false),
+            IDQAnswer(text: "To unwrap optionals safely.", isCorrect: false),
             IDQAnswer(text: "To manage multiple async tasks.", isCorrect: false),
             IDQAnswer(text: "To ensure that certain conditions are met before executing the rest of the code in a function or method.", isCorrect: false ),
             IDQAnswer(text: "It allows you to write a concise expression to choose one of two values based on a condition.", isCorrect: true)
@@ -67,16 +69,30 @@ let idqQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "The __________ type represents a single extended grapheme cluster, which is a sequence of one or more Unicode scalars that produce a single human-readable letter or symbol.",
-        explanation: "The Character type represents a character made up of one or more Unicode scalar values.",
+        question: "The __________ type represents a character made up of one (or more) Unicode scalar values.",
+        explanation: "The Character represents a single extended grapheme cluster, which is a sequence of one or more Unicode scalars that produce a single human-readable letter or symbol.",
         reference: "https://developer.apple.com/documentation/swift/character",
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "UInt", isCorrect: false),
-            IDQAnswer(text: "AnyObject", isCorrect: false),
-            IDQAnswer(text: "String", isCorrect: false ),
-            IDQAnswer(text: "Character", isCorrect: true)
+            IDQAnswer(text: "UInt \t", isCorrect: false),
+            IDQAnswer(text: "AnyObject \t", isCorrect: false),
+            IDQAnswer(text: "String \t", isCorrect: false ),
+            IDQAnswer(text: "Character \t", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "A #selector expression is used to refer to __________",
+        explanation: "A selector expression lets you access the selector used to refer to a method or to a property’s getter or setter in Objective-C.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/expressions/#Selector-Expression",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "an object exposed to Swift or Objective-C.", isCorrect: false),
+            IDQAnswer(text: "an object exposed to Objective-C.", isCorrect: false),
+            IDQAnswer(text: "a method exposed to Swift or Objective-C.", isCorrect: false ),
+            IDQAnswer(text: "a method exposed to Objective-C.", isCorrect: true)
         ]
     ),
     
@@ -84,13 +100,13 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is the difference between Any and AnyObject?",
         explanation: "Any is a protocol that represents any type at all, including class types, struct types, enum types, and protocol types.. AnyObject is a protocol that represents any instance of a class type.",
         reference: "https://developer.apple.com/documentation/swift/anyobject",
-        difficulty: .easy,
+        difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Any can represent any instance of a class.\nAnyObject can represent any type including value types.", isCorrect: false),
-            IDQAnswer(text: "Any can only represent value types.\nAnyObject can represent any instance of a class.", isCorrect: false),
-            IDQAnswer(text: "Any represents class types, AnyObject represents struct.", isCorrect: false ),
-            IDQAnswer(text: "Any can represent any type including value types.\nAnyObject can represent any instance of a class.", isCorrect: true)
+            IDQAnswer(text: " Any can represent any instance of a class.\n AnyObject can represent any type including value types.", isCorrect: false),
+            IDQAnswer(text: " Any can only represent value types.\n AnyObject can represent any instance of a class.", isCorrect: false),
+            IDQAnswer(text: " Any represents class types, AnyObject represents struct.", isCorrect: false ),
+            IDQAnswer(text: " Any can represent any type including value types.\n AnyObject can represent any instance of a class.", isCorrect: true)
         ]
     ),
     
@@ -140,7 +156,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is a Tuple in Swift?",
         explanation: "A tuple type is a comma-separated list of types, that can be of different types and is enclosed in parentheses.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/#Tuple-Type",
-        difficulty: .medium,
+        difficulty: .easy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "A control flow statement that allows you to break out of a loop or switch statement.", isCorrect: false),
@@ -194,6 +210,34 @@ let idqQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
+        question: "what is an associated type?",
+        explanation: "An associated type gives a placeholder name to a type that’s used as part of the protocol.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/#Associated-Types",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "It's used to hide a return values type.", isCorrect: false),
+            IDQAnswer(text: "It's used to create an alias or alternative name for an existing type.", isCorrect: false),
+            IDQAnswer(text: "It's used to define enums in Swift.", isCorrect: false),
+            IDQAnswer(text: "It's used to define placeholder type used in a protocol.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "what is an opaque type?",
+        explanation: "An opaque type is a way to hide the underlying implementation details of a type",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/opaquetypes",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "There is no opaque type in Swift.", isCorrect: false),
+            IDQAnswer(text: "It's used to create an alias or alternative name for an existing type.", isCorrect: false),
+            IDQAnswer(text: "It refers to the type of any type, including class types, structure types, enumeration types, and protocol types.", isCorrect: false),
+            IDQAnswer(text: "A function or method with an opaque type hides its return value’s type information.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
         question: "What is the difference between an Array and a Set?",
         explanation: "A Set is unordered collection of unique elements. An Array is an ordered random-access collection.",
         reference: "https://developer.apple.com/documentation/swift/set",
@@ -228,10 +272,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "applicationDidBecomeActive(_: )", isCorrect: false),
-            IDQAnswer(text: "application(_: didFinishLaunchingWithOptions: )", isCorrect: false),
-            IDQAnswer(text: "sceneDidBecomeActive(_: )", isCorrect: false),
-            IDQAnswer(text: "application(_: willFinishLaunchingWithOptions: )", isCorrect: true),
+            IDQAnswer(text: "applicationDidBecomeActive(_:) \t", isCorrect: false),
+            IDQAnswer(text: "application(_: didFinishLaunchingWithOptions:) \t", isCorrect: false),
+            IDQAnswer(text: "sceneDidBecomeActive(_:) \t", isCorrect: false),
+            IDQAnswer(text: "application(_: willFinishLaunchingWithOptions:) \t", isCorrect: true),
         ]
     ),
     
@@ -258,9 +302,9 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Comparable ", isCorrect: false),
-            IDQAnswer(text: "TextOutputStreamable ", isCorrect: false),
-            IDQAnswer(text: "Hashable ", isCorrect: false),
+            IDQAnswer(text: "Comparable \t", isCorrect: false),
+            IDQAnswer(text: "TextOutputStreamable \t", isCorrect: false),
+            IDQAnswer(text: "Hashable \t", isCorrect: false),
             IDQAnswer(text: "It conforms to all of the listed protocols", isCorrect: true),
         ]
     ),
@@ -301,10 +345,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "the append(_: at:) ", isCorrect: false),
-            IDQAnswer(text: "the addElement(_:) ", isCorrect: false),
-            IDQAnswer(text: "the append(_:) ", isCorrect: false),
-            IDQAnswer(text: "the insert(_: at:) ", isCorrect: true)
+            IDQAnswer(text: "the append(_:at:) \n", isCorrect: false),
+            IDQAnswer(text: "the addElement(_:) \n", isCorrect: false),
+            IDQAnswer(text: "the append(_:) \n", isCorrect: false),
+            IDQAnswer(text: "the insert(_:at:) \n", isCorrect: true)
         ]
     ),
     
@@ -399,10 +443,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Key-View Object", isCorrect: false),
-            IDQAnswer(text: "Key-View Observer", isCorrect: false),
-            IDQAnswer(text: "Key-Value Object", isCorrect: false),
-            IDQAnswer(text: "Key-Value Observing", isCorrect: true)
+            IDQAnswer(text: "Key-View Object \t", isCorrect: false),
+            IDQAnswer(text: "Key-View Observer \t", isCorrect: false),
+            IDQAnswer(text: "Key-Value Object \t", isCorrect: false),
+            IDQAnswer(text: "Key-Value Observing \t", isCorrect: true)
         ]
     ),
     
@@ -413,10 +457,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Viewcontroller", isCorrect: false),
-            IDQAnswer(text: "Version Control", isCorrect: false),
-            IDQAnswer(text: "Vector", isCorrect: false),
-            IDQAnswer(text: "View", isCorrect: true)
+            IDQAnswer(text: "Viewcontroller \t", isCorrect: false),
+            IDQAnswer(text: "Version Control \t", isCorrect: false),
+            IDQAnswer(text: "Vector \t", isCorrect: false),
+            IDQAnswer(text: "View \t", isCorrect: true)
         ]
     ),
     
@@ -476,20 +520,89 @@ let idqQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "How can you declare optional methods in a protocol?",
+        explanation: "With the @objc optional keywords. Note that all conforming types must be Objective-C compatible.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/#Optional-Protocol-Requirements",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "It's not possible, except with an extension to the protocol where the optional method is used.", isCorrect: false),
+            IDQAnswer(text: "By using the @abstract optional  keyword", isCorrect: false),
+            IDQAnswer(text: "By using the @optional keywords", isCorrect: false),
+            IDQAnswer(text: "By using @objc optional keywords.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is the difference between Size classes and Auto Layout?",
+        explanation: "4 constraints are required to properly define the position of a UI element.",
+        reference: nil,
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "Auto Layout cannot be modified later, unlike Size classes", isCorrect: false),
+            IDQAnswer(text: "Auto Layout definitions always override size classes when the two are confliction.", isCorrect: false),
+            IDQAnswer(text: "Auto Layout defines interface traits, Size classes positioning.", isCorrect: false),
+            IDQAnswer(text: "Size classes define interface traits, Auto Layout positioning.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Which one is printed out first?",
+        explanation: "4 constraints are required to properly define the position of a UI element.",
+        reference: nil,
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "DispatchQueue.main.async {\n\tprint(\"fist\")\n}", isCorrect: false),
+            IDQAnswer(text: "DispatchQueue.main.asyncAfter (deadline: .now()) {\n\tprint(\"fist\")\n}", isCorrect: false),
+            IDQAnswer(text: "Either one of the print statments called on the main thread.", isCorrect: false),
+            IDQAnswer(text: "print(\"fist\")", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is the difference between the main thread and the background threads?",
+        explanation: "4 constraints are required to properly define the position of a UI element.",
+        reference: nil,
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "That there are only 2 main threads and 6 background threads.", isCorrect: false),
+            IDQAnswer(text: "Methods called on the main thread are always executed before of those called on a background thread.", isCorrect: false),
+            IDQAnswer(text: "The main thread typically handles the user interface while the background thread handles networking", isCorrect: false),
+            IDQAnswer(text: "The main thread typically handles the user interface while the background threads handle large, time-consuming tasks.", isCorrect: true)
+        ]
+    ),
     
     
+    //MARK: - UIKit
+    IDQQuestion(
+        question: "In UIKit how many constraints are needed at minimum to correctly determine the position of a UI element?",
+        explanation: "4 constraints are required to properly define the position of a UI element.",
+        reference: nil,
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "1", isCorrect: false),
+            IDQAnswer(text: "2", isCorrect: false),
+            IDQAnswer(text: "6", isCorrect: false),
+            IDQAnswer(text: "4", isCorrect: true)
+        ]
+    ),
     
     IDQQuestion(
         question: "What methods are required to be implemented when adopting the UICollectionViewDataSource protocol?",
         explanation: "At a minimum, all data source objects must implement the collectionView(_:numberOfItemsInSection:) and collectionView(_:cellForItemAt:) methods.",
         reference: "https://developer.apple.com/documentation/uikit/uicollectionviewdatasource",
         difficulty: .medium,
-        topic: .basics,
+        topic: .uikit,
         answers: [
             IDQAnswer(text: "The UICollectionViewDataSource protocol has no required methods.", isCorrect: false),
-            IDQAnswer(text: "collectionView(_:didSelectItemAt:)\ncollectionView(_:numberOfItemsInSection:)\n collectionView(_:cellForItemAt:)", isCorrect: false),
-            IDQAnswer(text: "collectionView(_:numberOfItemsInSection:)\ncollectionView(_:layout:sizeForItemAt:)", isCorrect: false),
-            IDQAnswer(text: "collectionView(_:numberOfItemsInSection:)\ncollectionView(_:cellForItemAt:)", isCorrect: true)
+            IDQAnswer(text: " collectionView(_:didSelectItemAt:) \n collectionView(_:numberOfItemsInSection:) \n  collectionView(_:cellForItemAt:)", isCorrect: false),
+            IDQAnswer(text: " collectionView(_:numberOfItemsInSection:) \n collectionView(_:layout:sizeForItemAt:)", isCorrect: false),
+            IDQAnswer(text: "collectionView(_:numberOfItemsInSection:) \n collectionView(_:cellForItemAt:)", isCorrect: true)
         ]
     ),
     

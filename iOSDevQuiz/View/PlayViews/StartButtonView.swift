@@ -49,7 +49,7 @@ class StartButtonView: UIView {
         label.alpha = 0.55
         label.textColor = .white//UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
         label.font = IDQConstants.setFont(fontSize: 13, isBold: true)
-        label.text = "Start Quiz"
+        label.text = "Quick Quiz"
         label.isAccessibilityElement = false
         return label
     }()
