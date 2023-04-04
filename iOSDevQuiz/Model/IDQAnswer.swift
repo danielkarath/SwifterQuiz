@@ -16,5 +16,5 @@ enum AnswerType {
 
 struct IDQAnswer {
     let text: String
-    let isCorrect: Bool
+    let answerType: AnswerType
 }

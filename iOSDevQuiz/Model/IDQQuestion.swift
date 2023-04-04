@@ -33,10 +33,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "version control", isCorrect: false),
-            IDQAnswer(text: "refactoring", isCorrect: false),
-            IDQAnswer(text: "inheritance", isCorrect: false ),
-            IDQAnswer(text: "initialization", isCorrect: true)
+            IDQAnswer(text: "version control", answerType: .wrong),
+            IDQAnswer(text: "refactoring", answerType: .wrong),
+            IDQAnswer(text: "inheritance", answerType: .wrong ),
+            IDQAnswer(text: "initialization", answerType: .correct),
         ]
     ),
     
@@ -47,10 +47,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "??", isCorrect: false),
-            IDQAnswer(text: "OR", isCorrect: false),
-            IDQAnswer(text: "or", isCorrect: false ),
-            IDQAnswer(text: "||", isCorrect: true)
+            IDQAnswer(text: "??", answerType: .wrong),
+            IDQAnswer(text: "OR", answerType: .wrong),
+            IDQAnswer(text: "or", answerType: .wrong ),
+            IDQAnswer(text: "||", answerType: .correct),
         ]
     ),
     
@@ -61,10 +61,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "To unwrap optionals safely.", isCorrect: false),
-            IDQAnswer(text: "To manage multiple async tasks.", isCorrect: false),
-            IDQAnswer(text: "To ensure that certain conditions are met before executing the rest of the code in a function or method.", isCorrect: false ),
-            IDQAnswer(text: "It allows you to write a concise expression to choose one of two values based on a condition.", isCorrect: true)
+            IDQAnswer(text: "To unwrap optionals safely.", answerType: .wrong),
+            IDQAnswer(text: "To manage multiple async tasks.", answerType: .wrong),
+            IDQAnswer(text: "To ensure that certain conditions are met before executing the rest of the code in a function or method.", answerType: .wrong ),
+            IDQAnswer(text: "It allows you to write a concise expression to choose one of two values based on a condition.", answerType: .correct),
         ]
     ),
     
@@ -75,10 +75,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "UInt \t", isCorrect: false),
-            IDQAnswer(text: "AnyObject \t", isCorrect: false),
-            IDQAnswer(text: "String \t", isCorrect: false ),
-            IDQAnswer(text: "Character \t", isCorrect: true)
+            IDQAnswer(text: "UInt \t", answerType: .wrong),
+            IDQAnswer(text: "AnyObject \t", answerType: .wrong),
+            IDQAnswer(text: "String \t", answerType: .wrong ),
+            IDQAnswer(text: "Character \t", answerType: .correct),
         ]
     ),
     
@@ -89,10 +89,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "an object exposed to Swift or Objective-C.", isCorrect: false),
-            IDQAnswer(text: "an object exposed to Objective-C.", isCorrect: false),
-            IDQAnswer(text: "a method exposed to Swift or Objective-C.", isCorrect: false ),
-            IDQAnswer(text: "a method exposed to Objective-C.", isCorrect: true)
+            IDQAnswer(text: "an object exposed to Swift or Objective-C.", answerType: .wrong),
+            IDQAnswer(text: "an object exposed to Objective-C.", answerType: .wrong),
+            IDQAnswer(text: "a method exposed to Swift or Objective-C.", answerType: .wrong ),
+            IDQAnswer(text: "a method exposed to Objective-C.", answerType: .correct),
         ]
     ),
     
@@ -103,10 +103,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: " Any can represent any instance of a class.\n AnyObject can represent any type including value types.", isCorrect: false),
-            IDQAnswer(text: " Any can only represent value types.\n AnyObject can represent any instance of a class.", isCorrect: false),
-            IDQAnswer(text: " Any represents class types, AnyObject represents struct.", isCorrect: false ),
-            IDQAnswer(text: " Any can represent any type including value types.\n AnyObject can represent any instance of a class.", isCorrect: true)
+            IDQAnswer(text: " Any can represent any instance of a class.\n AnyObject can represent any type including value types.", answerType: .wrong),
+            IDQAnswer(text: " Any can only represent value types.\n AnyObject can represent any instance of a class.", answerType: .wrong),
+            IDQAnswer(text: " Any represents class types, AnyObject represents struct.", answerType: .wrong ),
+            IDQAnswer(text: " Any can represent any type including value types.\n AnyObject can represent any instance of a class.", answerType: .correct),
         ]
     ),
     
@@ -117,10 +117,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "The creation of an optional type data object", isCorrect: false),
-            IDQAnswer(text: "Creating new types by combining existing types.", isCorrect: false),
-            IDQAnswer(text: "Automatically inferring the type of a variable or function parameter.", isCorrect: false ),
-            IDQAnswer(text: "Explicitly specifying the type of a variable or function parameter.", isCorrect: true)
+            IDQAnswer(text: "The creation of an optional type data object", answerType: .wrong),
+            IDQAnswer(text: "Creating new types by combining existing types.", answerType: .wrong),
+            IDQAnswer(text: "Automatically inferring the type of a variable or function parameter.", answerType: .wrong ),
+            IDQAnswer(text: "Explicitly specifying the type of a variable or function parameter.", answerType: .correct),
         ]
     ),
     
@@ -131,10 +131,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "By the combination of a backslash and an asterisk,", isCorrect: false),
-            IDQAnswer(text: "By using the backslash character at the end of each line,", isCorrect: false),
-            IDQAnswer(text: "By separating each line with a semicolon", isCorrect: false ),
-            IDQAnswer(text: "By enclosing the string in triple quotes", isCorrect: true)
+            IDQAnswer(text: "By the combination of a backslash and an asterisk,", answerType: .wrong),
+            IDQAnswer(text: "By using the backslash character at the end of each line,", answerType: .wrong),
+            IDQAnswer(text: "By separating each line with a semicolon", answerType: .wrong ),
+            IDQAnswer(text: "By enclosing the string in triple quotes", answerType: .correct),
         ]
     ),
     
@@ -145,10 +145,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "deinit() is called to create a new instance of a particular type", isCorrect: false),
-            IDQAnswer(text: "The deinit() is called to unconditionally stop execution.", isCorrect: false),
-            IDQAnswer(text: "The deinit() method is called on the app delegate when the app is about to move from the active to inactive state.", isCorrect: false),
-            IDQAnswer(text: "The deinit() is called immediately before a class instance is deallocated.", isCorrect: true)
+            IDQAnswer(text: "deinit() is called to create a new instance of a particular type", answerType: .wrong),
+            IDQAnswer(text: "The deinit() is called to unconditionally stop execution.", answerType: .wrong),
+            IDQAnswer(text: "The deinit() method is called on the app delegate when the app is about to move from the active to inactive state.", answerType: .wrong),
+            IDQAnswer(text: "The deinit() is called immediately before a class instance is deallocated.", answerType: .correct),
         ]
     ),
     
@@ -159,10 +159,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A control flow statement that allows you to break out of a loop or switch statement.", isCorrect: false),
-            IDQAnswer(text: "A collection type that can store multiple values of the same type in an ordered list.", isCorrect: false),
-            IDQAnswer(text: "A Tuple is collection of values of either Int, String or Bool types", isCorrect: false ),
-            IDQAnswer(text: "A Tuple is a collection of values of any type, which can be of different types.", isCorrect: true)
+            IDQAnswer(text: "A control flow statement that allows you to break out of a loop or switch statement.", answerType: .wrong),
+            IDQAnswer(text: "A collection type that can store multiple values of the same type in an ordered list.", answerType: .wrong),
+            IDQAnswer(text: "A Tuple is collection of values of either Int, String or Bool types", answerType: .wrong),
+            IDQAnswer(text: "A Tuple is a collection of values of any type, which can be of different types.", answerType: .correct),
         ]
     ),
     
@@ -173,10 +173,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "It defines methods for converting an object to and from a binary format.", isCorrect: false),
-            IDQAnswer(text: "It provides methods for performing cryptographic operations.", isCorrect: false),
-            IDQAnswer(text: "It provides a standardized way to decode objects from JSON.", isCorrect: false),
-            IDQAnswer(text: "It provides a standardized way to encode and decode objects to and from JSON, or other data formats.", isCorrect: true)
+            IDQAnswer(text: "It defines methods for converting an object to and from a binary format.", answerType: .wrong),
+            IDQAnswer(text: "It provides methods for performing cryptographic operations.", answerType: .wrong),
+            IDQAnswer(text: "It provides a standardized way to decode objects from JSON.", answerType: .wrong),
+            IDQAnswer(text: "It provides a standardized way to encode and decode objects to and from JSON, or other data formats.", answerType: .correct),
         ]
     ),
     
@@ -187,10 +187,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Enums are a tool to debug errors.", isCorrect: false),
-            IDQAnswer(text: "A type of array used to store multiple values of the same type.", isCorrect: false),
-            IDQAnswer(text: "A collection type that can store multiple values of the same type in an ordered list.", isCorrect: false),
-            IDQAnswer(text: "Enums are a way to define a group of related values.", isCorrect: true)
+            IDQAnswer(text: "Enums are a tool to debug errors.", answerType: .wrong),
+            IDQAnswer(text: "A type of array used to store multiple values of the same type.", answerType: .wrong),
+            IDQAnswer(text: "A collection type that can store multiple values of the same type in an ordered list.", answerType: .wrong),
+            IDQAnswer(text: "Enums are a way to define a group of related values.", answerType: .correct),
         ]
     ),
     
@@ -202,10 +202,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A set of built-in methods that can be used to manipulate user interface elements.", isCorrect: false),
-            IDQAnswer(text: "A type of in-memory cache that can be used to store frequently accessed data to improve the application's performance.", isCorrect: false),
-            IDQAnswer(text: "Data structures to store and retrieve large amounts of data in a key-value format.", isCorrect: false),
-            IDQAnswer(text: "A simple key-value store that allows the application to store and retrieve small pieces of data.", isCorrect: true)
+            IDQAnswer(text: "A set of built-in methods that can be used to manipulate user interface elements.", answerType: .wrong),
+            IDQAnswer(text: "A type of in-memory cache that can be used to store frequently accessed data to improve the application's performance.", answerType: .wrong),
+            IDQAnswer(text: "Data structures to store and retrieve large amounts of data in a key-value format.", answerType: .wrong),
+            IDQAnswer(text: "A simple key-value store that allows the application to store and retrieve small pieces of data.", answerType: .correct),
         ]
     ),
     
@@ -216,10 +216,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .hard,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "It's used to hide a return values type.", isCorrect: false),
-            IDQAnswer(text: "It's used to create an alias or alternative name for an existing type.", isCorrect: false),
-            IDQAnswer(text: "It's used to define enums in Swift.", isCorrect: false),
-            IDQAnswer(text: "It's used to define placeholder type used in a protocol.", isCorrect: true)
+            IDQAnswer(text: "It's used to hide a return values type.", answerType: .wrong),
+            IDQAnswer(text: "It's used to create an alias or alternative name for an existing type.", answerType: .wrong),
+            IDQAnswer(text: "It's used to define enums in Swift.", answerType: .wrong),
+            IDQAnswer(text: "It's used to define placeholder type used in a protocol.", answerType: .correct),
         ]
     ),
     
@@ -230,10 +230,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .hard,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "There is no opaque type in Swift.", isCorrect: false),
-            IDQAnswer(text: "It's used to create an alias or alternative name for an existing type.", isCorrect: false),
-            IDQAnswer(text: "It refers to the type of any type, including class types, structure types, enumeration types, and protocol types.", isCorrect: false),
-            IDQAnswer(text: "A function or method with an opaque type hides its return value’s type information.", isCorrect: true)
+            IDQAnswer(text: "There is no opaque type in Swift.", answerType: .wrong),
+            IDQAnswer(text: "It's used to create an alias or alternative name for an existing type.", answerType: .wrong),
+            IDQAnswer(text: "It refers to the type of any type, including class types, structure types, enumeration types, and protocol types.", answerType: .wrong),
+            IDQAnswer(text: "A function or method with an opaque type hides its return value’s type information.", answerType: .correct),
         ]
     ),
     
@@ -244,10 +244,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "An Array is a collection of elements that can be of different data types. A Set can only contain elements of the same data type.", isCorrect: false),
-            IDQAnswer(text: "An Array is a dynamic collection of elements, while a Set is static and immutable.", isCorrect: false),
-            IDQAnswer(text: "A Set can only store two elements, while an Array can store an unlimited number of elements.", isCorrect: false),
-            IDQAnswer(text: "An Array is a collection of elements that can contain duplicates and are ordered, while a Set is an unordered collection of unique elements", isCorrect: true)
+            IDQAnswer(text: "An Array is a collection of elements that can be of different data types. A Set can only contain elements of the same data type.", answerType: .wrong),
+            IDQAnswer(text: "An Array is a dynamic collection of elements, while a Set is static and immutable.", answerType: .wrong),
+            IDQAnswer(text: "A Set can only store two elements, while an Array can store an unlimited number of elements.", answerType: .wrong),
+            IDQAnswer(text: "An Array is a collection of elements that can contain duplicates and are ordered, while a Set is an unordered collection of unique elements", answerType: .correct),
         ]
     ),
     
@@ -258,10 +258,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A Float is a data type that can only store positive numbers.", isCorrect: false),
-            IDQAnswer(text: "Float is a one-precision while Dpuble is a double-precision floating point number.", isCorrect: false),
-            IDQAnswer(text: "Both are floating-point numbers, but Float had been depricated in iOS 7.", isCorrect: false),
-            IDQAnswer(text: "A Float uses 32 bits while a Double uses 64 bits of memory.", isCorrect: true)
+            IDQAnswer(text: "A Float is a data type that can only store positive numbers.", answerType: .wrong),
+            IDQAnswer(text: "Float is a one-precision while Dpuble is a double-precision floating point number.", answerType: .wrong),
+            IDQAnswer(text: "Both are floating-point numbers, but Float had been depricated in iOS 7.", answerType: .wrong),
+            IDQAnswer(text: "A Float uses 32 bits while a Double uses 64 bits of memory.", answerType: .correct)
         ]
     ),
     
@@ -272,10 +272,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "applicationDidBecomeActive(_:) \t", isCorrect: false),
-            IDQAnswer(text: "application(_: didFinishLaunchingWithOptions:) \t", isCorrect: false),
-            IDQAnswer(text: "sceneDidBecomeActive(_:) \t", isCorrect: false),
-            IDQAnswer(text: "application(_: willFinishLaunchingWithOptions:) \t", isCorrect: true),
+            IDQAnswer(text: "applicationDidBecomeActive(_:) \t", answerType: .wrong),
+            IDQAnswer(text: "application(_: didFinishLaunchingWithOptions:) \t", answerType: .wrong),
+            IDQAnswer(text: "sceneDidBecomeActive(_:) \t", answerType: .wrong),
+            IDQAnswer(text: "application(_: willFinishLaunchingWithOptions:) \t", answerType: .correct),
         ]
     ),
     
@@ -287,10 +287,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .hard,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "It grants a public getter but private setter to the object it's applied to", isCorrect: false),
-            IDQAnswer(text: "There is no @frozen attribute in Swift", isCorrect: false),
-            IDQAnswer(text: "It prevents the app from executing the function it's applied to more than once per app launch", isCorrect: false),
-            IDQAnswer(text: "It indicates that the annotated type or member is immutable.", isCorrect: true)
+            IDQAnswer(text: "It grants a public getter but private setter to the object it's applied to", answerType: .wrong),
+            IDQAnswer(text: "There is no @frozen attribute in Swift", answerType: .wrong),
+            IDQAnswer(text: "It prevents the app from executing the function it's applied to more than once per app launch", answerType: .wrong),
+            IDQAnswer(text: "It indicates that the annotated type or member is immutable.", answerType: .correct),
         ]
     ),
     
@@ -302,10 +302,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Comparable \t", isCorrect: false),
-            IDQAnswer(text: "TextOutputStreamable \t", isCorrect: false),
-            IDQAnswer(text: "Hashable \t", isCorrect: false),
-            IDQAnswer(text: "It conforms to all of the listed protocols", isCorrect: true),
+            IDQAnswer(text: "Comparable \t", answerType: .wrong),
+            IDQAnswer(text: "TextOutputStreamable \t", answerType: .wrong),
+            IDQAnswer(text: "Hashable \t", answerType: .wrong),
+            IDQAnswer(text: "It conforms to all of the listed protocols", answerType: .correct),
         ]
     ),
     
@@ -317,10 +317,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A function to encode and decode Unicode characters.", isCorrect: false),
-            IDQAnswer(text: "A data type used for storing GPS coordinates.", isCorrect: false),
-            IDQAnswer(text: "A unique 256-bit value that provides identifiable data about an iCloud user.", isCorrect: false),
-            IDQAnswer(text: "A unique 128-bit value that is used to identify information in a unique and standardized way.", isCorrect: true)
+            IDQAnswer(text: "A function to encode and decode Unicode characters.", answerType: .wrong),
+            IDQAnswer(text: "A data type used for storing GPS coordinates.", answerType: .wrong),
+            IDQAnswer(text: "A unique 256-bit value that provides identifiable data about an iCloud user.", answerType: .wrong),
+            IDQAnswer(text: "A unique 128-bit value that is used to identify information in a unique and standardized way.", answerType: .correct),
         ]
     ),
     
@@ -331,10 +331,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "It's a property that is only accessible within the scope of a particular function or method.", isCorrect: false),
-            IDQAnswer(text: "A property that is automatically deallocated from memory when it is no longer needed.", isCorrect: false),
-            IDQAnswer(text: "There is no lazy property in Swift", isCorrect: false),
-            IDQAnswer(text: "It's a property that is only initialized when it is accessed for the first time.", isCorrect: true)
+            IDQAnswer(text: "It's a property that is only accessible within the scope of a particular function or method.", answerType: .wrong),
+            IDQAnswer(text: "A property that is automatically deallocated from memory when it is no longer needed.", answerType: .wrong),
+            IDQAnswer(text: "There is no lazy property in Swift", answerType: .wrong),
+            IDQAnswer(text: "It's a property that is only initialized when it is accessed for the first time.", answerType: .correct),
         ]
     ),
     
@@ -345,10 +345,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "the append(_:at:) \n", isCorrect: false),
-            IDQAnswer(text: "the addElement(_:) \n", isCorrect: false),
-            IDQAnswer(text: "the append(_:) \n", isCorrect: false),
-            IDQAnswer(text: "the insert(_:at:) \n", isCorrect: true)
+            IDQAnswer(text: "the append(_:at:) \n", answerType: .wrong),
+            IDQAnswer(text: "the addElement(_:) \n", answerType: .wrong),
+            IDQAnswer(text: "the append(_:) \n", answerType: .wrong),
+            IDQAnswer(text: "the insert(_:at:) \n", answerType: .correct),
         ]
     ),
     
@@ -359,10 +359,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "compress data into a smaller size before transmitting it over a network.", isCorrect: false),
-            IDQAnswer(text: "convert an array of strings into an array of integers, by mapping each string to its corresponding ASCII code.", isCorrect: false),
-            IDQAnswer(text: "extract files from a compressed archive.", isCorrect: false),
-            IDQAnswer(text: "merge two sequences into a single sequence of tuples.", isCorrect: true)
+            IDQAnswer(text: "compress data into a smaller size before transmitting it over a network.", answerType: .wrong),
+            IDQAnswer(text: "convert an array of strings into an array of integers, by mapping each string to its corresponding ASCII code.", answerType: .wrong),
+            IDQAnswer(text: "extract files from a compressed archive.", answerType: .wrong),
+            IDQAnswer(text: "merge two sequences into a single sequence of tuples.", answerType: .correct),
         ]
     ),
     
@@ -373,10 +373,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "The Result type is returned by the Core ML framework's removeCheckpoints(_:) at the end of an MLTrainingSession.", isCorrect: false),
-            IDQAnswer(text: "It indicates the status of an operation that can return a success or a failure, or an unknown Result type.", isCorrect: false),
-            IDQAnswer(text: "It's used to manage concurrency and synchronization in multi-threaded programs.", isCorrect: false),
-            IDQAnswer(text: "It's used to indicate the outcome of a function or method that can either succeed or fail.", isCorrect: true)
+            IDQAnswer(text: "The Result type is returned by the Core ML framework's removeCheckpoints(_:) at the end of an MLTrainingSession.", answerType: .wrong),
+            IDQAnswer(text: "It indicates the status of an operation that can return a success or a failure, or an unknown Result type.", answerType: .wrong),
+            IDQAnswer(text: "It's used to manage concurrency and synchronization in multi-threaded programs.", answerType: .wrong),
+            IDQAnswer(text: "It's used to indicate the outcome of a function or method that can either succeed or fail.", answerType: .correct),
         ]
     ),
     
@@ -387,10 +387,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "a method that is used to encrypt data.", isCorrect: false),
-            IDQAnswer(text: "a type of loop that repeats a block of code until a condition is met.", isCorrect: false),
-            IDQAnswer(text: "A control flow statement that is always executed first in it's function or method.", isCorrect: false),
-            IDQAnswer(text: "A control flow statement that is used to exit early from a function, method or loop if a condition isn't met.", isCorrect: true)
+            IDQAnswer(text: "a method that is used to encrypt data.", answerType: .wrong),
+            IDQAnswer(text: "a type of loop that repeats a block of code until a condition is met.", answerType: .wrong),
+            IDQAnswer(text: "A control flow statement that is always executed first in it's function or method.", answerType: .wrong),
+            IDQAnswer(text: "A control flow statement that is used to exit early from a function, method or loop if a condition isn't met.", answerType: .correct),
         ]
     ),
     
@@ -401,10 +401,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A data structure that allows for the efficient storage and retrieval of key-value pairs.", isCorrect: false),
-            IDQAnswer(text: "An object that broadcasts information to other objects without having to know about them directly.", isCorrect: false),
-            IDQAnswer(text: "A delegator is an object that is responsible for handling specific tasks on behalf of another object, called the delegate.", isCorrect: false),
-            IDQAnswer(text: "A delegate is an object that is responsible for handling specific tasks on behalf of another object, called the delegator.", isCorrect: true)
+            IDQAnswer(text: "A data structure that allows for the efficient storage and retrieval of key-value pairs.", answerType: .wrong),
+            IDQAnswer(text: "An object that broadcasts information to other objects without having to know about them directly.", answerType: .wrong),
+            IDQAnswer(text: "A delegator is an object that is responsible for handling specific tasks on behalf of another object, called the delegate.", answerType: .wrong),
+            IDQAnswer(text: "A delegate is an object that is responsible for handling specific tasks on behalf of another object, called the delegator.", answerType: .correct),
         ]
     ),
     
@@ -415,10 +415,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "The notification pattern allows direct control over who receives the notifications.", isCorrect: false),
-            IDQAnswer(text: "The notification pattern is generally more efficient then the delegate pattern.", isCorrect: false),
-            IDQAnswer(text: "The delegate pattern is in every way superior to the notification pattern", isCorrect: false),
-            IDQAnswer(text: "Notifications can have multiple observers, which allows for more flexibility", isCorrect: true)
+            IDQAnswer(text: "The notification pattern allows direct control over who receives the notifications.", answerType: .wrong),
+            IDQAnswer(text: "The notification pattern is generally more efficient then the delegate pattern.", answerType: .wrong),
+            IDQAnswer(text: "The delegate pattern is in every way superior to the notification pattern", answerType: .wrong),
+            IDQAnswer(text: "Notifications can have multiple observers, which allows for more flexibility", answerType: .correct),
         ]
     ),
     
@@ -429,10 +429,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "delegate pattern", isCorrect: false),
-            IDQAnswer(text: "key-value observing pattern", isCorrect: false),
-            IDQAnswer(text: "notification pattern", isCorrect: false),
-            IDQAnswer(text: "notification and KVO patterns", isCorrect: true)
+            IDQAnswer(text: "delegate pattern", answerType: .wrong),
+            IDQAnswer(text: "key-value observing pattern", answerType: .wrong),
+            IDQAnswer(text: "notification pattern", answerType: .wrong),
+            IDQAnswer(text: "notification and KVO patterns", answerType: .correct),
         ]
     ),
     
@@ -443,10 +443,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Key-View Object \t", isCorrect: false),
-            IDQAnswer(text: "Key-View Observer \t", isCorrect: false),
-            IDQAnswer(text: "Key-Value Object \t", isCorrect: false),
-            IDQAnswer(text: "Key-Value Observing \t", isCorrect: true)
+            IDQAnswer(text: "Key-View Object \t", answerType: .wrong),
+            IDQAnswer(text: "Key-View Observer \t", answerType: .wrong),
+            IDQAnswer(text: "Key-Value Object \t", answerType: .wrong),
+            IDQAnswer(text: "Key-Value Observing \t", answerType: .correct),
         ]
     ),
     
@@ -457,10 +457,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Viewcontroller \t", isCorrect: false),
-            IDQAnswer(text: "Version Control \t", isCorrect: false),
-            IDQAnswer(text: "Vector \t", isCorrect: false),
-            IDQAnswer(text: "View \t", isCorrect: true)
+            IDQAnswer(text: "Viewcontroller \t", answerType: .wrong),
+            IDQAnswer(text: "Version Control \t", answerType: .wrong),
+            IDQAnswer(text: "Vector \t", answerType: .wrong),
+            IDQAnswer(text: "View \t", answerType: .correct),
         ]
     ),
     
@@ -471,10 +471,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "There is no Controller in MVC.", isCorrect: false),
-            IDQAnswer(text: "It represents the data and the logic of the application.", isCorrect: false),
-            IDQAnswer(text: "It represents the user interface of the application.", isCorrect: false),
-            IDQAnswer(text: "It acts as an intermediary between the model and the view.", isCorrect: true)
+            IDQAnswer(text: "There is no Controller in MVC.", answerType: .wrong),
+            IDQAnswer(text: "It represents the data and the logic of the application.", answerType: .wrong),
+            IDQAnswer(text: "It represents the user interface of the application.", answerType: .wrong),
+            IDQAnswer(text: "It acts as an intermediary between the model and the view.", answerType: .correct),
         ]
     ),
     
@@ -485,10 +485,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "MVVM separates the business logic from the data model.", isCorrect: false),
-            IDQAnswer(text: "MVVM further separates view logic from the data logic than VIPER.", isCorrect: false),
-            IDQAnswer(text: "MVVM and VIPER are the same, just have different namings.", isCorrect: false),
-            IDQAnswer(text: "VIPER separates the navigation logic of the application.", isCorrect: true)
+            IDQAnswer(text: "MVVM separates the business logic from the data model.", answerType: .wrong),
+            IDQAnswer(text: "MVVM further separates view logic from the data logic than VIPER.", answerType: .wrong),
+            IDQAnswer(text: "MVVM and VIPER are the same, just have different namings.", answerType: .wrong),
+            IDQAnswer(text: "VIPER separates the navigation logic of the application.", answerType: .correct),
         ]
     ),
     
@@ -499,10 +499,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Entity ", isCorrect: false),
-            IDQAnswer(text: "Presenter ", isCorrect: false),
-            IDQAnswer(text: "Interactor ", isCorrect: false),
-            IDQAnswer(text: "Model ", isCorrect: true)
+            IDQAnswer(text: "Entity ", answerType: .wrong),
+            IDQAnswer(text: "Presenter ", answerType: .wrong),
+            IDQAnswer(text: "Interactor ", answerType: .wrong),
+            IDQAnswer(text: "Model ", answerType: .correct),
         ]
     ),
     
@@ -513,10 +513,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A networking protocol used for transferring large files between computers.", isCorrect: false),
-            IDQAnswer(text: "A design pattern where multiple instances of a class can exist simultaneously. ", isCorrect: false),
-            IDQAnswer(text: "A programming language that only supports single-threaded applications.", isCorrect: false),
-            IDQAnswer(text: "A design pattern that restricts the instantiation of a class to one object", isCorrect: true)
+            IDQAnswer(text: "A networking protocol used for transferring large files between computers.", answerType: .wrong),
+            IDQAnswer(text: "A design pattern where multiple instances of a class can exist simultaneously. ", answerType: .wrong),
+            IDQAnswer(text: "A programming language that only supports single-threaded applications.", answerType: .wrong),
+            IDQAnswer(text: "A design pattern that restricts the instantiation of a class to one object", answerType: .correct),
         ]
     ),
     
@@ -527,10 +527,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .hard,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "It's not possible, except with an extension to the protocol where the optional method is used.", isCorrect: false),
-            IDQAnswer(text: "By using the @abstract optional  keyword", isCorrect: false),
-            IDQAnswer(text: "By using the @optional keywords", isCorrect: false),
-            IDQAnswer(text: "By using @objc optional keywords.", isCorrect: true)
+            IDQAnswer(text: "It's not possible, except with an extension to the protocol where the optional method is used.", answerType: .wrong),
+            IDQAnswer(text: "By using the @abstract optional  keyword", answerType: .wrong),
+            IDQAnswer(text: "By using the @optional keywords", answerType: .wrong),
+            IDQAnswer(text: "By using @objc optional keywords.", answerType: .correct),
         ]
     ),
     
@@ -541,10 +541,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Auto Layout cannot be modified later, unlike Size classes", isCorrect: false),
-            IDQAnswer(text: "Auto Layout definitions always override size classes when the two are confliction.", isCorrect: false),
-            IDQAnswer(text: "Auto Layout defines interface traits, Size classes positioning.", isCorrect: false),
-            IDQAnswer(text: "Size classes define interface traits, Auto Layout positioning.", isCorrect: true)
+            IDQAnswer(text: "Auto Layout cannot be modified later, unlike Size classes", answerType: .wrong),
+            IDQAnswer(text: "Auto Layout definitions always override size classes when the two are confliction.", answerType: .wrong),
+            IDQAnswer(text: "Auto Layout defines interface traits, Size classes positioning.", answerType: .wrong),
+            IDQAnswer(text: "Size classes define interface traits, Auto Layout positioning.", answerType: .correct),
         ]
     ),
     
@@ -555,10 +555,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "DispatchQueue.main.async {\n\tprint(\"fist\")\n}", isCorrect: false),
-            IDQAnswer(text: "DispatchQueue.main.asyncAfter (deadline: .now()) {\n\tprint(\"fist\")\n}", isCorrect: false),
-            IDQAnswer(text: "Either one of the print statments called on the main thread.", isCorrect: false),
-            IDQAnswer(text: "print(\"fist\")", isCorrect: true)
+            IDQAnswer(text: "DispatchQueue.main.async {\n\tprint(\"fist\")\n}", answerType: .wrong),
+            IDQAnswer(text: "DispatchQueue.main.asyncAfter (deadline: .now()) {\n\tprint(\"fist\")\n}", answerType: .wrong),
+            IDQAnswer(text: "Either one of the print statments called on the main thread.", answerType: .wrong),
+            IDQAnswer(text: "print(\"fist\")", answerType: .correct),
         ]
     ),
     
@@ -569,10 +569,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "That there are only 2 main threads and 6 background threads.", isCorrect: false),
-            IDQAnswer(text: "Methods called on the main thread are always executed before of those called on a background thread.", isCorrect: false),
-            IDQAnswer(text: "The main thread typically handles the user interface while the background thread handles networking", isCorrect: false),
-            IDQAnswer(text: "The main thread typically handles the user interface while the background threads handle large, time-consuming tasks.", isCorrect: true)
+            IDQAnswer(text: "That there are only 2 main threads and 6 background threads.", answerType: .wrong),
+            IDQAnswer(text: "Methods called on the main thread are always executed before of those called on a background thread.", answerType: .wrong),
+            IDQAnswer(text: "The main thread typically handles the user interface while the background thread handles networking", answerType: .wrong),
+            IDQAnswer(text: "The main thread typically handles the user interface while the background threads handle large, time-consuming tasks.", answerType: .correct),
         ]
     ),
     
@@ -583,10 +583,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "It's for a group of tasks that you monitor as a single unit.", isCorrect: false),
-            IDQAnswer(text: "It's an object that manages operations on a file descriptor using either stream-based or random-access semantics.", isCorrect: false),
-            IDQAnswer(text: "It's for an object that coordinates the processing of specific low-level system events.", isCorrect: false),
-            IDQAnswer(text: "It's for setting the execution priority, to apply to tasks.", isCorrect: true)
+            IDQAnswer(text: "It's for a group of tasks that you monitor as a single unit.", answerType: .wrong),
+            IDQAnswer(text: "It's an object that manages operations on a file descriptor using either stream-based or random-access semantics.", answerType: .wrong),
+            IDQAnswer(text: "It's for an object that coordinates the processing of specific low-level system events.", answerType: .wrong),
+            IDQAnswer(text: "It's for setting the execution priority, to apply to tasks.", answerType: .correct),
         ]
     ),
     
@@ -597,10 +597,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .hard,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "userInitiated", isCorrect: false),
-            IDQAnswer(text: "default", isCorrect: false),
-            IDQAnswer(text: "utility", isCorrect: false),
-            IDQAnswer(text: "background", isCorrect: true)
+            IDQAnswer(text: "userInitiated", answerType: .wrong),
+            IDQAnswer(text: "default", answerType: .wrong),
+            IDQAnswer(text: "utility", answerType: .wrong),
+            IDQAnswer(text: "background", answerType: .correct),
         ]
     ),
     
@@ -611,10 +611,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .hard,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "By using a semaphore to manage the priority", isCorrect: false),
-            IDQAnswer(text: "With the priorityLevel property", isCorrect: false),
-            IDQAnswer(text: "The priority in the same service class is fixed and can't be modified.", isCorrect: false),
-            IDQAnswer(text: "With the relativePriority property", isCorrect: true)
+            IDQAnswer(text: "By using a semaphore to manage the priority", answerType: .wrong),
+            IDQAnswer(text: "With the priorityLevel property", answerType: .wrong),
+            IDQAnswer(text: "The priority in the same service class is fixed and can't be modified.", answerType: .wrong),
+            IDQAnswer(text: "With the relativePriority property", answerType: .correct),
         ]
     ),
     
@@ -625,10 +625,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "Inside switch statements the code within a defer case is executed only if no other cases match the control expression", isCorrect: false),
-            IDQAnswer(text: "It causes a program to end execution of the current scope and begin error propagation to its enclosing scope.", isCorrect: false),
-            IDQAnswer(text: "It is used to declare a function with a default value.", isCorrect: false),
-            IDQAnswer(text: "It's used to execute a block of code just before the current scope is exited", isCorrect: true)
+            IDQAnswer(text: "Inside switch statements the code within a defer case is executed only if no other cases match the control expression", answerType: .wrong),
+            IDQAnswer(text: "It causes a program to end execution of the current scope and begin error propagation to its enclosing scope.", answerType: .wrong),
+            IDQAnswer(text: "It is used to declare a function with a default value.", answerType: .wrong),
+            IDQAnswer(text: "It's used to execute a block of code just before the current scope is exited", answerType: .correct),
         ]
     ),
     
@@ -639,10 +639,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "With the defer statement", isCorrect: false),
-            IDQAnswer(text: "With the @notify keyword and a unique notification identifier", isCorrect: false),
-            IDQAnswer(text: "With property wrappers", isCorrect: false),
-            IDQAnswer(text: "With property observers", isCorrect: true)
+            IDQAnswer(text: "With the defer statement", answerType: .wrong),
+            IDQAnswer(text: "With the @notify keyword and a unique notification identifier", answerType: .wrong),
+            IDQAnswer(text: "With property wrappers", answerType: .wrong),
+            IDQAnswer(text: "With property observers", answerType: .correct),
         ]
     ),
     
@@ -655,10 +655,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "1", isCorrect: false),
-            IDQAnswer(text: "2", isCorrect: false),
-            IDQAnswer(text: "6", isCorrect: false),
-            IDQAnswer(text: "4", isCorrect: true)
+            IDQAnswer(text: "1", answerType: .wrong),
+            IDQAnswer(text: "2", answerType: .wrong),
+            IDQAnswer(text: "6", answerType: .wrong),
+            IDQAnswer(text: "4", answerType: .correct),
         ]
     ),
     
@@ -669,10 +669,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "windowDidAppear()", isCorrect: false),
-            IDQAnswer(text: "viewWillAppear", isCorrect: false),
-            IDQAnswer(text: "viewDidLoad()", isCorrect: false),
-            IDQAnswer(text: "loadView()", isCorrect: true)
+            IDQAnswer(text: "windowDidAppear()", answerType: .wrong),
+            IDQAnswer(text: "viewWillAppear", answerType: .wrong),
+            IDQAnswer(text: "viewDidLoad()", answerType: .wrong),
+            IDQAnswer(text: "loadView()", answerType: .correct),
         ]
     ),
     
@@ -683,10 +683,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "By setting the ExampleViewController's level property to 0 inside the AppDelegate.", isCorrect: false),
-            IDQAnswer(text: "By setting the isRottViewController property of the ExampleViewController to true in the SceneDelegate.", isCorrect: false),
-            IDQAnswer(text: "By calling the app's root view controller's present() method in the AppDelegate.", isCorrect: false),
-            IDQAnswer(text: "By setting the window property's rootViewController to ExampleViewController in the app's SceneDelegate.", isCorrect: true)
+            IDQAnswer(text: "By setting the ExampleViewController's level property to 0 inside the AppDelegate.", answerType: .wrong),
+            IDQAnswer(text: "By setting the isRottViewController property of the ExampleViewController to true in the SceneDelegate.", answerType: .wrong),
+            IDQAnswer(text: "By calling the app's root view controller's present() method in the AppDelegate.", answerType: .wrong),
+            IDQAnswer(text: "By setting the window property's rootViewController to ExampleViewController in the app's SceneDelegate.", answerType: .correct),
         ]
     ),
     
@@ -697,10 +697,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "clipsToBounds property to true", isCorrect: false),
-            IDQAnswer(text: "clipsToBounds property to false", isCorrect: false),
-            IDQAnswer(text: "translatesAutoresizingMaskIntoConstraints property to true", isCorrect: false),
-            IDQAnswer(text: "translatesAutoresizingMaskIntoConstraints property to false", isCorrect: true)
+            IDQAnswer(text: "clipsToBounds property to true", answerType: .wrong),
+            IDQAnswer(text: "clipsToBounds property to false", answerType: .wrong),
+            IDQAnswer(text: "translatesAutoresizingMaskIntoConstraints property to true", answerType: .wrong),
+            IDQAnswer(text: "translatesAutoresizingMaskIntoConstraints property to false", answerType: .correct),
         ]
     ),
     
@@ -711,10 +711,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "The modal segue is only used for storyboard-based transitions, the push segue is for programatic transitions.", isCorrect: false),
-            IDQAnswer(text: "The push segue presents the new content modally over the source view controller. ", isCorrect: false),
-            IDQAnswer(text: "Modal segues have a back button built in the presented view controller by default", isCorrect: false),
-            IDQAnswer(text: "Push segues require a navigation controller but modal segues don't", isCorrect: true)
+            IDQAnswer(text: "The modal segue is only used for storyboard-based transitions, the push segue is for programatic transitions.", answerType: .wrong),
+            IDQAnswer(text: "The push segue presents the new content modally over the source view controller. ", answerType: .wrong),
+            IDQAnswer(text: "Modal segues have a back button built in the presented view controller by default", answerType: .wrong),
+            IDQAnswer(text: "Push segues require a navigation controller but modal segues don't", answerType: .correct),
         ]
     ),
     
@@ -725,10 +725,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .medium,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "The UICollectionViewDataSource protocol has no required methods.", isCorrect: false),
-            IDQAnswer(text: " collectionView(_:didSelectItemAt:) \n collectionView(_:numberOfItemsInSection:) \n  collectionView(_:cellForItemAt:)", isCorrect: false),
-            IDQAnswer(text: " collectionView(_:numberOfItemsInSection:) \n collectionView(_:layout:sizeForItemAt:)", isCorrect: false),
-            IDQAnswer(text: "collectionView(_:numberOfItemsInSection:) \n collectionView(_:cellForItemAt:)", isCorrect: true)
+            IDQAnswer(text: "The UICollectionViewDataSource protocol has no required methods.", answerType: .wrong),
+            IDQAnswer(text: " collectionView(_:didSelectItemAt:) \n collectionView(_:numberOfItemsInSection:) \n  collectionView(_:cellForItemAt:)", answerType: .wrong),
+            IDQAnswer(text: " collectionView(_:numberOfItemsInSection:) \n collectionView(_:layout:sizeForItemAt:)", answerType: .wrong),
+            IDQAnswer(text: "collectionView(_:numberOfItemsInSection:) \n collectionView(_:cellForItemAt:)", answerType: .correct),
         ]
     ),
     

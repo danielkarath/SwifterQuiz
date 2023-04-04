@@ -274,7 +274,7 @@ final class IDQGameView: UIView {
             self.vibrate(for: .error)
             self.isCorrectArray.append(false)
         }
-        displayQuestionResults(isCorrectlyAnswered: selectedAnswer.isCorrect, answeredInTime: true)
+        displayQuestionResults(isCorrectlyAnswered: selectedAnswer.answerType == .correct, answeredInTime: true)
     }
     
     private func displayQuestionResults(isCorrectlyAnswered: Bool, answeredInTime: Bool) {
