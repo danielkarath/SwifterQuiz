@@ -118,16 +118,24 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         imageOuterView.gradient(IDQConstants.highlightedContentBackgroundColor.cgColor, IDQConstants.backgroundColor.cgColor, direction: .horizontal)
     }
     
-    private func setupIsCorrectIcon(isCorrect: Bool) {
+    private func setupIsCorrectIcon(answerType: IDQAnswerType) {
         var markImage: UIImage?
-        //self.isCorrectImageView.tintColor = IDQConstants.secondaryFontColor
-        if isCorrect {
+        
+        switch answerType {
+        case .correct:
             markImage = (UIImage(systemName: "checkmark.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate))
             self.isCorrectImageView.tintColor = IDQConstants.correctColor
-        } else {
+        case .wrong:
             markImage = (UIImage(systemName: "x.circle.fill")?.withTintColor(IDQConstants.correctColor, renderingMode: .alwaysTemplate))
             self.isCorrectImageView.tintColor = IDQConstants.errorColor
+        case .passed:
+            markImage = (UIImage(systemName: "exclamationmark.triangle.fill")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate))
+            self.isCorrectImageView.tintColor = IDQConstants.warningColor
+        case .runOutOfTime:
+            markImage = (UIImage(systemName: "exclamationmark.triangle.fill")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate))
+            self.isCorrectImageView.tintColor = IDQConstants.warningColor
         }
+        
         self.isCorrectImageView.image = markImage
     }
     
@@ -144,8 +152,8 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     public func configure(with quiz: IDQQuiz, index: Int) {
         guard quiz.questions.count >= index + 1 else { return }
         let question: IDQQuestion = quiz.questions[index].question
-        let isCorrect: Bool = quiz.questions[index].answeredCorrectly
-        setupIsCorrectIcon(isCorrect: isCorrect)
+        let answerType: IDQAnswerType = quiz.questions[index].answerType
+        setupIsCorrectIcon(answerType: answerType)
         questionLabel.text = question.question
         difficultyLabel.text = question.difficulty.rawValue
         questionTypeImageView.image = question.topic.image

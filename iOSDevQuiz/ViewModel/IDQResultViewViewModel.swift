@@ -18,8 +18,10 @@ final class IDQResultViewViewModel {
     
     //MARK: - Private
     private func evaulate(quiz: IDQQuiz) -> ScoreType {
+        guard quiz.totalScore > 0 else {
+            return .low
+        }
         let percentage: Double = Double(Double(quiz.totalScore)/Double(quiz.questions.count))
-        
         if percentage < 0.35 {
             return .low
         } else if percentage < 0.70 {
@@ -123,6 +125,10 @@ final class IDQResultViewViewModel {
     //MARK: - Public
     public func countAnimation(_ label: UILabel, duration: TimeInterval, quiz: IDQQuiz) {
         let scoreType = evaulate(quiz: quiz)
+        guard quiz.totalScore > 0 else {
+            lowCountAnimation(label, duration: duration, resultNumber: 0)
+            return
+        }
         
         switch scoreType {
         case .perfect:

@@ -18,7 +18,7 @@ class IDQAnswerResultView: UIView {
 
     private var question: IDQQuestion?
     
-    private var answerType: AnswerType?
+    private var answerType: IDQAnswerType?
     
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
@@ -197,7 +197,7 @@ class IDQAnswerResultView: UIView {
         }
     }
     
-    private func configure(_view: IDQAnswerResultView, with design: AnswerType) {
+    private func configure(_view: IDQAnswerResultView, with design: IDQAnswerType) {
         var titleStringArray: [String] = []
         var backgroundColor: UIColor?
         var tintColor: UIColor?
@@ -305,7 +305,7 @@ class IDQAnswerResultView: UIView {
         }
     }
     
-    public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, didNotAnswer: AnswerType) {
+    public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, didNotAnswer: IDQAnswerType) {
         resetView()
         self.question = question
         detailLabel.text = question.explanation

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AnswerType {
+enum IDQAnswerType {
     case correct
     case wrong
     case passed
@@ -16,5 +16,5 @@ enum AnswerType {
 
 struct IDQAnswer {
     let text: String
-    let answerType: AnswerType
+    let answerType: IDQAnswerType
 }

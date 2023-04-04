@@ -29,7 +29,7 @@ final class IDQGameView: UIView {
     
     private var game: IDQGame?
     
-    private var isCorrectArray: [Bool] = []
+    private var isCorrectArray: [IDQAnswerType] = []
         
     private var totalScore: Int = 0
     
@@ -269,10 +269,11 @@ final class IDQGameView: UIView {
         let isCorrect = cell.didSelect(answer: selectedAnswer)
         if isCorrect {
             self.totalScore += 1
-            self.isCorrectArray.append(true)
+            self.isCorrectArray.append(.correct)
         } else {
+            self.totalScore -= 1
             self.vibrate(for: .error)
-            self.isCorrectArray.append(false)
+            self.isCorrectArray.append(.wrong)
         }
         displayQuestionResults(isCorrectlyAnswered: selectedAnswer.answerType == .correct, answeredInTime: true)
     }
@@ -284,7 +285,7 @@ final class IDQGameView: UIView {
         if !answeredInTime {
             self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .runOutOfTime)
             self.vibrate(for: .error)
-            self.isCorrectArray.append(false)
+            self.isCorrectArray.append(.runOutOfTime)
         } else {
             answerResultView.idqAnswerResultView(answerResultView, question: question!, answeredCorrectly: isCorrectlyAnswered)
         }
@@ -300,7 +301,7 @@ final class IDQGameView: UIView {
         countDownView.stopTimer()
         configure(overlay: overlayView)
         self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .passed)
-        self.isCorrectArray.append(false)
+        self.isCorrectArray.append(.passed)
        
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
             self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
