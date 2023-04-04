@@ -14,17 +14,11 @@ protocol IDQAnswerResultViewDelegate: AnyObject {
 
 class IDQAnswerResultView: UIView {
     
-    enum AnswerViewDesignType {
-        case correct
-        case incorrect
-        case warning
-    }
-    
     public weak var delegate: IDQAnswerResultViewDelegate?
 
     private var question: IDQQuestion?
     
-    private var designType: AnswerViewDesignType?
+    private var answerType: AnswerType?
     
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
@@ -203,29 +197,34 @@ class IDQAnswerResultView: UIView {
         }
     }
     
-    private func configure(_view: IDQAnswerResultView, with design: AnswerViewDesignType) {
+    private func configure(_view: IDQAnswerResultView, with design: AnswerType) {
         var titleStringArray: [String] = []
         var backgroundColor: UIColor?
         var tintColor: UIColor?
         var iconName: String?
-        self.designType = design
+        self.answerType = design
         
         switch design {
         case .correct:
-            titleStringArray = ["Awesome!", "Excellent!", "Correct", "Hoooray!", "Well done!", "Great job!", "Bravo!", "Very cool!"]
+            titleStringArray = ["Awesome!", "Excellent!", "Correct", "Hoooray!", "Well done!", "Great job!", "Bravo!", "Very cool!", "Splendid!"]
             backgroundColor = IDQConstants.correctBackgroundColor
             tintColor = IDQConstants.correctColor
             iconName = "checkmark.circle.fill"
-        case .incorrect:
+        case .wrong:
             titleStringArray =  ["Incorrect", "Incorrect", "Incorrect", "Wrong answer", "Oopsie"]
             backgroundColor = IDQConstants.errorBackgroundColor
             tintColor = IDQConstants.errorColor
             iconName = "x.circle.fill"
-        case .warning:
-            titleStringArray =  ["Run out of time"]
+        case .runOutOfTime:
+            titleStringArray =  ["Out of time"]
             backgroundColor = IDQConstants.warningBackgroundColor
             tintColor = IDQConstants.warningColor
             iconName = "clock.badge.exclamationmark"
+        case .passed:
+            titleStringArray =  ["Passed"]
+            backgroundColor = IDQConstants.warningBackgroundColor
+            tintColor = IDQConstants.warningColor
+            iconName = "questionmark.square.dashed"
         default:
             backgroundColor = IDQConstants.warningBackgroundColor
             tintColor = IDQConstants.warningColor
@@ -258,7 +257,7 @@ class IDQAnswerResultView: UIView {
     
     @objc
     private func referenceButtonTapped(_ sender: UIButton) {
-        guard let question = self.question, self.question != nil, designType != nil else {return}
+        guard let question = self.question, self.question != nil, answerType != nil else {return}
         let safariViewController = SFSafariViewController(url: URL(string: question.reference!)!)
         safariViewController.modalPresentationStyle = .popover
         if let viewController = self.getViewController() {
@@ -302,15 +301,19 @@ class IDQAnswerResultView: UIView {
         if answeredCorrectly {
             configure(_view: self, with: .correct)
         } else{
-            configure(_view: self, with: .incorrect)
+            configure(_view: self, with: .wrong)
         }
     }
     
-    public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, didNotAnswer: IDQAnswerResultViewViewModel.DidNotAnswer) {
+    public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, didNotAnswer: AnswerType) {
         resetView()
         self.question = question
         detailLabel.text = question.explanation
-        configure(_view: self, with: .warning)
+        if didNotAnswer == .runOutOfTime {
+            configure(_view: self, with: .runOutOfTime)
+        } else if didNotAnswer == .passed {
+            configure(_view: self, with: .passed)
+        }
     }
     
 }

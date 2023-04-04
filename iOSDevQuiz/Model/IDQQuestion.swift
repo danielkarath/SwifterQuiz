@@ -112,7 +112,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "What is type annotation?",
-        explanation: "The Character type represents a character made up of one or more Unicode scalar values, grouped by a Unicode boundary algorithm.",
+        explanation: "A type annotation explicitly specifies the type of a variable or expression.\nExample: let size: CGFloat = 10.0",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/#Type-Annotation",
         difficulty: .easy,
         topic: .basics,
@@ -550,7 +550,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "Which one is printed out first?",
-        explanation: "4 constraints are required to properly define the position of a UI element.",
+        explanation: "The print(\"first\") is executed firstly on the current thread. The rest is scheduled to be executed asynchronously on the main thread at some point in the future.",
         reference: nil,
         difficulty: .medium,
         topic: .basics,

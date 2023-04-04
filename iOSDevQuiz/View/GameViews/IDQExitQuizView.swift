@@ -73,8 +73,8 @@ class IDQExitQuizView: UIView {
         button.setTitleColor(IDQConstants.basicFontColor, for: .normal)
         button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
         button.backgroundColor = IDQConstants.contentBackgroundColor
-        button.setTitle("CONTINUE QUIZ", for: .normal)
-        button.setTitle("CONTINUE QUIZ", for: .highlighted)
+        button.setTitle("RETURN", for: .normal)
+        button.setTitle("RETURN", for: .highlighted)
         button.layer.borderWidth = 2.0
         button.layer.borderColor = IDQConstants.basicFontColor.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false

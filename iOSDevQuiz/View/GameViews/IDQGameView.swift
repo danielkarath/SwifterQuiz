@@ -122,18 +122,16 @@ final class IDQGameView: UIView {
     
     private let passButton: UIButton = {
         let button = UIButton()
-        button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.alpha = 0.0
-        let width: CGFloat = 60
-        let height: CGFloat = width * 1.33
-        button.frame.size = CGSize(width: width * 2, height: height * 2) //.size = CGSize(width: width, height: height)
-        button.setTitleColor(IDQConstants.darkOrange, for: .normal)
-        button.titleLabel?.font = IDQConstants.setFont(fontSize: 15, isBold: false)
+        let width: CGFloat = UIScreen.main.bounds.width - 50
+        let height: CGFloat = 40
+        button.frame.size = CGSize(width: width, height: height)
+        button.layer.cornerRadius = 8
+        button.setTitleColor(IDQConstants.secondaryFontColor, for: .normal)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
         button.setTitle("Pass", for: .normal)
         button.setTitle("Pass", for: .highlighted)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.isEnabled = false
-        button.isUserInteractionEnabled = false
         button.layer.zPosition = 6
         return button
     }()
@@ -153,8 +151,10 @@ final class IDQGameView: UIView {
         answerResultView.delegate = self
         exitView.delegate = self
         countDownView.delegate = self
-        answerResultView.layer.zPosition = 8
-        exitView.layer.zPosition = 9
+        countDownView.layer.zPosition = 11
+        answerResultView.layer.zPosition = 12
+        exitView.layer.zPosition = 13
+        passButton.addTarget(self, action: #selector(passButtonTapped(_:)), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -217,18 +217,18 @@ final class IDQGameView: UIView {
             
             countDownView.heightAnchor.constraint(equalToConstant: 40),
             countDownView.widthAnchor.constraint(equalToConstant: 40),
-            countDownView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -64),
+            countDownView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
             countDownView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
 
             collectionView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 24),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -160),
             
-            passButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
+            passButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
             passButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            passButton.widthAnchor.constraint(equalToConstant: 60),
-            passButton.heightAnchor.constraint(equalToConstant: 25),
+            passButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 50),
+            passButton.heightAnchor.constraint(equalToConstant: 40),
             
             questionNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: -12),
             questionNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2),
@@ -288,6 +288,19 @@ final class IDQGameView: UIView {
         } else {
             answerResultView.idqAnswerResultView(answerResultView, question: question!, answeredCorrectly: isCorrectlyAnswered)
         }
+       
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
+        }, completion: nil)
+    }
+    
+    @objc
+    private func passButtonTapped(_ sender: UIButton) {
+        delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
+        countDownView.stopTimer()
+        configure(overlay: overlayView)
+        self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .passed)
+        self.isCorrectArray.append(false)
        
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
             self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)

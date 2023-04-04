@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum AnswerType {
+    case correct
+    case wrong
+    case passed
+    case runOutOfTime
+}
+
 struct IDQAnswer {
     let text: String
     let isCorrect: Bool

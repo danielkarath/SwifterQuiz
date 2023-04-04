@@ -9,9 +9,5 @@ import Foundation
 
 final class IDQAnswerResultViewViewModel {
     
-    enum DidNotAnswer {
-        case passed
-        case runOutOfTime
-    }
     
 }
