@@ -25,6 +25,9 @@ struct IDQConstants {
         "insert",
         "addElement",
         "zip",
+        "clipsToBounds",
+        "defer",
+        "translatesAutoresizingMaskIntoConstraints",
         "removeCheckpoints",
         "CustomStringConvertible",
         "Equatable",
@@ -105,9 +108,17 @@ struct IDQConstants {
         "append(_:)",
         "insert(_:at:)",
         "applicationDidBecomeActive(_:)",
+        "application(_:",
+        "didFinishLaunchingWithOptions:)",
         "application(_: didFinishLaunchingWithOptions: )",
         "sceneDidBecomeActive(_:)",
+        "application(_:",
+        "willFinishLaunchingWithOptions:)",
         "application(_: willFinishLaunchingWithOptions: )",
+        "loadView()",
+        "viewDidLoad()",
+        "viewWillAppear()",
+        "windowDidAppear()",
     ]
     
     //MARK: - Background colors

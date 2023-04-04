@@ -564,8 +564,8 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "What is the difference between the main thread and the background threads?",
-        explanation: "4 constraints are required to properly define the position of a UI element.",
-        reference: nil,
+        explanation: "The main thread generally focuses on UI changes, the background threads for lengthier tasks",
+        reference: "https://developer.apple.com/documentation/dispatch/dispatchqueue",
         difficulty: .medium,
         topic: .basics,
         answers: [
@@ -576,19 +576,145 @@ let idqQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "What the DispatchQoS is used for?",
+        explanation: "The Dispatch Quality of Service sets the execution priority of tasks. It categorizes work to perform on a DispatchQueue. By specifying the quality of a task, you indicate its importance to your app.",
+        reference: "https://developer.apple.com/documentation/dispatch/dispatchqos",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "It's for a group of tasks that you monitor as a single unit.", isCorrect: false),
+            IDQAnswer(text: "It's an object that manages operations on a file descriptor using either stream-based or random-access semantics.", isCorrect: false),
+            IDQAnswer(text: "It's for an object that coordinates the processing of specific low-level system events.", isCorrect: false),
+            IDQAnswer(text: "It's for setting the execution priority, to apply to tasks.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Which qualty of service class has the lowest priority level?",
+        explanation: "The background tasks have the lowest priority level of all tasks.",
+        reference: "https://developer.apple.com/documentation/dispatch/dispatchqos/1780981-background",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "userInitiated", isCorrect: false),
+            IDQAnswer(text: "default", isCorrect: false),
+            IDQAnswer(text: "utility", isCorrect: false),
+            IDQAnswer(text: "background", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "How would you set the position of a task's importance within its assigned quality of service (QoS) class?",
+        explanation: "By setting the relativePriority of the service property.",
+        reference: "https://developer.apple.com/documentation/dispatch/dispatchqos/1780953-relativepriority",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "By using a semaphore to manage the priority", isCorrect: false),
+            IDQAnswer(text: "With the priorityLevel property", isCorrect: false),
+            IDQAnswer(text: "The priority in the same service class is fixed and can't be modified.", isCorrect: false),
+            IDQAnswer(text: "With the relativePriority property", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is a defer statement?",
+        explanation: "A defer statement is used for executing code just before transferring program control outside of the scope that the defer statement appears in.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/statements/#Defer-Statement",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "Inside switch statements the code within a defer case is executed only if no other cases match the control expression", isCorrect: false),
+            IDQAnswer(text: "It causes a program to end execution of the current scope and begin error propagation to its enclosing scope.", isCorrect: false),
+            IDQAnswer(text: "It is used to declare a function with a default value.", isCorrect: false),
+            IDQAnswer(text: "It's used to execute a block of code just before the current scope is exited", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "With what tools can you catch changes in a property's value in Swift?",
+        explanation: "With property observers. The \"willSet\" and \"didSet\" observeres are called before/after a change in the observed property's value.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/properties/#Property-Observers",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "With the defer statement", isCorrect: false),
+            IDQAnswer(text: "With the @notify keyword and a unique notification identifier", isCorrect: false),
+            IDQAnswer(text: "With property wrappers", isCorrect: false),
+            IDQAnswer(text: "With property observers", isCorrect: true)
+        ]
+    ),
+    
     
     //MARK: - UIKit
     IDQQuestion(
         question: "In UIKit how many constraints are needed at minimum to correctly determine the position of a UI element?",
         explanation: "4 constraints are required to properly define the position of a UI element.",
         reference: nil,
-        difficulty: .medium,
+        difficulty: .easy,
         topic: .uikit,
         answers: [
             IDQAnswer(text: "1", isCorrect: false),
             IDQAnswer(text: "2", isCorrect: false),
             IDQAnswer(text: "6", isCorrect: false),
             IDQAnswer(text: "4", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In UIKit when loading a view controller what method is called first from the listed below?",
+        explanation: "The loadView() is called before the controller's view is loaded into memory.",
+        reference: "https://developer.apple.com/documentation/uikit/uiviewcontroller/1621454-loadview",
+        difficulty: .easy,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "windowDidAppear()", isCorrect: false),
+            IDQAnswer(text: "viewWillAppear", isCorrect: false),
+            IDQAnswer(text: "viewDidLoad()", isCorrect: false),
+            IDQAnswer(text: "loadView()", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In UIKit how can you programatically set a view controller (ExampleViewController) to be the first presented when launching the app?",
+        explanation: "By setting the window property's rootViewController to ExampleViewController in the app's SceneDelegate.",
+        reference: nil,
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "By setting the ExampleViewController's level property to 0 inside the AppDelegate.", isCorrect: false),
+            IDQAnswer(text: "By setting the isRottViewController property of the ExampleViewController to true in the SceneDelegate.", isCorrect: false),
+            IDQAnswer(text: "By calling the app's root view controller's present() method in the AppDelegate.", isCorrect: false),
+            IDQAnswer(text: "By setting the window property's rootViewController to ExampleViewController in the app's SceneDelegate.", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "When setting custom constraints to a UI element we should set the element's ______________.",
+        explanation: "If you want to use Auto Layout to dynamically calculate the size and position of your view, you must set this property to false",
+        reference: "https://developer.apple.com/documentation/uikit/uiview/1622572-translatesautoresizingmaskintoco",
+        difficulty: .easy,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "clipsToBounds property to true", isCorrect: false),
+            IDQAnswer(text: "clipsToBounds property to false", isCorrect: false),
+            IDQAnswer(text: "translatesAutoresizingMaskIntoConstraints property to true", isCorrect: false),
+            IDQAnswer(text: "translatesAutoresizingMaskIntoConstraints property to false", isCorrect: true)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Regarding the difference between push and modal segues which of the below statements is true?",
+        explanation: "Push segues require a navigation view controller. The presented view controller has a back button and it, by default covers the entire screen.",
+        reference: "https://developer.apple.com/library/archive/featuredarticles/ViewControllerPGforiPhoneOS/UsingSegues.html",
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "The modal segue is only used for storyboard-based transitions, the push segue is for programatic transitions.", isCorrect: false),
+            IDQAnswer(text: "The push segue presents the new content modally over the source view controller. ", isCorrect: false),
+            IDQAnswer(text: "Modal segues have a back button built in the presented view controller by default", isCorrect: false),
+            IDQAnswer(text: "Push segues require a navigation controller but modal segues don't", isCorrect: true)
         ]
     ),
     
