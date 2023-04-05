@@ -101,9 +101,9 @@ class IDQPlayView: UIView {
         let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
+        topBackgroundView.backgroundColor = IDQConstants.contentBackgroundColor
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
         topBackgroundView.layer.cornerRadius = topBackgroundSize/2
-        topBackgroundView.gradient(IDQConstants.highlightedContentBackgroundColor.cgColor, IDQConstants.contentBackgroundColor.cgColor, direction: .bottomLeftToTopRight)
     }
     
     //MARK: - Private

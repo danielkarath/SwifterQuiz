@@ -254,6 +254,7 @@ final class IDQGameView: UIView {
     
     private func setupQuizResults() {
         guard let game = self.game else { return }
+        countDownView.stopTimer()
         let quiz = viewModel.getQuizResults(
             game: game,
             questions: questions,
@@ -271,7 +272,7 @@ final class IDQGameView: UIView {
             self.totalScore += 1
             self.isCorrectArray.append(.correct)
         } else {
-            self.totalScore -= 1
+            //self.totalScore -= 1
             self.vibrate(for: .error)
             self.isCorrectArray.append(.wrong)
         }
