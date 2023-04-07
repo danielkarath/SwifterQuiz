@@ -35,6 +35,7 @@
 		3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */; };
 		396B6A9329C127990098A4E5 /* IDQAnswerResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */; };
 		39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39743AEB29D9AD0600D1C341 /* IDQExitQuizView.swift */; };
+		39904E0029E0792E009F9380 /* IDQPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39904DFF29E0792E009F9380 /* IDQPercentageView.swift */; };
 		39962B2B29C9CC93001350F8 /* IDQGameResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2A29C9CC93001350F8 /* IDQGameResultViewController.swift */; };
 		39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2C29C9CD38001350F8 /* IDQResultView.swift */; };
 		39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */; };
@@ -74,6 +75,7 @@
 		3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswer.swift; sourceTree = "<group>"; };
 		396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultView.swift; sourceTree = "<group>"; };
 		39743AEB29D9AD0600D1C341 /* IDQExitQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQExitQuizView.swift; sourceTree = "<group>"; };
+		39904DFF29E0792E009F9380 /* IDQPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQPercentageView.swift; sourceTree = "<group>"; };
 		39962B2A29C9CC93001350F8 /* IDQGameResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameResultViewController.swift; sourceTree = "<group>"; };
 		39962B2C29C9CD38001350F8 /* IDQResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultView.swift; sourceTree = "<group>"; };
 		39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultViewViewModel.swift; sourceTree = "<group>"; };
@@ -96,10 +98,10 @@
 		3905B24D29E03FFD00E3A632 /* ResultViewSubviews */ = {
 			isa = PBXGroup;
 			children = (
-				39962B2C29C9CD38001350F8 /* IDQResultView.swift */,
 				39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */,
 				3905B24B29E0372A00E3A632 /* IDQScoreView.swift */,
 				3905B24E29E0403C00E3A632 /* IDQTimeView.swift */,
+				39904DFF29E0792E009F9380 /* IDQPercentageView.swift */,
 			);
 			path = ResultViewSubviews;
 			sourceTree = "<group>";
@@ -191,6 +193,7 @@
 			children = (
 				3914C93229B10B300001377B /* IDQPlayView.swift */,
 				3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */,
+				39962B2C29C9CD38001350F8 /* IDQResultView.swift */,
 				3905B24D29E03FFD00E3A632 /* ResultViewSubviews */,
 			);
 			path = PlayViews;
@@ -316,6 +319,7 @@
 				3914C92729B0EBD20001377B /* IDQStatsViewController.swift in Sources */,
 				3914C90929B0D7E40001377B /* AppDelegate.swift in Sources */,
 				3909BBAC29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift in Sources */,
+				39904E0029E0792E009F9380 /* IDQPercentageView.swift in Sources */,
 				39E2256F29B8F71500830F1A /* IDQGameView.swift in Sources */,
 				3952D1DE29B8AC220061C5C9 /* StartButtonView.swift in Sources */,
 				3914C92329B0DCE60001377B /* IDQConstants.swift in Sources */,

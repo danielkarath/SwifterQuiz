@@ -69,8 +69,8 @@ final class IDQResultViewViewModel {
     
     private func finalCountAnimation(_ label: UILabel, duration: TimeInterval, resultNumber: Int) {
         let firstDelay: TimeInterval = 0.32
-        let secondDelay: TimeInterval = 0.56 + firstDelay
-        let thirdDelay: TimeInterval = 0.96 + secondDelay
+        let secondDelay: TimeInterval = 0.46 + firstDelay
+        let thirdDelay: TimeInterval = 0.66 + secondDelay
         
         let timer1 = Timer.scheduledTimer(withTimeInterval: firstDelay, repeats: false) { timer in
             DispatchQueue.main.async {
@@ -122,6 +122,27 @@ final class IDQResultViewViewModel {
         generator.notificationOccurred(type)
     }
     
+    private func evaulate(duration: TimeInterval) -> Double {
+        let threeSec: TimeInterval = 3
+        if duration > threeSec + 1 {
+            return floor(duration/(threeSec)) * (threeSec)
+        } else {
+            return 0
+        }
+    }
+    
+    private func evaulate(performance: Double) -> Double {
+        let fivePercentage: Double = 5
+        var returnValue: Double = floor(performance/(fivePercentage)) * (fivePercentage)
+        if returnValue >= 99 {
+            return returnValue - 2
+        } else if returnValue.truncatingRemainder(dividingBy: 1) == 0 {
+            return returnValue - 3
+        } else {
+            return returnValue
+        }
+    }
+    
     //MARK: - Public
     public func countAnimation(_ label: UILabel, duration: TimeInterval, quiz: IDQQuiz) {
         let scoreType = evaulate(quiz: quiz)
@@ -144,25 +165,59 @@ final class IDQResultViewViewModel {
         }
     }
     
-    public func countTimeAnimation(_ label: UILabel, duration: TimeInterval, quiz: IDQQuiz) {
-        print("quiz duration: \(quiz.time)")
+    public func countTimeAnimation(_ label: UILabel, quiz: IDQQuiz) {
         let roundedInterval = round(quiz.time * 100) / 100
-        var timeDurationString: String =  String(roundedInterval)
-        timeDurationString = timeDurationString.replacingOccurrences(of: ".", with: ":")
-        label.text = timeDurationString
-//        
-//        switch scoreType {
-//        case .perfect:
-//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-//        case .outstanding:
-//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-//        case .good:
-//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-//        case .medium:
-//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-//        case .low:
-//            lowCountAnimation(label, duration: duration, resultNumber: quiz.time)
-//        }
+        
+        let counterModifier: Double = evaulate(duration: quiz.time)
+        var counter: Double = 0.00 + counterModifier
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.010, repeats: true) { timer in
+            DispatchQueue.main.async {
+                var formatedCounter: Double = round(counter * 100) / 100
+                var timeDurationString: String =  String(formatedCounter)
+                if formatedCounter.truncatingRemainder(dividingBy: 1) == 0 {
+                    let formattedString = String(format: "%.2f", formatedCounter)
+                    timeDurationString = formattedString
+                }
+                timeDurationString = timeDurationString.replacingOccurrences(of: ".", with: ":")
+                label.text = timeDurationString
+                if counter >= roundedInterval {
+                    var timeDurationString: String =  String(roundedInterval)
+                    if roundedInterval.truncatingRemainder(dividingBy: 1) == 0 {
+                        let formattedString = String(format: "%.2f", roundedInterval)
+                        timeDurationString = formattedString
+                    }
+                    timeDurationString = timeDurationString.replacingOccurrences(of: ".", with: ":")
+                    label.text = timeDurationString
+                    timer.invalidate()
+                }
+                counter += 0.01
+            }
+        }
+    }
+    
+    public func performanceAnimation(_ label: UILabel, quiz: IDQQuiz) {
+        let maxScore = quiz.questions.count
+        let userScore = quiz.totalScore
+        let performance: Double = Double(Double(userScore)/Double(maxScore))*100
+        
+        let counterModifier: Double = evaulate(performance: performance)
+        
+        var counter: Double = 0.00 + counterModifier
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+            DispatchQueue.main.async {
+                label.text = "\(counter)%"
+                if counter >= performance {
+                    if performance.truncatingRemainder(dividingBy: 1) == 0 {
+                        let formattedString = String(format: "%.0f", performance)
+                        label.text = "\(formattedString)%"
+                    } else {
+                        label.text = "\(performance)%"
+                    }
+                    timer.invalidate()
+                }
+                counter += 0.10
+            }
+        }
     }
     
 }

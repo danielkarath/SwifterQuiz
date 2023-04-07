@@ -30,7 +30,7 @@ final class IDQTimeView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.highlightedDarkOrange
-        label.font = IDQConstants.setFont(fontSize: 24, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: 21, isBold: true)
         label.layer.zPosition = 4
         return label
     }()

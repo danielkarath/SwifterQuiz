@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class IDQScoreView: UIView {
+final class IDQPercentageView: UIView {
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "target")
+        imageView.image = UIImage(systemName: "percent")
         imageView.image?.withTintColor(IDQConstants.backgroundColor, renderingMode: .alwaysTemplate)
         imageView.tintColor = IDQConstants.backgroundColor
         imageView.alpha = 1.0
@@ -23,7 +23,7 @@ final class IDQScoreView: UIView {
         return imageView
     }()
 
-    public let quizScoreLabel: UILabel = {
+    public let quizPercentageLabel: UILabel = {
         let label = UILabel()
         label.text = " "
         label.numberOfLines = 1
@@ -35,9 +35,9 @@ final class IDQScoreView: UIView {
         return label
     }()
     
-    private let quizScoreDescriptionLabel: UILabel = {
+    private let quizPercentageDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Score"
+        label.text = "Performance"
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.contentBackgroundColor
@@ -82,23 +82,23 @@ final class IDQScoreView: UIView {
     
     private func setupConstraints() {
         
-        addSubviews(descriptionView, quizScoreLabel, backgroundImageView)
-        descriptionView.addSubview(quizScoreDescriptionLabel)
+        addSubviews(descriptionView, quizPercentageLabel, backgroundImageView)
+        descriptionView.addSubview(quizPercentageDescriptionLabel)
         NSLayoutConstraint.activate([
-            quizScoreLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12),
-            quizScoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            quizScoreLabel.widthAnchor.constraint(equalToConstant: 80),
-            quizScoreLabel.heightAnchor.constraint(equalToConstant: 80),
+            quizPercentageLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12),
+            quizPercentageLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            quizPercentageLabel.widthAnchor.constraint(equalToConstant: 80),
+            quizPercentageLabel.heightAnchor.constraint(equalToConstant: 80),
             
             descriptionView.topAnchor.constraint(equalTo: topAnchor, constant: -40),
             descriptionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             descriptionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             descriptionView.heightAnchor.constraint(equalToConstant: 54),
             
-            quizScoreDescriptionLabel.centerXAnchor.constraint(equalTo: descriptionView.centerXAnchor, constant: 0),
-            quizScoreDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 1),
-            quizScoreDescriptionLabel.widthAnchor.constraint(equalToConstant: 60),
-            quizScoreDescriptionLabel.heightAnchor.constraint(equalToConstant: 16),
+            quizPercentageDescriptionLabel.centerXAnchor.constraint(equalTo: descriptionView.centerXAnchor, constant: 0),
+            quizPercentageDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 1),
+            quizPercentageDescriptionLabel.widthAnchor.constraint(equalToConstant: 80),
+            quizPercentageDescriptionLabel.heightAnchor.constraint(equalToConstant: 16),
             
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 6),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 6),

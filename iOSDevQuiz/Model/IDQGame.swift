@@ -42,7 +42,7 @@ enum IDQTopic {
     var image: UIImage {
         switch self {
         case .basics:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .uikit:
             return IDQConstants.uikitImage
         case .swiftui:

@@ -27,6 +27,8 @@ class IDQResultView: UIView {
     
     private let timeView = IDQTimeView()
     
+    private let percentageView = IDQPercentageView()
+    
     private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
     
     private let topBackgroundView: UIView = {
@@ -34,25 +36,6 @@ class IDQResultView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    private let statsView3: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = IDQConstants.contentBackgroundColor
-        view.layer.cornerRadius = 8
-        return view
-    }()
-    
-//    private let congratulationsLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "You've scored "
-//        label.numberOfLines = 1
-//        label.textAlignment = .center
-//        label.textColor = IDQConstants.secondaryFontColor
-//        label.font = IDQConstants.setFont(fontSize: 11, isBold: false)
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
     
     private let QuestionsSubTitleLabel: UILabel = {
         let label = UILabel()
@@ -118,7 +101,7 @@ class IDQResultView: UIView {
         let statsViewHeight: CGFloat = 48
         let statsViewWidth: CGFloat = 90
         
-        addSubviews(topBackgroundView, scoreView, timeView, statsView3, QuestionsSubTitleLabel, questionsCollectionView)
+        addSubviews(topBackgroundView, scoreView, timeView, percentageView, QuestionsSubTitleLabel, questionsCollectionView)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -135,10 +118,10 @@ class IDQResultView: UIView {
             timeView.widthAnchor.constraint(equalToConstant: statsViewWidth),
             timeView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
-            statsView3.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
-            statsView3.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor * 3.0),
-            statsView3.widthAnchor.constraint(equalToConstant: statsViewWidth),
-            statsView3.heightAnchor.constraint(equalToConstant: statsViewHeight),
+            percentageView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
+            percentageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor * 3.0),
+            percentageView.widthAnchor.constraint(equalToConstant: statsViewWidth),
+            percentageView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
             QuestionsSubTitleLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: 32),
             QuestionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
@@ -157,8 +140,16 @@ class IDQResultView: UIView {
     
     public func configure(quiz: IDQQuiz) {
         self.quiz = quiz
-        viewModel.countAnimation(scoreView.quizScoreLabel, duration: 3.0, quiz: quiz)
-        viewModel.countTimeAnimation(timeView.timeLabel, duration: 3.0, quiz: quiz)
+        DispatchQueue.main.async {
+            self.viewModel.countAnimation(self.scoreView.quizScoreLabel, duration: 3.0, quiz: quiz)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
+            self.viewModel.countTimeAnimation(self.timeView.timeLabel, quiz: quiz)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
+            self.viewModel.performanceAnimation(self.percentageView.quizPercentageLabel, quiz: quiz)
+        }
+        
     }
     
 }

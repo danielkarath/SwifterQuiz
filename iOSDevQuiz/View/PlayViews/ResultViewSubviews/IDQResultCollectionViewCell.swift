@@ -96,10 +96,10 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
             imageOuterView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             imageOuterView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             
-            questionTypeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 12),
-            questionTypeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 18),
-            questionTypeImageView.widthAnchor.constraint(equalToConstant: frame.size.width/3.00),
-            questionTypeImageView.heightAnchor.constraint(equalToConstant: frame.size.width/3.00),
+            questionTypeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 16),
+            questionTypeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16),
+            questionTypeImageView.widthAnchor.constraint(equalToConstant: frame.size.width/2.70),
+            questionTypeImageView.heightAnchor.constraint(equalToConstant: frame.size.width/2.70),
             
             difficultyLabel.leadingAnchor.constraint(equalTo: isCorrectImageView.trailingAnchor, constant: 3),
             difficultyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 60),
