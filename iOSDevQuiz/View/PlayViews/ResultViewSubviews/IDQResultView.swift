@@ -23,6 +23,10 @@ class IDQResultView: UIView {
         }
     }
     
+    private let scoreView = IDQScoreView()
+    
+    private let timeView = IDQTimeView()
+    
     private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
     
     private let topBackgroundView: UIView = {
@@ -31,27 +35,24 @@ class IDQResultView: UIView {
         return view
     }()
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Results"
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        label.textColor = IDQConstants.highlightedDarkOrange
-        label.font = IDQConstants.setFont(fontSize: 48, isBold: true)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let statsView3: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = IDQConstants.contentBackgroundColor
+        view.layer.cornerRadius = 8
+        return view
     }()
     
-    private let congratulationsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "You've scored "
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        label.textColor = IDQConstants.secondaryFontColor
-        label.font = IDQConstants.setFont(fontSize: 11, isBold: false)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+//    private let congratulationsLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "You've scored "
+//        label.numberOfLines = 1
+//        label.textAlignment = .center
+//        label.textColor = IDQConstants.secondaryFontColor
+//        label.font = IDQConstants.setFont(fontSize: 11, isBold: false)
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        return label
+//    }()
     
     private let QuestionsSubTitleLabel: UILabel = {
         let label = UILabel()
@@ -114,25 +115,32 @@ class IDQResultView: UIView {
     private func setupConstraints() {
         
         let collectionViewLeadingAnchor: CGFloat = 8
+        let statsViewHeight: CGFloat = 48
+        let statsViewWidth: CGFloat = 90
         
-        addSubviews(topBackgroundView, titleLabel, congratulationsLabel, QuestionsSubTitleLabel, questionsCollectionView)
+        addSubviews(topBackgroundView, scoreView, timeView, statsView3, QuestionsSubTitleLabel, questionsCollectionView)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
             topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
             
-            congratulationsLabel.heightAnchor.constraint(equalToConstant: 18),
-            congratulationsLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.60),
-            congratulationsLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            congratulationsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 80),
+            scoreView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
+            scoreView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor * 3.0),
+            scoreView.widthAnchor.constraint(equalToConstant: statsViewWidth),
+            scoreView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
-            titleLabel.heightAnchor.constraint(equalToConstant: 80),
-            titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.80),
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            titleLabel.topAnchor.constraint(equalTo: congratulationsLabel.bottomAnchor, constant: -8),
+            timeView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
+            timeView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            timeView.widthAnchor.constraint(equalToConstant: statsViewWidth),
+            timeView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
-            QuestionsSubTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
+            statsView3.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
+            statsView3.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor * 3.0),
+            statsView3.widthAnchor.constraint(equalToConstant: statsViewWidth),
+            statsView3.heightAnchor.constraint(equalToConstant: statsViewHeight),
+            
+            QuestionsSubTitleLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: 32),
             QuestionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
             QuestionsSubTitleLabel.widthAnchor.constraint(equalToConstant: 160),
             QuestionsSubTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor+8),
@@ -149,7 +157,8 @@ class IDQResultView: UIView {
     
     public func configure(quiz: IDQQuiz) {
         self.quiz = quiz
-        viewModel.countAnimation(titleLabel, duration: 3.0, quiz: quiz)
+        viewModel.countAnimation(scoreView.quizScoreLabel, duration: 3.0, quiz: quiz)
+        viewModel.countTimeAnimation(timeView.timeLabel, duration: 3.0, quiz: quiz)
     }
     
 }
