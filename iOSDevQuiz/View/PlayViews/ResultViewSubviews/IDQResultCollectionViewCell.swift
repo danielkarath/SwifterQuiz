@@ -82,6 +82,12 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         fatalError("Unsupported")
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+                
+        imageOuterView.gradient(IDQConstants.highlightedContentBackgroundColor.cgColor, IDQConstants.backgroundColor.cgColor, direction: .horizontal)
+    }
+    
     private func addConstraints() {
         NSLayoutConstraint.activate([
             

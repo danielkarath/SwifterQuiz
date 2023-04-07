@@ -29,7 +29,7 @@ final class IDQScoreView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.highlightedDarkOrange
-        label.font = IDQConstants.setFont(fontSize: 28, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: 24, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.zPosition = 4
         return label
@@ -87,7 +87,7 @@ final class IDQScoreView: UIView {
         NSLayoutConstraint.activate([
             quizScoreLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12),
             quizScoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            quizScoreLabel.widthAnchor.constraint(equalToConstant: 50),
+            quizScoreLabel.widthAnchor.constraint(equalToConstant: 80),
             quizScoreLabel.heightAnchor.constraint(equalToConstant: 80),
             
             descriptionView.topAnchor.constraint(equalTo: topAnchor, constant: -40),

@@ -145,7 +145,9 @@ final class IDQResultViewViewModel {
     }
     
     public func countTimeAnimation(_ label: UILabel, duration: TimeInterval, quiz: IDQQuiz) {
-        var timeDurationString: String =  String(quiz.time)
+        print("quiz duration: \(quiz.time)")
+        let roundedInterval = round(quiz.time * 100) / 100
+        var timeDurationString: String =  String(roundedInterval)
         timeDurationString = timeDurationString.replacingOccurrences(of: ".", with: ":")
         label.text = timeDurationString
 //        

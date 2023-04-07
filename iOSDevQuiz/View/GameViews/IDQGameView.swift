@@ -35,7 +35,10 @@ final class IDQGameView: UIView {
     
     private var quizDuration: TimeInterval = 0
     
-    private let quizDate: Date = Date()
+    private let quizStartDate: Date = Date()
+    private var questionStartDate: Date = Date()
+    private var questionEndDate: Date?
+    private var quizTimeSpent: TimeInterval = 0
     
     private var question: IDQQuestion? {
         didSet {
@@ -255,18 +258,24 @@ final class IDQGameView: UIView {
     private func setupQuizResults() {
         guard let game = self.game else { return }
         countDownView.stopTimer()
+        questionEndDate = Date()
+        //let timeDifference = questionEndDate.timeIntervalSince(quizStartDate)
+        
         let quiz = viewModel.getQuizResults(
             game: game,
             questions: questions,
             isCorrect: isCorrectArray,
             totalScore: totalScore,
-            quizDuration: quizDuration
+            quizDuration: quizTimeSpent
         )
         delegate?.idqGameView(self, didFinish: quiz)
     }
     
     private func didTapAnswer(cell: IDQGameAnswerCollectionViewCell, selectedAnswer: IDQAnswer) {
         self.quizDuration = countDownView.timeSpent
+        questionEndDate = Date()
+        let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
+        quizTimeSpent += timeDifference
         let isCorrect = cell.didSelect(answer: selectedAnswer)
         if isCorrect {
             self.totalScore += 1
@@ -300,6 +309,9 @@ final class IDQGameView: UIView {
     private func passButtonTapped(_ sender: UIButton) {
         delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
         countDownView.stopTimer()
+        questionEndDate = Date()
+        let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
+        quizTimeSpent += timeDifference
         configure(overlay: overlayView)
         self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .passed)
         self.isCorrectArray.append(.passed)
@@ -312,6 +324,11 @@ final class IDQGameView: UIView {
     @objc
     private func didTapExit() {
         countDownView.pauseTimer()
+        
+        questionEndDate = Date()
+        let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
+        quizTimeSpent += timeDifference
+        
         configure(overlay: overlayView)
         UIView.animate(withDuration: 0.80, delay: 0.0, usingSpringWithDamping: 0.86, initialSpringVelocity: 0.2, options: [], animations: {
             self.exitView.transform = CGAffineTransform(translationX: 0, y: -290)
@@ -353,6 +370,7 @@ final class IDQGameView: UIView {
         guard !questions.isEmpty, game != nil else {
             fatalError("Wrong configuration at IDQGameView configure")
         }
+        questionStartDate = Date()
         self.questions = questions
         self.game = game
         questionLabel.configureFor(IDQConstants.keywords)
@@ -445,6 +463,9 @@ extension IDQGameView: CountDownViewDelegate {
     func countDownView(_: CountDownView, didReachDeadline: Bool) {
         if didReachDeadline {
             print("Did reach deadline!!!!")
+            questionEndDate = Date()
+            let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
+            quizTimeSpent += timeDifference
             displayQuestionResults(isCorrectlyAnswered: false, answeredInTime: false)
         }
     }
@@ -453,6 +474,7 @@ extension IDQGameView: CountDownViewDelegate {
 extension IDQGameView: IDQExitQuizViewDelegate {
     func didTapRejoinButton(_ idqExitQuizView: IDQExitQuizView) {
         didTapRejoinQuiz()
+        questionStartDate = Date()
     }
     
     func didConfirmExit(_ idqExitQuizView: IDQExitQuizView) {
@@ -462,3 +484,4 @@ extension IDQGameView: IDQExitQuizViewDelegate {
     
     
 }
+
