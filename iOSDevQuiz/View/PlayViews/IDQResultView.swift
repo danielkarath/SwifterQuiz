@@ -48,6 +48,37 @@ class IDQResultView: UIView {
         return label
     }()
     
+    private let shareButton: UIButton = {
+        let button = UIButton()
+        button.frame.size = CGSize(width: 50, height: 50)
+        button.layer.cornerRadius = 8
+        button.setTitleColor(IDQConstants.basicFontColor, for: .normal)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        button.backgroundColor = IDQConstants.contentBackgroundColor
+        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .highlighted)
+        button.tintColor = IDQConstants.basicFontColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private let menuButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.frame.size = CGSize(width: UIScreen.main.bounds.width-32-66, height: 50)
+        let color1: UIColor = IDQConstants.highlightedLightOrange
+        let color2: UIColor = IDQConstants.highlightedDarkOrange
+        button.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 8
+        button.setTitleColor(IDQConstants.contentBackgroundColor, for: .normal)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        button.setTitle("Menu", for: .normal)
+        button.setTitle("Menu", for: .highlighted)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private let questionsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -86,6 +117,7 @@ class IDQResultView: UIView {
         topBackgroundView.backgroundColor = IDQConstants.contentBackgroundColor
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
         topBackgroundView.layer.cornerRadius = topBackgroundSize/2
+        menuButton.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
     }
     
     private func setupCollectionView() {
@@ -101,7 +133,7 @@ class IDQResultView: UIView {
         let statsViewHeight: CGFloat = 48
         let statsViewWidth: CGFloat = 90
         
-        addSubviews(topBackgroundView, scoreView, timeView, percentageView, QuestionsSubTitleLabel, questionsCollectionView)
+        addSubviews(topBackgroundView, scoreView, timeView, percentageView, QuestionsSubTitleLabel, questionsCollectionView, menuButton, shareButton)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -131,9 +163,23 @@ class IDQResultView: UIView {
             questionsCollectionView.topAnchor.constraint(equalTo: QuestionsSubTitleLabel.bottomAnchor, constant: 2),
             questionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor),
             questionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
-            questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128)
+            questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128),
             
+            shareButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            shareButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            shareButton.widthAnchor.constraint(equalToConstant: 50),
+            shareButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            menuButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            menuButton.leadingAnchor.constraint(equalTo: shareButton.trailingAnchor, constant: 16),
+            menuButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            menuButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+    }
+    
+    @objc
+    private func menuButtonTapped(_ sender: UIButton) {
+        delegate?.idqResultView(self, didTap: menuButton)
     }
     
     //MARK: - Public

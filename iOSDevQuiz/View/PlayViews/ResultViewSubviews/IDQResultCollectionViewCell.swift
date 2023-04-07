@@ -112,7 +112,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
             isCorrectImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 14),
             
             questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            questionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -72),
+            questionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -64),
             questionLabel.topAnchor.constraint(equalTo: difficultyLabel.bottomAnchor, constant: -4),
             questionLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 90)
             

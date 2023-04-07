@@ -41,11 +41,11 @@ final class IDQGameResultViewController: UIViewController {
     private func setupNavItems() {
         navigationController?.navigationBar.prefersLargeTitles = false
         let chevronImage = UIImage(systemName: "chevron.left")!
-        //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
-        let menuButton = UIBarButtonItem(image: chevronImage, title: "Menu", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
-        menuButton.titlePositionAdjustment(for: .default)
-        menuButton.title = "Menu"
-        navigationItem.leftBarButtonItem = menuButton
+//        //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
+//        let menuButton = UIBarButtonItem(image: chevronImage, title: "Menu", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
+//        menuButton.titlePositionAdjustment(for: .default)
+//        menuButton.title = "Menu"
+//        navigationItem.leftBarButtonItem = menuButton
     }
     
     private func setupConstraints() {
@@ -57,16 +57,11 @@ final class IDQGameResultViewController: UIViewController {
             resultView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
         ])
     }
-    
-    @objc
-    private func menuButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
-    }
 }
 
 extension IDQGameResultViewController: IDQResultViewDelegate {
     func idqResultView(_: IDQResultView, didTap button: UIButton) {
-        
+        navigationController?.popToRootViewController(animated: true)
     }
     
 }
