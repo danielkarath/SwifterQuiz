@@ -120,8 +120,8 @@ class CountDownView: UIView {
         strokeLayer.add(colorAnimation, forKey: "colorAnimation")
     }
     
-    private func startAnimation(with duration: Int) {
-        var remainingTime: Int = duration
+    private func startAnimation(with duration: TimeInterval) {
+        var remainingTime: TimeInterval = duration
         UIView.animate(withDuration: TimeInterval(duration)) {
             self.circleAnimation(self, layer: self.strokeLayer, colors: self.colors.toCGColors(), duration: CFTimeInterval(duration))
             
@@ -135,7 +135,9 @@ class CountDownView: UIView {
                     self.delegate?.countDownView(self, didReachDeadline: true)
                 } else {
                     //self.countDownView.changeTimer(remainingTime)
-                    self.countDownLabel.text = String(remainingTime)
+                    var durationString: String = String(remainingTime)
+                    durationString = String(durationString.prefix(durationString.count - 2))
+                    self.countDownLabel.text = durationString
                     
                     if remainingTime == 10 {
                         let targetSize: CGFloat = self.viewSize * 2.5
@@ -153,10 +155,10 @@ class CountDownView: UIView {
     
     //MARK: - Public
     
-    public var timeSpent: Int = 0
+    public var timeSpent: TimeInterval = 0
     
     public func setupTimer(game: IDQGame) {
-        startAnimation(with: Int(game.questionTimer.rawValue))
+        startAnimation(with: game.questionTimer.rawValue)
         countDownLabel.text = String(Int(game.questionTimer.rawValue))
     }
     
@@ -181,7 +183,7 @@ class CountDownView: UIView {
     public func unpauseTimer(game: IDQGame) {
         if !questionCountdownTimer.isValid {
             let reducedTime = Double(game.questionTimer.rawValue - Double(timeSpent))
-            startAnimation(with: Int(timeSpent))
+            startAnimation(with: timeSpent)
             countDownLabel.text = String(timeSpent)
         }
     }

@@ -19,6 +19,7 @@ final class IDQScoreView: UIView {
         imageView.transform = CGAffineTransform(scaleX: -1, y: 1)
         imageView.contentMode = .scaleAspectFit
         imageView.isAccessibilityElement = false
+        imageView.layer.zPosition = 1
         return imageView
     }()
 
@@ -30,6 +31,7 @@ final class IDQScoreView: UIView {
         label.textColor = IDQConstants.highlightedDarkOrange
         label.font = IDQConstants.setFont(fontSize: 28, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.zPosition = 4
         return label
     }()
     
@@ -41,6 +43,7 @@ final class IDQScoreView: UIView {
         label.textColor = IDQConstants.contentBackgroundColor
         label.font = IDQConstants.setFont(fontSize: 13, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.zPosition = 3
         return label
     }()
     
@@ -53,6 +56,7 @@ final class IDQScoreView: UIView {
         view.frame.size = CGSize(width: 90, height: 54)
         view.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
         view.clipsToBounds = true
+        view.layer.zPosition = 2
         return view
     }()
     

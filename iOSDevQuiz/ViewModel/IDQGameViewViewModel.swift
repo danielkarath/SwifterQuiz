@@ -42,7 +42,7 @@ final class IDQGameViewViewModel {
     
     //MARK: - Public
     
-    public func getQuizResults(game: IDQGame, questions: [IDQQuestion], isCorrect answerArray: [IDQAnswerType], totalScore: Int, quizDuration: Int) -> IDQQuiz {
+    public func getQuizResults(game: IDQGame, questions: [IDQQuestion], isCorrect answerArray: [IDQAnswerType], totalScore: Int, quizDuration: TimeInterval) -> IDQQuiz {
         let questionsTuple = createQuestionTuples(with: questions, with: answerArray)
         let quiz = IDQQuiz(
             gamestyle: game,

@@ -18,22 +18,24 @@ final class IDQTimeView: UIView {
         imageView.alpha = 1.0
         imageView.transform = CGAffineTransform(scaleX: -1, y: 1)
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.zPosition = 1
         imageView.isAccessibilityElement = false
         return imageView
     }()
 
     public let timeLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.highlightedDarkOrange
         label.font = IDQConstants.setFont(fontSize: 28, isBold: true)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.zPosition = 4
         return label
     }()
     
-    private let quizScoreDescriptionLabel: UILabel = {
+    private let timeDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Time"
         label.numberOfLines = 1
@@ -41,6 +43,7 @@ final class IDQTimeView: UIView {
         label.textColor = IDQConstants.contentBackgroundColor
         label.font = IDQConstants.setFont(fontSize: 13, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.zPosition = 3
         return label
     }()
     
@@ -53,6 +56,7 @@ final class IDQTimeView: UIView {
         view.frame.size = CGSize(width: 90, height: 54)
         view.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
         view.clipsToBounds = true
+        view.layer.zPosition = 2
         return view
     }()
     
@@ -79,11 +83,11 @@ final class IDQTimeView: UIView {
     private func setupConstraints() {
         
         addSubviews(descriptionView, timeLabel, backgroundImageView)
-        descriptionView.addSubview(quizScoreDescriptionLabel)
+        descriptionView.addSubview(timeDescriptionLabel)
         NSLayoutConstraint.activate([
             timeLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12),
             timeLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            timeLabel.widthAnchor.constraint(equalToConstant: 50),
+            timeLabel.widthAnchor.constraint(equalToConstant: 70),
             timeLabel.heightAnchor.constraint(equalToConstant: 80),
             
             descriptionView.topAnchor.constraint(equalTo: topAnchor, constant: -40),
@@ -91,10 +95,10 @@ final class IDQTimeView: UIView {
             descriptionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             descriptionView.heightAnchor.constraint(equalToConstant: 54),
             
-            quizScoreDescriptionLabel.centerXAnchor.constraint(equalTo: descriptionView.centerXAnchor, constant: 0),
-            quizScoreDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 1),
-            quizScoreDescriptionLabel.widthAnchor.constraint(equalToConstant: 60),
-            quizScoreDescriptionLabel.heightAnchor.constraint(equalToConstant: 16),
+            timeDescriptionLabel.centerXAnchor.constraint(equalTo: descriptionView.centerXAnchor, constant: 0),
+            timeDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 1),
+            timeDescriptionLabel.widthAnchor.constraint(equalToConstant: 60),
+            timeDescriptionLabel.heightAnchor.constraint(equalToConstant: 16),
             
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 6),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 6),

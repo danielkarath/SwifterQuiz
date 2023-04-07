@@ -33,7 +33,7 @@ final class IDQGameView: UIView {
         
     private var totalScore: Int = 0
     
-    private var quizDuration: Int = 0
+    private var quizDuration: TimeInterval = 0
     
     private let quizDate: Date = Date()
     

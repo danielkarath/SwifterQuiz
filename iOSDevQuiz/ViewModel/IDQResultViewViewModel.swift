@@ -145,25 +145,22 @@ final class IDQResultViewViewModel {
     }
     
     public func countTimeAnimation(_ label: UILabel, duration: TimeInterval, quiz: IDQQuiz) {
-        let scoreType = evaulate(quiz: quiz)
-        print("quiz time: \(quiz.time)")
-        guard quiz.time > 0 else {
-            lowCountAnimation(label, duration: duration, resultNumber: 0)
-            return
-        }
-        
-        switch scoreType {
-        case .perfect:
-            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-        case .outstanding:
-            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-        case .good:
-            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-        case .medium:
-            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
-        case .low:
-            lowCountAnimation(label, duration: duration, resultNumber: quiz.time)
-        }
+        var timeDurationString: String =  String(quiz.time)
+        timeDurationString = timeDurationString.replacingOccurrences(of: ".", with: ":")
+        label.text = timeDurationString
+//        
+//        switch scoreType {
+//        case .perfect:
+//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
+//        case .outstanding:
+//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
+//        case .good:
+//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
+//        case .medium:
+//            mediumCountAnimation(label, duration: duration, resultNumber: quiz.time)
+//        case .low:
+//            lowCountAnimation(label, duration: duration, resultNumber: quiz.time)
+//        }
     }
     
 }
