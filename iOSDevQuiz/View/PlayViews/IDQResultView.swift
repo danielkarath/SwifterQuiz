@@ -31,6 +31,9 @@ class IDQResultView: UIView {
     
     private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
     
+    private var cellsAnimated: [Bool] = []
+
+    
     private let topBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +128,15 @@ class IDQResultView: UIView {
         questionsCollectionView.dataSource = self
     }
     
+    private func setupCellAnimation() {
+        guard quiz != nil, quiz?.questions.count ?? 0 > 0 else {
+            return
+        }
+        for question in quiz!.questions {
+            cellsAnimated.append(false)
+        }
+    }
+    
     //MARK: - Private
     
     private func setupConstraints() {
@@ -186,6 +198,7 @@ class IDQResultView: UIView {
     
     public func configure(quiz: IDQQuiz) {
         self.quiz = quiz
+        questionsCollectionView.isUserInteractionEnabled = false
         DispatchQueue.main.async {
             self.viewModel.countAnimation(self.scoreView.quizScoreLabel, duration: 3.0, quiz: quiz)
         }
@@ -196,6 +209,9 @@ class IDQResultView: UIView {
             self.viewModel.performanceAnimation(self.percentageView.quizPercentageLabel, quiz: quiz)
         }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.35) {
+            self.questionsCollectionView.isUserInteractionEnabled = true
+        }
     }
     
 }
@@ -203,6 +219,7 @@ class IDQResultView: UIView {
 extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        setupCellAnimation()
         return quiz?.questions.count ?? 10
     }
     
@@ -212,6 +229,9 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
         if quiz != nil {
             cell.configure(with: quiz!, index: indexPath.row)
+            if !cellsAnimated[indexPath.row] {
+                cell.alpha = 0.0
+            }
         }
         return cell
     }
@@ -227,4 +247,28 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
         //let selectedQuestion = questions[indexPath.row]
         //delegate?.didSelectEpisode(selectedQuestion)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? IDQResultCollectionViewCell else { return }
+        
+        if !cellsAnimated[indexPath.row] {
+            cellsAnimated[indexPath.row] = true
+            
+            cell.alpha = 0.0
+            cell.transform = CGAffineTransform(translationX: -collectionView.bounds.width, y: 0)
+            
+            // Calculate delay for this cell based on its index path
+            let delay = 0.10 * Double(indexPath.item)
+            
+            // Apply animation to slide cell into view with delay
+            UIView.animate(withDuration: 0.60, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.40, options: [], animations: {
+                cell.alpha = 1.0
+                cell.transform = CGAffineTransform.identity
+            }, completion: nil)
+        } else {
+            cell.alpha = 1.0
+            cell.transform = CGAffineTransform.identity
+        }
+    }
+
 }

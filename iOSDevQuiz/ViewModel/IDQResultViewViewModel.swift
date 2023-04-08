@@ -133,11 +133,12 @@ final class IDQResultViewViewModel {
     
     private func evaulate(performance: Double) -> Double {
         let fivePercentage: Double = 5
+        let randStartingPointArray: [Double] = [8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0]
         var returnValue: Double = floor(performance/(fivePercentage)) * (fivePercentage)
         if returnValue >= 99 {
-            return returnValue - 2
+            return returnValue - (randStartingPointArray.randomElement() ?? 16.0)
         } else if returnValue.truncatingRemainder(dividingBy: 1) == 0 {
-            return returnValue - 3
+            return returnValue - (randStartingPointArray.randomElement() ?? 17.0) - 3
         } else {
             return returnValue
         }
@@ -203,7 +204,7 @@ final class IDQResultViewViewModel {
         let counterModifier: Double = evaulate(performance: performance)
         
         var counter: Double = 0.00 + counterModifier
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.08, repeats: true) { timer in
             DispatchQueue.main.async {
                 label.text = "\(counter)%"
                 if counter >= performance {
@@ -215,7 +216,7 @@ final class IDQResultViewViewModel {
                     }
                     timer.invalidate()
                 }
-                counter += 0.10
+                counter += 1.00
             }
         }
     }

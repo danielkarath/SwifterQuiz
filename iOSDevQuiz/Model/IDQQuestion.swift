@@ -669,10 +669,10 @@ let idqQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "windowDidAppear()", answerType: .wrong),
-            IDQAnswer(text: "viewWillAppear", answerType: .wrong),
-            IDQAnswer(text: "viewDidLoad()", answerType: .wrong),
-            IDQAnswer(text: "loadView()", answerType: .correct),
+            IDQAnswer(text: "windowDidAppear() \t", answerType: .wrong),
+            IDQAnswer(text: "viewWillAppear() \t", answerType: .wrong),
+            IDQAnswer(text: "viewDidLoad() \t", answerType: .wrong),
+            IDQAnswer(text: "loadView() \t", answerType: .correct),
         ]
     ),
     
