@@ -40,7 +40,7 @@ class IDQResultView: UIView {
         return view
     }()
     
-    private let QuestionsSubTitleLabel: UILabel = {
+    private let questionsSubTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Questions"
         label.numberOfLines = 1
@@ -137,6 +137,20 @@ class IDQResultView: UIView {
         }
     }
     
+    private func animate(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: IndexPath) {
+        cell.alpha = 0.0
+        cell.transform = CGAffineTransform(translationX: -collectionView.bounds.width, y: 0)
+        
+        // Calculate delay for this cell based on its index path
+        let delay = 0.07 * Double(indexPath.item)
+        
+        // Apply animation to slide cell into view with delay
+        UIView.animate(withDuration: 0.60, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.40, options: [], animations: {
+            cell.alpha = 1.0
+            cell.transform = CGAffineTransform.identity
+        }, completion: nil)
+    }
+    
     //MARK: - Private
     
     private func setupConstraints() {
@@ -145,7 +159,7 @@ class IDQResultView: UIView {
         let statsViewHeight: CGFloat = 48
         let statsViewWidth: CGFloat = 90
         
-        addSubviews(topBackgroundView, scoreView, timeView, percentageView, QuestionsSubTitleLabel, questionsCollectionView, menuButton, shareButton)
+        addSubviews(topBackgroundView, scoreView, timeView, percentageView, questionsSubTitleLabel, questionsCollectionView, menuButton, shareButton)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -167,12 +181,12 @@ class IDQResultView: UIView {
             percentageView.widthAnchor.constraint(equalToConstant: statsViewWidth),
             percentageView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
-            QuestionsSubTitleLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: 32),
-            QuestionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
-            QuestionsSubTitleLabel.widthAnchor.constraint(equalToConstant: 160),
-            QuestionsSubTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor+8),
+            questionsSubTitleLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: 32),
+            questionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
+            questionsSubTitleLabel.widthAnchor.constraint(equalToConstant: 160),
+            questionsSubTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor+8),
             
-            questionsCollectionView.topAnchor.constraint(equalTo: QuestionsSubTitleLabel.bottomAnchor, constant: 2),
+            questionsCollectionView.topAnchor.constraint(equalTo: questionsSubTitleLabel.bottomAnchor, constant: 2),
             questionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor),
             questionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
             questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128),
@@ -199,6 +213,8 @@ class IDQResultView: UIView {
     public func configure(quiz: IDQQuiz) {
         self.quiz = quiz
         questionsCollectionView.isUserInteractionEnabled = false
+        questionsCollectionView.alpha = 0.0
+        questionsSubTitleLabel.alpha = 0.0
         DispatchQueue.main.async {
             self.viewModel.countAnimation(self.scoreView.quizScoreLabel, duration: 3.0, quiz: quiz)
         }
@@ -209,8 +225,12 @@ class IDQResultView: UIView {
             self.viewModel.performanceAnimation(self.percentageView.quizPercentageLabel, quiz: quiz)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.35) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.10) {
             self.questionsCollectionView.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.85) {
+                self.questionsCollectionView.alpha = 1.0
+                self.questionsSubTitleLabel.alpha = 1.0
+            }
         }
     }
     
@@ -254,21 +274,12 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
         if !cellsAnimated[indexPath.row] {
             cellsAnimated[indexPath.row] = true
             
-            cell.alpha = 0.0
-            cell.transform = CGAffineTransform(translationX: -collectionView.bounds.width, y: 0)
-            
-            // Calculate delay for this cell based on its index path
-            let delay = 0.10 * Double(indexPath.item)
-            
-            // Apply animation to slide cell into view with delay
-            UIView.animate(withDuration: 0.60, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.40, options: [], animations: {
-                cell.alpha = 1.0
-                cell.transform = CGAffineTransform.identity
-            }, completion: nil)
+            animate(cell: cell, collectionView: collectionView, indexPath: indexPath)
         } else {
             cell.alpha = 1.0
             cell.transform = CGAffineTransform.identity
         }
+        
     }
 
 }
