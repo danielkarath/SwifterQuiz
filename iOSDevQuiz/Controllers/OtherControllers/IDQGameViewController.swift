@@ -78,7 +78,6 @@ final class IDQGameViewController: UIViewController {
 extension IDQGameViewController: IDQGameViewDelegate {
     
     func idqGameView(_ gameView: IDQGameView, questionCounter: Int) {
-        print("Counter: \(questionCounter)")
         quizRoundCounter = questionCounter
     }
     

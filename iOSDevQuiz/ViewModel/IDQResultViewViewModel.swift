@@ -168,10 +168,8 @@ final class IDQResultViewViewModel {
     
     public func countTimeAnimation(_ label: UILabel, quiz: IDQQuiz) {
         let roundedInterval = 600.00//round(quiz.time * 100) / 100
-        print("roundedInterval: \(roundedInterval)")
         
         let counterModifier: Double = evaulate(duration: quiz.time)
-        print("counterModifier: \(counterModifier)")
         var counter: Double = 0.00 + counterModifier
         let timer = Timer.scheduledTimer(withTimeInterval: 0.010, repeats: true) { timer in
             DispatchQueue.main.async {
@@ -180,10 +178,8 @@ final class IDQResultViewViewModel {
                 if formatedCounter.truncatingRemainder(dividingBy: 1) == 0 {
                     let formattedString = String(format: "%.2f", formatedCounter)
                     timeDurationString = formattedString
-                    print("timeDurationString 1: \(timeDurationString)")
                 }
                 
-                print("timeDurationString 2: \(timeDurationString)")
                 timeDurationString = timeDurationString.replacingOccurrences(of: ".", with: ":")
                 label.text = timeDurationString
                 
@@ -192,10 +188,8 @@ final class IDQResultViewViewModel {
                     if roundedInterval.truncatingRemainder(dividingBy: 1) == 0 {
                         let formattedString = String(format: "%.2f", roundedInterval)
                         timeDurationString = formattedString
-                        print("timeDurationString 3: \(timeDurationString)")
                     }
                     timeDurationString = timeDurationString.replacingOccurrences(of: ".", with: ":")
-                    print("timeDurationString 4: \(timeDurationString)")
                     label.text = timeDurationString
                     timer.invalidate()
                 }

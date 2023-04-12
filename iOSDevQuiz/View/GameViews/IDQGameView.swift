@@ -462,7 +462,6 @@ extension IDQGameView: IDQAnswerResultViewDelegate {
 extension IDQGameView: CountDownViewDelegate {
     func countDownView(_: CountDownView, didReachDeadline: Bool) {
         if didReachDeadline {
-            print("Did reach deadline!!!!")
             questionEndDate = Date()
             let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
             quizTimeSpent += timeDifference

@@ -732,4 +732,46 @@ let idqQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "Regarding the difference between UITableView and UICollectionView which statment is INCORRECT?",
+        explanation: "The UITableView does not allow varying sized cells is the false statment. With the tableView(_:heightForRowAt:) method you can modify a given row's height.",
+        reference: "https://developer.apple.com/documentation/uikit/uitableviewdelegate/1614998-tableview",
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "Only the UICollectionView offeres built in transitions effects when changing it's layout.", answerType: .wrong),
+            IDQAnswer(text: "The UITableView is designed to display data in a single column", answerType: .wrong),
+            IDQAnswer(text: "The UICollectionView allow you to move items around based on user interactions.", answerType: .wrong),
+            IDQAnswer(text: "The UITableView does not allow varying sized cells.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In UIKit use __________ to force the view to update its layout immediately.",
+        explanation: "Use layoutIfNeeded() to force the view to update its layout immediately. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints.",
+        reference: "https://developer.apple.com/documentation/uikit/uiview/1622507-layoutifneeded",
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "sizeToFit() \t", answerType: .wrong),
+            IDQAnswer(text: "updateConstraints() \t", answerType: .wrong),
+            IDQAnswer(text: "setNeedsLayout() \t", answerType: .wrong),
+            IDQAnswer(text: "layoutIfNeeded() \t", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In UIKit what is the default value for tableView(_:heightForRowAt:) if the table view is not empty?",
+        explanation: "automaticDimension is the default value that is used for the height or width of a UI element, such as a table view cell or a collection view cell.",
+        reference: "https://developer.apple.com/documentation/uikit/uitableview/1614961-automaticdimension",
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "UITableView.estimatedRowHeight \t", answerType: .wrong),
+            IDQAnswer(text: "The geometry calculation is automatically generates it based on the first row's height.", answerType: .wrong),
+            IDQAnswer(text: "nill \t", answerType: .wrong),
+            IDQAnswer(text: "UITableView.automaticDimension \t", answerType: .correct),
+        ]
+    ),
+    
 ]

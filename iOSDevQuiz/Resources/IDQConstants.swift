@@ -119,6 +119,17 @@ struct IDQConstants {
         "viewDidLoad()",
         "viewWillAppear()",
         "windowDidAppear()",
+        "UITableView",
+        "UICollectionView",
+        "layoutIfNeeded()",
+        "setNeedsLayout()",
+        "updateConstraints()",
+        "sizeToFit()",
+        "tableView(_:heightForRowAt:)",
+        "UITableView.estimatedRowHeight",
+        "UITableView.automaticDimension",
+        "automaticDimension",
+        "nill",
     ]
     
     //MARK: - Background colors
