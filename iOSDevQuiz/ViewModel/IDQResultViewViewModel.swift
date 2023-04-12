@@ -167,7 +167,7 @@ final class IDQResultViewViewModel {
     }
     
     public func countTimeAnimation(_ label: UILabel, quiz: IDQQuiz) {
-        let roundedInterval = 600.00//round(quiz.time * 100) / 100
+        let roundedInterval = round(quiz.time * 100) / 100 //600.00
         
         let counterModifier: Double = evaulate(duration: quiz.time)
         var counter: Double = 0.00 + counterModifier

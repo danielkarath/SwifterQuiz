@@ -105,7 +105,7 @@ final class IDQGameView: UIView {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.textColor = IDQConstants.highlightFontColor
-        label.font = IDQConstants.setFont(fontSize: 20, isBold: false)
+        label.font = IDQConstants.setFont(fontSize: 18, isBold: false)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.zPosition = 3
         return label

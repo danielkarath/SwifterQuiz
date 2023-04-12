@@ -119,6 +119,7 @@ struct IDQConstants {
         "viewDidLoad()",
         "viewWillAppear()",
         "windowDidAppear()",
+        "UICollectionViewCell",
         "UITableView",
         "UICollectionView",
         "layoutIfNeeded()",
@@ -128,8 +129,13 @@ struct IDQConstants {
         "tableView(_:heightForRowAt:)",
         "UITableView.estimatedRowHeight",
         "UITableView.automaticDimension",
+        "collectionView(_:willDisplay:forItemAt:)",
         "automaticDimension",
-        "nill",
+        "nil",
+        "prepareForReuse()",
+        "super.prepareForReuse()",
+        "UISlider()",
+        "UIRangeSlider",
     ]
     
     //MARK: - Background colors

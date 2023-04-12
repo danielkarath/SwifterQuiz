@@ -17,4 +17,16 @@ enum IDQAnswerType {
 struct IDQAnswer {
     let text: String
     let answerType: IDQAnswerType
+//    
+//    init(text: String, answerType: IDQAnswerType) throws {
+//            guard text.count <= 16 else {
+//                throw IDQAnswerError.textTooLong
+//            }
+//            self.text = text
+//            self.answerType = answerType
+//        }
+//    
+//    enum IDQAnswerError: Error {
+//        case textTooLong
+//    }
 }
