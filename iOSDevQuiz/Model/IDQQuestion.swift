@@ -840,7 +840,7 @@ let idqQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "By using a UISlider() with it's numberOfThumbs property set to 2", answerType: .wrong),
             IDQAnswer(text: "By using a UIRangeSlider() that by default has two thumbs which allows range selection.", answerType: .wrong),
             IDQAnswer(text: "By using a UISlider() with it's numberOfThumbs property set to 2 and it's selectionStyle set to range", answerType: .wrong),
-            IDQAnswer(text: "UIKit does not have a UIControl that allows this. Either place two sliders on top of each other or use third party solutions", answerType: .correct),
+            IDQAnswer(text: "UIKit does not have a UIControl that allows this. You may have to use third party libraries", answerType: .correct),
         ]
     ),
     

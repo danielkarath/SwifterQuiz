@@ -48,7 +48,7 @@ final class IDQGameViewViewModel {
             gamestyle: game,
             questions: questionsTuple,
             totalScore: totalScore,
-            time: quizDuration,
+            quizDuration: quizDuration,
             date: Date()
         )
         return quiz

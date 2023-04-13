@@ -232,6 +232,11 @@ class IDQResultView: UIView {
                 self.questionsSubTitleLabel.alpha = 1.0
             }
         }
+        
+        DispatchQueue.global(qos: .utility).async {
+            self.viewModel.save(quiz: quiz)
+            self.viewModel.saveToUserRecords(quiz)
+        }
     }
     
 }
