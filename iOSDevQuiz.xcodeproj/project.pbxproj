@@ -26,10 +26,15 @@
 		3914C93029B0FBE90001377B /* IDQExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C92F29B0FBE90001377B /* IDQExtensions.swift */; };
 		3914C93329B10B300001377B /* IDQPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C93229B10B300001377B /* IDQPlayView.swift */; };
 		392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392415C029BA9E9B006D6590 /* CountDownView.swift */; };
-		39267BA429E8071B007DD96F /* IDQQuizResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BA029E8071B007DD96F /* IDQQuizResult+CoreDataClass.swift */; };
-		39267BA529E8071B007DD96F /* IDQQuizResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BA129E8071B007DD96F /* IDQQuizResult+CoreDataProperties.swift */; };
-		39267BA629E8071B007DD96F /* IDQUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BA229E8071B007DD96F /* IDQUser+CoreDataClass.swift */; };
-		39267BA729E8071B007DD96F /* IDQUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BA329E8071B007DD96F /* IDQUser+CoreDataProperties.swift */; };
+		39267BA929E81742007DD96F /* IDQUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BA829E81742007DD96F /* IDQUserManager.swift */; };
+		39267BAE29E81E92007DD96F /* IDQQuizResult+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BAA29E81E92007DD96F /* IDQQuizResult+CoreDataClass.swift */; };
+		39267BAF29E81E92007DD96F /* IDQQuizResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BAB29E81E92007DD96F /* IDQQuizResult+CoreDataProperties.swift */; };
+		39267BB029E81E92007DD96F /* IDQUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BAC29E81E92007DD96F /* IDQUser+CoreDataClass.swift */; };
+		39267BB129E81E92007DD96F /* IDQUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BAD29E81E92007DD96F /* IDQUser+CoreDataProperties.swift */; };
+		39267BB429E82923007DD96F /* IDQStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB329E82923007DD96F /* IDQStatsView.swift */; };
+		39267BB629E82DEE007DD96F /* IDQLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB529E82DEE007DD96F /* IDQLineChart.swift */; };
+		39267BB829E8364D007DD96F /* IDQQuizResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB729E8364D007DD96F /* IDQQuizResultManager.swift */; };
+		39267BBA29E839AD007DD96F /* IDQStatsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */; };
 		3942949229C37AEE00E15FE1 /* IDQQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942949129C37AEE00E15FE1 /* IDQQuiz.swift */; };
 		3948B15729B942D600E2841F /* IDQGameViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948B15629B942D600E2841F /* IDQGameViewViewModel.swift */; };
 		3952D1DE29B8AC220061C5C9 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */; };
@@ -37,6 +42,7 @@
 		3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E329B8C70D0061C5C9 /* IDQGame.swift */; };
 		3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */; };
 		3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */; };
+		396793DD29E8961B00A476E2 /* IDQStatsUpperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396793DC29E8961B00A476E2 /* IDQStatsUpperView.swift */; };
 		396B6A9329C127990098A4E5 /* IDQAnswerResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */; };
 		39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39743AEB29D9AD0600D1C341 /* IDQExitQuizView.swift */; };
 		39904E0029E0792E009F9380 /* IDQPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39904DFF29E0792E009F9380 /* IDQPercentageView.swift */; };
@@ -70,10 +76,15 @@
 		3914C92F29B0FBE90001377B /* IDQExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQExtensions.swift; sourceTree = "<group>"; };
 		3914C93229B10B300001377B /* IDQPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQPlayView.swift; sourceTree = "<group>"; };
 		392415C029BA9E9B006D6590 /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
-		39267BA029E8071B007DD96F /* IDQQuizResult+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQQuizResult+CoreDataClass.swift"; sourceTree = "<group>"; };
-		39267BA129E8071B007DD96F /* IDQQuizResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQQuizResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		39267BA229E8071B007DD96F /* IDQUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQUser+CoreDataClass.swift"; sourceTree = "<group>"; };
-		39267BA329E8071B007DD96F /* IDQUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		39267BA829E81742007DD96F /* IDQUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQUserManager.swift; sourceTree = "<group>"; };
+		39267BAA29E81E92007DD96F /* IDQQuizResult+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQQuizResult+CoreDataClass.swift"; sourceTree = "<group>"; };
+		39267BAB29E81E92007DD96F /* IDQQuizResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQQuizResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		39267BAC29E81E92007DD96F /* IDQUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		39267BAD29E81E92007DD96F /* IDQUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		39267BB329E82923007DD96F /* IDQStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsView.swift; sourceTree = "<group>"; };
+		39267BB529E82DEE007DD96F /* IDQLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQLineChart.swift; sourceTree = "<group>"; };
+		39267BB729E8364D007DD96F /* IDQQuizResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuizResultManager.swift; sourceTree = "<group>"; };
+		39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsViewViewModel.swift; sourceTree = "<group>"; };
 		3942949129C37AEE00E15FE1 /* IDQQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuiz.swift; sourceTree = "<group>"; };
 		3948B15629B942D600E2841F /* IDQGameViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameViewViewModel.swift; sourceTree = "<group>"; };
 		3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
@@ -81,6 +92,7 @@
 		3952D1E329B8C70D0061C5C9 /* IDQGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGame.swift; sourceTree = "<group>"; };
 		3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuestion.swift; sourceTree = "<group>"; };
 		3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswer.swift; sourceTree = "<group>"; };
+		396793DC29E8961B00A476E2 /* IDQStatsUpperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsUpperView.swift; sourceTree = "<group>"; };
 		396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultView.swift; sourceTree = "<group>"; };
 		39743AEB29D9AD0600D1C341 /* IDQExitQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQExitQuizView.swift; sourceTree = "<group>"; };
 		39904DFF29E0792E009F9380 /* IDQPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQPercentageView.swift; sourceTree = "<group>"; };
@@ -117,10 +129,10 @@
 		3914C8FC29B0D7E40001377B = {
 			isa = PBXGroup;
 			children = (
-				39267BA029E8071B007DD96F /* IDQQuizResult+CoreDataClass.swift */,
-				39267BA129E8071B007DD96F /* IDQQuizResult+CoreDataProperties.swift */,
-				39267BA229E8071B007DD96F /* IDQUser+CoreDataClass.swift */,
-				39267BA329E8071B007DD96F /* IDQUser+CoreDataProperties.swift */,
+				39267BAA29E81E92007DD96F /* IDQQuizResult+CoreDataClass.swift */,
+				39267BAB29E81E92007DD96F /* IDQQuizResult+CoreDataProperties.swift */,
+				39267BAC29E81E92007DD96F /* IDQUser+CoreDataClass.swift */,
+				39267BAD29E81E92007DD96F /* IDQUser+CoreDataProperties.swift */,
 				3914C90729B0D7E40001377B /* iOSDevQuiz */,
 				3914C90629B0D7E40001377B /* Products */,
 			);
@@ -194,10 +206,21 @@
 		3914C93129B10B190001377B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39267BB229E82904007DD96F /* StatsViews_SwiftUI */,
 				3952D1DC29B8ABB10061C5C9 /* PlayViews */,
 				39E2256D29B8F6F400830F1A /* GameViews */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		39267BB229E82904007DD96F /* StatsViews_SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				39267BB329E82923007DD96F /* IDQStatsView.swift */,
+				39267BB529E82DEE007DD96F /* IDQLineChart.swift */,
+				396793DC29E8961B00A476E2 /* IDQStatsUpperView.swift */,
+			);
+			path = StatsViews_SwiftUI;
 			sourceTree = "<group>";
 		};
 		3952D1DC29B8ABB10061C5C9 /* PlayViews */ = {
@@ -219,6 +242,7 @@
 				39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */,
 				39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */,
 				3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */,
+				39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -230,6 +254,8 @@
 				3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */,
 				3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */,
 				3942949129C37AEE00E15FE1 /* IDQQuiz.swift */,
+				39267BA829E81742007DD96F /* IDQUserManager.swift */,
+				39267BB729E8364D007DD96F /* IDQQuizResultManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,34 +351,40 @@
 				39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */,
 				39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */,
 				39962B2B29C9CC93001350F8 /* IDQGameResultViewController.swift in Sources */,
-				39267BA529E8071B007DD96F /* IDQQuizResult+CoreDataProperties.swift in Sources */,
 				3914C93329B10B300001377B /* IDQPlayView.swift in Sources */,
 				3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */,
 				3914C92529B0EB8A0001377B /* IDQGameViewController.swift in Sources */,
 				3914C92729B0EBD20001377B /* IDQStatsViewController.swift in Sources */,
+				39267BB629E82DEE007DD96F /* IDQLineChart.swift in Sources */,
 				3914C90929B0D7E40001377B /* AppDelegate.swift in Sources */,
 				3909BBAC29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift in Sources */,
 				39904E0029E0792E009F9380 /* IDQPercentageView.swift in Sources */,
+				39267BB429E82923007DD96F /* IDQStatsView.swift in Sources */,
+				39267BA929E81742007DD96F /* IDQUserManager.swift in Sources */,
 				39E2256F29B8F71500830F1A /* IDQGameView.swift in Sources */,
 				3952D1DE29B8AC220061C5C9 /* StartButtonView.swift in Sources */,
 				3914C92329B0DCE60001377B /* IDQConstants.swift in Sources */,
+				39267BAE29E81E92007DD96F /* IDQQuizResult+CoreDataClass.swift in Sources */,
 				39AF9C4429CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift in Sources */,
-				39267BA729E8071B007DD96F /* IDQUser+CoreDataProperties.swift in Sources */,
 				3914C92E29B0ED260001377B /* IDQGameOptionsViewController.swift in Sources */,
 				3905B24F29E0403C00E3A632 /* IDQTimeView.swift in Sources */,
 				3952D1E129B8C6A10061C5C9 /* IDQPlayViewViewModel.swift in Sources */,
 				3914C91329B0D7E40001377B /* iOSDevQuiz.xcdatamodeld in Sources */,
+				396793DD29E8961B00A476E2 /* IDQStatsUpperView.swift in Sources */,
+				39267BBA29E839AD007DD96F /* IDQStatsViewViewModel.swift in Sources */,
 				39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */,
 				39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */,
 				3948B15729B942D600E2841F /* IDQGameViewViewModel.swift in Sources */,
 				3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */,
+				39267BAF29E81E92007DD96F /* IDQQuizResult+CoreDataProperties.swift in Sources */,
 				3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,
-				39267BA429E8071B007DD96F /* IDQQuizResult+CoreDataClass.swift in Sources */,
+				39267BB029E81E92007DD96F /* IDQUser+CoreDataClass.swift in Sources */,
 				392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */,
 				3914C92C29B0ECFB0001377B /* IDQPlayViewController.swift in Sources */,
+				39267BB129E81E92007DD96F /* IDQUser+CoreDataProperties.swift in Sources */,
+				39267BB829E8364D007DD96F /* IDQQuizResultManager.swift in Sources */,
 				3942949229C37AEE00E15FE1 /* IDQQuiz.swift in Sources */,
-				39267BA629E8071B007DD96F /* IDQUser+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

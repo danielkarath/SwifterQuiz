@@ -5,28 +5,37 @@
 //  Created by Daniel Karath on 3/2/23.
 //
 import UIKit
+import SwiftUI
 
 /// Controller to show and serach for characters
 final class IDQStatsViewController: UIViewController {
 
-    //private let characterListView = RMCharacterListView()
+    private var statsSwiftUIControllerView: UIHostingController<IDQStatsView>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = IDQConstants.backgroundColor
-        //setupConstraints()
+        addSwiftUIController()
     }
     
-    
-//    private func setupConstraints() {
-//        view.addSubview(characterListView)
-//        NSLayoutConstraint.activate([
-//            characterListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -16),
-//            characterListView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
-//            characterListView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0),
-//            characterListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 32),
-//        ])
-//        characterListView.delegate = self
-//    }
+    private func addSwiftUIController() {
+        let statsSwiftUIVC = UIHostingController(rootView: IDQStatsView())
 
+         
+        let swiftUIView: UIView = statsSwiftUIVC.view
+        addChild(statsSwiftUIVC)
+        statsSwiftUIVC.didMove(toParent: self)
+        view.addSubview(statsSwiftUIVC.view)
+        statsSwiftUIVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            swiftUIView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            swiftUIView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            swiftUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
+            swiftUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0),
+        
+        ])
+        
+        self.statsSwiftUIControllerView = statsSwiftUIVC
+    }
 }

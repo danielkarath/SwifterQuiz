@@ -19,57 +19,7 @@ final class IDQResultViewViewModel {
     
     //MARK: - Private
     
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    private func fetchUser() -> IDQUser? {
-        do {
-            let user: [IDQUser] = try context.fetch(IDQUser.fetchRequest())
-            if !user.isEmpty {
-                return user.first
-            } else {
-                return nil
-            }
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-    }
-    
-    private func getRecordsCount() -> Int? {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "IDQQuizResult")
-        do {
-            let count = try context.count(for: fetchRequest)
-            return count
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-    }
-    
-    private func saveTo(_ user: IDQUser, quiz: IDQQuiz) {
-        guard let totalQuizCount = getRecordsCount() else {
-            print("totalQuizCount is nil. Could not execute saveTo(_ user: IDQUser, quiz: IDQQuiz) in IDQResultViewViewModel")
-            return
-        }
-        var weightedTotalPerformance: Double = 1.0
-        if totalQuizCount <= 0 {
-            weightedTotalPerformance = Double(quiz.totalScore)/Double(quiz.questions.count)
-        } else {
-            weightedTotalPerformance = Double(totalQuizCount) * user.performance
-            weightedTotalPerformance += Double(quiz.totalScore)/Double(quiz.questions.count)
-            weightedTotalPerformance = weightedTotalPerformance / Double(totalQuizCount) + 1
-        }
-        user.totalScore += Int64(quiz.totalScore)
-        user.performance = weightedTotalPerformance
-
-        do {
-            print("Successfully saved quiz results to Core Data under an entity IDQUser")
-            try context.save()
-        } catch let error as NSError {
-            print("Failed to save quiz results to Core Data under an entity IDQUser: \(error), \(error.userInfo)")
-            // Handle the error appropriately, such as showing an error message to the user
-        }
-    }
+    private let quizResultManager = IDQQuizResultManager()
     
     private func evaulate(quiz: IDQQuiz) -> ScoreType {
         guard quiz.totalScore > 0 else {
@@ -278,26 +228,17 @@ final class IDQResultViewViewModel {
     }
     
     public func save(quiz: IDQQuiz) {
-        let result = IDQQuizResult(context: context)
-        result.date = quiz.date
-        result.duration = quiz.quizDuration
-        result.numberOfQuestions = Int64(quiz.questions.count)
-        result.score = Int64(quiz.totalScore)
-        result.performance = Double(Double(quiz.totalScore)/Double(quiz.questions.count))
-        do {
-            print("Successfully saved quiz results to Core Data under an entity IDQQuizResult")
-            try context.save()
-        } catch let error as NSError {
-            print("Failed to save quiz results to Core Data under an entity IDQQuizResult: \(error), \(error.userInfo)")
-            // Handle the error appropriately, such as showing an error message to the user
+        guard !quiz.questions.isEmpty else {
+            return
         }
+        quizResultManager.save(quiz: quiz)
     }
     
     public func saveToUserRecords(_ quiz: IDQQuiz) {
-        guard let user = fetchUser() else {
+        guard !quiz.questions.isEmpty else {
             return
         }
-        saveTo(user, quiz: quiz)
+        quizResultManager.saveToUserRecords(quiz)
     }
     
 }

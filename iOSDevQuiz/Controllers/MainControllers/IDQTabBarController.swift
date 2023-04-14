@@ -8,6 +8,10 @@
 import UIKit
 
 final class IDQTabBarController: UITabBarController {
+    
+    private let userManager = IDQUserManager()
+    private let resultManager = IDQQuizResultManager()
+    
     private var fullBlurView: UIVisualEffectView = {
         let view = UIVisualEffectView(effect: UIBlurEffect(style: .automatic))
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -18,7 +22,9 @@ final class IDQTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
-        setupTabs()        
+        setupTabs()
+        automaticallyGenerateUser()
+        resultManager.fetchResults()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -62,6 +68,12 @@ final class IDQTabBarController: UITabBarController {
         }
         
         setViewControllers(navControllers, animated: true)
+    }
+    
+    private func automaticallyGenerateUser() {
+        DispatchQueue.global(qos: .utility).async {
+            self.userManager.createUser(name: "Daniel")
+        }
     }
     
 }

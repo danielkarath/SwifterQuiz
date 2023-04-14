@@ -213,6 +213,10 @@ struct IDQConstants {
     ///The highlighted brandingColor light end for gradients.
     static let highlightedLightOrange = UIColor(red: 251/255, green: 169/255, blue: 25/255, alpha: 1.0)
     
+    ///whiteColor for fonts mostly
+    static let whiteColor = UIColor(red: 234/255, green: 235/255, blue: 238/255, alpha: 1.0)
+    
+    
     //MARK: - Images
     
     ///Transparent miniature of the app icon with the orange, branding color

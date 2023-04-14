@@ -19,8 +19,9 @@ extension IDQUser {
     @NSManaged public var firstName: String?
     @NSManaged public var totalScore: Int64
     @NSManaged public var performance: Double
-    @NSManaged public var bookmarkedQuestions: NSObject?
-    @NSManaged public var disabledQuestions: NSObject?
+    @NSManaged public var bookmarkedQuestions: NSObject? //[IDQQuestion]?
+    @NSManaged public var disabledQuestions: NSObject? //[IDQQuestion]?
+    @NSManaged public var numberOfQuizesPlayed: Int64
 
 }
 
