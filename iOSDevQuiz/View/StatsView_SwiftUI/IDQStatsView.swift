@@ -30,9 +30,10 @@ struct IDQStatsView: View {
                     .font(Font(titleFont))
                     .multilineTextAlignment(.leading)
                     .padding(.top, 16)
-                Spacer()
-                IDQStatsMetricsHStackView(totalScore: totalScore, totalPerformance: totalPerformance, quizesPlayed: quizesPlayed, timeSpent: timeSpent)
-                Spacer()
+                ScrollView(.vertical) {
+                    Spacer(minLength: UIScreen.main.bounds.width/2)
+                    IDQStatsMetricsHStackView(totalScore: totalScore, totalPerformance: totalPerformance, quizesPlayed: quizesPlayed, timeSpent: timeSpent)
+                }
             }
         }
         .background(Color(IDQConstants.backgroundColor))

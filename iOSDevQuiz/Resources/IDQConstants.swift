@@ -216,6 +216,9 @@ struct IDQConstants {
     ///whiteColor for fonts mostly
     static let whiteColor = UIColor(red: 234/255, green: 235/255, blue: 238/255, alpha: 1.0)
     
+    ///blackColor for fonts mostly
+    static let blackColor = UIColor(red: 51/255, green: 51/255, blue: 54/255, alpha: 1.0)
+    
     
     //MARK: - Images
     

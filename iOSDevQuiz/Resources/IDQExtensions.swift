@@ -243,6 +243,15 @@ extension UIBarButtonItem {
     }
 }
 
+extension Calendar {
+    func numberOfDaysInCurrentMonth() -> Int {
+        let date = Date()
+        let range = self.range(of: .day, in: .month, for: date)!
+        let numberOfDays = range.count
+        return numberOfDays
+    }
+}
+
 extension Bundle {
     var appName: String? {
         return object(forInfoDictionaryKey: "CFBundleName") as? String

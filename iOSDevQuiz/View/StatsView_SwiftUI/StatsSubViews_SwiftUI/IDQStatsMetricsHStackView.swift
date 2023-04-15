@@ -9,6 +9,8 @@ import SwiftUI
 
 struct IDQStatsMetricsHStackView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var totalScore: Double
     var totalPerformance: Double
     var quizesPlayed: Double
@@ -19,24 +21,22 @@ struct IDQStatsMetricsHStackView: View {
             IDQStatsMetricBoxView(title: "total score", value: totalScore, image: Image(systemName: "sparkles"), resultValueType: .wholeNum)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
-                .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 5)
+                .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
             IDQStatsMetricBoxView(title: "performance", value: totalPerformance, image: Image(systemName: "percent"), resultValueType: .percentage)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
-                .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 5)
-            
+                .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
         }
         .padding(.top, 16)
         HStack(spacing: CGFloat((UIScreen.main.bounds.width - 2 * 160-32)/3)) {
             IDQStatsMetricBoxView(title: "quizes played", value: quizesPlayed, image: Image(systemName: "pencil"), resultValueType: .wholeNum)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
-                .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 5)
+                .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
             IDQStatsMetricBoxView(title: "minutes spent", value: timeSpent, image: Image(systemName: "timer"), resultValueType: .time)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
-                .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 5)
-            
+                .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
         }
         .padding(.top, CGFloat((UIScreen.main.bounds.width - 2 * 160-40)/3))
     }

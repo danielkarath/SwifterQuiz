@@ -89,7 +89,7 @@ class IDQPlayView: UIView {
         setupView()
         setupConstraints()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
-        addGestureRecognizer(tapGesture)
+        startButtonView.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
