@@ -16,14 +16,13 @@ extension IDQUser {
         return NSFetchRequest<IDQUser>(entityName: "IDQUser")
     }
 
-    @NSManaged public var bookmarkedQuestions: NSObject? //[IDQQuestion]?
-    @NSManaged public var disabledQuestions: NSObject? //[IDQQuestion]?
+    @NSManaged public var bookmarkedQuestions: NSObject?//[IDQQuestion]?
+    @NSManaged public var disabledQuestions: NSObject?//[IDQQuestion]?
     @NSManaged public var firstName: String?
     @NSManaged public var numberOfQuizesPlayed: Int64
     @NSManaged public var performance: Double
     @NSManaged public var totalScore: Int64
     @NSManaged public var totalPlayTime: Double
-    @NSManaged public var numberOfQuizes: Int64
 
 }
 

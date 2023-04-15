@@ -8,7 +8,7 @@
 import UIKit
 
 
-enum IDQGameType {
+enum IDQGameType: CaseIterable {
     case basic
     case trueOrFalse
     case countDown

@@ -7,10 +7,12 @@
 
 import Foundation
 
-enum IDQQuestionDifficulty: String {
+enum IDQQuestionDifficulty: String, CaseIterable {
+    case veryEasy = "very easy"
     case easy = "easy"
     case medium = "medium"
     case hard = "hard"
+    case veryHard = "very hard"
 }
 
 struct IDQQuestion {
@@ -30,7 +32,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "The creation of a data object to a specific state or value is called __________.",
         explanation: "Initialization is the creation of a data object.",
         reference: "https://en.wikipedia.org/wiki/Initialization_(programming)",
-        difficulty: .easy,
+        difficulty: .veryEasy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "version control", answerType: .wrong),
@@ -44,7 +46,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is the logical 'or' operator in Swift?",
         explanation: "The logical OR operator is || in Swift",
         reference: "https://developer.apple.com/documentation/swift/operator-declarations",
-        difficulty: .easy,
+        difficulty: .veryEasy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "??", answerType: .wrong),
@@ -72,7 +74,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "The __________ type represents a character made up of one (or more) Unicode scalar values.",
         explanation: "The Character represents a single extended grapheme cluster, which is a sequence of one or more Unicode scalars that produce a single human-readable letter or symbol.",
         reference: "https://developer.apple.com/documentation/swift/character",
-        difficulty: .easy,
+        difficulty: .veryEasy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "UInt \t", answerType: .wrong),
@@ -227,7 +229,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "what is an opaque type?",
         explanation: "An opaque type is a way to hide the underlying implementation details of a type",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/opaquetypes",
-        difficulty: .hard,
+        difficulty: .veryHard,
         topic: .basics,
         answers: [
             IDQAnswer(text: "There is no opaque type in Swift.", answerType: .wrong),
@@ -241,7 +243,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is the difference between an Array and a Set?",
         explanation: "A Set is unordered collection of unique elements. An Array is an ordered random-access collection.",
         reference: "https://developer.apple.com/documentation/swift/set",
-        difficulty: .medium,
+        difficulty: .easy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "An Array is a collection of elements that can be of different data types. A Set can only contain elements of the same data type.", answerType: .wrong),
@@ -398,7 +400,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is a delegate in Swift?",
         explanation: "Delegation is a design pattern that enables a class or structure to hand off (or delegate) some of its responsibilities to an instance of another type. Think of a delegator as a boss and a delegate as an employee.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/#Delegation",
-        difficulty: .easy,
+        difficulty: .medium,
         topic: .basics,
         answers: [
             IDQAnswer(text: "A data structure that allows for the efficient storage and retrieval of key-value pairs.", answerType: .wrong),
@@ -440,7 +442,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is the acronym KVO stands for in iOS development?",
         explanation: "KVO: Key-Value Observing which is a commonly used design pattern.",
         reference: "https://developer.apple.com/documentation/swift/using-key-value-observing-in-swift",
-        difficulty: .easy,
+        difficulty: .medium,
         topic: .basics,
         answers: [
             IDQAnswer(text: "Key-View Object \t", answerType: .wrong),
@@ -454,7 +456,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "In MVC (design pattern) what does the V stand for?",
         explanation: "In the Model-View-Controller (MVC) design pattern the V stands for View",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
-        difficulty: .easy,
+        difficulty: .veryEasy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "Viewcontroller \t", answerType: .wrong),
@@ -482,7 +484,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is the difference between the MVVM and the Viper design patterns?",
         explanation: "The 'R' in VIPER stands for Router which alone handles navigation between screens.",
         reference: "https://www.kodeco.com/8440907-getting-started-with-the-viper-architecture-pattern",
-        difficulty: .medium,
+        difficulty: .hard,
         topic: .basics,
         answers: [
             IDQAnswer(text: "MVVM separates the business logic from the data model.", answerType: .wrong),
@@ -510,7 +512,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "What is a singleton?",
         explanation: "A software design pattern that restricts the instantiation of a class to a singular instance.",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Singleton.html",
-        difficulty: .medium,
+        difficulty: .easy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "A networking protocol used for transferring large files between computers.", answerType: .wrong),
@@ -552,7 +554,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "Which one is printed out first?",
         explanation: "The print(\"first\") is executed firstly on the current thread. The rest is scheduled to be executed asynchronously on the main thread at some point in the future.",
         reference: nil,
-        difficulty: .medium,
+        difficulty: .easy,
         topic: .basics,
         answers: [
             IDQAnswer(text: "DispatchQueue.main.async {\n\tprint(\"fist\")\n}", answerType: .wrong),
@@ -652,7 +654,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "In UIKit how many constraints are needed at minimum to correctly determine the position of a UI element?",
         explanation: "4 constraints are required to properly define the position of a UI element.",
         reference: nil,
-        difficulty: .easy,
+        difficulty: .veryEasy,
         topic: .uikit,
         answers: [
             IDQAnswer(text: "1", answerType: .wrong),
@@ -677,16 +679,16 @@ let idqQuestionList: [IDQQuestion] = [
     ),
 
     IDQQuestion(
-        question: "In UIKit how can you programatically set a view controller (ExampleViewController) to be the first presented when launching the app?",
-        explanation: "By setting the window property's rootViewController to ExampleViewController in the app's SceneDelegate.",
+        question: "In UIKit how can you programatically set a view controller (ExampleVC) to be the first presented when launching the app?",
+        explanation: "By setting the window property's rootViewController to ExampleVC in the app's SceneDelegate.",
         reference: nil,
         difficulty: .medium,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "By setting the ExampleViewController's level property to 0 inside the AppDelegate.", answerType: .wrong),
-            IDQAnswer(text: "By setting the isRottViewController property of the ExampleViewController to true in the SceneDelegate.", answerType: .wrong),
+            IDQAnswer(text: "By setting the ExampleVC's level property to 0 inside the AppDelegate.", answerType: .wrong),
+            IDQAnswer(text: "By setting the isRottViewController property of the ExampleVC to true in the SceneDelegate.", answerType: .wrong),
             IDQAnswer(text: "By calling the app's root view controller's present() method in the AppDelegate.", answerType: .wrong),
-            IDQAnswer(text: "By setting the window property's rootViewController to ExampleViewController in the app's SceneDelegate.", answerType: .correct),
+            IDQAnswer(text: "By setting the window property's rootViewController to ExampleVC in the app's SceneDelegate.", answerType: .correct),
         ]
     ),
 
@@ -736,7 +738,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "Regarding the difference between UITableView and UICollectionView which statment is INCORRECT?",
         explanation: "The UITableView does not allow varying sized cells is the false statment. With the tableView(_:heightForRowAt:) method you can modify a given row's height.",
         reference: "https://developer.apple.com/documentation/uikit/uitableviewdelegate/1614998-tableview",
-        difficulty: .medium,
+        difficulty: .easy,
         topic: .uikit,
         answers: [
             IDQAnswer(text: "Only the UICollectionView offeres built in transitions effects when changing it's layout.", answerType: .wrong),
@@ -806,7 +808,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "How can you horizontally center the text of a UILabel?",
         explanation: "With the label's textAlignment property set to center",
         reference: "https://developer.apple.com/documentation/uikit/uilabel/1620541-textalignment",
-        difficulty: .easy,
+        difficulty: .veryEasy,
         topic: .uikit,
         answers: [
             IDQAnswer(text: "Set the label's centerXAnchor property to centered", answerType: .wrong),
@@ -834,7 +836,7 @@ let idqQuestionList: [IDQQuestion] = [
         question: "How would you build a slider in UIKit that allows the user to select a range of values?",
         explanation: "The only slider Apple offers is the UISlider() which only allows the selection of a single value from a range of values. You need to use third party libraries or place two sliders on top of each other.",
         reference: "https://developer.apple.com/documentation/uikit/uicontrol",
-        difficulty: .medium,
+        difficulty: .hard,
         topic: .uikit,
         answers: [
             IDQAnswer(text: "By using a UISlider() with it's numberOfThumbs property set to 2", answerType: .wrong),

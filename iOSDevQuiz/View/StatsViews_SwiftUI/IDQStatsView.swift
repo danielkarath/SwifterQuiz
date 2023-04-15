@@ -29,7 +29,7 @@ struct IDQStatsView: View {
                     .padding(.top, 16)
                 Spacer()
                 HStack(spacing: 40) {
-                    IDQStatsMetricBoxView(title: "Total Score", value: totalScore, image: Image(systemName: "sparkles"), isPercentage: false)
+                    IDQStatsMetricBoxView(title: "total score", value: totalScore, image: Image(systemName: "sparkles"), isPercentage: false)
                         .background(Color(IDQConstants.contentBackgroundColor))
                         .cornerRadius(16)
                         .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 5)

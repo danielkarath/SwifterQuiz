@@ -10,7 +10,8 @@ import CoreData
 
 final class IDQUserManager {
     
-    private let metricsManager = IDQTopicMetricManager()
+    private let topicMetricsManager = IDQTopicMetricManager()
+    private let difficultyMetricsManager = IDQDifficultyMetricManager()
     
     //MARK: - Init
     init(
@@ -82,6 +83,7 @@ final class IDQUserManager {
             user.performance = 0.0
             user.totalScore = 0
             user.numberOfQuizesPlayed = 0
+            user.totalPlayTime = 0
             //user.bookmarkedQuestions = []
             //user.disabledQuestions = []
             do {
@@ -95,6 +97,7 @@ final class IDQUserManager {
             print("There is already a user assigned.")
             printUserRecord()
         }
-        metricsManager.createMetrics()
+        topicMetricsManager.createMetrics()
+        difficultyMetricsManager.createMetrics()
     }
 }

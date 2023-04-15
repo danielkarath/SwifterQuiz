@@ -11,7 +11,8 @@ import CoreData
 final class IDQQuizResultManager {
     
     private let userManager = IDQUserManager()
-    private let metricManager = IDQTopicMetricManager()
+    private let topicMetricManager = IDQTopicMetricManager()
+    private let difficultyMetricManager = IDQDifficultyMetricManager()
     
     //MARK: - Init
     init(
@@ -51,7 +52,8 @@ final class IDQQuizResultManager {
         user.totalScore += Int64(quiz.totalScore)
         user.performance = weightedTotalPerformance
         user.numberOfQuizesPlayed += 1
-
+        user.totalPlayTime += quiz.quizDuration
+        
         do {
             try context.save()
             print("Successfully saved quiz results to Core Data under an entity IDQUser")
@@ -99,6 +101,7 @@ final class IDQQuizResultManager {
     
     private func save(to metric: IDQTopicMetrics, topic: IDQTopic, questions: [(question: IDQQuestion, answerType: IDQAnswerType)]) {
         var pointsCounter = 0
+        var mistakeCount = 0
         var totalCounter = 0
         
         for question in questions {
@@ -106,13 +109,47 @@ final class IDQQuizResultManager {
                 totalCounter += 1
                 if question.answerType == .correct {
                     pointsCounter += 1
+                } else {
+                    mistakeCount += 1
                 }
             }
         }
         
         metric.score += Int64(pointsCounter)
+        metric.wrongAnswerCount += Int64(mistakeCount)
         metric.numberOfQuestionsSeen += Int64(totalCounter)
         metric.performance = Double(Double(metric.score)/Double(metric.numberOfQuestionsSeen))
+        
+        do {
+            try context.save()
+            print("Successfully saved quiz results to Core Data under an entity IDQUser")
+            //fetchResults()
+        } catch let error as NSError {
+            print("Failed to save quiz results to Core Data under an entity IDQUser: \(error), \(error.userInfo)")
+            // Handle the error appropriately, such as showing an error message to the user
+        }
+    }
+    
+    private func save(to metric: IDQDifficultyMetrics, questions: [(question: IDQQuestion, answerType: IDQAnswerType)]) {
+        var pointsCounter = 0
+        var mistakeCount = 0
+        var totalCounter = 0
+        
+        for question in questions {
+            if question.question.difficulty.rawValue == metric.difficultyName {
+                totalCounter += 1
+                if question.answerType == .correct {
+                    pointsCounter += 1
+                } else {
+                    mistakeCount += 1
+                }
+            }
+        }
+        
+        metric.correctAnswerCount += Int64(pointsCounter)
+        metric.incorrectAnswerCount += Int64(mistakeCount)
+        metric.questionsSeen += Int64(totalCounter)
+        metric.performance = Double(Double(metric.correctAnswerCount)/Double(metric.questionsSeen))
         
         do {
             try context.save()
@@ -134,6 +171,7 @@ final class IDQQuizResultManager {
     
     public func saveToMetrics(_ quiz: IDQQuiz) {
         var topicsSeen: [IDQTopic] = []
+        var difficultiesSeen: [IDQQuestionDifficulty] = []
         let quizQuestions = quiz.questions
         let questionsSeen: [IDQQuestion] = quizQuestions.map { ($0.question) }
         
@@ -141,14 +179,25 @@ final class IDQQuizResultManager {
             if !topicsSeen.contains(question.topic) {
                 topicsSeen.append(question.topic)
             }
+            if !difficultiesSeen.contains(question.difficulty) {
+                difficultiesSeen.append(question.difficulty)
+            }
         }
         
         for topic in topicsSeen {
-            guard let metric = metricManager.fetchMetrics(for: topic) else {
+            guard let metric = topicMetricManager.fetchMetrics(for: topic) else {
                 print("topicMetric.fetchMetric is nil. Could not find existing metric for the topic. Maybe need to regenerate topics or add new ones")
                 return
             }
             save(to: metric, topic: topic, questions: quizQuestions)
+        }
+        
+        for difficulty in difficultiesSeen {
+            guard let metric = difficultyMetricManager.fetchMetrics(for: difficulty) else {
+                print("difficultyMetric.fetchMetric is nil. Could not find existing metric for the difficulty. Maybe need to regenerate topics or add new ones")
+                return
+            }
+            save(to: metric, questions: quizQuestions)
         }
     }
 }

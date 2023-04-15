@@ -14,7 +14,7 @@ struct IDQStatsMetricBoxView: View {
     var image: Image
     var isPercentage: Bool
     
-    private let titleFont = IDQConstants.setFont(fontSize: 16, isBold: false)
+    private let titleFont = IDQConstants.setFont(fontSize: 14, isBold: false)
     private let valueFont = IDQConstants.setFont(fontSize: 35, isBold: true)
     private let textColor = IDQConstants.basicFontColor
     

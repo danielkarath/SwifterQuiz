@@ -20,6 +20,7 @@ extension IDQTopicMetrics {
     @NSManaged public var performance: Double
     @NSManaged public var score: Int64
     @NSManaged public var numberOfQuestionsSeen: Int64
+    @NSManaged public var wrongAnswerCount: Int64
 
 }
 
