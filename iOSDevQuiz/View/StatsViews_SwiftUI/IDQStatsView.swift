@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct IDQStatsView: View {
     
+//    @State private var refreshID = UUID()
     var totalScore: Double
     var totalPerformance: Double
     
@@ -37,18 +39,23 @@ struct IDQStatsView: View {
                         .background(Color(IDQConstants.contentBackgroundColor))
                         .cornerRadius(16)
                         .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 5)
-
+                    
                 }
                 .padding(.top, -96)
                 Spacer()
             }
         }
+//        .id(refreshID)
         .background(Color(IDQConstants.backgroundColor))
+//        .onAppear {
+//            refreshID = UUID()
+//        }
     }
+
 }
 
 struct IDQStatsView_Previews: PreviewProvider {
     static var previews: some View {
-        IDQStatsView(totalScore: 28, totalPerformance: 87.8)
+        IDQStatsView(totalScore: 28, totalPerformance: 0.87)
     }
 }

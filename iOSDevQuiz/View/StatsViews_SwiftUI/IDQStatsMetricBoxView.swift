@@ -20,7 +20,12 @@ struct IDQStatsMetricBoxView: View {
     
     private var convertedValue: String {
         if isPercentage {
-            return String(String(value.rounded() * 100).dropLast(2))//.appending("%")
+            let myDouble = value * 100
+            if myDouble.truncatingRemainder(dividingBy: 1) == 0 {
+                return String(String((myDouble.rounded())).dropLast(2))//.appending("%")
+            } else {
+                return String(String((round(myDouble * 10) / 10)))//.appending("%")
+            }
         } else {
             return String(String(value.rounded()).dropLast(2))
         }
