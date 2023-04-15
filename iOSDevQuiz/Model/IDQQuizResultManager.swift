@@ -11,6 +11,7 @@ import CoreData
 final class IDQQuizResultManager {
     
     private let userManager = IDQUserManager()
+    private let metricManager = IDQTopicMetricManager()
     
     //MARK: - Init
     init(
@@ -39,7 +40,6 @@ final class IDQQuizResultManager {
             print("totalQuizCount is nil. Could not execute saveTo(_ user: IDQUser, quiz: IDQQuiz) in IDQResultViewViewModel")
             return
         }
-        print("totalQuizCount: \(totalQuizCount)")
         var weightedTotalPerformance: Double = 0.0
         if totalQuizCount <= 1 {
             weightedTotalPerformance = Double(quiz.totalScore)/Double(quiz.questions.count)
@@ -86,13 +86,40 @@ final class IDQQuizResultManager {
         result.date = quiz.date
         result.duration = quiz.quizDuration
         result.numberOfQuestions = Int64(quiz.questions.count)
-        result.score = Int64(quiz.totalScore)
+        result.totalScore = Int64(quiz.totalScore)
         result.performance = Double(Double(quiz.totalScore)/Double(quiz.questions.count))
         do {
             print("Successfully saved quiz results to Core Data under an entity IDQQuizResult")
             try context.save()
         } catch let error as NSError {
             print("Failed to save quiz results to Core Data under an entity IDQQuizResult: \(error), \(error.userInfo)")
+            // Handle the error appropriately, such as showing an error message to the user
+        }
+    }
+    
+    private func save(to metric: IDQTopicMetrics, topic: IDQTopic, questions: [(question: IDQQuestion, answerType: IDQAnswerType)]) {
+        var pointsCounter = 0
+        var totalCounter = 0
+        
+        for question in questions {
+            if question.question.topic == topic {
+                totalCounter += 1
+                if question.answerType == .correct {
+                    pointsCounter += 1
+                }
+            }
+        }
+        
+        metric.score += Int64(pointsCounter)
+        metric.numberOfQuestionsSeen += Int64(totalCounter)
+        metric.performance = Double(Double(metric.score)/Double(metric.numberOfQuestionsSeen))
+        
+        do {
+            try context.save()
+            print("Successfully saved quiz results to Core Data under an entity IDQUser")
+            //fetchResults()
+        } catch let error as NSError {
+            print("Failed to save quiz results to Core Data under an entity IDQUser: \(error), \(error.userInfo)")
             // Handle the error appropriately, such as showing an error message to the user
         }
     }
@@ -105,5 +132,23 @@ final class IDQQuizResultManager {
         saveTo(user, quiz: quiz)
     }
     
-    
+    public func saveToMetrics(_ quiz: IDQQuiz) {
+        var topicsSeen: [IDQTopic] = []
+        let quizQuestions = quiz.questions
+        let questionsSeen: [IDQQuestion] = quizQuestions.map { ($0.question) }
+        
+        for question in questionsSeen {
+            if !topicsSeen.contains(question.topic) {
+                topicsSeen.append(question.topic)
+            }
+        }
+        
+        for topic in topicsSeen {
+            guard let metric = metricManager.fetchMetrics(for: topic) else {
+                print("topicMetric.fetchMetric is nil. Could not find existing metric for the topic. Maybe need to regenerate topics or add new ones")
+                return
+            }
+            save(to: metric, topic: topic, questions: quizQuestions)
+        }
+    }
 }

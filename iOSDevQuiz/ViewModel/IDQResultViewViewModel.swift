@@ -232,6 +232,7 @@ final class IDQResultViewViewModel {
             return
         }
         quizResultManager.save(quiz: quiz)
+        quizResultManager.saveToMetrics(quiz)
     }
     
     public func saveToUserRecords(_ quiz: IDQQuiz) {

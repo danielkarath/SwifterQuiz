@@ -2,7 +2,7 @@
 //  IDQQuizResult+CoreDataProperties.swift
 //  iOSDevQuiz
 //
-//  Created by Daniel Karath on 4/13/23.
+//  Created by Daniel Karath on 4/15/23.
 //
 //
 
@@ -17,10 +17,10 @@ extension IDQQuizResult {
     }
 
     @NSManaged public var date: Date?
-    @NSManaged public var score: Int64
-    @NSManaged public var performance: Double
     @NSManaged public var duration: Double
     @NSManaged public var numberOfQuestions: Int64
+    @NSManaged public var performance: Double
+    @NSManaged public var totalScore: Int64
 
 }
 

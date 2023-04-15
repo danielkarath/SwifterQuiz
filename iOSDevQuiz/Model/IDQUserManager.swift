@@ -10,6 +10,8 @@ import CoreData
 
 final class IDQUserManager {
     
+    private let metricsManager = IDQTopicMetricManager()
+    
     //MARK: - Init
     init(
         
@@ -93,5 +95,6 @@ final class IDQUserManager {
             print("There is already a user assigned.")
             printUserRecord()
         }
+        metricsManager.createMetrics()
     }
 }

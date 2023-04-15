@@ -12,6 +12,8 @@ final class IDQStatsViewController: UIViewController {
 
     private var statsSwiftUIControllerView: UIHostingController<IDQStatsView>?
     
+    private var userManager = IDQUserManager()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -20,6 +22,7 @@ final class IDQStatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = IDQConstants.backgroundColor
+        
         addSwiftUIController()
     }
     
@@ -29,7 +32,8 @@ final class IDQStatsViewController: UIViewController {
     }
     
     private func addSwiftUIController() {
-        let statsSwiftUIVC = UIHostingController(rootView: IDQStatsView())
+        let myUser = userManager.fetchUser()
+        let statsSwiftUIVC = UIHostingController(rootView: IDQStatsView(totalScore: Double(myUser?.totalScore ?? 0), totalPerformance: myUser?.performance ?? 0))
 
          
         let swiftUIView: UIView = statsSwiftUIVC.view

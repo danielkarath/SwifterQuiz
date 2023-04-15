@@ -35,7 +35,7 @@ final class IDQStatsViewViewModel: ObservableObject {
                 if resultDate > startDate && resultDate < Date() {
                     self.results.append(result)
                     returnArray.append(result)
-                    print("Did add a result with date: \(resultDate) and score of \(result.score)")
+                    print("Did add a result with date: \(resultDate) and score of \(result.totalScore)")
                 }
             }
         }
