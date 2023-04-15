@@ -95,6 +95,27 @@ extension UIView {
     
 }
 
+extension UIImage {
+    func withGradient(colors: [CGColor]) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        
+        draw(in: CGRect(origin: .zero, size: size), blendMode: .normal, alpha: 1)
+        context.clip(to: CGRect(origin: .zero, size: size), mask: cgImage!)
+        
+        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors as CFArray, locations: nil)!
+        let startPoint = CGPoint(x: 0, y: 0)
+        let endPoint = CGPoint(x: size.width, y: size.height)
+        
+        context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+        
+        let imageWithGradient = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imageWithGradient
+    }
+}
+
 extension UIStackView {
     
     func addArrangedSubviews(_ views: UIView...) {
