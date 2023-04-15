@@ -12,6 +12,7 @@ enum IDQAnswerType {
     case wrong
     case passed
     case runOutOfTime
+    case leftQuestion
 }
 
 struct IDQAnswer {

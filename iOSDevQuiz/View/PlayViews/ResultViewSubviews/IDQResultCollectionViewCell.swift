@@ -102,7 +102,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
             questionTypeImageView.heightAnchor.constraint(equalToConstant: frame.size.width/2.70),
             
             difficultyLabel.leadingAnchor.constraint(equalTo: isCorrectImageView.trailingAnchor, constant: 3),
-            difficultyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 60),
+            difficultyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 80),
             difficultyLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             difficultyLabel.heightAnchor.constraint(equalToConstant: 30),
             
@@ -138,6 +138,9 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
             markImage = (UIImage(systemName: "exclamationmark.triangle.fill")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate))
             self.isCorrectImageView.tintColor = IDQConstants.warningColor
         case .runOutOfTime:
+            markImage = (UIImage(systemName: "exclamationmark.triangle.fill")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate))
+            self.isCorrectImageView.tintColor = IDQConstants.warningColor
+        case .leftQuestion:
             markImage = (UIImage(systemName: "exclamationmark.triangle.fill")?.withTintColor(IDQConstants.warningColor, renderingMode: .alwaysTemplate))
             self.isCorrectImageView.tintColor = IDQConstants.warningColor
         }

@@ -173,6 +173,9 @@ final class IDQGameView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
         NotificationCenter.default.addObserver(self, selector: #selector(didTapExit), name: .exitQuizPressed, object: nil)
+        
+        let notificationCenter = NotificationCenter.default
+            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     private func createCollectionView() -> UICollectionView {
@@ -321,6 +324,21 @@ final class IDQGameView: UIView {
         }, completion: nil)
     }
     
+    @objc func appMovedToBackground() {
+        print("App moved to background!")
+        
+        delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
+        countDownView.stopTimer()
+        configure(overlay: overlayView)
+        self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .leftQuestion)
+        self.vibrate(for: .error)
+        self.isCorrectArray.append(.leftQuestion)
+
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
+        }, completion: nil)
+    }
+    
     @objc
     private func didTapExit() {
         countDownView.pauseTimer()
@@ -365,7 +383,6 @@ final class IDQGameView: UIView {
     }
     
     //MARK: - Public
-    
     public func configure(with questions: [IDQQuestion], game: IDQGame) {
         guard !questions.isEmpty, game != nil else {
             fatalError("Wrong configuration at IDQGameView configure")

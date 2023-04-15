@@ -225,6 +225,11 @@ class IDQAnswerResultView: UIView {
             backgroundColor = IDQConstants.warningBackgroundColor
             tintColor = IDQConstants.warningColor
             iconName = "questionmark.square.dashed"
+        case .leftQuestion:
+            titleStringArray =  ["Left Game"]
+            backgroundColor = IDQConstants.warningBackgroundColor
+            tintColor = IDQConstants.warningColor
+            iconName = "rectangle.portrait.and.arrow.forward"
         default:
             backgroundColor = IDQConstants.warningBackgroundColor
             tintColor = IDQConstants.warningColor
@@ -313,6 +318,8 @@ class IDQAnswerResultView: UIView {
             configure(_view: self, with: .runOutOfTime)
         } else if didNotAnswer == .passed {
             configure(_view: self, with: .passed)
+        } else {
+            configure(_view: self, with: .leftQuestion)
         }
     }
     

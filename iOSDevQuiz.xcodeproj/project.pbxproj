@@ -25,6 +25,8 @@
 		3914C92E29B0ED260001377B /* IDQGameOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C92D29B0ED260001377B /* IDQGameOptionsViewController.swift */; };
 		3914C93029B0FBE90001377B /* IDQExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C92F29B0FBE90001377B /* IDQExtensions.swift */; };
 		3914C93329B10B300001377B /* IDQPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914C93229B10B300001377B /* IDQPlayView.swift */; };
+		391DDB6B29EB2917003AAD2D /* IDQStatsMetricsHStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391DDB6A29EB2917003AAD2D /* IDQStatsMetricsHStackView.swift */; };
+		391DDB6D29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391DDB6C29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift */; };
 		3920A18429EAB1CE001A1522 /* IDQStatsMetricBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A18329EAB1CE001A1522 /* IDQStatsMetricBoxView.swift */; };
 		3920A19229EAE939001A1522 /* IDQTopicMetricManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A19129EAE939001A1522 /* IDQTopicMetricManager.swift */; };
 		3920A1AB29EAFBEE001A1522 /* IDQDifficultyMetrics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A1A329EAFBEE001A1522 /* IDQDifficultyMetrics+CoreDataClass.swift */; };
@@ -82,6 +84,8 @@
 		3914C92D29B0ED260001377B /* IDQGameOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameOptionsViewController.swift; sourceTree = "<group>"; };
 		3914C92F29B0FBE90001377B /* IDQExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQExtensions.swift; sourceTree = "<group>"; };
 		3914C93229B10B300001377B /* IDQPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQPlayView.swift; sourceTree = "<group>"; };
+		391DDB6A29EB2917003AAD2D /* IDQStatsMetricsHStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsMetricsHStackView.swift; sourceTree = "<group>"; };
+		391DDB6C29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsMetricBoxViewViewModel.swift; sourceTree = "<group>"; };
 		3920A18329EAB1CE001A1522 /* IDQStatsMetricBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsMetricBoxView.swift; sourceTree = "<group>"; };
 		3920A19129EAE939001A1522 /* IDQTopicMetricManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTopicMetricManager.swift; sourceTree = "<group>"; };
 		3920A1A329EAFBEE001A1522 /* IDQDifficultyMetrics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQDifficultyMetrics+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -224,11 +228,22 @@
 		3914C93129B10B190001377B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				39267BB229E82904007DD96F /* StatsViews_SwiftUI */,
+				39267BB229E82904007DD96F /* StatsView_SwiftUI */,
 				3952D1DC29B8ABB10061C5C9 /* PlayViews */,
 				39E2256D29B8F6F400830F1A /* GameViews */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		391DDB6929EB28F0003AAD2D /* StatsSubViews_SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				396793DC29E8961B00A476E2 /* IDQStatsUpperView.swift */,
+				391DDB6A29EB2917003AAD2D /* IDQStatsMetricsHStackView.swift */,
+				3920A18329EAB1CE001A1522 /* IDQStatsMetricBoxView.swift */,
+				39267BB529E82DEE007DD96F /* IDQLineChart.swift */,
+			);
+			path = StatsSubViews_SwiftUI;
 			sourceTree = "<group>";
 		};
 		3920A1B529EB0FC5001A1522 /* Manager */ = {
@@ -242,15 +257,13 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		39267BB229E82904007DD96F /* StatsViews_SwiftUI */ = {
+		39267BB229E82904007DD96F /* StatsView_SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
 				39267BB329E82923007DD96F /* IDQStatsView.swift */,
-				396793DC29E8961B00A476E2 /* IDQStatsUpperView.swift */,
-				3920A18329EAB1CE001A1522 /* IDQStatsMetricBoxView.swift */,
-				39267BB529E82DEE007DD96F /* IDQLineChart.swift */,
+				391DDB6929EB28F0003AAD2D /* StatsSubViews_SwiftUI */,
 			);
-			path = StatsViews_SwiftUI;
+			path = StatsView_SwiftUI;
 			sourceTree = "<group>";
 		};
 		3952D1DC29B8ABB10061C5C9 /* PlayViews */ = {
@@ -273,6 +286,7 @@
 				39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */,
 				3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */,
 				39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */,
+				391DDB6C29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -379,6 +393,7 @@
 				3914C93029B0FBE90001377B /* IDQExtensions.swift in Sources */,
 				39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */,
 				39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */,
+				391DDB6B29EB2917003AAD2D /* IDQStatsMetricsHStackView.swift in Sources */,
 				39962B2B29C9CC93001350F8 /* IDQGameResultViewController.swift in Sources */,
 				3914C93329B10B300001377B /* IDQPlayView.swift in Sources */,
 				3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */,
@@ -406,6 +421,7 @@
 				3920A1B429EAFCA2001A1522 /* IDQDifficultyMetricManager.swift in Sources */,
 				3920A1AC29EAFBEE001A1522 /* IDQDifficultyMetrics+CoreDataProperties.swift in Sources */,
 				39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */,
+				391DDB6D29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift in Sources */,
 				3920A1B229EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift in Sources */,
 				3948B15729B942D600E2841F /* IDQGameViewViewModel.swift in Sources */,
 				3920A1AD29EAFBEE001A1522 /* IDQQuizResult+CoreDataClass.swift in Sources */,

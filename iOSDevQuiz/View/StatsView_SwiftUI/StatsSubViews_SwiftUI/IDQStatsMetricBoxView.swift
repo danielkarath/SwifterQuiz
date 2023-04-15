@@ -9,41 +9,21 @@ import SwiftUI
 
 struct IDQStatsMetricBoxView: View {
     
-    enum ResultValueType {
-        case percentage
-        case wholeNum
-        case time
-    }
+    private let viewModel = IDQStatsMetricBoxViewViewModel()
     
     var title: String
     var value: Double
     var image: Image
-    var resultValueType: ResultValueType
+    var resultValueType: IDQStatsMetricBoxViewViewModel.ResultValueType
     
     private let titleFont = IDQConstants.setFont(fontSize: 18, isBold: false)
     private let valueFont = IDQConstants.setFont(fontSize: 40, isBold: true)
     private let textColor = IDQConstants.basicFontColor
     
-    private var convertedValue: String {
-        if resultValueType == .percentage {
-            let myDouble = value * 100
-            if myDouble.truncatingRemainder(dividingBy: 1) == 0 {
-                return String(String((myDouble.rounded())).dropLast(2))//.appending("%")
-            } else {
-                return String(String((round(myDouble * 10) / 10)))//.appending("%")
-            }
-        } else if resultValueType == .wholeNum {
-            return String(String(value.rounded()).dropLast(2))
-        } else {
-            let myDouble = ceil(value)
-            return String(String(myDouble).dropLast(2))
-        }
-    }
-    
     var body: some View {
         ZStack {
             VStack {
-                Text(convertedValue)
+                Text(viewModel.convertToString(value: value, type: resultValueType))
                     .frame(width: 160, height: 90, alignment: .center)
                     .font(Font(valueFont))
                     .foregroundColor(Color(textColor))
