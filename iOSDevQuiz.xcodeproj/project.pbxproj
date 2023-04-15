@@ -231,13 +231,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		3920A1B529EB0FC5001A1522 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				39267BA829E81742007DD96F /* IDQUserManager.swift */,
+				3920A19129EAE939001A1522 /* IDQTopicMetricManager.swift */,
+				3920A1B329EAFCA2001A1522 /* IDQDifficultyMetricManager.swift */,
+				39267BB729E8364D007DD96F /* IDQQuizResultManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		39267BB229E82904007DD96F /* StatsViews_SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
 				39267BB329E82923007DD96F /* IDQStatsView.swift */,
+				396793DC29E8961B00A476E2 /* IDQStatsUpperView.swift */,
 				3920A18329EAB1CE001A1522 /* IDQStatsMetricBoxView.swift */,
 				39267BB529E82DEE007DD96F /* IDQLineChart.swift */,
-				396793DC29E8961B00A476E2 /* IDQStatsUpperView.swift */,
 			);
 			path = StatsViews_SwiftUI;
 			sourceTree = "<group>";
@@ -269,14 +280,11 @@
 		3952D1E229B8C7050061C5C9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3920A1B529EB0FC5001A1522 /* Manager */,
 				3952D1E329B8C70D0061C5C9 /* IDQGame.swift */,
 				3952D1E629B8D6DC0061C5C9 /* IDQQuestion.swift */,
 				3952D1E829B8DA530061C5C9 /* IDQAnswer.swift */,
 				3942949129C37AEE00E15FE1 /* IDQQuiz.swift */,
-				39267BA829E81742007DD96F /* IDQUserManager.swift */,
-				3920A19129EAE939001A1522 /* IDQTopicMetricManager.swift */,
-				3920A1B329EAFCA2001A1522 /* IDQDifficultyMetricManager.swift */,
-				39267BB729E8364D007DD96F /* IDQQuizResultManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

@@ -8,22 +8,19 @@ import UIKit
 import SwiftUI
 
 final class IDQStatsViewController: UIViewController {
-
+    
     private var statsSwiftUIControllerView: UIHostingController<IDQStatsView>?
     private var userManager = IDQUserManager()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-        // Update the SwiftUI view
         updateSwiftUIController()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = IDQConstants.backgroundColor
-        
         addSwiftUIController()
     }
     
@@ -38,13 +35,25 @@ final class IDQStatsViewController: UIViewController {
     
     private func updateSwiftUIController() {
         if let statsSwiftUIControllerView = statsSwiftUIControllerView {
-            // Remove the existing SwiftUI view from the view hierarchy
             statsSwiftUIControllerView.view.removeFromSuperview()
             statsSwiftUIControllerView.removeFromParent()
         }
         
         let myUser = userManager.fetchUser()
-        let statsSwiftUIVC = UIHostingController(rootView: IDQStatsView(totalScore: Double(myUser?.totalScore ?? 0), totalPerformance: myUser?.performance ?? 0))
+        let totalScore: Double = Double(myUser?.totalScore ?? 0)
+        let totalPerformance: Double = (myUser?.performance ?? 0)
+        let gamesPlayed: Double = Double(myUser?.numberOfQuizesPlayed ?? 0)
+        let timeSpent: Double = (((myUser?.totalPlayTime ?? 60)/3600) ?? 0)
+        
+        let statsSwiftUIVC = UIHostingController(
+            rootView:
+                IDQStatsView(
+                    totalScore: totalScore,
+                    totalPerformance: totalPerformance,
+                    quizesPlayed: gamesPlayed,
+                    timeSpent: timeSpent
+                )
+        )
         
         let swiftUIView: UIView = statsSwiftUIVC.view
         addChild(statsSwiftUIVC)
