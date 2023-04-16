@@ -11,18 +11,18 @@ struct IDQStatsMetricsHStackView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    var totalScore: Double
+    var speed: Double
     var totalPerformance: Double
     var quizesPlayed: Double
     var timeSpent: Double
     
     var body: some View {
         HStack(spacing: CGFloat((UIScreen.main.bounds.width - 2 * 160-32)/3)) {
-            IDQStatsMetricBoxView(title: "total score", value: totalScore, image: Image(systemName: "sparkles"), resultValueType: .wholeNum)
+            IDQStatsMetricBoxView(title: "performance", value: totalPerformance, image: Image(systemName: "percent"), resultValueType: .percentage)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
                 .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
-            IDQStatsMetricBoxView(title: "performance", value: totalPerformance, image: Image(systemName: "percent"), resultValueType: .percentage)
+            IDQStatsMetricBoxView(title: "speed", value: speed, image: Image(systemName: "timer"), resultValueType: .wholeNum)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
                 .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
@@ -33,7 +33,7 @@ struct IDQStatsMetricsHStackView: View {
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
                 .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
-            IDQStatsMetricBoxView(title: "minutes spent", value: timeSpent, image: Image(systemName: "timer"), resultValueType: .time)
+            IDQStatsMetricBoxView(title: "minutes spent", value: timeSpent, image: Image(systemName: "hourglass"), resultValueType: .time)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
                 .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
@@ -44,6 +44,6 @@ struct IDQStatsMetricsHStackView: View {
 
 struct IDQStatsMetricsHStackView_Previews: PreviewProvider {
     static var previews: some View {
-        IDQStatsMetricsHStackView(totalScore: 28, totalPerformance: 0.87, quizesPlayed: 23, timeSpent: 9048)
+        IDQStatsMetricsHStackView(speed: 28, totalPerformance: 0.87, quizesPlayed: 23, timeSpent: 9048)
     }
 }

@@ -38,6 +38,7 @@ struct IDQStatsMetricBoxView: View {
         .overlay(
             image
                 .resizable()
+                .scaledToFit()
                 .frame(width: 80, height: 80)
                 .padding(.leading, 85)
                 .padding(.top, 45)

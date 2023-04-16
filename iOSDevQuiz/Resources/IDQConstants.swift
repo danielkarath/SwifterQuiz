@@ -225,6 +225,8 @@ struct IDQConstants {
     ///Transparent miniature of the app icon with the orange, branding color
     static let appIconMiniature: UIImage = UIImage(named: "appIconMiniature")!
     
+    static let trophyImage: UIImage = UIImage(named: "trophyImage")!
+    
     ///Basic icon
     static let basicImage: UIImage = UIImage(named: "basicIcon")!
     
