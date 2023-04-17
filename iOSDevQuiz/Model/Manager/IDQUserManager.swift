@@ -60,10 +60,26 @@ final class IDQUserManager {
         myUser = user
         print("\n\n------------------------------")
         print("\t\tUSER DATA\n")
-        print("User name: \(user.firstName)\n")
+        print("User name: \(user.firstName)")
         print("Total score: \(user.totalScore)")
         print("Total performance: \(user.performance)")
         print("number of games played: \(user.numberOfQuizesPlayed)")
+        print("number of bookmarked questions: \(user.bookmarkedQuestions.count)")
+        if user.bookmarkedQuestions.count != 0 {
+            print("The bookmarked questions are:")
+            for question in user.bookmarkedQuestions {
+                var disabledQuestion: IDQQuestion = question as! IDQQuestion
+                print(disabledQuestion.question)
+            }
+        }
+        print("\nnumber of disabled questions: \(user.disabledQuestions.count)")
+        if user.disabledQuestions.count != 0 {
+            print("The disabled questions are:")
+            for question in user.disabledQuestions {
+                var bookmarkedQuestion: IDQQuestion = question as! IDQQuestion
+                print(bookmarkedQuestion.question)
+            }
+        }
         print("------------------------------\n\n")
     }
     
@@ -95,8 +111,8 @@ final class IDQUserManager {
             user.numberOfQuizesPlayed = 0
             user.totalPlayTime = 0
             user.streak = 0
-            //user.bookmarkedQuestions = []
-            //user.disabledQuestions = []
+            user.bookmarkedQuestions = []
+            user.disabledQuestions = []
             do {
                 print("Successfully generated a user")
                 try context.save()

@@ -23,7 +23,7 @@ enum IDQGameQuestionTimer: CFTimeInterval {
     case snail = 90
 }
 
-enum IDQTopic: CaseIterable {
+enum IDQTopic: Codable, CaseIterable {
     case basics
     case uikit
     case swiftui

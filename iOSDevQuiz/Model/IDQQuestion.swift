@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IDQQuestionDifficulty: String, CaseIterable {
+enum IDQQuestionDifficulty: String, CaseIterable, Codable {
     case veryEasy = "very easy"
     case easy = "easy"
     case medium = "medium"
@@ -15,7 +15,7 @@ enum IDQQuestionDifficulty: String, CaseIterable {
     case veryHard = "very hard"
 }
 
-struct IDQQuestion {
+struct IDQQuestion: Codable {
     let question: String
     let explanation: String
     let reference: String?
@@ -23,6 +23,22 @@ struct IDQQuestion {
     let topic: IDQTopic
     let answers: [IDQAnswer]
 }
+
+class IDQQuestionArrayValueTransformer: ValueTransformer {
+    private let encoder = JSONEncoder()
+    private let decoder = JSONDecoder()
+
+    override func transformedValue(_ value: Any?) -> Any? {
+        guard let questions = value as? [IDQQuestion] else { return nil }
+        return try? encoder.encode(questions)
+    }
+
+    override func reverseTransformedValue(_ value: Any?) -> Any? {
+        guard let data = value as? Data else { return nil }
+        return try? decoder.decode([IDQQuestion].self, from: data)
+    }
+}
+
 
 let idqQuestionList: [IDQQuestion] = [
     

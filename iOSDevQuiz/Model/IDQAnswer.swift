@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IDQAnswerType {
+enum IDQAnswerType: Codable {
     case correct
     case wrong
     case passed
@@ -15,7 +15,7 @@ enum IDQAnswerType {
     case leftQuestion
 }
 
-struct IDQAnswer {
+struct IDQAnswer: Codable {
     let text: String
     let answerType: IDQAnswerType
 //    

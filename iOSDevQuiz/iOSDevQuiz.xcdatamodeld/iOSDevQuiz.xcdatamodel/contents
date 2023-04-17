@@ -22,8 +22,8 @@
         <attribute name="wrongAnswerCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="IDQUser" representedClassName="IDQUser" syncable="YES">
-        <attribute name="bookmarkedQuestions" optional="YES" attributeType="Transformable" customClassName="[IDQQuestion]"/>
-        <attribute name="disabledQuestions" optional="YES" attributeType="Transformable" customClassName="[IDQQuestion]"/>
+        <attribute name="bookmarkedQuestions" optional="YES" attributeType="Transformable" valueTransformerName="IDQQuestionArrayValueTransformer" customClassName="NSArray"/>
+        <attribute name="disabledQuestions" optional="YES" attributeType="Transformable" valueTransformerName="IDQQuestionArrayValueTransformer" customClassName="NSArray"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="lastDatePlayed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="numberOfQuizesPlayed" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

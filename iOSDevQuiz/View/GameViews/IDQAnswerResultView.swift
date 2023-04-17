@@ -14,6 +14,8 @@ protocol IDQAnswerResultViewDelegate: AnyObject {
 
 class IDQAnswerResultView: UIView {
     
+    private let questionManager = IDQQuestionManager()
+    
     public weak var delegate: IDQAnswerResultViewDelegate?
 
     private var question: IDQQuestion?
@@ -283,10 +285,16 @@ class IDQAnswerResultView: UIView {
                 self.bookmarkUnfilledImageView.removeFromSuperview()
                 self.bookmarkButton.addSubview(self.bookmarkFilledImageView)
             }
+            DispatchQueue.global(qos: .background).async {
+                self.questionManager.bookmark(question)
+            }
         } else {
             DispatchQueue.main.async {
                 self.bookmarkFilledImageView.removeFromSuperview()
                 self.bookmarkButton.addSubview(self.bookmarkUnfilledImageView)
+            }
+            DispatchQueue.global(qos: .background).async {
+                self.questionManager.removeBookmark(question)
             }
         }
         isBookmarked.toggle()
@@ -294,8 +302,8 @@ class IDQAnswerResultView: UIView {
     
     @objc
     private func discardQuestionButtonButtonTapped(_ sender: UIButton) {
-        guard let question = self.question, self.question != nil else {return}
-        
+        guard let question = self.question else {return}
+        questionManager.disable(question)
     }
     
     //MARK: - Public
