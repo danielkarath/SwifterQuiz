@@ -24,6 +24,7 @@ final class IDQTabBarController: UITabBarController {
         navigationItem.hidesBackButton = true
         setupTabs()
         automaticallyGenerateUser()
+        evaulateUserMetrics()
         resultManager.fetchResults()
     }
     
@@ -73,6 +74,12 @@ final class IDQTabBarController: UITabBarController {
     private func automaticallyGenerateUser() {
         DispatchQueue.global(qos: .utility).async {
             self.userManager.createUser(name: "Daniel")
+        }
+    }
+    
+    private func evaulateUserMetrics() {
+        DispatchQueue.global(qos: .utility).async {
+            self.userManager.evaulateStreak()
         }
     }
     

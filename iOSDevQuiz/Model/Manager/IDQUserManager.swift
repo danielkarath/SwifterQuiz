@@ -112,7 +112,29 @@ final class IDQUserManager {
         difficultyMetricsManager.createMetrics()
     }
     
-    public func evaulateStreak(for quiz: IDQQuiz) {
+    public func evaulateStreak() {
+        let user = fetchUser()
+        let calendar = Calendar.current
+        guard user != nil else {
+            return
+        }
+        guard let previousGameDate = user?.lastDatePlayed else {
+            return
+        }
+        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date())!
+        let isSameYesterdayDate = calendar.isDate(yesterdayDate, equalTo: previousGameDate, toGranularity: .day)
+        let isSameTodayDate = calendar.isDate(Date(), equalTo: previousGameDate, toGranularity: .day)
+        
+        if isSameTodayDate || isSameYesterdayDate {
+            print("Streak is evaulated and no changes needed")
+        } else {
+            print("Streak is evaulated and the user's last game was not today or yesterday")
+            user?.streak = 0
+            saveToCoreData()
+        }
+    }
+    
+    public func addToStreak(for quiz: IDQQuiz) {
         let user = fetchUser()
         let calendar = Calendar.current
         guard let previousGameDate = user?.lastDatePlayed else {
@@ -123,7 +145,7 @@ final class IDQUserManager {
         let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: quiz.date)!
         let isSameCalendarDate = calendar.isDate(quiz.date, equalTo: previousGameDate, toGranularity: .day)
 
-        if !isSameCalendarDate && user?.lastDatePlayed == yesterdayDate {
+        if !isSameCalendarDate && previousGameDate == yesterdayDate {
             print("The user played their last game the day before so it's time to add 1 to their streak")
             user?.streak += 1
             saveToCoreData()

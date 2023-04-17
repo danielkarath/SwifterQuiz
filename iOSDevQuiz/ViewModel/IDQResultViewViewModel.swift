@@ -249,7 +249,7 @@ final class IDQResultViewViewModel {
             print("Could not find user streak")
             return
         }
-        userManager.evaulateStreak(for: quiz)
+        userManager.addToStreak(for: quiz)
     }
     
 }

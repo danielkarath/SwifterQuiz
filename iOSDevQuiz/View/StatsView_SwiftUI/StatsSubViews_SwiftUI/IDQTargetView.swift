@@ -34,7 +34,7 @@ struct IDQTargetView: View {
                 .font(Font(valueFont))
                 .foregroundColor(Color(IDQConstants.basicFontColor))
                 .kerning(1.10)
-            Text("total accuracy")
+            Text("accuracy")
                 .frame(width: 160, height: 16, alignment: .center)
                 .font(Font(titleFont))
                 .foregroundColor(Color(IDQConstants.secondaryFontColor))

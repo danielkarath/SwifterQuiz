@@ -26,9 +26,9 @@ struct IDQTrophyView: View {
         VStack {
             Image(uiImage: trophyImage)
                 .resizable()
-                .frame(width: 110, height: 110)
+                .frame(width: 122, height: 122)
                 .scaledToFit()
-                .padding(.bottom, 2)
+                .padding(.bottom, -5)
             Text(String(viewModel.convertToString(value: value, type: .wholeNum)))
                 .frame(width: 160, height: 24, alignment: .center)
                 .font(Font(valueFont))
