@@ -24,6 +24,13 @@ final class IDQGameView: UIView {
     private let answerResultView = IDQAnswerResultView()
     
     private let exitView = IDQExitQuizView()
+    private var isExitViewVisible: Bool = false
+
+ 
+    private let disableQuestionView = IDQDisableQuestionView()
+    private var isDisableViewVisible: Bool = false
+    
+    private let questionManager = IDQQuestionManager()
     
     private var questions: [IDQQuestion] = []
     
@@ -83,7 +90,7 @@ final class IDQGameView: UIView {
         view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
-        view.layer.zPosition = 7
+        view.layer.zPosition = 12
         return view
     }()
     
@@ -153,10 +160,12 @@ final class IDQGameView: UIView {
         setupCollectionView(collectionView)
         answerResultView.delegate = self
         exitView.delegate = self
+        disableQuestionView.delegate = self
         countDownView.delegate = self
         countDownView.layer.zPosition = 11
-        answerResultView.layer.zPosition = 12
-        exitView.layer.zPosition = 13
+        answerResultView.layer.zPosition = 13
+        exitView.layer.zPosition = 14
+        disableQuestionView.layer.zPosition = 15
         passButton.addTarget(self, action: #selector(passButtonTapped(_:)), for: .touchUpInside)
     }
     
@@ -175,7 +184,10 @@ final class IDQGameView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(didTapExit), name: .exitQuizPressed, object: nil)
         
         let notificationCenter = NotificationCenter.default
-            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside(_:)))
+        overlayView.addGestureRecognizer(tapGesture)
+
     }
     
     private func createCollectionView() -> UICollectionView {
@@ -202,7 +214,7 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
-        addSubviews(spinner, overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerResultView, exitView)
+        addSubviews(spinner, overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerResultView, exitView, disableQuestionView)
         guard let collectionView = answerCollectionView else {
             return
         }
@@ -254,7 +266,12 @@ final class IDQGameView: UIView {
             exitView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 350),
             exitView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             exitView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            exitView.heightAnchor.constraint(equalToConstant: 350)
+            exitView.heightAnchor.constraint(equalToConstant: 350),
+            
+            disableQuestionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 350),
+            disableQuestionView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            disableQuestionView.heightAnchor.constraint(equalToConstant: 320),
+            disableQuestionView.widthAnchor.constraint(equalToConstant: 260)
         ])
     }
     
@@ -309,6 +326,17 @@ final class IDQGameView: UIView {
     }
     
     @objc
+    private func didTapOutside(_ sender: UIView) {
+        if !overlayView.isHidden && isDisableViewVisible {
+            didDismiss(disableQuestionView)
+        }
+        
+        if !overlayView.isHidden && isExitViewVisible {
+            didTapRejoinButton(exitView)
+        }
+    }
+    
+    @objc
     private func passButtonTapped(_ sender: UIButton) {
         delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
         countDownView.stopTimer()
@@ -341,6 +369,7 @@ final class IDQGameView: UIView {
     
     @objc
     private func didTapExit() {
+        isExitViewVisible.toggle()
         countDownView.pauseTimer()
         
         questionEndDate = Date()
@@ -466,6 +495,17 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension IDQGameView: IDQAnswerResultViewDelegate {
     
+    func didTapDisableQuestion(_ answerResultView: IDQAnswerResultView, for question: IDQQuestion) {
+        isDisableViewVisible.toggle()
+        UIView.animate(withDuration: 0.30) {
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+        
+        UIView.animate(withDuration: 0.80, delay: 0.35, animations: {
+            self.disableQuestionView.transform = CGAffineTransform(translationX: 0, y: -(350 + UIScreen.main.bounds.height / 2 - 160))
+        }, completion: nil)
+    }
+    
     func didTapContinue(_ answerResultView: IDQAnswerResultView) {
         UIView.animate(withDuration: 0.30) {
             self.answerResultView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -489,11 +529,13 @@ extension IDQGameView: CountDownViewDelegate {
 
 extension IDQGameView: IDQExitQuizViewDelegate {
     func didTapRejoinButton(_ idqExitQuizView: IDQExitQuizView) {
+        isExitViewVisible.toggle()
         didTapRejoinQuiz()
         questionStartDate = Date()
     }
     
     func didConfirmExit(_ idqExitQuizView: IDQExitQuizView) {
+        isExitViewVisible.toggle()
         countDownView.stopTimer()
         delegate?.idqGameView(self, didTapExit: true)
     }
@@ -501,3 +543,28 @@ extension IDQGameView: IDQExitQuizViewDelegate {
     
 }
 
+extension IDQGameView: IDQDisableQuestionViewDelegate {
+    func didDismiss(_ disableQuestionView: IDQDisableQuestionView) {
+        isDisableViewVisible.toggle()
+        UIView.animate(withDuration: 0.30) {
+            self.disableQuestionView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+        
+        UIView.animate(withDuration: 1.0, delay: 0.40, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
+        }, completion: nil)
+    }
+    
+    func didTapDisable(_ disableQuestionView: IDQDisableQuestionView) {
+        isDisableViewVisible.toggle()
+        guard let question = question else {return}
+        questionManager.disable(question)
+        UIView.animate(withDuration: 0.30) {
+            self.disableQuestionView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+        
+        spinner.startAnimating()
+        configure(overlay: overlayView)
+        configure(with: questions, game: game!)
+    }
+}

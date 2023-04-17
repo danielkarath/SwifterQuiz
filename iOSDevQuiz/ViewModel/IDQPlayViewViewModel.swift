@@ -9,6 +9,8 @@ import UIKit
 
 final class IDQPlayViewViewModel {
     
+    private let userManager = IDQUserManager()
+    
     //MARK: - Init
     init(
         
@@ -16,13 +18,19 @@ final class IDQPlayViewViewModel {
         
     }
     
-    public func generateQuestions(game: IDQGame) -> [IDQQuestion] {
+    public func generateQuestions(game: IDQGame) -> [IDQQuestion]? {
+        guard let user = userManager.fetchUser() else {return nil}
+        let disabledQuestions: [IDQQuestion] = user.disabledQuestions as! [IDQQuestion]
         var questions: [IDQQuestion] = []
         var optionalQuestions: [IDQQuestion] = []
         for question in idqQuestionList {
-            if game.topics.contains(question.topic) {
-                optionalQuestions.append(question)
+            
+            if !disabledQuestions.contains(where: { $0.question == question.question }) {
+                if game.topics.contains(question.topic) {
+                    optionalQuestions.append(question)
+                }
             }
+            
         }
         
         for _ in 0..<game.numberOfQuestions {

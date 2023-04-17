@@ -10,6 +10,7 @@ import SafariServices
 
 protocol IDQAnswerResultViewDelegate: AnyObject {
     func didTapContinue(_ answerResultView: IDQAnswerResultView)
+    func didTapDisableQuestion(_ answerResultView: IDQAnswerResultView, for question: IDQQuestion)
 }
 
 class IDQAnswerResultView: UIView {
@@ -303,7 +304,7 @@ class IDQAnswerResultView: UIView {
     @objc
     private func discardQuestionButtonButtonTapped(_ sender: UIButton) {
         guard let question = self.question else {return}
-        questionManager.disable(question)
+        delegate?.didTapDisableQuestion(self, for: question)
     }
     
     //MARK: - Public

@@ -42,7 +42,8 @@ extension IDQPlayViewController: IDQPlayViewDelegate {
         guard let game = game else {
             return
         }
-        let questions = viewModel.generateQuestions(game: game)
+        let generatedQuestions = viewModel.generateQuestions(game: game)
+        guard let questions = generatedQuestions else {return}
         let detailVC = IDQGameViewController(questions: questions, game: game)
         detailVC.navigationItem.largeTitleDisplayMode = .never
         detailVC.hidesBottomBarWhenPushed = true
