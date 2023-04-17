@@ -14,10 +14,17 @@ struct IDQTrophyView: View {
     private let viewModel = IDQStatsMetricBoxViewViewModel()
     private let titleFont = IDQConstants.setFont(fontSize: 16, isBold: false)
     private let valueFont = IDQConstants.setFont(fontSize: 18, isBold: true)
+    private var trophyImage: UIImage {
+        if value > 0 {
+            return IDQConstants.trophyImage
+        } else {
+            return IDQConstants.inactiveTrophyImage
+        }
+    }
     
     var body: some View {
         VStack {
-            Image(uiImage: IDQConstants.trophyImage)
+            Image(uiImage: trophyImage)
                 .resizable()
                 .frame(width: 110, height: 110)
                 .scaledToFit()

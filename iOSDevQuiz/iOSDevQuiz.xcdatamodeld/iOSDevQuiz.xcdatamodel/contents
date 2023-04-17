@@ -25,8 +25,10 @@
         <attribute name="bookmarkedQuestions" optional="YES" attributeType="Transformable" customClassName="[IDQQuestion]"/>
         <attribute name="disabledQuestions" optional="YES" attributeType="Transformable" customClassName="[IDQQuestion]"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="lastDatePlayed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="numberOfQuizesPlayed" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="performance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="streak" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalPlayTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalScore" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>

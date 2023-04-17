@@ -45,6 +45,7 @@ final class IDQStatsViewController: UIViewController {
         let totalPerformance: Double = (myUser?.performance ?? 0)
         let gamesPlayed: Double = Double(myUser?.numberOfQuizesPlayed ?? 0)
         let timeSpent: Double = (((myUser?.totalPlayTime ?? 60)/3600) ?? 0)
+        let streak: Double = Double(myUser?.streak ?? 0)
         
         let statsSwiftUIVC = UIHostingController(
             rootView:
@@ -53,7 +54,8 @@ final class IDQStatsViewController: UIViewController {
                     totalPerformance: totalPerformance,
                     averageSpeed: 140,
                     quizesPlayed: gamesPlayed,
-                    timeSpent: timeSpent
+                    timeSpent: timeSpent,
+                    streak: streak
                 )
         )
         

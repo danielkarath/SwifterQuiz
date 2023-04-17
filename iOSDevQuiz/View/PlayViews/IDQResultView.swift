@@ -236,6 +236,7 @@ class IDQResultView: UIView {
         DispatchQueue.global(qos: .utility).async {
             self.viewModel.save(quiz: quiz)
             self.viewModel.saveToUserRecords(quiz)
+            self.viewModel.evaulateStreak(for: quiz)
         }
     }
     

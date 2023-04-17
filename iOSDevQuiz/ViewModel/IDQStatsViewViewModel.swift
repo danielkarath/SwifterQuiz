@@ -15,6 +15,10 @@ final class IDQStatsViewViewModel: ObservableObject {
     private let quizResultManager = IDQQuizResultManager()
     private let userManager = IDQUserManager()
     
+    private func fetch(streak: Int64, lastQuizDate: Date) {
+        let user = userManager.fetchUser()
+        
+    }
     
     //MARK: - Public
     public var results: [IDQQuizResult] = []
@@ -41,6 +45,4 @@ final class IDQStatsViewViewModel: ObservableObject {
         }
         return returnArray
     }
-    
-    
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct IDQMainStatsView: View {
     
     var totalScore: Double
+    var totalPerformance: Double
+    var streak: Double
     
     private let titleFont = IDQConstants.setFont(fontSize: 32, isBold: true)
     
@@ -22,8 +24,14 @@ struct IDQMainStatsView: View {
                 .multilineTextAlignment(.leading)
                 .padding(.top, 16)
                 .padding(.bottom, 32)
-            IDQTrophyView(value: totalScore)
-                .frame(width: 140, height: 140)
+            HStack {
+                IDQTargetView(value: totalPerformance)
+                    .frame(width: 90, height: 90)
+                IDQTrophyView(value: totalScore)
+                    .frame(width: 140, height: 140)
+                IDQStreakView(value: streak)
+                    .frame(width: 90, height: 90)
+            }
             Spacer()
         }
     }
@@ -31,6 +39,6 @@ struct IDQMainStatsView: View {
 
 struct IDQMainStatsView_Previews: PreviewProvider {
     static var previews: some View {
-        IDQMainStatsView(totalScore: 19)
+        IDQMainStatsView(totalScore: 19, totalPerformance: 89.30, streak: 2)
     }
 }

@@ -225,7 +225,23 @@ struct IDQConstants {
     ///Transparent miniature of the app icon with the orange, branding color
     static let appIconMiniature: UIImage = UIImage(named: "appIconMiniature")!
     
+    ///Stats icon for the total score
     static let trophyImage: UIImage = UIImage(named: "trophyImage")!
+    
+    ///Stats icon for the inactive trophy
+    static let inactiveTrophyImage: UIImage = UIImage(named: "inactiveTrophyImage")!
+    
+    ///Stats icon for the total percentage
+    static let targetImage: UIImage = UIImage(named: "targetImage")!
+    
+    ///Stats icon for the inactive total percentage
+    static let inactiveTargetIcon: UIImage = UIImage(named: "inactiveTargetIcon")!
+    
+    ///Stats icon for the current streak
+    static let streakIcon: UIImage = UIImage(named: "streakIcon")!
+    
+    ///Stats icon for the inactive streak
+    static let inactiveStreakIcon: UIImage = UIImage(named: "inactiveStreakIcon")!
     
     ///Basic icon
     static let basicImage: UIImage = UIImage(named: "basicIcon")!

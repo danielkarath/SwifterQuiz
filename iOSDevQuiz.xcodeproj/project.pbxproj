@@ -61,6 +61,8 @@
 		39AF9C4429CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */; };
 		39E0707D29EC719200AE1858 /* IDQTrophyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0707C29EC719200AE1858 /* IDQTrophyView.swift */; };
 		39E0707F29EC7EA800AE1858 /* IDQMainStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0707E29EC7EA800AE1858 /* IDQMainStatsView.swift */; };
+		39E0708129EC8F7000AE1858 /* IDQTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0708029EC8F7000AE1858 /* IDQTargetView.swift */; };
+		39E0708329EC9A7300AE1858 /* IDQStreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0708229EC9A7300AE1858 /* IDQStreakView.swift */; };
 		39E2256F29B8F71500830F1A /* IDQGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E2256E29B8F71500830F1A /* IDQGameView.swift */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +123,8 @@
 		39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		39E0707C29EC719200AE1858 /* IDQTrophyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTrophyView.swift; sourceTree = "<group>"; };
 		39E0707E29EC7EA800AE1858 /* IDQMainStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQMainStatsView.swift; sourceTree = "<group>"; };
+		39E0708029EC8F7000AE1858 /* IDQTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTargetView.swift; sourceTree = "<group>"; };
+		39E0708229EC9A7300AE1858 /* IDQStreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStreakView.swift; sourceTree = "<group>"; };
 		39E2256E29B8F71500830F1A /* IDQGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -245,6 +249,8 @@
 				39E0707E29EC7EA800AE1858 /* IDQMainStatsView.swift */,
 				3920A18329EAB1CE001A1522 /* IDQStatsMetricBoxView.swift */,
 				39E0707C29EC719200AE1858 /* IDQTrophyView.swift */,
+				39E0708029EC8F7000AE1858 /* IDQTargetView.swift */,
+				39E0708229EC9A7300AE1858 /* IDQStreakView.swift */,
 			);
 			path = StatsSubViews_SwiftUI;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 				3920A19229EAE939001A1522 /* IDQTopicMetricManager.swift in Sources */,
 				3920A1B429EAFCA2001A1522 /* IDQDifficultyMetricManager.swift in Sources */,
 				3920A1AC29EAFBEE001A1522 /* IDQDifficultyMetrics+CoreDataProperties.swift in Sources */,
+				39E0708129EC8F7000AE1858 /* IDQTargetView.swift in Sources */,
 				39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */,
 				391DDB6D29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift in Sources */,
 				3920A1B229EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift in Sources */,
@@ -431,6 +438,7 @@
 				3920A1AD29EAFBEE001A1522 /* IDQQuizResult+CoreDataClass.swift in Sources */,
 				3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */,
 				3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */,
+				39E0708329EC9A7300AE1858 /* IDQStreakView.swift in Sources */,
 				3920A1B129EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,
 				392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */,

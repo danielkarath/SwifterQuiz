@@ -20,6 +20,7 @@ final class IDQResultViewViewModel {
     //MARK: - Private
     
     private let quizResultManager = IDQQuizResultManager()
+    private let userManager = IDQUserManager()
     
     private func evaulate(quiz: IDQQuiz) -> ScoreType {
         guard quiz.totalScore > 0 else {
@@ -240,6 +241,15 @@ final class IDQResultViewViewModel {
             return
         }
         quizResultManager.saveToUserRecords(quiz)
+    }
+    
+    public func evaulateStreak(for quiz: IDQQuiz) {
+        let user = userManager.fetchUser()
+        guard let streak = user?.streak else {
+            print("Could not find user streak")
+            return
+        }
+        userManager.evaulateStreak(for: quiz)
     }
     
 }

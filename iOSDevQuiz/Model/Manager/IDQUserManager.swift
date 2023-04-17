@@ -39,6 +39,16 @@ final class IDQUserManager {
         }
     }
     
+    private func saveToCoreData() {
+        do {
+            print("Successfully saved user data")
+            try context.save()
+        } catch let error as NSError {
+            print("Failed to save user data to user Error: \(error), \(error.userInfo)")
+            // Handle the error appropriately, such as showing an error message to the user
+        }
+    }
+    
     //MARK: - Pubic
     public var myUser: IDQUser?
     
@@ -84,6 +94,7 @@ final class IDQUserManager {
             user.totalScore = 0
             user.numberOfQuizesPlayed = 0
             user.totalPlayTime = 0
+            user.streak = 0
             //user.bookmarkedQuestions = []
             //user.disabledQuestions = []
             do {
@@ -100,4 +111,29 @@ final class IDQUserManager {
         topicMetricsManager.createMetrics()
         difficultyMetricsManager.createMetrics()
     }
+    
+    public func evaulateStreak(for quiz: IDQQuiz) {
+        let user = fetchUser()
+        let calendar = Calendar.current
+        guard let previousGameDate = user?.lastDatePlayed else {
+            user?.streak = 1
+            saveToCoreData()
+            return
+        }
+        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: quiz.date)!
+        let isSameCalendarDate = calendar.isDate(quiz.date, equalTo: previousGameDate, toGranularity: .day)
+
+        if !isSameCalendarDate && user?.lastDatePlayed == yesterdayDate {
+            print("The user played their last game the day before so it's time to add 1 to their streak")
+            user?.streak += 1
+            saveToCoreData()
+        } else if isSameCalendarDate {
+            print("Streak evaulatin has already been done today. No further actions needed.")
+        } else {
+            user?.streak = 1
+            saveToCoreData()
+        }
+    }
+    
+    
 }
