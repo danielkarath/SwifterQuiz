@@ -187,7 +187,9 @@ final class IDQGameView: UIView {
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside(_:)))
         overlayView.addGestureRecognizer(tapGesture)
-
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDisableView(_:)))
+        swipeGesture.direction = .down
+        disableQuestionView.addGestureRecognizer(swipeGesture)
     }
     
     private func createCollectionView() -> UICollectionView {
@@ -270,7 +272,7 @@ final class IDQGameView: UIView {
             
             disableQuestionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 350),
             disableQuestionView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            disableQuestionView.heightAnchor.constraint(equalToConstant: 320),
+            disableQuestionView.heightAnchor.constraint(equalToConstant: 350),
             disableQuestionView.widthAnchor.constraint(equalToConstant: 260)
         ])
     }
@@ -323,6 +325,13 @@ final class IDQGameView: UIView {
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
             self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
         }, completion: nil)
+    }
+    
+    @objc
+    private func didSwipeDisableView(_ sender: UIView) {
+        if !overlayView.isHidden && isDisableViewVisible {
+            didDismiss(disableQuestionView)
+        }
     }
     
     @objc

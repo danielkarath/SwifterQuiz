@@ -107,7 +107,7 @@ class IDQDisableQuestionView: UIView {
     
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        self.layer.frame = CGRect(x: 0, y: 0, width: 260, height: 320)
+        self.layer.frame = CGRect(x: 0, y: 0, width: 260, height: 350)
         backgroundColor = IDQConstants.contentBackgroundColor
         layer.cornerRadius = 16
         
@@ -125,21 +125,21 @@ class IDQDisableQuestionView: UIView {
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            closeButton.heightAnchor.constraint(equalToConstant: 16),
-            closeButton.widthAnchor.constraint(equalToConstant: 16),
+            closeButton.heightAnchor.constraint(equalToConstant: 24),
+            closeButton.widthAnchor.constraint(equalToConstant: 24),
 
             disableImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             disableImageView.widthAnchor.constraint(equalToConstant: 60),
             disableImageView.heightAnchor.constraint(equalToConstant: 60),
             disableImageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             
-            disableTitleLabel.topAnchor.constraint(equalTo: disableImageView.bottomAnchor, constant: 16),
+            disableTitleLabel.topAnchor.constraint(equalTo: disableImageView.bottomAnchor, constant: 12),
             disableTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             disableTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             disableTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             disableTitleLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            disableExplanationLabel.topAnchor.constraint(equalTo: disableTitleLabel.bottomAnchor, constant: 0),
+            disableExplanationLabel.topAnchor.constraint(equalTo: disableTitleLabel.bottomAnchor, constant: -12),
             disableExplanationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             disableExplanationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             disableExplanationLabel.bottomAnchor.constraint(equalTo: disableButton.topAnchor, constant: -8),
