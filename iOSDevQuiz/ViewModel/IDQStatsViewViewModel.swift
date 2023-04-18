@@ -26,7 +26,7 @@ final class IDQStatsViewViewModel: ObservableObject {
     public func fetchMonthlyMetrics() -> [IDQQuizResult] {
         var returnArray: [IDQQuizResult] = []
         let calendar = Calendar.current
-        guard let startDate = calendar.date(byAdding: .day, value: -30, to: Date()) else {
+        guard let startDate = calendar.date(byAdding: .day, value: -30, to: Date.currentTime) else {
             return []
         }
         
@@ -36,7 +36,7 @@ final class IDQStatsViewViewModel: ObservableObject {
                 guard let resultDate = result.date else {
                     break
                 }
-                if resultDate > startDate && resultDate < Date() {
+                if resultDate > startDate && resultDate < Date.currentTime {
                     self.results.append(result)
                     returnArray.append(result)
                     print("Did add a result with date: \(resultDate) and score of \(result.totalScore)")

@@ -243,6 +243,14 @@ extension UIBarButtonItem {
     }
 }
 
+extension Date {
+    static var currentTime: Date {
+        let now = Date()
+        let secondsFromGMT = TimeZone.current.secondsFromGMT(for: now)
+        return now.addingTimeInterval(TimeInterval(secondsFromGMT))
+    }
+}
+
 extension Calendar {
     func numberOfDaysInCurrentMonth() -> Int {
         let date = Date()

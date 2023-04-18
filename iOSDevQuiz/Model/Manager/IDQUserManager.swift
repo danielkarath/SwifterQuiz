@@ -137,9 +137,9 @@ final class IDQUserManager {
         guard let previousGameDate = user?.lastDatePlayed else {
             return
         }
-        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date())!
+        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime)!
         let isSameYesterdayDate = calendar.isDate(yesterdayDate, equalTo: previousGameDate, toGranularity: .day)
-        let isSameTodayDate = calendar.isDate(Date(), equalTo: previousGameDate, toGranularity: .day)
+        let isSameTodayDate = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
         
         if isSameTodayDate || isSameYesterdayDate {
             print("Streak is evaulated and no changes needed")

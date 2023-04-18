@@ -52,7 +52,7 @@ final class IDQQuizResultManager {
         user.totalScore += Int64(quiz.totalScore)
         user.performance = weightedTotalPerformance
         user.numberOfQuizesPlayed += 1
-        user.lastDatePlayed = Date()
+        user.lastDatePlayed = Date.currentTime
         print("TIME SPENT IN QUIZ = \(quiz.quizDuration)")
         user.totalPlayTime += quiz.quizDuration
         
