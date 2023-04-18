@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import MessageUI
 
 extension UIView {
     
@@ -93,6 +93,27 @@ extension UIView {
     }
 
     
+}
+
+extension UIViewController: MFMailComposeViewControllerDelegate {
+    
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        switch result {
+        case .cancelled:
+            print("Cancelled")
+        case .failed:
+            print("Failed to send email")
+        case .saved:
+            print("Message draft saved")
+        case .sent:
+            print("Message sent")
+            //special toast here!!
+        default:
+            print("Unknown error occured when trying to open mail composer")
+        }
+        controller.dismiss(animated: true)
+    }
 }
 
 extension UICollectionView {

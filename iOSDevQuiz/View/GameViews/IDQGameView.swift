@@ -11,6 +11,7 @@ protocol IDQGameViewDelegate: AnyObject {
     func idqGameView(_ gameView: IDQGameView, didFinish quiz: IDQQuiz)
     func idqGameView(_ gameView: IDQGameView, didTapExit: Bool)
     func idqGameView(_ gameView: IDQGameView, questionCounter: Int)
+    func shouldOpenMailComposer(for question: IDQQuestion?)
 }
 
 final class IDQGameView: UIView {
@@ -609,6 +610,11 @@ extension IDQGameView: IDQExitQuizViewDelegate {
 }
 
 extension IDQGameView: IDQDisableQuestionViewDelegate {
+    
+    func didTapReport(_ disableQuestionView: IDQDisableQuestionView) {
+        delegate?.shouldOpenMailComposer(for: question)
+    }
+    
     func didDismiss(_ disableQuestionView: IDQDisableQuestionView) {
         isDisableViewVisible.toggle()
         UIView.animate(withDuration: 0.30) {

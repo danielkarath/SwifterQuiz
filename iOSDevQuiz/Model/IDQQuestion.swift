@@ -17,6 +17,7 @@ enum IDQQuestionDifficulty: String, CaseIterable, Codable {
 
 struct IDQQuestion: Codable {
     let question: String
+    let questionSerialNum: Int
     let explanation: String
     let reference: String?
     let difficulty: IDQQuestionDifficulty
@@ -46,6 +47,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "The creation of a data object to a specific state or value is called __________.",
+        questionSerialNum: 1,
         explanation: "Initialization is the creation of a data object.",
         reference: "https://en.wikipedia.org/wiki/Initialization_(programming)",
         difficulty: .veryEasy,
@@ -60,6 +62,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the logical 'or' operator in Swift?",
+        questionSerialNum: 2,
         explanation: "The logical OR operator is || in Swift",
         reference: "https://developer.apple.com/documentation/swift/operator-declarations",
         difficulty: .veryEasy,
@@ -74,6 +77,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What do we use the ternary operator for?",
+        questionSerialNum: 3,
         explanation: "condition ? valueIfTrue : valueIfFalse",
         reference: "https://developer.apple.com/documentation/swift/operator-declarations",
         difficulty: .easy,
@@ -88,6 +92,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "The __________ type represents a character made up of one (or more) Unicode scalar values.",
+        questionSerialNum: 4,
         explanation: "The Character represents a single extended grapheme cluster, which is a sequence of one or more Unicode scalars that produce a single human-readable letter or symbol.",
         reference: "https://developer.apple.com/documentation/swift/character",
         difficulty: .veryEasy,
@@ -102,6 +107,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "A #selector expression is used to refer to __________",
+        questionSerialNum: 5,
         explanation: "A selector expression lets you access the selector used to refer to a method or to a property’s getter or setter in Objective-C.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/expressions/#Selector-Expression",
         difficulty: .easy,
@@ -116,6 +122,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the difference between Any and AnyObject?",
+        questionSerialNum: 6,
         explanation: "Any is a protocol that represents any type at all, including class types, struct types, enum types, and protocol types.. AnyObject is a protocol that represents any instance of a class type.",
         reference: "https://developer.apple.com/documentation/swift/anyobject",
         difficulty: .medium,
@@ -130,6 +137,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is type annotation?",
+        questionSerialNum: 7,
         explanation: "A type annotation explicitly specifies the type of a variable or expression.\nExample: let size: CGFloat = 10.0",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/#Type-Annotation",
         difficulty: .easy,
@@ -144,6 +152,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "How can you create a multi-line String object in Swift?",
+        questionSerialNum: 8,
         explanation: "The Character type represents a character made up of one or more Unicode scalar values, grouped by a Unicode boundary algorithm.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/stringsandcharacters/#Multiline-String-Literals",
         difficulty: .medium,
@@ -158,6 +167,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the method deinit() used for?",
+        questionSerialNum: 9,
         explanation: "A deinitializer is called immediately before a class instance is deallocated.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/deinitialization/",
         difficulty: .medium,
@@ -172,6 +182,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is a Tuple in Swift?",
+        questionSerialNum: 10,
         explanation: "A tuple type is a comma-separated list of types, that can be of different types and is enclosed in parentheses.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/#Tuple-Type",
         difficulty: .easy,
@@ -186,6 +197,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What does the Codable protocol do?",
+        questionSerialNum: 11,
         explanation: "It's a combination of Decodable and Encodable. With it you can convert objects to and from a serialized format, such as JSON, that can be easily transmitted or stored.",
         reference: "https://developer.apple.com/documentation/swift/codable",
         difficulty: .medium,
@@ -200,6 +212,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What are enums in Swift?",
+        questionSerialNum: 12,
         explanation: "Enum stands for enumeration, and it defines a common type for a group of related values",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/",
         difficulty: .easy,
@@ -215,6 +228,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What are UserDefaults?",
+        questionSerialNum: 13,
         explanation: "An interface to the user’s defaults database, where you store key-value pairs persistently across launches of your app.",
         reference: "https://developer.apple.com/documentation/foundation/userdefaults",
         difficulty: .easy,
@@ -229,6 +243,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "what is an associated type?",
+        questionSerialNum: 14,
         explanation: "An associated type gives a placeholder name to a type that’s used as part of the protocol.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/#Associated-Types",
         difficulty: .hard,
@@ -243,6 +258,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "what is an opaque type?",
+        questionSerialNum: 15,
         explanation: "An opaque type is a way to hide the underlying implementation details of a type",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/opaquetypes",
         difficulty: .veryHard,
@@ -257,6 +273,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the difference between an Array and a Set?",
+        questionSerialNum: 16,
         explanation: "A Set is unordered collection of unique elements. An Array is an ordered random-access collection.",
         reference: "https://developer.apple.com/documentation/swift/set",
         difficulty: .easy,
@@ -271,6 +288,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the difference between a Float and a Double?",
+        questionSerialNum: 17,
         explanation: "Double represents a 64-bit floating-point number while a Float represents a 32-bit floating-point number.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics/#Floating-Point-Numbers",
         difficulty: .easy,
@@ -285,6 +303,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "Which of the following methods is executed first in the AppDelegate before the others?",
+        questionSerialNum: 18,
         explanation: "The application(_:willFinishLaunchingWithOptions:) tells the delegate that the launch process has begun but that state restoration hasn’t occured.",
         reference: "https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app",
         difficulty: .easy,
@@ -300,6 +319,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What does @frozen attribute stand for?",
+        questionSerialNum: 19,
         explanation: "Apply this attribute to a structure or enumeration declaration to restrict the kinds of changes you can make to the type.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/attributes/#frozen",
         difficulty: .hard,
@@ -315,6 +335,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "StringProtocol conforms to which of these protocols?",
+        questionSerialNum: 20,
         explanation: "StringProtocol conforms to: BidirectionalCollection, Comparable, ExpressibleByStringInterpolation, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable",
         reference: "https://developer.apple.com/documentation/swift/stringprotocol",
         difficulty: .medium,
@@ -330,6 +351,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is a UUID?",
+        questionSerialNum: 21,
         explanation: "A universally unique value to identify types, interfaces, and other items.",
         reference: "https://developer.apple.com/documentation/foundation/uuid",
         difficulty: .easy,
@@ -344,6 +366,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the lazy property in Swift?",
+        questionSerialNum: 22,
         explanation: "A lazy stored property is a property whose initial value isn’t calculated until the first time it’s used.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/properties/#Lazy-Stored-Properties",
         difficulty: .medium,
@@ -358,6 +381,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "You can add an element to a specific index of an array by using __________ method",
+        questionSerialNum: 23,
         explanation: "The append(_:) method adds a new element to the end of the Array and the insert(_: at: ) adds a new element to a specific index.",
         reference: "https://developer.apple.com/documentation/swift/array/insert(_:at:)-3erb3",
         difficulty: .easy,
@@ -372,6 +396,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "The zip() method in Swift is used to __________",
+        questionSerialNum: 24,
         explanation: "The zip() method combines two arrays into a single array of tuples, where each tuple contains one element from each of the input arrays at the same index.",
         reference: "https://developer.apple.com/documentation/swift/zip(_:_:)",
         difficulty: .medium,
@@ -386,6 +411,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "When would you use Swift’s Result type?",
+        questionSerialNum: 25,
         explanation: "A value that represents either a success or a failure, including an associated value in each case.",
         reference: "https://developer.apple.com/documentation/swift/result",
         difficulty: .medium,
@@ -400,6 +426,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "The guard statement is __________",
+        questionSerialNum: 26,
         explanation: "With the guard statement we can implement checks into our code that prevents the current scope from continuing if certain conditions are not met.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/statements/#Guard-Statement",
         difficulty: .easy,
@@ -414,6 +441,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is a delegate in Swift?",
+        questionSerialNum: 27,
         explanation: "Delegation is a design pattern that enables a class or structure to hand off (or delegate) some of its responsibilities to an instance of another type. Think of a delegator as a boss and a delegate as an employee.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/#Delegation",
         difficulty: .medium,
@@ -428,6 +456,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What are the advatages of the notification design pattern over the delegate pattern?",
+        questionSerialNum: 28,
         explanation: "Notifications can have multiple observers, they are flexible and notifications are delivered asynchronously.",
         reference: nil,
         difficulty: .easy,
@@ -442,6 +471,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "With the __________ observers can be registered and unregistered dynamically at runtime without modifying the code of the notifying object.",
+        questionSerialNum: 29,
         explanation: "Both the notification pattern and key-value observing pattern is capable of it.",
         reference: nil,
         difficulty: .medium,
@@ -456,6 +486,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the acronym KVO stands for in iOS development?",
+        questionSerialNum: 30,
         explanation: "KVO: Key-Value Observing which is a commonly used design pattern.",
         reference: "https://developer.apple.com/documentation/swift/using-key-value-observing-in-swift",
         difficulty: .medium,
@@ -470,6 +501,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "In MVC (design pattern) what does the V stand for?",
+        questionSerialNum: 31,
         explanation: "In the Model-View-Controller (MVC) design pattern the V stands for View",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
         difficulty: .veryEasy,
@@ -484,6 +516,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "In the MVC design pattern what is the role of the Controller?",
+        questionSerialNum: 32,
         explanation: "The Controller mediates between the view and the model via the delegation pattern.",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html",
         difficulty: .easy,
@@ -498,6 +531,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the difference between the MVVM and the Viper design patterns?",
+        questionSerialNum: 33,
         explanation: "The 'R' in VIPER stands for Router which alone handles navigation between screens.",
         reference: "https://www.kodeco.com/8440907-getting-started-with-the-viper-architecture-pattern",
         difficulty: .hard,
@@ -512,6 +546,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "Which is NOT a component in the VIPER design pattern?",
+        questionSerialNum: 34,
         explanation: "VIPER as View-Interactor-Presenter-Entity-Router",
         reference: "https://www.kodeco.com/8440907-getting-started-with-the-viper-architecture-pattern",
         difficulty: .medium,
@@ -526,6 +561,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is a singleton?",
+        questionSerialNum: 35,
         explanation: "A software design pattern that restricts the instantiation of a class to a singular instance.",
         reference: "https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Singleton.html",
         difficulty: .easy,
@@ -540,6 +576,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "How can you declare optional methods in a protocol?",
+        questionSerialNum: 36,
         explanation: "With the @objc optional keywords. Note that all conforming types must be Objective-C compatible.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/#Optional-Protocol-Requirements",
         difficulty: .hard,
@@ -554,6 +591,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the difference between Size classes and Auto Layout?",
+        questionSerialNum: 37,
         explanation: "4 constraints are required to properly define the position of a UI element.",
         reference: nil,
         difficulty: .medium,
@@ -568,6 +606,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "Which one is printed out first?",
+        questionSerialNum: 38,
         explanation: "The print(\"first\") is executed firstly on the current thread. The rest is scheduled to be executed asynchronously on the main thread at some point in the future.",
         reference: nil,
         difficulty: .easy,
@@ -582,6 +621,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is the difference between the main thread and the background threads?",
+        questionSerialNum: 39,
         explanation: "The main thread generally focuses on UI changes, the background threads for lengthier tasks",
         reference: "https://developer.apple.com/documentation/dispatch/dispatchqueue",
         difficulty: .medium,
@@ -596,6 +636,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What the DispatchQoS is used for?",
+        questionSerialNum: 40,
         explanation: "The Dispatch Quality of Service sets the execution priority of tasks. It categorizes work to perform on a DispatchQueue. By specifying the quality of a task, you indicate its importance to your app.",
         reference: "https://developer.apple.com/documentation/dispatch/dispatchqos",
         difficulty: .medium,
@@ -610,6 +651,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "Which qualty of service class has the lowest priority level?",
+        questionSerialNum: 41,
         explanation: "The background tasks have the lowest priority level of all tasks.",
         reference: "https://developer.apple.com/documentation/dispatch/dispatchqos/1780981-background",
         difficulty: .hard,
@@ -624,6 +666,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "How would you set the position of a task's importance within its assigned quality of service (QoS) class?",
+        questionSerialNum: 42,
         explanation: "By setting the relativePriority of the service property.",
         reference: "https://developer.apple.com/documentation/dispatch/dispatchqos/1780953-relativepriority",
         difficulty: .hard,
@@ -638,6 +681,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What is a defer statement?",
+        questionSerialNum: 43,
         explanation: "A defer statement is used for executing code just before transferring program control outside of the scope that the defer statement appears in.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/statements/#Defer-Statement",
         difficulty: .medium,
@@ -652,6 +696,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "With what tools can you catch changes in a property's value in Swift?",
+        questionSerialNum: 44,
         explanation: "With property observers. The \"willSet\" and \"didSet\" observeres are called before/after a change in the observed property's value.",
         reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/properties/#Property-Observers",
         difficulty: .medium,
@@ -668,6 +713,7 @@ let idqQuestionList: [IDQQuestion] = [
     //MARK: - UIKit
     IDQQuestion(
         question: "In UIKit how many constraints are needed at minimum to correctly determine the position of a UI element?",
+        questionSerialNum: 45,
         explanation: "4 constraints are required to properly define the position of a UI element.",
         reference: nil,
         difficulty: .veryEasy,
@@ -682,6 +728,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "In UIKit when loading a view controller what method is called first from the listed below?",
+        questionSerialNum: 46,
         explanation: "The loadView() is called before the controller's view is loaded into memory.",
         reference: "https://developer.apple.com/documentation/uikit/uiviewcontroller/1621454-loadview",
         difficulty: .easy,
@@ -696,6 +743,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "In UIKit how can you programatically set a view controller (ExampleVC) to be the first presented when launching the app?",
+        questionSerialNum: 47,
         explanation: "By setting the window property's rootViewController to ExampleVC in the app's SceneDelegate.",
         reference: nil,
         difficulty: .medium,
@@ -710,6 +758,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "When setting custom constraints to a UI element we should set the element's ______________.",
+        questionSerialNum: 48,
         explanation: "If you want to use Auto Layout to dynamically calculate the size and position of your view, you must set this property to false",
         reference: "https://developer.apple.com/documentation/uikit/uiview/1622572-translatesautoresizingmaskintoco",
         difficulty: .easy,
@@ -724,6 +773,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "Regarding the difference between push and modal segues which of the below statements is true?",
+        questionSerialNum: 49,
         explanation: "Push segues require a navigation view controller. The presented view controller has a back button and it, by default covers the entire screen.",
         reference: "https://developer.apple.com/library/archive/featuredarticles/ViewControllerPGforiPhoneOS/UsingSegues.html",
         difficulty: .medium,
@@ -738,6 +788,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "What methods are required to be implemented when adopting the UICollectionViewDataSource protocol?",
+        questionSerialNum: 50,
         explanation: "At a minimum, all data source objects must implement the collectionView(_:numberOfItemsInSection:) and collectionView(_:cellForItemAt:) methods.",
         reference: "https://developer.apple.com/documentation/uikit/uicollectionviewdatasource",
         difficulty: .medium,
@@ -752,6 +803,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "Regarding the difference between UITableView and UICollectionView which statment is INCORRECT?",
+        questionSerialNum: 51,
         explanation: "The UITableView does not allow varying sized cells is the false statment. With the tableView(_:heightForRowAt:) method you can modify a given row's height.",
         reference: "https://developer.apple.com/documentation/uikit/uitableviewdelegate/1614998-tableview",
         difficulty: .easy,
@@ -766,6 +818,7 @@ let idqQuestionList: [IDQQuestion] = [
 
     IDQQuestion(
         question: "In UIKit use __________ to force the view to update its layout immediately.",
+        questionSerialNum: 52,
         explanation: "Use layoutIfNeeded() to force the view to update its layout immediately. When using Auto Layout, the layout engine updates the position of views as needed to satisfy changes in constraints.",
         reference: "https://developer.apple.com/documentation/uikit/uiview/1622507-layoutifneeded",
         difficulty: .medium,
@@ -780,6 +833,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "What is the default value for tableView(_:heightForRowAt:) if the table view is not empty?",
+        questionSerialNum: 53,
         explanation: "automaticDimension is the default value that is used for the height or width of a UI element, such as a table view cell or a collection view cell.",
         reference: "https://developer.apple.com/documentation/uikit/uitableview/1614961-automaticdimension",
         difficulty: .medium,
@@ -794,6 +848,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "When subclassing UICollectionViewCell and implementing the prepareForReuse() without calling the super.prepareForResue() the intended purpose of the method __________ ?",
+        questionSerialNum: 54,
         explanation: "If you override the prepareForReuse() method in a subclass of UICollectionViewCell and you don't call super.prepareForReuse(), the default implementation of prepareForReuse() provided by UICollectionViewCell may not be executed.",
         reference: "https://developer.apple.com/documentation/uikit/uicollectionreusableview/1620141-prepareforreuse",
         difficulty: .medium,
@@ -808,6 +863,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "How can you implement a dynamic font size in UILabel?",
+        questionSerialNum: 55,
         explanation: "By setting the adjustsFontSizeToFitWidth property true and specifying a minimumScaleFactor the label's fontsize will dynamically be set based on the label’s bounding rectangle.",
         reference: "https://developer.apple.com/documentation/uikit/uilabel/1620546-adjustsfontsizetofitwidth",
         difficulty: .medium,
@@ -822,6 +878,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "How can you horizontally center the text of a UILabel?",
+        questionSerialNum: 56,
         explanation: "With the label's textAlignment property set to center",
         reference: "https://developer.apple.com/documentation/uikit/uilabel/1620541-textalignment",
         difficulty: .veryEasy,
@@ -836,6 +893,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "When working with UIKit what would you use to make sure the user can enter a large amount of text into your app?",
+        questionSerialNum: 57,
         explanation: "The UITextView is by default a multiline, scrollable text region which is perfect for entering or editing a larger body of text.",
         reference: "https://developer.apple.com/documentation/uikit/uitextview",
         difficulty: .easy,
@@ -850,6 +908,7 @@ let idqQuestionList: [IDQQuestion] = [
     
     IDQQuestion(
         question: "How would you build a slider in UIKit that allows the user to select a range of values?",
+        questionSerialNum: 58,
         explanation: "The only slider Apple offers is the UISlider() which only allows the selection of a single value from a range of values. You need to use third party libraries or place two sliders on top of each other.",
         reference: "https://developer.apple.com/documentation/uikit/uicontrol",
         difficulty: .hard,

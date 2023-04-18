@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 final class IDQGameViewController: UIViewController {
     
@@ -76,6 +77,28 @@ final class IDQGameViewController: UIViewController {
 }
 
 extension IDQGameViewController: IDQGameViewDelegate {
+    func shouldOpenMailComposer(for question: IDQQuestion?) {
+        guard let question = question else {
+            return
+        }
+        guard MFMailComposeViewController.canSendMail()  else {
+            print("Can't send mail")
+            return
+        }
+        var mailMessageSubject: String = "Report on question number: \(question.questionSerialNum)"
+        
+        let systemVersion = UIDevice.current.systemVersion
+        
+        
+        
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setToRecipients(["hello@danielkarath.com"])
+        composer.setSubject(mailMessageSubject)
+        composer.setMessageBody("", isHTML: false)
+        present(composer, animated: true)
+    }
+    
     
     func idqGameView(_ gameView: IDQGameView, questionCounter: Int) {
         quizRoundCounter = questionCounter

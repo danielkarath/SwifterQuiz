@@ -7,10 +7,10 @@
 
 import UIKit
 
-
 protocol IDQDisableQuestionViewDelegate: AnyObject {
     func didDismiss(_ disableQuestionView: IDQDisableQuestionView)
     func didTapDisable(_ disableQuestionView: IDQDisableQuestionView)
+    func didTapReport(_ disableQuestionView: IDQDisableQuestionView)
 }
 
 
@@ -163,7 +163,6 @@ class IDQDisableQuestionView: UIView {
         button.addSubview(imageView)
     }
     
-    
     @objc
     private func disableButtonTapped(_ sender: UIButton) {
         delegate?.didTapDisable(self)
@@ -171,7 +170,7 @@ class IDQDisableQuestionView: UIView {
     
     @objc
     private func reportButtonTapped(_ sender: UIButton) {
-        
+        delegate?.didTapReport(self)
     }
     
     @objc
