@@ -151,24 +151,36 @@ final class IDQUserManager {
     }
     
     public func addToStreak(for quiz: IDQQuiz) {
-        let user = fetchUser()
-        let calendar = Calendar.current
-        guard let previousGameDate = user?.lastDatePlayed else {
-            user?.streak = 1
+        guard let user = fetchUser() else {
+            print("At UserManager addToStreak could not load the user")
+            return
+        }
+        guard var previousGameDate = user.lastDatePlayed else {
+            print("At UserManager addToStreak could not load previousGameDate: \(user.lastDatePlayed)")
+            user.streak = 1
             saveToCoreData()
             return
         }
-        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: quiz.date)!
-        let isSameCalendarDate = calendar.isDate(quiz.date, equalTo: previousGameDate, toGranularity: .day)
+        let calendar = Calendar.current
+        let evaulatedTimePeriod: Calendar.Component = .day
+        let thisQuizDate: Date = quiz.date
+        
+        let yesterdayDate = calendar.date(byAdding: evaulatedTimePeriod, value: -1, to: quiz.date)!
+        let isSameCalendarDate = calendar.isDate(quiz.date, equalTo: previousGameDate, toGranularity: evaulatedTimePeriod)
 
+        print("yesterdayDate: \(yesterdayDate)")
+        print("previousGameDate: \(previousGameDate)")
+        print("isSameCalendarDate: \(isSameCalendarDate)")
+        
         if !isSameCalendarDate && previousGameDate == yesterdayDate {
             print("The user played their last game the day before so it's time to add 1 to their streak")
-            user?.streak += 1
+            user.streak += 1
             saveToCoreData()
         } else if isSameCalendarDate {
             print("Streak evaulatin has already been done today. No further actions needed.")
         } else {
-            user?.streak = 1
+            print("Did set streak to 1")
+            user.streak = 1
             saveToCoreData()
         }
     }
