@@ -12,6 +12,7 @@ final class IDQUserManager {
     
     private let topicMetricsManager = IDQTopicMetricManager()
     private let difficultyMetricsManager = IDQDifficultyMetricManager()
+    private let daytimeGroupManager = IDQDaytimeActivityGroupManager()
     
     //MARK: - Init
     init(
@@ -126,6 +127,7 @@ final class IDQUserManager {
         }
         topicMetricsManager.createMetrics()
         difficultyMetricsManager.createMetrics()
+        daytimeGroupManager.generateDaytimeGroups()
     }
     
     public func evaulateStreak() {

@@ -21,6 +21,7 @@ final class IDQResultViewViewModel {
     
     private let quizResultManager = IDQQuizResultManager()
     private let userManager = IDQUserManager()
+    private let daytimeActivityGroupManager = IDQDaytimeActivityGroupManager()
     
     private func evaulate(quiz: IDQQuiz) -> ScoreType {
         guard quiz.totalScore > 0 else {
@@ -241,6 +242,18 @@ final class IDQResultViewViewModel {
             return
         }
         quizResultManager.saveToUserRecords(quiz)
+    }
+    
+    public func saveToDaytimeActivity(_ quiz: IDQQuiz) {
+        guard !quiz.questions.isEmpty else {
+            return
+        }
+        
+        let dayTimeGroup = daytimeActivityGroupManager.evaulate(for: quiz.date)
+        guard let daytimeActivityGroup = daytimeActivityGroupManager.fetch(quiz, for: dayTimeGroup) else {
+            return
+        }
+        daytimeActivityGroupManager.update(daytimeActivityGroup, with: quiz)
     }
     
     public func evaulateStreak(for quiz: IDQQuiz) {

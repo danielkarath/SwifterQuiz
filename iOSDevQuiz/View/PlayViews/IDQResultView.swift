@@ -235,6 +235,7 @@ class IDQResultView: UIView {
         
         DispatchQueue.global(qos: .utility).async {
             self.viewModel.save(quiz: quiz)
+            self.viewModel.saveToDaytimeActivity(quiz)
             self.viewModel.evaulateStreak(for: quiz)
             self.viewModel.saveToUserRecords(quiz)
         }
