@@ -39,20 +39,20 @@ final class IDQStatsViewController: UIViewController {
             statsSwiftUIControllerView.removeFromParent()
         }
         
-        let myUser = userManager.fetchUser()
-        let totalScore: Double = Double(myUser?.totalScore ?? 0)
-        let averageSpeed: Double = Double(myUser?.totalPlayTime ?? 0)
-        let totalPerformance: Double = (myUser?.performance ?? 0)
-        let gamesPlayed: Double = Double(myUser?.numberOfQuizesPlayed ?? 0)
-        let timeSpent: Double = (((myUser?.totalPlayTime ?? 60)/3600) ?? 0)
-        let streak: Double = Double(myUser?.streak ?? 0)
+        guard let user = userManager.fetchUser() else { return }
+        
+        let timeSpent: Double = user.totalPlayTime
+        
+        let totalScore: Double = Double(user.totalScore ?? 0)
+        let totalPerformance: Double = (user.performance ?? 0)
+        let gamesPlayed: Double = Double(user.numberOfQuizesPlayed ?? 0)
+        let streak: Double = Double(user.streak ?? 0)
         
         let statsSwiftUIVC = UIHostingController(
             rootView:
                 IDQStatsView(
                     totalScore: totalScore,
                     totalPerformance: totalPerformance,
-                    averageSpeed: 140,
                     quizesPlayed: gamesPlayed,
                     timeSpent: timeSpent,
                     streak: streak

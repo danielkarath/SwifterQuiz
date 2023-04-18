@@ -50,6 +50,8 @@ final class IDQGameView: UIView {
     private var questionEndDate: Date?
     private var quizTimeSpent: TimeInterval = 0
     
+    private var didAnswer: Bool = false
+    
     private var question: IDQQuestion? {
         didSet {
             startViewAnimations()
@@ -174,9 +176,13 @@ final class IDQGameView: UIView {
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside(_:)))
         overlayView.addGestureRecognizer(tapGesture)
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDisableView(_:)))
-        swipeGesture.direction = .down
-        disableQuestionView.addGestureRecognizer(swipeGesture)
+        let swipeGestureDisableView = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDisableView(_:)))
+        swipeGestureDisableView.direction = .down
+        disableQuestionView.addGestureRecognizer(swipeGestureDisableView)
+        
+        let swipeGestureExitView = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeExitView(_:)))
+        swipeGestureExitView.direction = .down
+        exitView.addGestureRecognizer(swipeGestureExitView)
     }
     
     private func createCollectionView() -> UICollectionView {
@@ -280,6 +286,7 @@ final class IDQGameView: UIView {
         self.spinner.stopAnimating()
         
         //Seting up values for the Views UI elements
+        self.didAnswer = false
         self.difficultyLabel.text = question.difficulty.rawValue
         self.questionLabel.text = question.question
         var shuffledAnswers = question.answers
@@ -349,6 +356,7 @@ final class IDQGameView: UIView {
     }
     
     private func displayQuestionResults(isCorrectlyAnswered: Bool, answeredInTime: Bool) {
+        didAnswer = true
         delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
         countDownView.stopTimer()
         configure(overlay: overlayView)
@@ -369,6 +377,13 @@ final class IDQGameView: UIView {
     private func didSwipeDisableView(_ sender: UIView) {
         if !overlayView.isHidden && isDisableViewVisible {
             didDismiss(disableQuestionView)
+        }
+    }
+    
+    @objc
+    private func didSwipeExitView(_ sender: UIView) {
+        if !overlayView.isHidden && isExitViewVisible {
+            didTapRejoinButton(exitView)
         }
     }
     
@@ -423,18 +438,27 @@ final class IDQGameView: UIView {
         let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
         quizTimeSpent += timeDifference
         
-        configure(overlay: overlayView)
+        if overlayView.isHidden {
+            configure(overlay: overlayView)
+        }
         UIView.animate(withDuration: 0.80, delay: 0.0, usingSpringWithDamping: 0.86, initialSpringVelocity: 0.2, options: [], animations: {
             self.exitView.transform = CGAffineTransform(translationX: 0, y: -290)
         }, completion: nil)
     }
     
     private func didTapRejoinQuiz() {
-        countDownView.unpauseTimer(game: game!)
+        guard let game = self.game else {return}
         UIView.animate(withDuration: 0.30) {
             self.exitView.transform = CGAffineTransform(translationX: 0, y: 0)
         }
-        configure(overlay: overlayView)
+        
+        if countDownView.timeSpent >= game.questionTimer.rawValue || didAnswer {
+            print("The question countdown did end")
+        } else {
+            print("The question countdown did not end yet")
+            countDownView.unpauseTimer(game: game)
+            configure(overlay: overlayView)
+        }
     }
     
     private func configure(overlay view: UIView) {

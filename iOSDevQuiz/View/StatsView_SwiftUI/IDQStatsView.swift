@@ -12,11 +12,11 @@ struct IDQStatsView: View {
     
     var totalScore: Double
     var totalPerformance: Double
-    var averageSpeed: Double
     var quizesPlayed: Double
     var timeSpent: Double
     var streak: Double
     
+    private let viewModel = IDQStatsViewViewModel()
     
     var body: some View {
         ZStack {
@@ -29,7 +29,7 @@ struct IDQStatsView: View {
                     IDQMainStatsView(totalScore: totalScore, totalPerformance: totalPerformance, streak: streak)
                     ScrollView(.vertical) {
                         Spacer(minLength: UIScreen.main.bounds.width/1.30)
-                        IDQStatsMetricsHStackView(speed: averageSpeed, totalPerformance: totalPerformance, quizesPlayed: quizesPlayed, timeSpent: timeSpent)
+                        IDQStatsMetricsHStackView(quizesPlayed: quizesPlayed, timeSpent: viewModel.setupGameTime(for: timeSpent), gameTimeText: viewModel.setupTextFor(totalGameTime: timeSpent))
                     }
                 }
             }
@@ -41,6 +41,6 @@ struct IDQStatsView: View {
 
 struct IDQStatsView_Previews: PreviewProvider {
     static var previews: some View {
-        IDQStatsView(totalScore: 28, totalPerformance: 0.87, averageSpeed: 140, quizesPlayed: 23, timeSpent: 9048, streak: 2)
+        IDQStatsView(totalScore: 28, totalPerformance: 0.87, quizesPlayed: 23, timeSpent: 9048, streak: 2)
     }
 }

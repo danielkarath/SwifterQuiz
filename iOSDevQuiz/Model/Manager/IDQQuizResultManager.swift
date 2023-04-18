@@ -53,7 +53,6 @@ final class IDQQuizResultManager {
         user.performance = weightedTotalPerformance
         user.numberOfQuizesPlayed += 1
         user.lastDatePlayed = Date.currentTime
-        print("TIME SPENT IN QUIZ = \(quiz.quizDuration)")
         user.totalPlayTime += quiz.quizDuration
         
         do {
