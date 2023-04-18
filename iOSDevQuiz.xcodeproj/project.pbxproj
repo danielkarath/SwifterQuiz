@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3901B87C29EF1A1A00CEECA4 /* IDQSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */; };
+		3901B87E29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B87D29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift */; };
+		3901B88229EF33EE00CEECA4 /* IDQAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */; };
 		3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */; };
 		3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24B29E0372A00E3A632 /* IDQScoreView.swift */; };
 		3905B24F29E0403C00E3A632 /* IDQTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24E29E0403C00E3A632 /* IDQTimeView.swift */; };
@@ -72,6 +75,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQSettingsView.swift; sourceTree = "<group>"; };
+		3901B87D29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQSettingsViewViewModel.swift; sourceTree = "<group>"; };
+		3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAboutView.swift; sourceTree = "<group>"; };
 		3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultViewViewModel.swift; sourceTree = "<group>"; };
 		3905B24B29E0372A00E3A632 /* IDQScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQScoreView.swift; sourceTree = "<group>"; };
 		3905B24E29E0403C00E3A632 /* IDQTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTimeView.swift; sourceTree = "<group>"; };
@@ -149,6 +155,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3901B87A29EF19E900CEECA4 /* SettingsView_SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */,
+				3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */,
+			);
+			path = SettingsView_SwiftUI;
+			sourceTree = "<group>";
+		};
 		3905B24D29E03FFD00E3A632 /* ResultViewSubviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +264,7 @@
 				39267BB229E82904007DD96F /* StatsView_SwiftUI */,
 				3952D1DC29B8ABB10061C5C9 /* PlayViews */,
 				39E2256D29B8F6F400830F1A /* GameViews */,
+				3901B87A29EF19E900CEECA4 /* SettingsView_SwiftUI */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +326,7 @@
 				3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */,
 				39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */,
 				391DDB6C29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift */,
+				3901B87D29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -420,10 +437,12 @@
 				39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */,
 				39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */,
 				391DDB6B29EB2917003AAD2D /* IDQStatsMetricsHStackView.swift in Sources */,
+				3901B87E29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift in Sources */,
 				39962B2B29C9CC93001350F8 /* IDQGameResultViewController.swift in Sources */,
 				3914C93329B10B300001377B /* IDQPlayView.swift in Sources */,
 				3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */,
 				3914C92529B0EB8A0001377B /* IDQGameViewController.swift in Sources */,
+				3901B87C29EF1A1A00CEECA4 /* IDQSettingsView.swift in Sources */,
 				39E0707D29EC719200AE1858 /* IDQTrophyView.swift in Sources */,
 				3920A1B029EAFBEE001A1522 /* IDQUser+CoreDataProperties.swift in Sources */,
 				3914C92729B0EBD20001377B /* IDQStatsViewController.swift in Sources */,
@@ -438,6 +457,7 @@
 				3960971029EEA7BF0061F658 /* IDQDaytimeActivityGroup+CoreDataProperties.swift in Sources */,
 				3914C92329B0DCE60001377B /* IDQConstants.swift in Sources */,
 				39AF9C4429CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift in Sources */,
+				3901B88229EF33EE00CEECA4 /* IDQAboutView.swift in Sources */,
 				3914C92E29B0ED260001377B /* IDQGameOptionsViewController.swift in Sources */,
 				3905B24F29E0403C00E3A632 /* IDQTimeView.swift in Sources */,
 				3932AE1C29EEA832003FFE8B /* IDQDaytimeActivityGroupManager.swift in Sources */,

@@ -50,10 +50,10 @@ final class IDQDifficultyMetricManager {
         }
         
         do {
-            print("Successfully generated \(counter) topic metrics")
+            print("Successfully generated \(counter) difficulty metrics")
             try context.save()
         } catch let error as NSError {
-            print("Failed to generated a user. Error: \(error), \(error.userInfo)")
+            print("Failed to generated difficulty metrics. Error: \(error), \(error.userInfo)")
             // Handle the error appropriately, such as showing an error message to the user
         }
 

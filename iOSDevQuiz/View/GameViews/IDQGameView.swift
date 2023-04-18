@@ -233,12 +233,12 @@ final class IDQGameView: UIView {
             countDownView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
             countDownView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
 
-            collectionView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 24),
+            collectionView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 18),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -160),
+            collectionView.bottomAnchor.constraint(equalTo: passButton.topAnchor, constant: -16),
             
-            passButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
+            passButton.centerYAnchor.constraint(equalTo: countDownView.centerYAnchor, constant: 0),
             passButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             passButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 50),
             passButton.heightAnchor.constraint(equalToConstant: 40),
@@ -575,7 +575,7 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         if !cellsAnimated[indexPath.row] {
             cellsAnimated[indexPath.row] = true
             
-            collectionView.slide(cell, at: indexPath, delay: 0.5)
+            collectionView.slide(cell, at: indexPath, delay: 0.3)
         } else {
             cell.alpha = 1.0
             cell.transform = CGAffineTransform.identity

@@ -71,7 +71,7 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
             answerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             answerLabel.leadingAnchor.constraint(equalTo: answerImageView.trailingAnchor, constant: 16),
             answerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            //answerLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            answerLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
         ])
     }
     
