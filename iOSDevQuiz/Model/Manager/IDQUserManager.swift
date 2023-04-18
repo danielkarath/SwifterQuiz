@@ -28,11 +28,6 @@ final class IDQUserManager {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "IDQUser")
         do {
             let count = try context.count(for: fetchRequest)
-            if count == 1 {
-                if let fetchedUser = fetchUser() {
-                    myUser = fetchedUser
-                }
-            }
             return count
         } catch {
             print(error.localizedDescription)
@@ -51,14 +46,12 @@ final class IDQUserManager {
     }
     
     //MARK: - Pubic
-    public var myUser: IDQUser?
     
     public func printUserRecord() {
         guard let user = fetchUser() else {
             print("Could not load User or there is none")
             return
         }
-        myUser = user
         print("\n\n------------------------------")
         print("\t\tUSER DATA\n")
         print("User name: \(user.firstName)")
@@ -88,8 +81,12 @@ final class IDQUserManager {
         do {
             let user: [IDQUser] = try context.fetch(IDQUser.fetchRequest())
             if !user.isEmpty {
-                myUser = user.first
-                return user.first
+                if let safeUser = user.first as? IDQUser {
+                    return safeUser
+                } else {
+                    print("The first element of the fetched [IDQUser] array is not an IDQUser. There is a bug in IDQUserManager fetchUser")
+                    return nil
+                }
             } else {
                 return nil
             }

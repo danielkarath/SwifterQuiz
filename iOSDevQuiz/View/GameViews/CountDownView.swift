@@ -120,33 +120,35 @@ class CountDownView: UIView {
         strokeLayer.add(colorAnimation, forKey: "colorAnimation")
     }
     
-    private func startAnimation(with duration: TimeInterval) {
+    private func startAnimation(with duration: TimeInterval, delay: TimeInterval) {
         var remainingTime: TimeInterval = duration
-        UIView.animate(withDuration: TimeInterval(duration)) {
-            self.circleAnimation(self, layer: self.strokeLayer, colors: self.colors.toCGColors(), duration: CFTimeInterval(duration))
-            
-            self.questionCountdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {_ in
-                remainingTime -= 1
-                self.timeSpent = remainingTime
-                if remainingTime <= 0 {
-                    self.countDownLabel.text = "0"
-                    self.countDownLabel.textColor = IDQConstants.errorColor
-                    self.stopTimer()
-                    self.delegate?.countDownView(self, didReachDeadline: true)
-                } else {
-                    //self.countDownView.changeTimer(remainingTime)
-                    var durationString: String = String(remainingTime)
-                    durationString = String(durationString.prefix(durationString.count - 2))
-                    self.countDownLabel.text = durationString
-                    
-                    if remainingTime == 10 {
-                        let targetSize: CGFloat = self.viewSize * 2.5
-                        self.circularView.pulseAnimation(targetSize: targetSize)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            UIView.animate(withDuration: TimeInterval(duration)) {
+                self.circleAnimation(self, layer: self.strokeLayer, colors: self.colors.toCGColors(), duration: CFTimeInterval(duration))
+                
+                self.questionCountdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {_ in
+                    remainingTime -= 1
+                    self.timeSpent = remainingTime
+                    if remainingTime <= 0 {
+                        self.countDownLabel.text = "0"
+                        self.countDownLabel.textColor = IDQConstants.errorColor
+                        self.stopTimer()
+                        self.delegate?.countDownView(self, didReachDeadline: true)
+                    } else {
+                        //self.countDownView.changeTimer(remainingTime)
+                        var durationString: String = String(remainingTime)
+                        durationString = String(durationString.prefix(durationString.count - 2))
+                        self.countDownLabel.text = durationString
                         
-                    }
-                    if remainingTime == 5 {
-                        let targetSize: CGFloat = self.viewSize * 12.0
-                        self.circularView.pulseAnimation(targetSize: targetSize, duration: 1.60)
+                        if remainingTime == 10 {
+                            let targetSize: CGFloat = self.viewSize * 2.5
+                            self.circularView.pulseAnimation(targetSize: targetSize)
+                            
+                        }
+                        if remainingTime == 5 {
+                            let targetSize: CGFloat = self.viewSize * 12.0
+                            self.circularView.pulseAnimation(targetSize: targetSize, duration: 1.60)
+                        }
                     }
                 }
             }
@@ -157,8 +159,8 @@ class CountDownView: UIView {
     
     public var timeSpent: TimeInterval = 0
     
-    public func setupTimer(game: IDQGame) {
-        startAnimation(with: game.questionTimer.rawValue)
+    public func setupTimer(game: IDQGame, delay: TimeInterval) {
+        startAnimation(with: game.questionTimer.rawValue, delay: delay)
         countDownLabel.text = String(Int(game.questionTimer.rawValue))
     }
     
@@ -183,7 +185,7 @@ class CountDownView: UIView {
     public func unpauseTimer(game: IDQGame) {
         if !questionCountdownTimer.isValid {
             let reducedTime = Double(game.questionTimer.rawValue - Double(timeSpent))
-            startAnimation(with: timeSpent)
+            startAnimation(with: timeSpent, delay: 0)
             countDownLabel.text = String(timeSpent)
         }
     }

@@ -42,6 +42,8 @@ final class IDQGameView: UIView {
     
     private var quizDuration: TimeInterval = 0
     
+    private var cellsAnimated: [Bool] = []
+    
     private let quizStartDate: Date = Date.currentTime
     private var questionStartDate: Date = Date.currentTime
     private var questionEndDate: Date?
@@ -49,26 +51,7 @@ final class IDQGameView: UIView {
     
     private var question: IDQQuestion? {
         didSet {
-            guard let question = question else { return }
-            spinner.stopAnimating()
-            self.answerCollectionView?.reloadData()
-            self.answerCollectionView?.isHidden = false
-            self.passButton.isHidden = false
-            var shuffledAnswers = question.answers
-            for i in 0..<shuffledAnswers.count {
-                let j = Int(arc4random_uniform(UInt32(shuffledAnswers.count - i))) + i
-                if i != j {
-                    shuffledAnswers.swapAt(i, j)
-                }
-            }
-            self.answers = shuffledAnswers
-            
-            UIView.animate(withDuration: 0.25, delay: 0.10) {
-                self.difficultyLabel.text = self.question?.difficulty.rawValue
-                self.questionLabel.text = self.question?.question
-                self.answerCollectionView?.alpha = 1.0
-                self.passButton.alpha = 1.0
-            }
+            startViewAnimations()
         }
     }
     
@@ -97,6 +80,7 @@ final class IDQGameView: UIView {
     private let questionNumberLabel: UILabel = {
         let label = UILabel()
         label.text = " "
+        label.alpha = 0.0
         label.numberOfLines = 1
         label.textAlignment = .right
         label.textColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.15)
@@ -109,6 +93,7 @@ final class IDQGameView: UIView {
     private let questionLabel: UILabel = {
         let label = UILabel()
         label.text = " "
+        label.alpha = 0.0
         label.numberOfLines = 0
         label.textAlignment = .left
         label.textColor = IDQConstants.highlightFontColor
@@ -121,6 +106,7 @@ final class IDQGameView: UIView {
     private let difficultyLabel: UILabel = {
         let label = UILabel()
         label.text = " "
+        label.alpha = 0.0
         label.numberOfLines = 1
         label.textAlignment = .left
         label.textColor = IDQConstants.secondaryFontColor
@@ -277,6 +263,57 @@ final class IDQGameView: UIView {
         ])
     }
     
+    private func setupCellAnimation() {
+        guard let question = self.question else {
+            print("Could not load question for setting up animations in IDQGameView setupCellAnimation")
+            return
+        }
+        
+        for _ in question.answers {
+            cellsAnimated.append(false)
+        }
+    }
+    
+    private func startViewAnimations() {
+        guard let question = question else { return }
+        self.spinner.stopAnimating()
+        
+        //Seting up values for the Views UI elements
+        self.difficultyLabel.text = question.difficulty.rawValue
+        self.questionLabel.text = question.question
+        var shuffledAnswers = question.answers
+        for i in 0..<shuffledAnswers.count {
+            let j = Int(arc4random_uniform(UInt32(shuffledAnswers.count - i))) + i
+            if i != j {
+                shuffledAnswers.swapAt(i, j)
+            }
+        }
+        self.answers = shuffledAnswers
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            UIView.animate(withDuration: 0.30, delay: 0.0) {
+                self.questionNumberLabel.alpha = 1.0
+            }
+            
+            UIView.animate(withDuration: 0.60, delay: 0.20) {
+                self.questionLabel.alpha = 1.0
+                self.difficultyLabel.alpha = 1.0
+            }
+            
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.80) {
+            self.answerCollectionView?.reloadData()
+            self.answerCollectionView?.isHidden = false
+            self.passButton.isHidden = false
+            self.passButton.alpha = 1.0
+            self.countDownView.alpha = 1.0
+            self.answerCollectionView?.alpha = 1.0
+            self.setupCellAnimation()
+        }
+
+    }
+    
     private func setupQuizResults() {
         guard let game = self.game else { return }
         countDownView.stopTimer()
@@ -425,11 +462,16 @@ final class IDQGameView: UIView {
         guard !questions.isEmpty, game != nil else {
             fatalError("Wrong configuration at IDQGameView configure")
         }
+        self.questionLabel.alpha = 0.0
+        self.difficultyLabel.alpha = 0.0
+        self.answerCollectionView?.alpha = 0.0
+        self.countDownView.alpha = 0.0
         questionStartDate = Date.currentTime
+        self.cellsAnimated = []
         self.questions = questions
         self.game = game
         questionLabel.configureFor(IDQConstants.keywords)
-        countDownView.setupTimer(game: game)
+        countDownView.setupTimer(game: game, delay: 1.40)
         if viewModel.isLastQuestion(game: game) {
             self.question = questions[viewModel.quizRound-1]
             questionNumberLabel.text = String(viewModel.quizRound)
@@ -500,6 +542,20 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         didTapAnswer(cell: cell, selectedAnswer: selectedAnswer)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? IDQGameAnswerCollectionViewCell else { return }
+        guard !cellsAnimated.isEmpty else {
+            return
+        }
+        if !cellsAnimated[indexPath.row] {
+            cellsAnimated[indexPath.row] = true
+            
+            collectionView.slide(cell, at: indexPath, delay: 0.5)
+        } else {
+            cell.alpha = 1.0
+            cell.transform = CGAffineTransform.identity
+        }
+    }
 }
 
 extension IDQGameView: IDQAnswerResultViewDelegate {

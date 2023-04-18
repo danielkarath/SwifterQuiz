@@ -95,6 +95,20 @@ extension UIView {
     
 }
 
+extension UICollectionView {
+    func slide(_ cell: UICollectionViewCell, at indexPath: IndexPath, delay: Double = 0.6) {
+        cell.transform = CGAffineTransform(translationX: -self.bounds.width, y: 0)
+        
+        // Calculate delay for this cell based on its index path
+        let adjustedDelay = delay * Double(indexPath.item)
+        
+        // Apply animation to slide cell into view with delay
+        UIView.animate(withDuration: 0.60, delay: adjustedDelay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.40, options: [], animations: {
+            cell.transform = CGAffineTransform.identity
+        }, completion: nil)
+    }
+}
+
 extension UIImage {
     func withGradient(colors: [CGColor]) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)

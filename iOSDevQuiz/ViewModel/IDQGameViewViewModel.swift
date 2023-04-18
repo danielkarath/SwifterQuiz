@@ -43,12 +43,18 @@ final class IDQGameViewViewModel {
     //MARK: - Public
     
     public func getQuizResults(game: IDQGame, questions: [IDQQuestion], isCorrect answerArray: [IDQAnswerType], totalScore: Int, quizDuration: TimeInterval) -> IDQQuiz {
+        //Adjusted quiz duration due to the animations
+        var adjustedQuizDuration: TimeInterval = Double(questions.count) * 0.80
+        adjustedQuizDuration = quizDuration - adjustedQuizDuration
+        if adjustedQuizDuration < 0 {
+            adjustedQuizDuration = 0
+        }
         let questionsTuple = createQuestionTuples(with: questions, with: answerArray)
         let quiz = IDQQuiz(
             gamestyle: game,
             questions: questionsTuple,
             totalScore: totalScore,
-            quizDuration: quizDuration,
+            quizDuration: adjustedQuizDuration,
             date: Date.currentTime
         )
         return quiz

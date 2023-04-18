@@ -137,20 +137,6 @@ class IDQResultView: UIView {
         }
     }
     
-    private func animate(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: IndexPath) {
-        cell.alpha = 0.0
-        cell.transform = CGAffineTransform(translationX: -collectionView.bounds.width, y: 0)
-        
-        // Calculate delay for this cell based on its index path
-        let delay = 0.07 * Double(indexPath.item)
-        
-        // Apply animation to slide cell into view with delay
-        UIView.animate(withDuration: 0.60, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.40, options: [], animations: {
-            cell.alpha = 1.0
-            cell.transform = CGAffineTransform.identity
-        }, completion: nil)
-    }
-    
     //MARK: - Private
     
     private func setupConstraints() {
@@ -281,7 +267,7 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
         if !cellsAnimated[indexPath.row] {
             cellsAnimated[indexPath.row] = true
             
-            animate(cell: cell, collectionView: collectionView, indexPath: indexPath)
+            collectionView.slide(cell, at: indexPath)
         } else {
             cell.alpha = 1.0
             cell.transform = CGAffineTransform.identity
