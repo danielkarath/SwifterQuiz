@@ -22,7 +22,7 @@ struct IDQDismissButtonView: View {
                     .imageScale(.large)
                     .frame(width: 44, height: 44)
             }
-            .padding(.top, -60)
+            //.padding(.top, -60)
         }
     }
 }

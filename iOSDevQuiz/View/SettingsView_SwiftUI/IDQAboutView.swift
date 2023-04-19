@@ -9,8 +9,14 @@ import SwiftUI
 
 struct IDQAboutView: View {
     
-    private let appVersion: String = Bundle.main.appVersion ?? "1.0"
+    @Environment(\.colorScheme) var colorScheme
+    
     @Binding var isAboutViewVisible: Bool
+    
+    private let appVersion: String = Bundle.main.appVersion ?? "1.0"
+    private let aboutDescriptionText = "Thank you for downloading my app! I'm Daniel and I'm the developer of the application you're using. I'd a blast building this app & I hope you'll have a great time using it.\n\nIf you'd like to give me some feedback, feel free to send me an e-mail or contact me via Twitter."
+    var topPaddingModifier: CGFloat = UIScreen.main.bounds.height >= 700 ? 0.05 : 0.16
+    var topSpacerModifier: CGFloat = UIScreen.main.bounds.height >= 700 ? 0.05 : 0.015
     
     var body: some View {
         let leadingColor = Color(IDQConstants.highlightedLightOrange)
@@ -18,28 +24,39 @@ struct IDQAboutView: View {
         let gradient = LinearGradient(gradient: Gradient(colors: [leadingColor, trailingColor]),
                                       startPoint: .leading,
                                       endPoint: .topTrailing)
-        
         ZStack {
             AddCurve()
                 .fill(gradient)
             VStack(alignment: .center, spacing: 2) {
-                Spacer()
                 IDQDismissButtonView(isAboutViewVisible: $isAboutViewVisible)
                     .padding(.leading, UIScreen.main.bounds.width - 80)
-                    .padding(.top, 16)
+                    .padding(.top, UIScreen.main.bounds.height * topPaddingModifier)
+                Spacer(minLength: UIScreen.main.bounds.height * topSpacerModifier)
                 Text("iOS Dev Quiz")
                     .font(Font(IDQConstants.setFont(fontSize: 24, isBold: true)))
                     .foregroundColor(Color(IDQConstants.whiteColor))
                 Text("App version: \(appVersion)")
                     .font(Font(IDQConstants.setFont(fontSize: 14, isBold: false)))
                     .foregroundColor(Color(IDQConstants.whiteColor))
-                Spacer()
+                    .padding(.bottom, 16)
                 IDQAppIconView()
                     .frame(width: 100, height: 100)
-                    .padding(.top, 24)
-                Spacer(minLength: 600)
+                Spacer(minLength: UIScreen.main.bounds.height * 0.10)
+                IDQAboutTextView(title: "Hey there!", description: aboutDescriptionText)
+                    .frame(width: UIScreen.main.bounds.width - 64, height: 180)
+                    .shadow(color: colorScheme == .light ? Color.gray.opacity(0.40) : Color.clear, radius: 5, x: 0, y: 5)
+                    .padding(.bottom, 16)
+                HStack(spacing: 16) {
+                    IDQSocialMediaView(title: "Keep in touch", subTitle: "Follow me on Twitter", image: Image(uiImage: IDQConstants.twitterIcon))
+                        .frame(width: UIScreen.main.bounds.width/2 - 24, height: 60)
+                        .shadow(color: colorScheme == .light ? Color.gray.opacity(0.40) : Color.clear, radius: 5, x: 0, y: 5)
+                    IDQSocialMediaView(title: "Reach out", subTitle: "Send feedback", image: Image(systemName: "envelope"))
+                        .frame(width: UIScreen.main.bounds.width/2 - 24, height: 60)
+                        .shadow(color: colorScheme == .light ? Color.gray.opacity(0.40) : Color.clear, radius: 5, x: 0, y: 5)
+                }
+                .frame(width: UIScreen.main.bounds.width - 64, height: 70)
+                Spacer(minLength: UIScreen.main.bounds.height * 0.30)
             }
-            .padding(.top, 128)
         }
         .background(Color(IDQConstants.backgroundColor))
         .ignoresSafeArea()
@@ -59,7 +76,7 @@ struct AddCurve: Shape {
             
             path.addLine(to: CGPoint(x: rect.maxX, y: rect.minX))
             path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
-
+            print("SCREEN SIZE: \(UIScreen.main.bounds.height)")
         }
     }
 }

@@ -12,6 +12,8 @@
 		3901B88229EF33EE00CEECA4 /* IDQAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */; };
 		3901B88429EFE74A00CEECA4 /* IDQDismissButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88329EFE74A00CEECA4 /* IDQDismissButtonView.swift */; };
 		3901B88629EFEEF400CEECA4 /* IDQAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */; };
+		3901B88929EFF45100CEECA4 /* IDQAboutTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88829EFF45100CEECA4 /* IDQAboutTextView.swift */; };
+		3901B88B29F01DB500CEECA4 /* IDQSocialMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88A29F01DB500CEECA4 /* IDQSocialMediaView.swift */; };
 		3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */; };
 		3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24B29E0372A00E3A632 /* IDQScoreView.swift */; };
 		3905B24F29E0403C00E3A632 /* IDQTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24E29E0403C00E3A632 /* IDQTimeView.swift */; };
@@ -82,6 +84,8 @@
 		3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAboutView.swift; sourceTree = "<group>"; };
 		3901B88329EFE74A00CEECA4 /* IDQDismissButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQDismissButtonView.swift; sourceTree = "<group>"; };
 		3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAppIconView.swift; sourceTree = "<group>"; };
+		3901B88829EFF45100CEECA4 /* IDQAboutTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAboutTextView.swift; sourceTree = "<group>"; };
+		3901B88A29F01DB500CEECA4 /* IDQSocialMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQSocialMediaView.swift; sourceTree = "<group>"; };
 		3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultViewViewModel.swift; sourceTree = "<group>"; };
 		3905B24B29E0372A00E3A632 /* IDQScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQScoreView.swift; sourceTree = "<group>"; };
 		3905B24E29E0403C00E3A632 /* IDQTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTimeView.swift; sourceTree = "<group>"; };
@@ -164,10 +168,20 @@
 			children = (
 				3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */,
 				3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */,
-				3901B88329EFE74A00CEECA4 /* IDQDismissButtonView.swift */,
-				3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */,
+				3901B88729EFF42600CEECA4 /* AboutViewSubviews_SwiftUI */,
 			);
 			path = SettingsView_SwiftUI;
+			sourceTree = "<group>";
+		};
+		3901B88729EFF42600CEECA4 /* AboutViewSubviews_SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				3901B88329EFE74A00CEECA4 /* IDQDismissButtonView.swift */,
+				3901B88829EFF45100CEECA4 /* IDQAboutTextView.swift */,
+				3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */,
+				3901B88A29F01DB500CEECA4 /* IDQSocialMediaView.swift */,
+			);
+			path = AboutViewSubviews_SwiftUI;
 			sourceTree = "<group>";
 		};
 		3905B24D29E03FFD00E3A632 /* ResultViewSubviews */ = {
@@ -466,6 +480,7 @@
 				3914C92329B0DCE60001377B /* IDQConstants.swift in Sources */,
 				39AF9C4429CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift in Sources */,
 				3901B88229EF33EE00CEECA4 /* IDQAboutView.swift in Sources */,
+				3901B88929EFF45100CEECA4 /* IDQAboutTextView.swift in Sources */,
 				3914C92E29B0ED260001377B /* IDQGameOptionsViewController.swift in Sources */,
 				3905B24F29E0403C00E3A632 /* IDQTimeView.swift in Sources */,
 				3932AE1C29EEA832003FFE8B /* IDQDaytimeActivityGroupManager.swift in Sources */,
@@ -497,6 +512,7 @@
 				3914C92C29B0ECFB0001377B /* IDQPlayViewController.swift in Sources */,
 				39267BB829E8364D007DD96F /* IDQQuizResultManager.swift in Sources */,
 				3942949229C37AEE00E15FE1 /* IDQQuiz.swift in Sources */,
+				3901B88B29F01DB500CEECA4 /* IDQSocialMediaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

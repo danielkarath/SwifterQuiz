@@ -243,6 +243,8 @@ struct IDQConstants {
     ///Stats icon for the inactive streak
     static let inactiveStreakIcon: UIImage = UIImage(named: "inactiveStreakIcon")!
     
+    static let twitterIcon: UIImage = UIImage(named: "twitterIcon")!
+    
     ///Basic icon
     static let basicImage: UIImage = UIImage(named: "basicIcon")!
     
