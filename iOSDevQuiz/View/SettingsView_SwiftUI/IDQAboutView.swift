@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct IDQAboutView: View {
-    
+        
     @Environment(\.colorScheme) var colorScheme
+    
+    @ObservedObject var viewModel = IDQAboutViewViewModel()
     
     @Binding var isAboutViewVisible: Bool
     
@@ -50,9 +52,15 @@ struct IDQAboutView: View {
                     IDQSocialMediaView(title: "Keep in touch", subTitle: "Follow me on Twitter", image: Image(uiImage: IDQConstants.twitterIcon))
                         .frame(width: UIScreen.main.bounds.width/2 - 24, height: 60)
                         .shadow(color: colorScheme == .light ? Color.gray.opacity(0.40) : Color.clear, radius: 5, x: 0, y: 5)
-                    IDQSocialMediaView(title: "Reach out", subTitle: "Send feedback", image: Image(systemName: "envelope"))
+                        .onTapGesture {
+                            viewModel.didTap(on: .twitter)
+                        }
+                    IDQSocialMediaView(title: "Contribute", subTitle: "Source Code", image: Image(systemName: "hammer.fill"))
                         .frame(width: UIScreen.main.bounds.width/2 - 24, height: 60)
                         .shadow(color: colorScheme == .light ? Color.gray.opacity(0.40) : Color.clear, radius: 5, x: 0, y: 5)
+                        .onTapGesture {
+                            viewModel.didTap(on: .viewCode)
+                        }
                 }
                 .frame(width: UIScreen.main.bounds.width - 64, height: 70)
                 Spacer(minLength: UIScreen.main.bounds.height * 0.30)
@@ -63,7 +71,6 @@ struct IDQAboutView: View {
         .statusBar(hidden: true)
     }
 }
-    //.frame(width: 300, height: 450)
 
 
 struct AddCurve: Shape {

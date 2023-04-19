@@ -5,6 +5,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>twitter</string>
+		<string>github</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

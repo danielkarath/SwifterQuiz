@@ -14,6 +14,7 @@
 		3901B88629EFEEF400CEECA4 /* IDQAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */; };
 		3901B88929EFF45100CEECA4 /* IDQAboutTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88829EFF45100CEECA4 /* IDQAboutTextView.swift */; };
 		3901B88B29F01DB500CEECA4 /* IDQSocialMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88A29F01DB500CEECA4 /* IDQSocialMediaView.swift */; };
+		3901B88F29F031C800CEECA4 /* IDQAboutViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88E29F031C800CEECA4 /* IDQAboutViewViewModel.swift */; };
 		3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */; };
 		3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24B29E0372A00E3A632 /* IDQScoreView.swift */; };
 		3905B24F29E0403C00E3A632 /* IDQTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24E29E0403C00E3A632 /* IDQTimeView.swift */; };
@@ -86,6 +87,7 @@
 		3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAppIconView.swift; sourceTree = "<group>"; };
 		3901B88829EFF45100CEECA4 /* IDQAboutTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAboutTextView.swift; sourceTree = "<group>"; };
 		3901B88A29F01DB500CEECA4 /* IDQSocialMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQSocialMediaView.swift; sourceTree = "<group>"; };
+		3901B88E29F031C800CEECA4 /* IDQAboutViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAboutViewViewModel.swift; sourceTree = "<group>"; };
 		3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultViewViewModel.swift; sourceTree = "<group>"; };
 		3905B24B29E0372A00E3A632 /* IDQScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQScoreView.swift; sourceTree = "<group>"; };
 		3905B24E29E0403C00E3A632 /* IDQTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTimeView.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				3952D1E029B8C6A10061C5C9 /* IDQPlayViewViewModel.swift */,
+				3901B88E29F031C800CEECA4 /* IDQAboutViewViewModel.swift */,
 				3948B15629B942D600E2841F /* IDQGameViewViewModel.swift */,
 				39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */,
 				39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */,
@@ -504,6 +507,7 @@
 				39E0708329EC9A7300AE1858 /* IDQStreakView.swift in Sources */,
 				3920A1B129EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,
+				3901B88F29F031C800CEECA4 /* IDQAboutViewViewModel.swift in Sources */,
 				392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */,
 				3920A1AF29EAFBEE001A1522 /* IDQUser+CoreDataClass.swift in Sources */,
 				3920A1AE29EAFBEE001A1522 /* IDQQuizResult+CoreDataProperties.swift in Sources */,
