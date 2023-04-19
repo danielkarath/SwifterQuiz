@@ -37,7 +37,7 @@ struct IDQSettingsCellViewModel: Identifiable {
     }
     
     public var subtitle: String {
-        return type.displayTitle
+        return type.displaySubtitle
     }
     
 }
@@ -70,9 +70,9 @@ enum IDQSettingsOption: CaseIterable {
         case .rateApp:
             return "Rate App"
         case .contact:
-            return "Contact Developer"
+            return "Feedback"
         case .donate:
-            return "View source Code"
+            return "Support"
         }
         
     }
@@ -80,13 +80,13 @@ enum IDQSettingsOption: CaseIterable {
     var displaySubtitle: String {
         switch self {
         case .about:
-            return "About"
+            return "Learn more about the app"
         case .rateApp:
-            return "Rate App"
+            return "Rate iOS Dev Quiz 5 stars"
         case .contact:
-            return "Contact Developer"
+            return "Reach out to the developer"
         case .donate:
-            return "View source Code"
+            return "Buy me a coffee"
         }
         
     }
@@ -100,7 +100,7 @@ enum IDQSettingsOption: CaseIterable {
         case .contact:
             return UIImage(systemName: "envelope.fill")
         case .donate:
-            return UIImage(systemName: "hammer.fill")
+            return UIImage(systemName: "cup.and.saucer.fill")
         }
     }
 }

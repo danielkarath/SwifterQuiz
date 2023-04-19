@@ -65,6 +65,7 @@ final class IDQTabBarController: UITabBarController {
                 image: menuIcons[j],
                 tag: j
             )
+
             j = j + 1
         }
         
