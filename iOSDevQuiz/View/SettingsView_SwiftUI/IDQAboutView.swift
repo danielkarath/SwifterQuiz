@@ -83,7 +83,6 @@ struct AddCurve: Shape {
             
             path.addLine(to: CGPoint(x: rect.maxX, y: rect.minX))
             path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
-            print("SCREEN SIZE: \(UIScreen.main.bounds.height)")
         }
     }
 }

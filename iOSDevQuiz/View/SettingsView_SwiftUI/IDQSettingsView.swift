@@ -11,6 +11,8 @@ struct IDQSettingsView: View {
     
     let viewModel: IDQSettingsViewViewModel
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @State private var isAboutViewVisible = false
     
     init(viewModel: IDQSettingsViewViewModel) {
@@ -18,34 +20,17 @@ struct IDQSettingsView: View {
     }
     
     var body: some View {
-        VStack {
-            Spacer(minLength: 32)
-            ScrollView {
-                LazyVStack {
-                    ForEach(viewModel.cellViewModels) { viewModel in
-                        HStack {
-                            if let image = viewModel.image,
-                               let backgroundColor = viewModel.iconContainerColor
-                            {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .renderingMode(.template)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(.white)
-                                    .padding(9)
-                                    .background(Color(backgroundColor))
-                                    .cornerRadius(6)
-                                    .padding(8)
-                            }
-                            Text("\(viewModel.title)")
-                                .frame(width: 160, height: 30, alignment: .leading)
-                                .font(Font(IDQConstants.setFont(fontSize: 14, isBold: false)))
-                                .foregroundColor(Color(IDQConstants.basicFontColor))
-                                .kerning(2.35)
-                        }
-                        .contentShape(Rectangle())
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 60, alignment: .leading)
+        ScrollView {
+            Text("Settings")
+                .frame(width: UIScreen.main.bounds.width - 64, height: 50, alignment: .leading)
+                .font(Font(IDQConstants.setFont(fontSize: 46, isBold: true)))
+                .foregroundColor(Color(IDQConstants.secondaryFontColor.withAlphaComponent(0.12)))
+                .kerning(2.35)
+                .padding(.bottom, -(UIScreen.main.bounds.height * 0.017))
+            LazyVStack(spacing: 24) {
+                ForEach(viewModel.cellViewModels) { viewModel in
+                    IDQSettingsViewCell(cellTitle: viewModel.title, subTitle: viewModel.subtitle, image: Image(uiImage: viewModel.image!))
+                        .frame(width: UIScreen.main.bounds.width - 64, height: 72, alignment: .leading)
                         .background(Color(IDQConstants.contentBackgroundColor))
                         .cornerRadius(8)
                         .onTapGesture {
@@ -55,11 +40,10 @@ struct IDQSettingsView: View {
                                 viewModel.onTapHandler(viewModel.type)
                             }
                         }
-                    }
                 }
             }
         }
-        .background(Color(IDQConstants.backgroundColor))
+        .shadow(color: colorScheme == .light ? Color.gray.opacity(0.40) : Color.clear, radius: 13, x: -2, y: 8)
         .fullScreenCover(isPresented: $isAboutViewVisible, content: {
             IDQAboutView(isAboutViewVisible: $isAboutViewVisible)
                 .background(Color(IDQConstants.contentBackgroundColor))
@@ -70,8 +54,8 @@ struct IDQSettingsView: View {
                     }
                 }
         })
+        .background(Color(IDQConstants.backgroundColor))
     }
-    
 }
 
 struct IDQSettingsView_Previews: PreviewProvider {

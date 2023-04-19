@@ -36,9 +36,10 @@ struct IDQSettingsCellViewModel: Identifiable {
         return type.displayTitle
     }
     
-    public var iconContainerColor: UIColor? {
-        return type.iconContainerColor
+    public var subtitle: String {
+        return type.displayTitle
     }
+    
 }
 
 
@@ -46,7 +47,7 @@ enum IDQSettingsOption: CaseIterable {
     case about
     case rateApp
     case contact
-    case viewCode
+    case donate
     
     var targetURL: URL? {
         switch self {
@@ -57,7 +58,7 @@ enum IDQSettingsOption: CaseIterable {
             return nil
         case .contact:
             return nil
-        case .viewCode:
+        case .donate:
             return URL(string: "https://github.com/danielkarath/iOSDevQuiz")
         }
     }
@@ -70,26 +71,24 @@ enum IDQSettingsOption: CaseIterable {
             return "Rate App"
         case .contact:
             return "Contact Developer"
-        case .viewCode:
+        case .donate:
             return "View source Code"
         }
         
     }
     
-    var iconContainerColor: UIColor {
+    var displaySubtitle: String {
+        switch self {
+        case .about:
+            return "About"
+        case .rateApp:
+            return "Rate App"
+        case .contact:
+            return "Contact Developer"
+        case .donate:
+            return "View source Code"
+        }
         
-        return IDQConstants.highlightedDarkOrange
-        
-//        switch self {
-//        case .about:
-//            return UIColor(named: "mainColor") ?? .systemGreen
-//        case .rateApp:
-//            return .systemYellow
-//        case .contact:
-//            return .systemOrange
-//        case .viewCode:
-//            return .systemBlue
-//        }
     }
     
     var iconImage: UIImage? {
@@ -100,7 +99,7 @@ enum IDQSettingsOption: CaseIterable {
             return UIImage(systemName: "star.fill")
         case .contact:
             return UIImage(systemName: "envelope.fill")
-        case .viewCode:
+        case .donate:
             return UIImage(systemName: "hammer.fill")
         }
     }

@@ -48,44 +48,15 @@ struct IDQSocialMediaView: View {
                             .frame(alignment: .leading)
                             .font(Font(IDQConstants.setFont(fontSize: 12, isBold: true)))
                             .foregroundColor(Color(IDQConstants.basicFontColor))
-//                            .padding(.top, 12)
                         Text(subTitle)
                             .frame(alignment: .leading)
                             .font(Font(IDQConstants.setFont(fontSize: 9, isBold: false)))
                             .foregroundColor(Color(IDQConstants.basicFontColor))
-//                            .padding(.bottom, 16)
                     }
                     Spacer()
                 }
             }
         }
-        
-        
-//        ZStack {
-//            VStack {
-//                Text(title)
-//                    .frame(width: 80, height: 30, alignment: .center)
-//                    .font(Font(IDQConstants.setFont(fontSize: 14, isBold: true)))
-//                    .foregroundColor(Color(IDQConstants.basicFontColor))
-//                    .kerning(2.35)
-//                Text(subTitle)
-//                    .frame(width: 80, height: 20, alignment: .center)
-//                    .font(Font(IDQConstants.setFont(fontSize: 12, isBold: false)))
-//                    .foregroundColor(Color(IDQConstants.basicFontColor))
-//                    //.padding(.top, -35)
-//            }
-//        }
-//        .overlay(
-//            image
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 64, height: 64)
-//                .padding(.leading, 32)
-//                .padding(.top, 22)
-//                .aspectRatio(contentMode: .fit)
-//                .opacity(0.25)
-//        )
-//
     }
 }
 

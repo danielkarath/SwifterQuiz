@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct IDQAppIconView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(Color(IDQConstants.whiteColor))
+                .foregroundColor(colorScheme == .light ? Color(IDQConstants.whiteColor) : Color(IDQConstants.blackColor))
                 .cornerRadius(16)
             Rectangle()
                 .foregroundColor(Color(IDQConstants.contentBackgroundColor))
