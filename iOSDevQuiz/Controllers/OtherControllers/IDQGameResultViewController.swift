@@ -41,11 +41,6 @@ final class IDQGameResultViewController: UIViewController {
     private func setupNavItems() {
         navigationController?.navigationBar.prefersLargeTitles = false
         let chevronImage = UIImage(systemName: "chevron.left")!
-//        //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
-//        let menuButton = UIBarButtonItem(image: chevronImage, title: "Menu", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
-//        menuButton.titlePositionAdjustment(for: .default)
-//        menuButton.title = "Menu"
-//        navigationItem.leftBarButtonItem = menuButton
     }
     
     private func setupConstraints() {

@@ -202,10 +202,10 @@ struct IDQConstants {
     //MARK: - Gradient Colors
     
     ///The brandingColor dark end for gradients.
-    static let darkOrange = UIColor(red: 224/255, green: 80/255, blue: 52/255, alpha: 1.0)
+    static let darkOrange = UIColor(red: 235/255, green: 95/255, blue: 60/255, alpha: 1.0)
     
     ///The brandingColor light end for gradients.
-    static let lightOrange = UIColor(red: 244/255, green: 128/255, blue: 47/255, alpha: 1.0)
+    static let lightOrange = UIColor(red: 235/255, green: 120/255, blue: 50/255, alpha: 1.0)
     
     ///The highlighted brandingColor dark end for gradients.
     static let highlightedDarkOrange = UIColor(red: 246/255, green: 49/255, blue: 28/255, alpha: 1.0)

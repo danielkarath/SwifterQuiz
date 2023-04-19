@@ -10,6 +10,8 @@
 		3901B87C29EF1A1A00CEECA4 /* IDQSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */; };
 		3901B87E29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B87D29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift */; };
 		3901B88229EF33EE00CEECA4 /* IDQAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */; };
+		3901B88429EFE74A00CEECA4 /* IDQDismissButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88329EFE74A00CEECA4 /* IDQDismissButtonView.swift */; };
+		3901B88629EFEEF400CEECA4 /* IDQAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */; };
 		3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */; };
 		3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24B29E0372A00E3A632 /* IDQScoreView.swift */; };
 		3905B24F29E0403C00E3A632 /* IDQTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905B24E29E0403C00E3A632 /* IDQTimeView.swift */; };
@@ -78,6 +80,8 @@
 		3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQSettingsView.swift; sourceTree = "<group>"; };
 		3901B87D29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQSettingsViewViewModel.swift; sourceTree = "<group>"; };
 		3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAboutView.swift; sourceTree = "<group>"; };
+		3901B88329EFE74A00CEECA4 /* IDQDismissButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQDismissButtonView.swift; sourceTree = "<group>"; };
+		3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAppIconView.swift; sourceTree = "<group>"; };
 		3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQAnswerResultViewViewModel.swift; sourceTree = "<group>"; };
 		3905B24B29E0372A00E3A632 /* IDQScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQScoreView.swift; sourceTree = "<group>"; };
 		3905B24E29E0403C00E3A632 /* IDQTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTimeView.swift; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 			children = (
 				3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */,
 				3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */,
+				3901B88329EFE74A00CEECA4 /* IDQDismissButtonView.swift */,
+				3901B88529EFEEF400CEECA4 /* IDQAppIconView.swift */,
 			);
 			path = SettingsView_SwiftUI;
 			sourceTree = "<group>";
@@ -431,7 +437,9 @@
 				3914C90D29B0D7E40001377B /* IDQTabBarController.swift in Sources */,
 				3952D1E729B8D6DC0061C5C9 /* IDQQuestion.swift in Sources */,
 				39BFF81C29EDA77600003E22 /* IDQQuestionManager.swift in Sources */,
+				3901B88629EFEEF400CEECA4 /* IDQAppIconView.swift in Sources */,
 				3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */,
+				3901B88429EFE74A00CEECA4 /* IDQDismissButtonView.swift in Sources */,
 				3914C93029B0FBE90001377B /* IDQExtensions.swift in Sources */,
 				3960970F29EEA7BF0061F658 /* IDQDaytimeActivityGroup+CoreDataClass.swift in Sources */,
 				39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */,

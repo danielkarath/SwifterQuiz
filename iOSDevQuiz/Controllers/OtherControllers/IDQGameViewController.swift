@@ -43,7 +43,7 @@ final class IDQGameViewController: UIViewController {
         qameView.delegate = self
         let chevronImage = UIImage(systemName: "chevron.left")!
         //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
-        let menuButton = UIBarButtonItem(image: chevronImage, title: "End Quiz", color: IDQConstants.darkOrange, target: self, action: #selector(menuButtonTapped))
+        let menuButton = UIBarButtonItem(image: chevronImage, title: "End Quiz", color: IDQConstants.errorColor, target: self, action: #selector(menuButtonTapped))
         menuButton.titlePositionAdjustment(for: .default)
         menuButton.title = "End Quiz"
         navigationItem.leftBarButtonItem = menuButton

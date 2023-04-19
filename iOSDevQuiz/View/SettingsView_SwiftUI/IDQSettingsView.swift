@@ -60,33 +60,43 @@ struct IDQSettingsView: View {
             }
         }
         .background(Color(IDQConstants.backgroundColor))
-        .overlay(
-            Group {
-                if isAboutViewVisible {
-                    VStack {
-                        Spacer()
-                        IDQAboutView()
-                            .frame(width: 300, height: 450)
-                            .background(Color(IDQConstants.contentBackgroundColor))
-                            .cornerRadius(20)
-                            .padding()
-                            .shadow(radius: 24)
-                            .opacity(isAboutViewVisible ? 1 : 0)
-                            .scaleEffect(isAboutViewVisible ? 1 : 0, anchor: .bottom)
-                            .animation(.spring(response: 0.8, dampingFraction: 0.7), value: isAboutViewVisible)
-
-                            .offset(y: isAboutViewVisible ? -UIScreen.main.bounds.height/4 :  -UIScreen.main.bounds.height)
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 1.0)) {
-                                    isAboutViewVisible.toggle()
-                                }
-                            }
+        .fullScreenCover(isPresented: $isAboutViewVisible, content: {
+            IDQAboutView(isAboutViewVisible: $isAboutViewVisible)
+                .background(Color(IDQConstants.contentBackgroundColor))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 1.0)) {
+                        //isAboutViewVisible.toggle()
                     }
-                    .transition(.move(edge: .bottom))
-                    .animation(.easeInOut(duration: 1.8))
                 }
-            }
-        )
+        })
+//        .overlay(
+//            Group {
+//                if isAboutViewVisible {
+//                    VStack {
+//                        Spacer()
+//                        IDQAboutView()
+//                            .frame(width: 300, height: 450)
+//                            .background(Color(IDQConstants.contentBackgroundColor))
+//                            .cornerRadius(20)
+//                            .padding()
+//                            .shadow(radius: 24)
+//                            .opacity(isAboutViewVisible ? 1 : 0)
+//                            .scaleEffect(isAboutViewVisible ? 1 : 0, anchor: .bottom)
+//                            .animation(.spring(response: 0.8, dampingFraction: 0.7), value: isAboutViewVisible)
+//
+//                            .offset(y: isAboutViewVisible ? -UIScreen.main.bounds.height/4 :  -UIScreen.main.bounds.height)
+//                            .onTapGesture {
+//                                withAnimation(.easeInOut(duration: 1.0)) {
+//                                    isAboutViewVisible.toggle()
+//                                }
+//                            }
+//                    }
+//                    .transition(.move(edge: .bottom))
+//                    .animation(.easeInOut(duration: 1.8))
+//                }
+//            }
+//        )
         
     }
     
