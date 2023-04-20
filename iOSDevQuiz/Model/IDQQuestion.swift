@@ -64,6 +64,36 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "initialization", answerType: .correct),
         ]
     ),
+    
+    IDQQuestion(
+        question: "What is the keyword used to declare constants in Swift?",
+        questionSerialNum: 0,
+        explanation: "Constants are declared with the let keyword. Variables are with var.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics#Declaring-Constants-and-Variables",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "val", answerType: .wrong),
+            IDQAnswer(text: "final", answerType: .wrong),
+            IDQAnswer(text: "const", answerType: .wrong ),
+            IDQAnswer(text: "let", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is the result of -11 % 4 ?",
+        questionSerialNum: 0,
+        explanation: "The correct answer is: -3 The remainder operator (a % b) works out how many multiples of b will fit inside a and returns the value that’s left over (known as the remainder).",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/basicoperators#Remainder-Operator",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "-1", answerType: .wrong),
+            IDQAnswer(text: "-2", answerType: .wrong),
+            IDQAnswer(text: "1", answerType: .wrong ),
+            IDQAnswer(text: "-3", answerType: .correct),
+        ]
+    ),
 
     IDQQuestion(
         question: "What is the logical 'or' operator in Swift?",
@@ -92,6 +122,21 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "To manage multiple async tasks.", answerType: .wrong),
             IDQAnswer(text: "To ensure that certain conditions are met before executing the rest of the code in a function or method.", answerType: .wrong ),
             IDQAnswer(text: "It allows you to write a concise expression to choose one of two values based on a condition.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is optional binding in Swift?",
+        questionSerialNum: 0,
+        explanation: "Constants are declared with the let keyword. Variables are with var.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics#Optional-Binding",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "It's the initialization of lazily declared properties.", answerType: .wrong),
+            IDQAnswer(text: "A technique to declare optional variables without assigning a value.", answerType: .wrong),
+            IDQAnswer(text: "A technique to force-unwrap optionals without checking for nil.", answerType: .wrong ),
+            IDQAnswer(text: "A way to find out if an optional contains a value, and if so, to make that value available as a temporary constant or variable.", answerType: .correct),
         ]
     ),
     
@@ -197,6 +242,36 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "an object exposed to Objective-C.", answerType: .wrong),
             IDQAnswer(text: "a method exposed to Swift or Objective-C.", answerType: .wrong ),
             IDQAnswer(text: "a method exposed to Objective-C.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "How can you STOP a switch statement from completing its execution as soon as the first matching case is completed?",
+        questionSerialNum: 0,
+        explanation: "By adding the fallthrough keyword to it's cases.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/controlflow/#Fallthrough",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "By default the switch statments iterate through each case regardless of matching them", answerType: .wrong),
+            IDQAnswer(text: "By adding the pass keyword to it's case(s)", answerType: .wrong),
+            IDQAnswer(text: "By adding fallthrough before the switch keyword and pass to it's relevant case(s)", answerType: .wrong ),
+            IDQAnswer(text: "By adding fallthrough to it's case(s)", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is the difference between a while and a repeat-while control flow statment in Swift?",
+        questionSerialNum: 0,
+        explanation: "The repeat-while loop performs a single pass through the loop block first, before considering the loop’s condition.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/controlflow/#Repeat-While",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "There is no repeat-while in Swift only do-while", answerType: .wrong),
+            IDQAnswer(text: "A repeat-while requires it's condition to be true and a minimum number of iterations to exit", answerType: .wrong),
+            IDQAnswer(text: "The repeat-while loop evaluates its condition at the end of each iterations", answerType: .wrong ),
+            IDQAnswer(text: "A repeat-while loop will always execute at least once,", answerType: .correct),
         ]
     ),
 
@@ -425,7 +500,81 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "application(_: willFinishLaunchingWithOptions:) \t", answerType: .correct),
         ]
     ),
-
+    
+    IDQQuestion(
+        question: "What is the difference between the open and public access control levels?",
+        questionSerialNum: 0,
+        explanation: "Open access applies only to classes and class members, and it differs from public access by allowing code outside the module to subclass and override",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/#Access-Levels",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "There is no difference", answerType: .wrong),
+            IDQAnswer(text: "Open access applies only to struct and struct members", answerType: .wrong),
+            IDQAnswer(text: "Open allows entities to be used only inside the module. Public allows entities to be used both inside and outside the module.", answerType: .wrong),
+            IDQAnswer(text: "Open allows entities to be subclassed and overridden outside the module. Public only allows entities to be used outside the module.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Which access control level is the most restrictive in Swift?",
+        questionSerialNum: 0,
+        explanation: "Private is the most restrictive and open is the least restrictive access control level",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/#Access-Levels",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "protected \t", answerType: .wrong),
+            IDQAnswer(text: "internal \t", answerType: .wrong),
+            IDQAnswer(text: "fileprivate \t", answerType: .wrong),
+            IDQAnswer(text: "private \t", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Which access control level is NOT supported in Swift?",
+        questionSerialNum: 0,
+        explanation: "The access control levels supported in Swift are open, public, internal, fileprivate and private.",
+        reference: "https://developer.apple.com/swift/blog/?id=11",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "open \t", answerType: .wrong),
+            IDQAnswer(text: "internal \t", answerType: .wrong),
+            IDQAnswer(text: "fileprivate \t", answerType: .wrong),
+            IDQAnswer(text: "protected \t", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What is the default access control level?",
+        questionSerialNum: 0,
+        explanation: "All entities in your code have a default access level of internal",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/#Default-Access-Levels",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "open \t", answerType: .wrong),
+            IDQAnswer(text: "private \t", answerType: .wrong),
+            IDQAnswer(text: "public \t", answerType: .wrong),
+            IDQAnswer(text: "internal \t", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "How is the default access control level calculated for functions in Swift?",
+        questionSerialNum: 0,
+        explanation: "By default it's calculated based on the most restrictive access level of the functions parameters and return types",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/#Function-Types",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "By default the access control level is internal", answerType: .wrong),
+            IDQAnswer(text: "By default the access control level is public", answerType: .wrong),
+            IDQAnswer(text: "The least restrictive access level of the function’s parameter types and return type.", answerType: .wrong),
+            IDQAnswer(text: "The most restrictive access level of the function’s parameter types and return type.", answerType: .correct),
+        ]
+    ),
 
     IDQQuestion(
         question: "What does @frozen attribute stand for?",

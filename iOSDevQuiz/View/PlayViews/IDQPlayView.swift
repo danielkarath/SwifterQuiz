@@ -65,7 +65,7 @@ class IDQPlayView: UIView {
     
     private let subTitle: UILabel = {
         let label = UILabel()
-        label.text = "practice with 300+ questions"
+        label.text = "Elevate your Swift game!"
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.secondaryFontColor

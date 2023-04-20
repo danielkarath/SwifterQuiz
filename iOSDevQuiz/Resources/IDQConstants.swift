@@ -21,6 +21,19 @@ struct IDQConstants {
     //MARK: - Keywords
     
     static let keywords: [String] = [
+        "open",
+        "public",
+        "internal",
+        "private",
+        "fileprivate",
+        "protected",
+        "do-while",
+        "repeat-while",
+        "fallthrough",
+        "return",
+        "break",
+        "pass",
+        "switch",
         "deinit()",
         "init()",
         "#selector",

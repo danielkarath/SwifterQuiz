@@ -118,13 +118,13 @@ final class IDQUserManager {
                 print("Failed to generated a user. Error: \(error), \(error.userInfo)")
                 // Handle the error appropriately, such as showing an error message to the user
             }
+            topicMetricsManager.createMetrics()
+            difficultyMetricsManager.createMetrics()
+            daytimeGroupManager.generateDaytimeGroups()
         } else {
             print("There is already a user assigned.")
             printUserRecord()
         }
-        topicMetricsManager.createMetrics()
-        difficultyMetricsManager.createMetrics()
-        daytimeGroupManager.generateDaytimeGroups()
     }
     
     public func evaulateStreak() {

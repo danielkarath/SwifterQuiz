@@ -132,6 +132,11 @@ class IDQAnswerResultView: UIView {
         referenceImageView.frame = CGRect(x: referenceButton.layer.frame.minX, y: referenceButton.layer.frame.minY, width: 24, height: 24)
         referenceImageView.contentMode = .scaleAspectFit
         referenceButton.addSubview(referenceImageView)
+        if question?.reference != nil {
+            referenceButton.isHidden = false
+        } else {
+            referenceButton.isHidden = true
+        }
         
         bookmarkUnfilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
         bookmarkFilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
@@ -163,13 +168,10 @@ class IDQAnswerResultView: UIView {
             resultLabel.widthAnchor.constraint(equalToConstant: 160),
             resultLabel.heightAnchor.constraint(equalToConstant: 40),
             
-            referenceButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
-            referenceButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
-            referenceButton.heightAnchor.constraint(equalToConstant: 24),
-            referenceButton.widthAnchor.constraint(equalToConstant: 24),
+            
             
             bookmarkButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
-            bookmarkButton.trailingAnchor.constraint(equalTo: referenceButton.leadingAnchor, constant: -16),
+            bookmarkButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
             bookmarkButton.heightAnchor.constraint(equalToConstant: 24),
             bookmarkButton.widthAnchor.constraint(equalToConstant: 24),
             
@@ -177,6 +179,11 @@ class IDQAnswerResultView: UIView {
             discardQuestionButton.trailingAnchor.constraint(equalTo: bookmarkButton.leadingAnchor, constant: -16),
             discardQuestionButton.heightAnchor.constraint(equalToConstant: 24),
             discardQuestionButton.widthAnchor.constraint(equalToConstant: 24),
+            
+            referenceButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
+            referenceButton.trailingAnchor.constraint(equalTo: discardQuestionButton.leadingAnchor, constant: -16),
+            referenceButton.heightAnchor.constraint(equalToConstant: 24),
+            referenceButton.widthAnchor.constraint(equalToConstant: 24),
             
             detailLabel.topAnchor.constraint(equalTo: resultImageView.bottomAnchor, constant: 4),
             detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -239,6 +246,11 @@ class IDQAnswerResultView: UIView {
             iconName = "clock.badge.exclamationmark"
         }
         
+        if question?.reference != nil {
+            referenceButton.isHidden = false
+        } else {
+            referenceButton.isHidden = true
+        }
         self.backgroundColor = backgroundColor
         self.resultImageView.tintColor = tintColor
         self.referenceImageView.tintColor = tintColor
