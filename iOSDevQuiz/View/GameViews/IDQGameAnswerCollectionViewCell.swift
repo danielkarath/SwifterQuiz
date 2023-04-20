@@ -26,7 +26,7 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         label.textColor = IDQConstants.basicFontColor
         label.numberOfLines = 0
         label.contentMode = .topLeft
-        label.font = IDQConstants.setFont(fontSize: 15, isBold: false)
+        label.font = IDQConstants.setFont(fontSize: 14, isBold: false)
         label.text = ""
         label.isAccessibilityElement = true
         return label

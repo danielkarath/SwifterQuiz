@@ -16,12 +16,7 @@ final class IDQQuestionManager {
     }
     
     private let userManager = IDQUserManager()
-    //MARK: - Init
-    init(
-        
-    ) {
-        
-    }
+
     
     //MARK: - Private
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

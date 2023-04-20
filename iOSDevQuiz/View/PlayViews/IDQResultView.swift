@@ -9,6 +9,7 @@ import UIKit
 
 protocol IDQResultViewDelegate: AnyObject {
     func idqResultView(_: IDQResultView, didTap button: UIButton)
+    func idqResultView(_ view: IDQResultView, didShare quiz: IDQQuiz, image: UIImage?)
 }
 
 class IDQResultView: UIView {
@@ -121,6 +122,7 @@ class IDQResultView: UIView {
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
         topBackgroundView.layer.cornerRadius = topBackgroundSize/2
         menuButton.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(share(_:)), for: .touchUpInside)
     }
     
     private func setupCollectionView() {
@@ -192,6 +194,11 @@ class IDQResultView: UIView {
     @objc
     private func menuButtonTapped(_ sender: UIButton) {
         delegate?.idqResultView(self, didTap: menuButton)
+    }
+    
+    @objc func share(_ sender: UIButton){
+        guard let quiz = self.quiz else {return}
+        delegate?.idqResultView(self, didShare: quiz, image: nil)
     }
     
     //MARK: - Public

@@ -44,7 +44,7 @@ struct IDQSettingsView: View {
                                 viewModel.onTapHandler(viewModel.type)
                             }
                         })
-                        .highlightEffect(color: Color.white.opacity(0.5))
+                        .highlightEffect(color: Color(uiColor: IDQConstants.contentBackgroundColor).opacity(0.5))
                 }
             }
         }
