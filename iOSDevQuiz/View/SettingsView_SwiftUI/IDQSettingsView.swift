@@ -38,6 +38,8 @@ struct IDQSettingsView: View {
                         .onTapGesture {
                             if viewModel.type == .about {
                                 isAboutViewVisible.toggle()
+                            } else if viewModel.type == .donate {
+                                IDQInAppPurchaseManager.shared.purchase(.IDQ_BuyMeCoffee)
                             } else {
                                 viewModel.onTapHandler(viewModel.type)
                             }

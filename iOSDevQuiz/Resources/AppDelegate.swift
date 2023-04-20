@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import StoreKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        IDQInAppPurchaseManager.shared.fetchProducts()
         ValueTransformer.setValueTransformer(IDQQuestionArrayValueTransformer(), forName: NSValueTransformerName(rawValue: "IDQQuestionArrayValueTransformer"))
         return true
     }

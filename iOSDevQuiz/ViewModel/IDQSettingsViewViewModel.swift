@@ -72,7 +72,7 @@ enum IDQSettingsOption: CaseIterable {
         case .contact:
             return "Feedback"
         case .donate:
-            return "Support"
+            return "Donate"
         }
         
     }
