@@ -11,7 +11,7 @@ final class IDQPlayViewController: UIViewController {
 
     private let playView = IDQPlayView()
     
-    private let viewModel = IDQPlayViewViewModel()
+    private let quizManager = IDQQuizManager()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,12 +37,11 @@ final class IDQPlayViewController: UIViewController {
 }
 
 extension IDQPlayViewController: IDQPlayViewDelegate {
-    
     func idqPlayView(_ playView: IDQPlayView, didSelect game: IDQGame?) {
         guard let game = game else {
             return
         }
-        let generatedQuestions = viewModel.generateQuestions(game: game)
+        let generatedQuestions = quizManager.generateQuestions(game: game)
         guard let questions = generatedQuestions else {return}
         let detailVC = IDQGameViewController(questions: questions, game: game)
         detailVC.navigationItem.largeTitleDisplayMode = .never

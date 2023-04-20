@@ -15,6 +15,8 @@ protocol IDQPlayViewDelegate: AnyObject {
 class IDQPlayView: UIView {
     
     public weak var delegate: IDQPlayViewDelegate?
+    
+    private let viewModel = IDQPlayViewViewModel()
         
     private let startButtonView = StartButtonView()
     
@@ -200,12 +202,8 @@ class IDQPlayView: UIView {
     
     @objc
     private func startViewTapped(_ gestureRecognizer: UITapGestureRecognizer) {
-        let idqGameList: [IDQGame] = [
-            IDQGame(gameName: "Tester", type: .basic, questionTimer: .cheetah, topics: [.basics, .uikit], numberOfQuestions: 2),
-            IDQGame(gameName: "Default", type: .basic, questionTimer: .gazelle, topics: [.basics, .uikit], numberOfQuestions: 10),
-            IDQGame(gameName: "Count Down", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics], numberOfQuestions: 15),
-            IDQGame(gameName: "True Or False", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics, .cloudKit, .combine, .cloudKit], numberOfQuestions: 15),
-        ]
-        delegate?.idqPlayView(self, didSelect: idqGameList[0])
+        startButtonView.didHighlight(with: IDQConstants.contentBackgroundColor.withAlphaComponent(0.40))
+        let selectedGame = viewModel.didTapButton(for: .quicQuiz)
+        delegate?.idqPlayView(self, didSelect: selectedGame)
     }
 }

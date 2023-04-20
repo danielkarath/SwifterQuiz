@@ -34,8 +34,8 @@ struct IDQSettingsView: View {
                     IDQSettingsViewCell(cellTitle: viewModel.title, subTitle: viewModel.subtitle, image: Image(uiImage: viewModel.image!))
                         .frame(width: UIScreen.main.bounds.width - 64, height: 80, alignment: .leading)
                         .background(Color(IDQConstants.contentBackgroundColor))
-                        .cornerRadius(8)
-                        .onTapGesture {
+                        .cornerRadius(16)
+                        .simultaneousGesture(TapGesture().onEnded {
                             if viewModel.type == .about {
                                 isAboutViewVisible.toggle()
                             } else if viewModel.type == .donate {
@@ -43,7 +43,8 @@ struct IDQSettingsView: View {
                             } else {
                                 viewModel.onTapHandler(viewModel.type)
                             }
-                        }
+                        })
+                        .highlightEffect(color: Color.white.opacity(0.5))
                 }
             }
         }

@@ -82,11 +82,8 @@ class StartButtonView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         frame.size = CGSize(width: menuButtonWidth, height: 1.80*menuButtonHight)
         layer.cornerRadius = menuButtonCornerRadius
-        backgroundColor = IDQConstants.backgroundColor
         clipsToBounds = true
         gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
-        
-
     }
     
     private func setupConstraints() {

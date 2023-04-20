@@ -23,6 +23,24 @@ extension UIView {
         })
     }
     
+    func didHighlight(with color: UIColor) {
+        let overlayView = UIView(frame: self.bounds)
+        overlayView.backgroundColor = color
+        overlayView.alpha = 0
+        
+        self.addSubview(overlayView)
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            overlayView.alpha = 1
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2, delay: 0.1, options: [], animations: {
+                overlayView.alpha = 0
+            }, completion: { _ in
+                overlayView.removeFromSuperview()
+            })
+        })
+    }
+    
     
     /// Add custom CAGradientLayer to the UIView
     /// - Parameters:
