@@ -156,6 +156,9 @@ class CountDownView: UIView {
     }
     
     //MARK: - Public
+    public func isTimerRunning() -> Bool {
+        return questionCountdownTimer.isValid
+    }
     
     public var timeSpent: TimeInterval = 0
     

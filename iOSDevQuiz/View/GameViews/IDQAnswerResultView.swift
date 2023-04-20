@@ -266,7 +266,13 @@ class IDQAnswerResultView: UIView {
     @objc
     private func referenceButtonTapped(_ sender: UIButton) {
         guard let question = self.question, self.question != nil, answerType != nil else {return}
-        let safariViewController = SFSafariViewController(url: URL(string: question.reference!)!)
+        
+        guard let referenceUrl = URL(string: question.reference!), IDQConstants.allowedDomainStrings.contains(referenceUrl.host ?? "") else {
+            print("The website is not allowed")
+            return
+        }
+        
+        let safariViewController = SFSafariViewController(url: referenceUrl)
         safariViewController.modalPresentationStyle = .popover
         if let viewController = self.getViewController() {
             viewController.present(safariViewController, animated: true, completion: nil)
@@ -277,6 +283,8 @@ class IDQAnswerResultView: UIView {
             }
         }
     }
+
+
     
     @objc
     private func bookmarkButtonTapped(_ sender: UIButton) {
@@ -332,4 +340,15 @@ class IDQAnswerResultView: UIView {
         }
     }
     
+}
+
+extension IDQAnswerResultView: SFSafariViewControllerDelegate {
+    func safariViewController(_ controller: SFSafariViewController, shouldLoad url: URL, for policy: SFSafariViewController.Configuration) -> Bool {
+        guard let safeUrlHost = url.host else {return false}
+        guard IDQConstants.allowedDomainStrings.contains(safeUrlHost) else {
+            print("The website is not allowed")
+            return false
+        }
+        return true
+    }
 }

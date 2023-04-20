@@ -9,7 +9,15 @@ import UIKit
 
 /// The constants used everywhere in the app like UIColors, Font sizes, etc
 struct IDQConstants {
-     
+    
+    //MARK: - AllowedDomains
+    static let allowedDomainStrings: [String] = [
+        "developer.apple.com",
+        "docs.swift.org",
+        "en.wikipedia.org",
+        "www.kodeco.com"
+    ]
+    
     //MARK: - Keywords
     
     static let keywords: [String] = [

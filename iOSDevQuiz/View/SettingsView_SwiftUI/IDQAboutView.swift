@@ -17,8 +17,8 @@ struct IDQAboutView: View {
     
     private let appVersion: String = Bundle.main.appVersion ?? "1.0"
     private let aboutDescriptionText = "Thank you for downloading my app! I'm Daniel and I'm the developer of the application you're using. I'd a blast building this app & I hope you'll have a great time using it.\n\nIf you'd like to give me some feedback, feel free to send me an e-mail or contact me via Twitter."
-    var topPaddingModifier: CGFloat = UIScreen.main.bounds.height >= 700 ? 0.05 : 0.16
-    var topSpacerModifier: CGFloat = UIScreen.main.bounds.height >= 700 ? 0.05 : 0.015
+    var topPaddingModifier: CGFloat = UIScreen.main.bounds.height >= 700 ? 0.07 : 0.16
+    var topSpacerModifier: CGFloat = UIScreen.main.bounds.height >= 700 ? 0.08 : 0.015
     
     var body: some View {
         let leadingColor = Color(IDQConstants.highlightedLightOrange)
