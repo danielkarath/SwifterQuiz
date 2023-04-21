@@ -11,7 +11,6 @@ class IDQBookmarkedQuestionsViewController: UIViewController {
 
     private let questions: [IDQQuestion]
     
-    
     private let bookmarkView = IDQBookmarkedQuestionsView()
     
     private var quizRoundCounter: Int = 0

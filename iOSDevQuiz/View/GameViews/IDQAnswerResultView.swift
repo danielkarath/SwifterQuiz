@@ -16,6 +16,7 @@ protocol IDQAnswerResultViewDelegate: AnyObject {
 class IDQAnswerResultView: UIView {
     
     private let questionManager = IDQQuestionManager()
+    private let userManager = IDQUserManager()
     
     public weak var delegate: IDQAnswerResultViewDelegate?
 
@@ -315,7 +316,10 @@ class IDQAnswerResultView: UIView {
                 self.bookmarkButton.addSubview(self.bookmarkUnfilledImageView)
             }
             DispatchQueue.global(qos: .background).async {
-                self.questionManager.removeBookmark(question)
+                guard let user = self.userManager.fetchUser() else {
+                    return
+                }
+                self.questionManager.removeBookmark(question, for: user)
             }
         }
         isBookmarked.toggle()

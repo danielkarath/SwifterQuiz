@@ -245,8 +245,9 @@ class IDQPlayView: UIView {
     }
     
     @objc func bookmarkedQuestionsButtonTapped(_ sender: UIButton){
+        let questions = viewModel.fetchBookmarkedQuestions()
         bookmarkedQuestionsButton.didHighlight(with: IDQConstants.contentBackgroundColor.withAlphaComponent(0.40))
-        delegate?.idqPlayView(self, bookmarkedQuestions: bookmarkedQuestions)
+        delegate?.idqPlayView(self, bookmarkedQuestions: questions)
     }
     
     @objc

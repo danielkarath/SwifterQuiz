@@ -71,7 +71,7 @@ final class IDQQuestionManager {
         } else {
             print("The question is already disabled. Cannot duplicate it & no changes are made in Core Data")
         }
-        removeBookmark(question)
+        removeBookmark(question, for: user)
     }
     
     public func bookmark(_ question: IDQQuestion) {
@@ -102,16 +102,14 @@ final class IDQQuestionManager {
         if let index = disabledQuestions.firstIndex(where: { $0.question == question.question }) {
             disabledQuestions.remove(at: index)
             user.disabledQuestions = disabledQuestions as NSArray
+            saveToCoreData()
             print("Question is removed from disabled list in Core Data successfully.")
         } else {
             print("The disabled questions array did not contain this question. No changes were made")
         }
     }
     
-    public func removeBookmark(_ question: IDQQuestion) {
-        guard let user = userManager.fetchUser() else {
-            return
-        }
+    public func removeBookmark(_ question: IDQQuestion, for user: IDQUser) {
         guard var bookmarkedQuestions = fetchQuestionArray(for: .bookmarked) else {
             return
         }
@@ -119,6 +117,7 @@ final class IDQQuestionManager {
             bookmarkedQuestions.remove(at: index)
             user.bookmarkedQuestions = bookmarkedQuestions as NSArray
             print("Question is removed from bookmarked list in Core Data successfully.")
+            saveToCoreData()
         } else {
             print("The bookmarked questions array did not contain this question. No changes were made")
         }
