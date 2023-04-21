@@ -53,7 +53,8 @@ final class IDQTabBarController: UITabBarController {
         }
         
         for navController in navControllers {
-            navController.navigationBar.prefersLargeTitles = true
+            navController.navigationBar.prefersLargeTitles = false
+            navController.navigationItem.largeTitleDisplayMode = .never
             navController.navigationBar.titleTextAttributes = [.foregroundColor: IDQConstants.highlightedDarkOrange]
             navController.navigationBar.largeTitleTextAttributes = [.foregroundColor: IDQConstants.highlightedDarkOrange]
             navController.navigationBar.backgroundColor = IDQConstants.backgroundColor.withAlphaComponent(0.0)

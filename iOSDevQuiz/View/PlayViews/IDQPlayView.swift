@@ -9,6 +9,7 @@ import UIKit
 
 protocol IDQPlayViewDelegate: AnyObject {
     func idqPlayView(_ playView: IDQPlayView, didSelect game: IDQGame?)
+    func idqPlayView(_ playView: IDQPlayView, bookmarkedQuestions: [IDQQuestion]?)
 }
 
 /// The view that handles showing the main game related buttons like start quiz, game options, resources and related UI.
@@ -19,6 +20,8 @@ class IDQPlayView: UIView {
     private let viewModel = IDQPlayViewViewModel()
         
     private let startButtonView = StartButtonView()
+    
+    private var bookmarkedQuestions: [IDQQuestion]?
     
     private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
     private let menuButtonHight: CGFloat = 48.0
@@ -74,6 +77,30 @@ class IDQPlayView: UIView {
         return label
     }()
     
+    private let bookmarkedQuestionsButton: UIButton = {
+        let button = UIButton()
+        let size: CGFloat = 40
+        let image = UIImage(systemName: "bookmark.fill")
+        let color = IDQConstants.highlightedDarkOrange
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        
+        button.frame.size = CGSize(width: size, height: size)
+        button.layer.cornerRadius = 8
+        button.setTitleColor(IDQConstants.highlightedDarkOrange, for: .normal)
+        button.tintColor = color
+        
+        
+        var imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 0, y: 0, width: size * 0.70, height: size * 0.70)
+        imageView.contentMode = .scaleAspectFit
+        button.addSubview(imageView)
+        
+        
+        return button
+    }()
+    
     private let quizOptionsButton: UIButton = {
         let button = UIButton()
         return button
@@ -92,6 +119,10 @@ class IDQPlayView: UIView {
         setupConstraints()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
         startButtonView.addGestureRecognizer(tapGesture)
+        bookmarkedQuestions = viewModel.fetchBookmarkedQuestions()
+        if !(bookmarkedQuestions?.isEmpty ?? true) {
+            bookmarkedQuestionsButton.isHidden = false
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -106,17 +137,30 @@ class IDQPlayView: UIView {
         topBackgroundView.backgroundColor = IDQConstants.contentBackgroundColor
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
         topBackgroundView.layer.cornerRadius = topBackgroundSize/2
+        bookmarkedQuestionsButton.addTarget(self, action: #selector(bookmarkedQuestionsButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    private func setupBookmarkedButton() {
+        bookmarkedQuestions = viewModel.fetchBookmarkedQuestions()
+        if !(bookmarkedQuestions?.isEmpty ?? true) {
+            bookmarkedQuestionsButton.isHidden = false
+        }
     }
     
     //MARK: - Private
     
     private func setupConstraints() {
-        addSubviews(topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView)
+        addSubviews(topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, bookmarkedQuestionsButton)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
             topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
+            
+            bookmarkedQuestionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            bookmarkedQuestionsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            bookmarkedQuestionsButton.widthAnchor.constraint(equalToConstant: 50),
+            bookmarkedQuestionsButton.heightAnchor.constraint(equalToConstant: 50),
             
             appIconMiniImageView.heightAnchor.constraint(equalToConstant: 64),
             appIconMiniImageView.widthAnchor.constraint(equalToConstant: 64),
@@ -198,6 +242,11 @@ class IDQPlayView: UIView {
     @objc
     private func questionBankButtonTapped(_ sender: UIButton) {
         
+    }
+    
+    @objc func bookmarkedQuestionsButtonTapped(_ sender: UIButton){
+        bookmarkedQuestionsButton.didHighlight(with: IDQConstants.contentBackgroundColor.withAlphaComponent(0.40))
+        delegate?.idqPlayView(self, bookmarkedQuestions: bookmarkedQuestions)
     }
     
     @objc

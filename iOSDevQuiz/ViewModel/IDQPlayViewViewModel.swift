@@ -50,4 +50,9 @@ final class IDQPlayViewViewModel {
         }
     }
     
+    public func fetchBookmarkedQuestions() -> [IDQQuestion] {
+        guard let user = userManager.fetchUser() else {return []}
+        return user.bookmarkedQuestions as! [IDQQuestion]
+    }
+    
 }

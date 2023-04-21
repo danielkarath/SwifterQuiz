@@ -37,6 +37,7 @@ final class IDQPlayViewController: UIViewController {
 }
 
 extension IDQPlayViewController: IDQPlayViewDelegate {
+    
     func idqPlayView(_ playView: IDQPlayView, didSelect game: IDQGame?) {
         guard let game = game else {
             return
@@ -49,5 +50,13 @@ extension IDQPlayViewController: IDQPlayViewDelegate {
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    
+    func idqPlayView(_ playView: IDQPlayView, bookmarkedQuestions: [IDQQuestion]?) {
+        guard let questions = bookmarkedQuestions else {
+            return
+        }
+        let bookmarkedQuestions = IDQBookmarkedQuestionsViewController(bookmarkedQuestions: questions)
+        bookmarkedQuestions.navigationItem.largeTitleDisplayMode = .automatic
+        bookmarkedQuestions.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(bookmarkedQuestions, animated: true)
+    }
 }
