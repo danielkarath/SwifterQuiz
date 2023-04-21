@@ -13,7 +13,7 @@ protocol IDQPlayViewDelegate: AnyObject {
 }
 
 /// The view that handles showing the main game related buttons like start quiz, game options, resources and related UI.
-class IDQPlayView: UIView {
+class IDQPlayView: UIView { //852 393
     
     public weak var delegate: IDQPlayViewDelegate?
     
@@ -23,8 +23,16 @@ class IDQPlayView: UIView {
     
     private var bookmarkedQuestions: [IDQQuestion]?
     
+    private let appIconTopAnchor: CGFloat = UIScreen.main.bounds.height * 0.018779
+    private let appIconSize: CGFloat = UIScreen.main.bounds.height * 0.075117
+    
+    private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.021101
+    private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.030480
+    
+    private let menuTopDistance: CGFloat = UIScreen.main.bounds.height * 0.0375586
+    
     private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
-    private let menuButtonHight: CGFloat = 48.0
+    private let menuButtonHight: CGFloat = UIScreen.main.bounds.height * 0.05633803 //0.0375586       48
     private let menuButtonCornerRadius: CGFloat = 8.0
     private let menuButtonFontSize: CGFloat = 24.0
     
@@ -61,7 +69,6 @@ class IDQPlayView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.highlightedDarkOrange
-        label.font = IDQConstants.setFont(fontSize: 21, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -123,6 +130,11 @@ class IDQPlayView: UIView {
         if !(bookmarkedQuestions?.isEmpty ?? true) {
             bookmarkedQuestionsButton.isHidden = false
         }
+        titleLabel.font = IDQConstants.setFont(fontSize: titleHeight * 0.80, isBold: true)
+        subTitle.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
+
+        print("UIScreen.main.bounds.height: \(UIScreen.main.bounds.height)")
+        print("UIScreen.main.bounds.width: \(UIScreen.main.bounds.width)")
     }
     
     required init?(coder: NSCoder) {
@@ -157,22 +169,22 @@ class IDQPlayView: UIView {
             topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
             topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
             
-            bookmarkedQuestionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            bookmarkedQuestionsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            bookmarkedQuestionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            bookmarkedQuestionsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             bookmarkedQuestionsButton.widthAnchor.constraint(equalToConstant: 50),
             bookmarkedQuestionsButton.heightAnchor.constraint(equalToConstant: 50),
             
-            appIconMiniImageView.heightAnchor.constraint(equalToConstant: 64),
-            appIconMiniImageView.widthAnchor.constraint(equalToConstant: 64),
+            appIconMiniImageView.heightAnchor.constraint(equalToConstant: appIconSize),
+            appIconMiniImageView.widthAnchor.constraint(equalToConstant: appIconSize),
             appIconMiniImageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            appIconMiniImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            appIconMiniImageView.topAnchor.constraint(equalTo: topAnchor, constant: appIconTopAnchor),
             
-            subTitle.heightAnchor.constraint(equalToConstant: 18),
+            subTitle.heightAnchor.constraint(equalToConstant: subTitleHeight),
             subTitle.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.60),
             subTitle.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             subTitle.topAnchor.constraint(equalTo: appIconMiniImageView.bottomAnchor, constant: 16),
             
-            titleLabel.heightAnchor.constraint(equalToConstant: 26),
+            titleLabel.heightAnchor.constraint(equalToConstant: titleHeight),
             titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.80),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             titleLabel.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 0),
@@ -180,7 +192,7 @@ class IDQPlayView: UIView {
             startButtonView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
             startButtonView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
             startButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            startButtonView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
+            startButtonView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
             
             quizOptionsButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
             quizOptionsButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
