@@ -9,8 +9,13 @@ import UIKit
 
 class StartButtonView: UIView {
         
+    private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.01524033
+    private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.02344666
     private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
-    private let menuButtonHight: CGFloat = 48.0
+    private let menuButtonHight: CGFloat = UIScreen.main.bounds.height * 0.05633803
+    private let smallIconSize: CGFloat = UIScreen.main.bounds.height * 0.02813599
+    private let backgroundImageBottomAnchor: CGFloat = UIScreen.main.bounds.height * 0.014068
+    private let backgroundImageTrailingAnchor: CGFloat = UIScreen.main.bounds.height * 0.02110199
     private let menuButtonCornerRadius: CGFloat = 8.0
     
     private let backgroundImageView: UIImageView = {
@@ -32,13 +37,11 @@ class StartButtonView: UIView {
         imageView.layer.cornerRadius = 4
         imageView.backgroundColor = UIColor.black.withAlphaComponent(0.05)
         
-        //let padding: CGFloat = 6
         let image = UIImage(systemName: "swift")?.withTintColor(IDQConstants.basicFontColor, renderingMode: .alwaysTemplate)
-        //let resizableImage = image?.resizableImage(withCapInsets: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding), resizingMode: .stretch)
         
         imageView.tintColor = .white
         imageView.image = image
-        imageView.contentMode = .center
+        imageView.contentMode = .scaleAspectFit
         imageView.isAccessibilityElement = false
         return imageView
     }()
@@ -58,7 +61,7 @@ class StartButtonView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        label.font = IDQConstants.setFont(fontSize: UIScreen.main.bounds.width/20, isBold: false)
+        label.font = IDQConstants.setFont(fontSize: 20, isBold: false)
         label.text = "Test your Swift skills"
         label.isAccessibilityElement = false
         return label
@@ -84,24 +87,31 @@ class StartButtonView: UIView {
         layer.cornerRadius = menuButtonCornerRadius
         clipsToBounds = true
         gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
+        
+        mainTitle.font = IDQConstants.setFont(fontSize: titleHeight, isBold: false)
+        subTitle.font = IDQConstants.setFont(fontSize: subTitleHeight, isBold: true)
     }
     
     private func setupConstraints() {
         addSubviews(backgroundImageView, smallIconImageView, subTitle, mainTitle)
         backgroundImageView.bounds = bounds
+        
+        let backgroundImageSize: CGFloat = UIScreen.main.bounds.height * 0.11267606
+        print("backgroundImageSize: \(backgroundImageSize)")
+        
         NSLayoutConstraint.activate([
-            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 12),
-            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 18),
-            backgroundImageView.widthAnchor.constraint(equalToConstant: frame.size.width/3.25),
-            backgroundImageView.heightAnchor.constraint(equalToConstant: frame.size.width/3.25),
+            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: backgroundImageBottomAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: backgroundImageTrailingAnchor),
+            backgroundImageView.widthAnchor.constraint(equalToConstant: backgroundImageSize),
+            backgroundImageView.heightAnchor.constraint(equalToConstant: backgroundImageSize),
             
             smallIconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             smallIconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            smallIconImageView.widthAnchor.constraint(equalToConstant: 24),
-            smallIconImageView.heightAnchor.constraint(equalToConstant: 24),
+            smallIconImageView.widthAnchor.constraint(equalToConstant: smallIconSize),
+            smallIconImageView.heightAnchor.constraint(equalToConstant: smallIconSize),
             
-            subTitle.centerYAnchor.constraint(equalTo: smallIconImageView.centerYAnchor, constant: 3),
-            subTitle.leadingAnchor.constraint(equalTo: smallIconImageView.trailingAnchor, constant: 6),
+            subTitle.centerYAnchor.constraint(equalTo: smallIconImageView.centerYAnchor, constant: smallIconSize * 0.125),
+            subTitle.leadingAnchor.constraint(equalTo: smallIconImageView.trailingAnchor, constant: smallIconSize * 0.25),
             
             mainTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
             mainTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
