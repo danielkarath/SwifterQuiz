@@ -10,7 +10,7 @@ import UIKit
 class StartButtonView: UIView {
         
     private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.01524033
-    private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.02344666
+    private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.02579132
     private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
     private let menuButtonHight: CGFloat = UIScreen.main.bounds.height * 0.05633803
     private let smallIconSize: CGFloat = UIScreen.main.bounds.height * 0.02813599
