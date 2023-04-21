@@ -127,62 +127,59 @@ final class IDQUserManager {
         }
     }
     
-    public func evaulateStreak() {
-        let user = fetchUser()
+    public func evaulateStreak(didPlayYesterday: Bool) {
         let calendar = Calendar.current
-        guard user != nil else {
-            return
-        }
-        guard let previousGameDate = user?.lastDatePlayed else {
-            return
-        }
         let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime)!
-        let isSameYesterdayDate = calendar.isDate(yesterdayDate, equalTo: previousGameDate, toGranularity: .day)
-        let isSameTodayDate = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
+        guard let user = fetchUser() else {
+            print("Could not load user while trying to set streak")
+            return
+        }
         
-        if isSameTodayDate || isSameYesterdayDate {
+        guard let previousGameDate = user.lastDatePlayed else {
+            print("Could not load previous game while trying to set streak")
+            return
+        }
+        
+        let hasPlayedAlreadyToday = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
+        
+        print("EvaulateStreak: \nyesterdayDate: \(yesterdayDate)\ndidPlayYesterday: \(didPlayYesterday)\nhasPlayedAlreadyToday\(hasPlayedAlreadyToday)")
+        if hasPlayedAlreadyToday {
             print("Streak is evaulated and no changes needed")
+        } else if didPlayYesterday {
+            print("Streak is evaulated and the player did play yesterday. No changes needed")
         } else {
             print("Streak is evaulated and the user's last game was not today or yesterday")
-            user?.streak = 0
+            user.streak = 0
             saveToCoreData()
         }
+        print("_________________________")
     }
     
-    public func addToStreak(for quiz: IDQQuiz) {
+    public func shouldAddToStreak() {
+        let calendar = Calendar.current
         guard let user = fetchUser() else {
-            print("At UserManager addToStreak could not load the user")
+            print("Could not load user while trying to set streak")
             return
         }
-        guard var previousGameDate = user.lastDatePlayed else {
-            print("At UserManager addToStreak could not load previousGameDate: \(user.lastDatePlayed)")
+        
+        guard let previousGameDate = user.lastDatePlayed else {
             user.streak = 1
             saveToCoreData()
+            print("Could not load previous game while trying to set streak")
             return
         }
-        let calendar = Calendar.current
-        let evaulatedTimePeriod: Calendar.Component = .day
-        let thisQuizDate: Date = quiz.date
         
-        let yesterdayDate = calendar.date(byAdding: evaulatedTimePeriod, value: -1, to: quiz.date)!
-        let isSameCalendarDate = calendar.isDate(quiz.date, equalTo: previousGameDate, toGranularity: evaulatedTimePeriod)
-
-        print("yesterdayDate: \(yesterdayDate)")
-        print("previousGameDate: \(previousGameDate)")
-        print("isSameCalendarDate: \(isSameCalendarDate)")
-        
-        if !isSameCalendarDate && previousGameDate == yesterdayDate {
-            print("The user played their last game the day before so it's time to add 1 to their streak")
+        let hasPlayedAlreadyToday = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
+        if hasPlayedAlreadyToday {
+            print("The user has already played today")
+            if user.streak < 1 {
+                user.streak = 1
+                saveToCoreData()
+            }
+        } else {
+            print("The user has not yet played today. Increase streak value")
             user.streak += 1
             saveToCoreData()
-        } else if isSameCalendarDate {
-            print("Streak evaulatin has already been done today. No further actions needed.")
-        } else {
-            print("Did set streak to 1")
-            user.streak = 1
-            saveToCoreData()
         }
     }
-    
-    
 }

@@ -84,6 +84,28 @@ final class IDQQuizResultManager {
         }
     }
     
+    public func didPlay(on date: Date) -> Bool? {
+        let calendar = Calendar.current
+        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime)!
+        
+        do {
+            var results: [IDQQuizResult] = try context.fetch(IDQQuizResult.fetchRequest())
+            if !results.isEmpty {
+                for result in results {
+                    if result.date == yesterdayDate {
+                        return true
+                    }
+                }
+                return false
+            } else {
+                return false
+            }
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
     public func save(quiz: IDQQuiz) {
         let result = IDQQuizResult(context: context)
         result.date = quiz.date

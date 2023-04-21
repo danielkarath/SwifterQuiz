@@ -20,16 +20,21 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let answerLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = IDQConstants.basicFontColor
-        label.numberOfLines = 0
-        label.contentMode = .topLeft
-        label.font = IDQConstants.setFont(fontSize: 14, isBold: false)
-        label.text = ""
-        label.isAccessibilityElement = true
-        return label
+    private let answerTextView: UITextView = {
+        let textView = UITextView()
+        let paragraphStyle = NSMutableParagraphStyle()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.textColor = IDQConstants.basicFontColor
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.isUserInteractionEnabled = false
+        textView.backgroundColor = .clear.withAlphaComponent(0.0)
+        textView.contentMode = .topLeft
+        paragraphStyle.lineSpacing = 8
+        textView.font = IDQConstants.setFont(fontSize: 14, isBold: false)
+        textView.text = ""
+        textView.isAccessibilityElement = true
+        return textView
     }()
     
     //MARK: - Init
@@ -45,7 +50,7 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        answerLabel.text = nil
+        answerTextView.text = nil
     }
     
     //MARK: - Private
@@ -61,17 +66,17 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupConstraints() {
-        addSubviews(answerLabel, answerImageView)
+        addSubviews(answerTextView, answerImageView)
         NSLayoutConstraint.activate([
             answerImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             answerImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             answerImageView.widthAnchor.constraint(equalToConstant: 24),
             answerImageView.heightAnchor.constraint(equalToConstant: 24),
             
-            answerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            answerLabel.leadingAnchor.constraint(equalTo: answerImageView.trailingAnchor, constant: 16),
-            answerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            answerLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            answerTextView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            answerTextView.leadingAnchor.constraint(equalTo: answerImageView.trailingAnchor, constant: 12),
+            answerTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            answerTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
         ])
     }
     
@@ -98,8 +103,8 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     
     public func configure(with answer: IDQAnswer, serial: Int) {
         guard !answer.text.isEmpty else { return }
-        answerLabel.text = answer.text
-        answerLabel.configureFor(IDQConstants.keywords)
+        answerTextView.text = answer.text
+        answerTextView.configureFor(IDQConstants.keywords, fontSize: 14.0)
         if serial >= 0 && serial < 4 {
             setupAnswerIcon(answerImageView, answerSerial: serial)
         } else {

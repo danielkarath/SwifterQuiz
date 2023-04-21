@@ -43,11 +43,12 @@ class IDQResultView: UIView {
     
     private let questionsSubTitleLabel: UILabel = {
         let label = UILabel()
+        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.01524033
         label.text = "Questions"
         label.numberOfLines = 1
         label.textAlignment = .left
         label.textColor = IDQConstants.basicFontColor
-        label.font = IDQConstants.setFont(fontSize: 13, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -232,12 +233,27 @@ class IDQResultView: UIView {
             }
         }
         
-        DispatchQueue.global(qos: .utility).async {
+        let serialQueue = DispatchQueue(label: "saveMetrics.serial.queue")
+
+        serialQueue.async {
+            print("Did fire self.viewModel.evaulateStreak()")
+            self.viewModel.evaulateStreak()
+            print("Did fire self.viewModel.save(quiz: quiz)")
             self.viewModel.save(quiz: quiz)
+        }
+        serialQueue.async {
+            print("Did fire viewModel.saveToDaytimeActivity(quiz)")
             self.viewModel.saveToDaytimeActivity(quiz)
-            self.viewModel.evaulateStreak(for: quiz)
+            print("Did fire viewModel.saveToUserRecords(quiz)")
             self.viewModel.saveToUserRecords(quiz)
         }
+        
+//        DispatchQueue.global(qos: .utility).async {
+//            self.viewModel.evaulateStreak(for: quiz)
+//            self.viewModel.save(quiz: quiz)
+//            self.viewModel.saveToDaytimeActivity(quiz)
+//            self.viewModel.saveToUserRecords(quiz)
+//        }
     }
     
 }
@@ -265,13 +281,17 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenBounds = UIScreen.main.bounds
         let width = (screenBounds.width-32)
-        return CGSize(width: width, height: width * 0.40)
+        var height: CGFloat?
+        if UIScreen.main.bounds.height  > 1080 {
+            height = width * 0.26
+        } else {
+            height = width * 0.40
+        }
+        return CGSize(width: width, height: height ?? width * 0.40)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        //let selectedQuestion = questions[indexPath.row]
-        //delegate?.didSelectEpisode(selectedQuestion)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

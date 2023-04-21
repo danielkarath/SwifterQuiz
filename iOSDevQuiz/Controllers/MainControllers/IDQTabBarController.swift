@@ -25,7 +25,6 @@ final class IDQTabBarController: UITabBarController {
         setupTabs()
         automaticallyGenerateUser()
         evaulateUserMetrics()
-        resultManager.fetchResults()
         print("number of questions in total: \(fullQuestionList.count)")
     }
     
@@ -81,9 +80,25 @@ final class IDQTabBarController: UITabBarController {
     }
     
     private func evaulateUserMetrics() {
-        DispatchQueue.global(qos: .utility).async {
-            self.userManager.evaulateStreak()
+        let calendar = Calendar.current
+        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime)!
+        let serialQueue = DispatchQueue(label: "evaulateUserMetrics.serial.queue")
+        var didPlayYesterday: Bool?
+        
+        serialQueue.async {
+            didPlayYesterday = self.resultManager.didPlay(on: yesterdayDate)
+            print("Did fire self evaulateUserMetrics.serial.queue\nChecking if the user played yesterday: \(didPlayYesterday)")
         }
+        serialQueue.async {
+            guard didPlayYesterday != nil else {return}
+            print("Did fire self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday)")
+            self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday!)
+        }
+        
+//        DispatchQueue.global(qos: .utility).async {
+//
+//            self.userManager.evaulateStreak(didPlayYesterday: <#Bool#>)
+//        }
     }
     
 }

@@ -265,7 +265,7 @@ class IDQPlayView: UIView { //852 393
     @objc
     private func startViewTapped(_ gestureRecognizer: UITapGestureRecognizer) {
         startButtonView.didHighlight(with: IDQConstants.contentBackgroundColor.withAlphaComponent(0.40))
-        let selectedGame = viewModel.didTapButton(for: .tester)
+        let selectedGame = viewModel.didTapButton(for: .quicQuiz)
         delegate?.idqPlayView(self, didSelect: selectedGame)
     }
 }

@@ -238,6 +238,29 @@ extension UILabel {
     
 }
 
+extension UITextView {
+    
+    func configureFor(_ keywordColors: [String], fontSize: CGFloat) {
+        guard let labelText = text else {
+            return
+        }
+        let color = IDQConstants.highlightedDarkOrange
+        let attributedString = NSMutableAttributedString(string: labelText)
+        
+        
+        let words = labelText.split(separator: " ")
+        for word in words {
+            if keywordColors.contains(String(word)) {
+                let range = (labelText as NSString).range(of: String(word))
+                attributedString.addAttribute(.foregroundColor, value: color, range: range)
+                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+            }
+        }
+        attributedText = attributedString
+    }
+    
+}
+
 extension Array where Element == UIColor {
     func toCGColors() -> [CGColor] {
         return self.map { $0.cgColor }
