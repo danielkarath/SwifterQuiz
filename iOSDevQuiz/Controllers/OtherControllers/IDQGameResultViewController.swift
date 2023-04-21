@@ -58,7 +58,7 @@ extension IDQGameResultViewController: IDQResultViewDelegate {
     
     
     func idqResultView(_ view: IDQResultView, didShare quiz: IDQQuiz, image: UIImage?) {
-        let appID = "Add your actual App ID" // Add your actual App ID
+        let appID = "Add your actual App ID" 
         let appURLString = "https://apps.apple.com/app/id\(appID)"
         
         let textToShare = "I scored \(quiz.totalScore) out of \(quiz.questions.count) in the iOS Developer Quiz!"
