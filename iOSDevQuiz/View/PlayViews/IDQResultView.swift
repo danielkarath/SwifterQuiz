@@ -143,9 +143,15 @@ class IDQResultView: UIView {
     
     private func setupConstraints() {
         
-        let collectionViewLeadingAnchor: CGFloat = 8
-        let statsViewHeight: CGFloat = 48
-        let statsViewWidth: CGFloat = 90
+        let collectionViewLeadingAnchor: CGFloat = UIScreen.main.bounds.height * 0.00937866
+        
+        var statsViewHeight: CGFloat = UIScreen.main.bounds.height * 0.05627198
+        var statsViewWidth: CGFloat = UIScreen.main.bounds.height * 0.10550996
+        
+        if UIScreen.main.bounds.height  > 1080 {
+            statsViewHeight = UIScreen.main.bounds.height * 0.07033998
+            statsViewWidth = UIScreen.main.bounds.height * 0.14067995
+        }
         
         addSubviews(topBackgroundView, scoreView, timeView, percentageView, questionsSubTitleLabel, questionsCollectionView, menuButton, shareButton)
         NSLayoutConstraint.activate([

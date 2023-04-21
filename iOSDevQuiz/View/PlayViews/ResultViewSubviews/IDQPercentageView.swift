@@ -25,11 +25,12 @@ final class IDQPercentageView: UIView {
 
     public let quizPercentageLabel: UILabel = {
         let label = UILabel()
+        var fontSize: CGFloat = UIScreen.main.bounds.height * 0.02461899
         label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.highlightedDarkOrange
-        label.font = IDQConstants.setFont(fontSize: 21, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.zPosition = 4
         return label
@@ -37,11 +38,12 @@ final class IDQPercentageView: UIView {
     
     private let quizPercentageDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Performance"
+        var fontSize: CGFloat = UIScreen.main.bounds.height * 0.01524033
+        label.text = "Accuracy"
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.contentBackgroundColor
-        label.font = IDQConstants.setFont(fontSize: 13, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.zPosition = 3
         return label
@@ -49,11 +51,16 @@ final class IDQPercentageView: UIView {
     
     private let descriptionView: UIView = {
         let view = UIView()
+        var statsViewHeight: CGFloat = UIScreen.main.bounds.height * 0.05627198
+        var statsViewWidth: CGFloat = UIScreen.main.bounds.height * 0.10550996
+        
+        if UIScreen.main.bounds.height  > 1080 {
+            statsViewWidth = UIScreen.main.bounds.height * 0.14067995
+        }
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.backgroundColor = IDQConstants.highlightedDarkOrange
         let color1: UIColor = IDQConstants.highlightedLightOrange
         let color2: UIColor = IDQConstants.highlightedDarkOrange
-        view.frame.size = CGSize(width: 90, height: 54)
+        view.frame.size = CGSize(width: statsViewWidth, height: statsViewHeight)
         view.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
         view.clipsToBounds = true
         view.layer.zPosition = 2
@@ -81,29 +88,43 @@ final class IDQPercentageView: UIView {
     }
     
     private func setupConstraints() {
+        var statsViewHeight: CGFloat = UIScreen.main.bounds.height * 0.05627198
+        var descriptionViewTopAnchor: CGFloat = -(UIScreen.main.bounds.height * 0.03745252)
+        var scoreLabelSize: CGFloat = UIScreen.main.bounds.height * 0.09378664
+        var scoreLabelCenterY: CGFloat = UIScreen.main.bounds.height * 0.014068
+        var descriptionLabelHeight: CGFloat = UIScreen.main.bounds.height * 0.01875733
+        var descriptionLabelWidth: CGFloat = UIScreen.main.bounds.height * 0.07033998
+        var descriptionLabelTopAnchor: CGFloat = UIScreen.main.bounds.height * 0.00347233
+        var backgroundImageViewSize: CGFloat = UIScreen.main.bounds.height * 0.04220399
+        var backgroundImageOffset: CGFloat = UIScreen.main.bounds.height * 0.007034
+        
+        if UIScreen.main.bounds.height  > 1080 {
+            backgroundImageViewSize = backgroundImageViewSize * 1.40
+            backgroundImageOffset = backgroundImageOffset * 1.40
+        }
         
         addSubviews(descriptionView, quizPercentageLabel, backgroundImageView)
         descriptionView.addSubview(quizPercentageDescriptionLabel)
         NSLayoutConstraint.activate([
-            quizPercentageLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12),
+            quizPercentageLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: scoreLabelCenterY),
             quizPercentageLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            quizPercentageLabel.widthAnchor.constraint(equalToConstant: 80),
-            quizPercentageLabel.heightAnchor.constraint(equalToConstant: 80),
+            quizPercentageLabel.widthAnchor.constraint(equalToConstant: scoreLabelSize),
+            quizPercentageLabel.heightAnchor.constraint(equalToConstant: scoreLabelSize),
             
-            descriptionView.topAnchor.constraint(equalTo: topAnchor, constant: -40),
+            descriptionView.topAnchor.constraint(equalTo: topAnchor, constant: descriptionViewTopAnchor),
             descriptionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             descriptionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            descriptionView.heightAnchor.constraint(equalToConstant: 54),
+            descriptionView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
             quizPercentageDescriptionLabel.centerXAnchor.constraint(equalTo: descriptionView.centerXAnchor, constant: 0),
-            quizPercentageDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 1),
-            quizPercentageDescriptionLabel.widthAnchor.constraint(equalToConstant: 80),
-            quizPercentageDescriptionLabel.heightAnchor.constraint(equalToConstant: 16),
+            quizPercentageDescriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: descriptionLabelTopAnchor),
+            quizPercentageDescriptionLabel.widthAnchor.constraint(equalToConstant: descriptionLabelWidth),
+            quizPercentageDescriptionLabel.heightAnchor.constraint(equalToConstant: descriptionLabelHeight),
             
-            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 6),
-            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 6),
-            backgroundImageView.widthAnchor.constraint(equalToConstant: 36),
-            backgroundImageView.heightAnchor.constraint(equalToConstant: 36),
+            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: backgroundImageOffset),
+            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: backgroundImageOffset),
+            backgroundImageView.widthAnchor.constraint(equalToConstant: backgroundImageViewSize),
+            backgroundImageView.heightAnchor.constraint(equalToConstant: backgroundImageViewSize),
         ])
     }
     

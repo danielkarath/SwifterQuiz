@@ -219,7 +219,7 @@ final class IDQGameView: UIView {
             overlayView.topAnchor.constraint(equalTo: topAnchor, constant: -100),
             overlayView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            questionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 64),
+            questionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 56),
             questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
             questionLabel.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-64)*0.95),
             
@@ -230,7 +230,7 @@ final class IDQGameView: UIView {
             
             countDownView.heightAnchor.constraint(equalToConstant: 40),
             countDownView.widthAnchor.constraint(equalToConstant: 40),
-            countDownView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            countDownView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
             countDownView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
 
             collectionView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 18),
