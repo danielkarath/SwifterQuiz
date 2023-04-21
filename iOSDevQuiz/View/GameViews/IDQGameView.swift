@@ -504,8 +504,8 @@ final class IDQGameView: UIView {
         self.questions = questions
         self.game = game
         questionLabel.configureFor(IDQConstants.keywords)
-        countDownView.setupTimer(game: game, delay: 1.40)
         if viewModel.isLastQuestion(game: game) {
+            countDownView.setupTimer(game: game, delay: 1.40)
             self.question = questions[viewModel.quizRound-1]
             questionNumberLabel.text = String(viewModel.quizRound)
         } else {
