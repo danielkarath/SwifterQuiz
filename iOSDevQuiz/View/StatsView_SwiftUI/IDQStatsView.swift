@@ -28,7 +28,7 @@ struct IDQStatsView: View {
                 ZStack {
                     IDQMainStatsView(totalScore: totalScore, totalPerformance: totalPerformance, streak: streak)
                     ScrollView(.vertical) {
-                        Spacer(minLength: UIScreen.main.bounds.width/1.30)
+                        Spacer(minLength: 280)
                         IDQStatsMetricsHStackView(quizesPlayed: quizesPlayed, timeSpent: viewModel.setupGameTime(for: timeSpent), gameTimeText: viewModel.setupTextFor(totalGameTime: timeSpent))
                     }
                 }

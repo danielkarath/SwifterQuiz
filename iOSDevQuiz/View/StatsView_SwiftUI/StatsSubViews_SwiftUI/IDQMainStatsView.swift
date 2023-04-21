@@ -14,24 +14,21 @@ struct IDQMainStatsView: View {
     var streak: Double
     
     private let titleFont = IDQConstants.setFont(fontSize: 32, isBold: true)
+    private let sideBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 220 : 90
+    private let midBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 300 : 140
+    private let topPadding: CGFloat = UIScreen.screenHeight > 1080 ? 64 : 32
     
     var body: some View {
         VStack {
-            Text("Progression")
-                .frame(width: UIScreen.main.bounds.width-64, height: 50, alignment: .leading)
-                .foregroundColor(Color(IDQConstants.basicFontColor))
-                .font(Font(titleFont))
-                .multilineTextAlignment(.leading)
-                .padding(.top, 16)
-                .padding(.bottom, 32)
             HStack {
                 IDQTargetView(value: totalPerformance)
-                    .frame(width: 90, height: 90)
+                    .frame(width: sideBoxSize, height: sideBoxSize)
                 IDQTrophyView(value: totalScore)
-                    .frame(width: 140, height: 140)
+                    .frame(width: midBoxSize, height: midBoxSize)
                 IDQStreakView(value: streak)
-                    .frame(width: 90, height: 90)
+                    .frame(width: sideBoxSize, height: sideBoxSize)
             }
+            .padding(.top, topPadding)
             Spacer()
         }
     }
