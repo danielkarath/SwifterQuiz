@@ -256,13 +256,11 @@ final class IDQResultViewViewModel {
         daytimeActivityGroupManager.update(daytimeActivityGroup, with: quiz)
     }
     
-    public func evaulateStreak(for quiz: IDQQuiz) {
-        let user = userManager.fetchUser()
-        guard let streak = user?.streak else {
-            print("Could not find user streak")
+    public func evaulateStreak() {
+        guard let user = userManager.fetchUser() else {
             return
         }
-        userManager.addToStreak(for: quiz)
+        userManager.shouldAddToStreak()
     }
     
 }

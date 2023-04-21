@@ -356,7 +356,6 @@ final class IDQGameView: UIView {
     }
     
     private func displayQuestionResults(isCorrectlyAnswered: Bool, answeredInTime: Bool) {
-        print("VIBRATE BUG")
         didAnswer = true
         delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
         countDownView.stopTimer()

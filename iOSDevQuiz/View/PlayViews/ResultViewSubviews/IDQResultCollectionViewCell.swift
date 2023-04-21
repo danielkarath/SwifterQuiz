@@ -33,11 +33,12 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     
     private let difficultyLabel: UILabel = {
         let label = UILabel()
+        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.01524033
         label.layer.zPosition = 5
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.text = "Some difficulty"
-        label.font = IDQConstants.setFont(fontSize: 13, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         label.textColor = IDQConstants.secondaryFontColor
         return label
     }()
@@ -54,13 +55,14 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     
     private let questionLabel: UILabel = {
         let label = UILabel()
+        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.02227433 //0.01758499
         label.layer.zPosition = 8
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.contentMode = .topLeft
         label.numberOfLines = 0
         label.text = "Some question"
-        label.font = IDQConstants.setFont(fontSize: 15, isBold: false)
+        label.font = IDQConstants.setFont(fontSize: fontSize, isBold: false)
         label.textColor = IDQConstants.basicFontColor
         return label
     }()
@@ -89,6 +91,10 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     }
     
     private func addConstraints() {
+        let difficultyLabelHeight: CGFloat = UIScreen.main.bounds.height * 0.03516999
+        let difficultyLabelWidth: CGFloat = UIScreen.main.bounds.height * 0.09378664
+        let isCorrectImageViewSize: CGFloat = UIScreen.main.bounds.height * 0.01641266
+        
         NSLayoutConstraint.activate([
             
             imageOuterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -102,18 +108,18 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
             questionTypeImageView.heightAnchor.constraint(equalToConstant: frame.size.width/2.70),
             
             difficultyLabel.leadingAnchor.constraint(equalTo: isCorrectImageView.trailingAnchor, constant: 3),
-            difficultyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 80),
+            difficultyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: difficultyLabelWidth),
             difficultyLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            difficultyLabel.heightAnchor.constraint(equalToConstant: 30),
+            difficultyLabel.heightAnchor.constraint(equalToConstant: difficultyLabelHeight),
             
-            isCorrectImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
+            isCorrectImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isCorrectImageViewSize),
             isCorrectImageView.centerYAnchor.constraint(equalTo: difficultyLabel.centerYAnchor, constant: -1.00),
-            isCorrectImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 14),
-            isCorrectImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 14),
+            isCorrectImageView.widthAnchor.constraint(lessThanOrEqualToConstant: isCorrectImageViewSize),
+            isCorrectImageView.heightAnchor.constraint(lessThanOrEqualToConstant: isCorrectImageViewSize),
             
             questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             questionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -64),
-            questionLabel.topAnchor.constraint(equalTo: difficultyLabel.bottomAnchor, constant: -4),
+            questionLabel.topAnchor.constraint(equalTo: difficultyLabel.bottomAnchor, constant: -2),
             questionLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 90)
             
         ])
