@@ -28,12 +28,12 @@ struct IDQQuestion: Codable {
 class IDQQuestionArrayValueTransformer: ValueTransformer {
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-
+    
     override func transformedValue(_ value: Any?) -> Any? {
         guard let questions = value as? [IDQQuestion] else { return nil }
         return try? encoder.encode(questions)
     }
-
+    
     override func reverseTransformedValue(_ value: Any?) -> Any? {
         guard let data = value as? Data else { return nil }
         return try? decoder.decode([IDQQuestion].self, from: data)
@@ -49,7 +49,7 @@ let fullQuestionList = unserializedQuestionList.enumerated().map { (index, quest
 let unserializedQuestionList: [IDQQuestion] = [
     
     //MARK: - Basics
-
+    
     IDQQuestion(
         question: "The creation of a data object to a specific state or value is called __________.",
         questionSerialNum: 0,
@@ -94,7 +94,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "-3", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the logical 'or' operator in Swift?",
         questionSerialNum: 0,
@@ -109,7 +109,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "||", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What do we use the ternary operator for?",
         questionSerialNum: 0,
@@ -229,7 +229,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Character \t", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "A #selector expression is used to refer to __________",
         questionSerialNum: 0,
@@ -274,7 +274,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A repeat-while loop will always execute at least once,", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the difference between Any and AnyObject?",
         questionSerialNum: 0,
@@ -289,7 +289,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: " Any can represent any type including value types.\n AnyObject can represent any instance of a class.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is type annotation?",
         questionSerialNum: 0,
@@ -304,7 +304,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Explicitly specifying the type of a variable or function parameter.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "How can you create a multi-line String object in Swift?",
         questionSerialNum: 0,
@@ -319,7 +319,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "By enclosing the string in triple quotes", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the method deinit() used for?",
         questionSerialNum: 0,
@@ -334,7 +334,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "The deinit() is called immediately before a class instance is deallocated.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is a Tuple in Swift?",
         questionSerialNum: 0,
@@ -349,7 +349,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A Tuple is a collection of values of any type, which can be of different types.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What does the Codable protocol do?",
         questionSerialNum: 0,
@@ -364,7 +364,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It provides a standardized way to encode and decode objects to and from JSON, or other data formats.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What are enums in Swift?",
         questionSerialNum: 0,
@@ -379,8 +379,8 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Enums are a way to define a group of related values.", answerType: .correct),
         ]
     ),
-
-
+    
+    
     IDQQuestion(
         question: "What are UserDefaults?",
         questionSerialNum: 0,
@@ -395,7 +395,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A simple key-value store that allows the application to store and retrieve small pieces of data.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "what is an associated type?",
         questionSerialNum: 0,
@@ -410,7 +410,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It's used to define placeholder type used in a protocol.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "what is an opaque type?",
         questionSerialNum: 0,
@@ -425,7 +425,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A function or method with an opaque type hides its return value’s type information.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the difference between an Array and a Set?",
         questionSerialNum: 0,
@@ -470,7 +470,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A collection type that stores key-value pairs.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the difference between a Float and a Double?",
         questionSerialNum: 0,
@@ -485,7 +485,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A Float uses 32 bits while a Double uses 64 bits of memory.", answerType: .correct)
         ]
     ),
-
+    
     IDQQuestion(
         question: "Which of the following methods is executed first in the AppDelegate before the others?",
         questionSerialNum: 0,
@@ -575,7 +575,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "The most restrictive access level of the function’s parameter types and return type.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What does @frozen attribute stand for?",
         questionSerialNum: 0,
@@ -590,8 +590,8 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It indicates that the annotated type or member is immutable.", answerType: .correct),
         ]
     ),
-
-
+    
+    
     IDQQuestion(
         question: "StringProtocol conforms to which of these protocols?",
         questionSerialNum: 0,
@@ -606,8 +606,8 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It conforms to all of the listed protocols", answerType: .correct),
         ]
     ),
-
-
+    
+    
     IDQQuestion(
         question: "What is a UUID?",
         questionSerialNum: 0,
@@ -622,7 +622,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A unique 128-bit value that is used to identify information in a unique and standardized way.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the lazy property in Swift?",
         questionSerialNum: 0,
@@ -637,7 +637,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It's a property that is only initialized when it is accessed for the first time.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "You can add an element to a specific index of an array by using __________ method",
         questionSerialNum: 0,
@@ -652,7 +652,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "the insert(_:at:) \n", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "The zip() method in Swift is used to __________",
         questionSerialNum: 0,
@@ -667,7 +667,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "merge two sequences into a single sequence of tuples.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "When would you use Swift’s Result type?",
         questionSerialNum: 0,
@@ -682,7 +682,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It's used to indicate the outcome of a function or method that can either succeed or fail.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "The guard statement is __________",
         questionSerialNum: 0,
@@ -697,7 +697,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A control flow statement that is used to exit early from a function, method or loop if a condition isn't met.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is a delegate in Swift?",
         questionSerialNum: 0,
@@ -712,7 +712,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A delegate is an object that is responsible for handling specific tasks on behalf of another object, called the delegator.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What are the advatages of the notification design pattern over the delegate pattern?",
         questionSerialNum: 0,
@@ -727,7 +727,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Notifications can have multiple observers, which allows for more flexibility", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "With the __________ observers can be registered and unregistered dynamically at runtime without modifying the code of the notifying object.",
         questionSerialNum: 0,
@@ -742,7 +742,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "notification and KVO patterns", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the acronym KVO stands for in iOS development?",
         questionSerialNum: 0,
@@ -757,7 +757,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Key-Value Observing \t", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "In MVC (design pattern) what does the V stand for?",
         questionSerialNum: 0,
@@ -772,7 +772,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "View \t", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "In the MVC design pattern what is the role of the Controller?",
         questionSerialNum: 0,
@@ -787,7 +787,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It acts as an intermediary between the model and the view.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the difference between the MVVM and the Viper design patterns?",
         questionSerialNum: 0,
@@ -802,7 +802,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "VIPER separates the navigation logic of the application.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "Which is NOT a component in the VIPER design pattern?",
         questionSerialNum: 0,
@@ -817,7 +817,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Model ", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is a singleton?",
         questionSerialNum: 0,
@@ -832,7 +832,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A design pattern that restricts the instantiation of a class to one object", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "How can you declare optional methods in a protocol?",
         questionSerialNum: 0,
@@ -847,7 +847,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "By using @objc optional keywords.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the difference between Size classes and Auto Layout?",
         questionSerialNum: 0,
@@ -862,7 +862,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Size classes define interface traits, Auto Layout positioning.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "Which one is printed out first?",
         questionSerialNum: 0,
@@ -877,7 +877,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "print(\"fist\")", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is the difference between the main thread and the background threads?",
         questionSerialNum: 0,
@@ -892,7 +892,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "The main thread typically handles the user interface while the background threads handle large, time-consuming tasks.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What the DispatchQoS is used for?",
         questionSerialNum: 0,
@@ -907,7 +907,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It's for setting the execution priority, to apply to tasks.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "Which qualty of service class has the lowest priority level?",
         questionSerialNum: 0,
@@ -922,7 +922,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "background", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "How would you set the position of a task's importance within its assigned quality of service (QoS) class?",
         questionSerialNum: 0,
@@ -937,7 +937,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "With the relativePriority property", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What is a defer statement?",
         questionSerialNum: 0,
@@ -952,7 +952,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "It's used to execute a block of code just before the current scope is exited", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "With what tools can you catch changes in a property's value in Swift?",
         questionSerialNum: 0,
@@ -967,8 +967,8 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "With property observers", answerType: .correct),
         ]
     ),
-
-
+    
+    
     //MARK: - UIKit
     IDQQuestion(
         question: "In UIKit how many constraints are needed at minimum to correctly determine the position of a UI element?",
@@ -984,7 +984,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "4", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "In UIKit when loading a view controller what method is called first from the listed below?",
         questionSerialNum: 0,
@@ -999,7 +999,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "loadView() \t", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "In UIKit how can you programatically set a view controller (ExampleVC) to be the first presented when launching the app?",
         questionSerialNum: 0,
@@ -1014,7 +1014,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "By setting the window property's rootViewController to ExampleVC in the app's SceneDelegate.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "When setting custom constraints to a UI element we should set the element's ______________.",
         questionSerialNum: 0,
@@ -1029,7 +1029,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "translatesAutoresizingMaskIntoConstraints property to false", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "Regarding the difference between push and modal segues which of the below statements is true?",
         questionSerialNum: 0,
@@ -1044,7 +1044,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Push segues require a navigation controller but modal segues don't", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "What methods are required to be implemented when adopting the UICollectionViewDataSource protocol?",
         questionSerialNum: 0,
@@ -1059,7 +1059,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "collectionView(_:numberOfItemsInSection:) \n collectionView(_:cellForItemAt:)", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "Regarding the difference between UITableView and UICollectionView which statment is INCORRECT?",
         questionSerialNum: 0,
@@ -1074,7 +1074,7 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "The UITableView does not allow varying sized cells.", answerType: .correct),
         ]
     ),
-
+    
     IDQQuestion(
         question: "In UIKit use __________ to force the view to update its layout immediately.",
         questionSerialNum: 0,
@@ -1195,6 +1195,80 @@ let unserializedQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "Which statment is true?",
+        questionSerialNum: 0,
+        explanation: "SwiftUI follows the declarative while UIKit the imperative programming approach.",
+        reference: "https://developer.apple.com/documentation/swiftui/declaring-a-custom-view",
+        difficulty: .veryEasy,
+        topic: .swiftui,
+        answers: [
+            IDQAnswer(text: "Both SwiftUI and UIKit follow the imperative programming approach.", answerType: .wrong),
+            IDQAnswer(text: "SwiftUI and UIKit both utilize the declarative, while Objective-C relies on the imperative approach.", answerType: .wrong),
+            IDQAnswer(text: "SwiftUI follows the imperative while UIKit the declarative programming approach.", answerType: .wrong),
+            IDQAnswer(text: "SwiftUI follows the declarative while UIKit the imperative programming approach.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Which statement is true regarding the List container in SwiftUI?",
+        questionSerialNum: 0,
+        explanation: "The List automatically manages its subviews in a single, vertically scrolling column.",
+        reference: "https://developer.apple.com/documentation/swiftui/list",
+        difficulty: .easy,
+        topic: .swiftui,
+        answers: [
+            IDQAnswer(text: "A List automatically manages it's subviews in a single, vertically or horizontally scrolling column", answerType: .wrong),
+            IDQAnswer(text: "A List is a generic container that provides a scrolling interface for its content, which can be laid out in any configuration", answerType: .wrong),
+            IDQAnswer(text: "The List automatically manages its subviews in one or more vertically scrolling column.", answerType: .wrong),
+            IDQAnswer(text: "The List automatically manages its subviews in one vertically scrolling column.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "How would you set the color of a text to blue in SwiftUI?",
+        questionSerialNum: 0,
+        explanation: "By applying the foregroundColor(_:) modifier to the Text with the Color.blue value",
+        reference: "https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)",
+        difficulty: .veryEasy,
+        topic: .swiftui,
+        answers: [
+            IDQAnswer(text: "By declaring the Text and calling the SetTintColor() method .onAppear with the Color.blue value.", answerType: .wrong),
+            IDQAnswer(text: "By applying the backgroundColor(_:) modifier to the Text with the Color.blue value.", answerType: .wrong),
+            IDQAnswer(text: "By applying the textColor(_:) modifier to the Text with the Color.blue value.", answerType: .wrong),
+            IDQAnswer(text: "By applying the foregroundColor(_:) modifier to the Text with the Color.blue value.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In SwiftUI the @State is __________ ",
+        questionSerialNum: 0,
+        explanation: "The @State property wrapper creates persistent storage for the value outside the view structure and preserves its value when the view redraws itself.",
+        reference: nil,
+        difficulty: .easy,
+        topic: .swiftui,
+        answers: [
+            IDQAnswer(text: "an attribute that restricts changes you can make to the type, making it immutable", answerType: .wrong),
+            IDQAnswer(text: "an acceess control syntax limiting the availability of an entity to its own defining source file", answerType: .wrong),
+            IDQAnswer(text: "a property wrapper used to create a mutable reference to a value stored in a different view or data source", answerType: .wrong),
+            IDQAnswer(text: "a property wrapper that creates persistent storage for a mutable value within a single view and preserves its value when the view redraws itself", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The ColorScheme environment value which let's you determine if the system apperance is set to light or dark mode",
+        questionSerialNum: 0,
+        explanation: "The possible color schemes, corresponding to the light and dark appearances.",
+        reference: "https://developer.apple.com/documentation/swiftui/colorscheme",
+        difficulty: .easy,
+        topic: .swiftui,
+        answers: [
+            IDQAnswer(text: "The UserInterfaceStyle environment value", answerType: .wrong),
+            IDQAnswer(text: "The traitCollectionDidChange method inside the onAppear(perform:) method", answerType: .wrong),
+            IDQAnswer(text: "The UserInterfaceStyle property value", answerType: .wrong),
+            IDQAnswer(text: "The ColorScheme environment value", answerType: .correct),
+        ]
+    ),
     
 ]
 

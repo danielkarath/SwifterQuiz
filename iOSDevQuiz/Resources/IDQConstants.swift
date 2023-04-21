@@ -164,6 +164,18 @@ struct IDQConstants {
         "super.prepareForReuse()",
         "UISlider()",
         "UIRangeSlider",
+        "foregroundColor(_:)",
+        "textColor(_:)",
+        "backgroundColor(_:)",
+        "SetTintColor()",
+        "Color.orange",
+        "ColorScheme",
+        "@State",
+        "@Binding",
+        "@Environment",
+        "UserInterfaceStyle",
+        "traitCollectionDidChange",
+        "onAppear(perform:)",
     ]
     
     //MARK: - Background colors

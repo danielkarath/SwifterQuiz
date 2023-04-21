@@ -44,31 +44,31 @@ enum IDQTopic: Codable, CaseIterable {
         case .basics:
             return IDQConstants.basicImage
         case .uikit:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage  //IDQConstants.uikitImage
         case .swiftui:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .cloudKit:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .combine:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .rxSwift:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .metal:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .coreML:
             return IDQConstants.mlImage
         case .coreAnimation:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .avFoundation:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .widgetKit:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .arkit:
             return IDQConstants.arkitImage
         case .mapKit:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         case .healthKit:
-            return IDQConstants.uikitImage
+            return IDQConstants.basicImage
         }
     }
     
