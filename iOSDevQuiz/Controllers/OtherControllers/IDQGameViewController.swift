@@ -67,9 +67,8 @@ final class IDQGameViewController: UIViewController {
     
     @objc
     private func menuButtonTapped() {
-        if quizRoundCounter > 0 {
-            NotificationCenter.default.post(name: .exitQuizPressed, object: nil)
-        } else {
+        NotificationCenter.default.post(name: .exitQuizPressed, object: nil)
+        if quizRoundCounter <= 0 {
             navigationController?.popToRootViewController(animated: true)
         }
     }

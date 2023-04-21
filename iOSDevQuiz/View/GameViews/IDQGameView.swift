@@ -356,6 +356,7 @@ final class IDQGameView: UIView {
     }
     
     private func displayQuestionResults(isCorrectlyAnswered: Bool, answeredInTime: Bool) {
+        print("VIBRATE BUG")
         didAnswer = true
         delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
         countDownView.stopTimer()
@@ -434,19 +435,23 @@ final class IDQGameView: UIView {
     
     @objc
     private func didTapExit() {
-        isExitViewVisible.toggle()
-        countDownView.pauseTimer()
-        
-        questionEndDate = Date.currentTime
-        let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
-        quizTimeSpent += timeDifference
-        
-        if overlayView.isHidden {
-            configure(overlay: overlayView)
+        if viewModel.quizRound == 1 {
+            countDownView.stopTimer()
+        } else {
+            isExitViewVisible.toggle()
+            countDownView.pauseTimer()
+            
+            questionEndDate = Date.currentTime
+            let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
+            quizTimeSpent += timeDifference
+            
+            if overlayView.isHidden {
+                configure(overlay: overlayView)
+            }
+            UIView.animate(withDuration: 0.80, delay: 0.0, usingSpringWithDamping: 0.86, initialSpringVelocity: 0.2, options: [], animations: {
+                self.exitView.transform = CGAffineTransform(translationX: 0, y: -290)
+            }, completion: nil)
         }
-        UIView.animate(withDuration: 0.80, delay: 0.0, usingSpringWithDamping: 0.86, initialSpringVelocity: 0.2, options: [], animations: {
-            self.exitView.transform = CGAffineTransform(translationX: 0, y: -290)
-        }, completion: nil)
     }
     
     private func didTapRejoinQuiz() {
