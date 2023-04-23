@@ -26,7 +26,7 @@ class IDQPlayView: UIView { //852 393
     private let appIconTopAnchor: CGFloat = UIScreen.main.bounds.height * 0.018779
     private let appIconSize: CGFloat = UIScreen.main.bounds.height * 0.075117
     
-    private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.021101
+    private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.019101
     private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.030480
     
     private let menuTopDistance: CGFloat = UIScreen.main.bounds.height * 0.0375586
@@ -63,8 +63,8 @@ class IDQPlayView: UIView { //852 393
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
+    private let titleLabel: GradientLabel = {
+        let label = GradientLabel()
         label.text = "iOS Developer Quiz"
         label.numberOfLines = 1
         label.textAlignment = .center
@@ -150,6 +150,7 @@ class IDQPlayView: UIView { //852 393
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
         topBackgroundView.layer.cornerRadius = topBackgroundSize/2
         bookmarkedQuestionsButton.addTarget(self, action: #selector(bookmarkedQuestionsButtonTapped(_:)), for: .touchUpInside)
+//        titleLabel.formatGradientLabel(gradientView: gradientView)
     }
     
     private func setupBookmarkedButton() {
@@ -162,7 +163,7 @@ class IDQPlayView: UIView { //852 393
     //MARK: - Private
     
     private func setupConstraints() {
-        addSubviews(topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, bookmarkedQuestionsButton)
+        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, bookmarkedQuestionsButton)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),

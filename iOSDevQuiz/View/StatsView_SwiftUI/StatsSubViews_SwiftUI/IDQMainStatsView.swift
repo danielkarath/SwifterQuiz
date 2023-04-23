@@ -16,7 +16,7 @@ struct IDQMainStatsView: View {
     private let titleFont = IDQConstants.setFont(fontSize: 32, isBold: true)
     private let sideBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 220 : 90
     private let midBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 300 : 140
-    private let topPadding: CGFloat = UIScreen.screenHeight > 1080 ? 64 : 32
+    private let topPadding: CGFloat = UIScreen.screenHeight > 1080 ? 72 : 48
     
     var body: some View {
         VStack {

@@ -94,11 +94,6 @@ final class IDQTabBarController: UITabBarController {
             print("Did fire self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday)")
             self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday!)
         }
-        
-//        DispatchQueue.global(qos: .utility).async {
-//
-//            self.userManager.evaulateStreak(didPlayYesterday: <#Bool#>)
-//        }
     }
     
 }

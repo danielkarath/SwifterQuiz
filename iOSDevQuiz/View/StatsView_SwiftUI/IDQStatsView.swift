@@ -15,6 +15,21 @@ struct IDQStatsView: View {
     var quizesPlayed: Double
     var timeSpent: Double
     var streak: Double
+        
+    private let midOffset: CGFloat = {
+        print("\n\n\n midOffset for screen \(UIScreen.screenHeight).")
+        if UIScreen.screenHeight < 700 {
+            return 240
+        } else if UIScreen.screenHeight < 880 {
+            return 300
+        } else if UIScreen.screenHeight < 940 {
+            return 325
+        } else if UIScreen.screenHeight < 1080 {
+            return 300
+        } else {
+            return 260
+        }
+    }()
     
     private let viewModel = IDQStatsViewViewModel()
     
@@ -28,7 +43,7 @@ struct IDQStatsView: View {
                 ZStack {
                     IDQMainStatsView(totalScore: totalScore, totalPerformance: totalPerformance, streak: streak)
                     ScrollView(.vertical) {
-                        Spacer(minLength: 280)
+                        Spacer(minLength: midOffset)
                         IDQStatsMetricsHStackView(quizesPlayed: quizesPlayed, timeSpent: viewModel.setupGameTime(for: timeSpent), gameTimeText: viewModel.setupTextFor(totalGameTime: timeSpent))
                     }
                 }

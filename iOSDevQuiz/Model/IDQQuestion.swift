@@ -96,6 +96,36 @@ let unserializedQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
+        question: "__________ is the mechanism in object-oriented programming where a class can derive properties and behavior from a parent class.",
+        questionSerialNum: 0,
+        explanation: "In object-oriented programming, inheritance is the mechanism of basing an object or class upon another object or class.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/inheritance/",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "polymorphism", answerType: .wrong),
+            IDQAnswer(text: "enumeration", answerType: .wrong),
+            IDQAnswer(text: "initialization", answerType: .wrong ),
+            IDQAnswer(text: "inheritance", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The __________ keyword is used to indicate that a subclass is providing its own implementation of a method or property inherited from a superclass.",
+        questionSerialNum: 0,
+        explanation: "In object-oriented programming, inheritance is the mechanism of basing an object or class upon another object or class.",
+        reference: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/inheritance/#Overriding",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "defer", answerType: .wrong),
+            IDQAnswer(text: "mutating", answerType: .wrong),
+            IDQAnswer(text: "init", answerType: .wrong ),
+            IDQAnswer(text: "override", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
         question: "What is the logical 'or' operator in Swift?",
         questionSerialNum: 0,
         explanation: "The logical OR operator is || in Swift",
@@ -449,10 +479,10 @@ let unserializedQuestionList: [IDQQuestion] = [
         difficulty: .veryEasy,
         topic: .basics,
         answers: [
-            IDQAnswer(text: "A Tuple", answerType: .wrong),
-            IDQAnswer(text: "A Dictionary", answerType: .wrong),
-            IDQAnswer(text: "An Array", answerType: .wrong),
-            IDQAnswer(text: "A Set", answerType: .correct),
+            IDQAnswer(text: "A Tuple \t", answerType: .wrong),
+            IDQAnswer(text: "A Dictionary \t", answerType: .wrong),
+            IDQAnswer(text: "An Array \t", answerType: .wrong),
+            IDQAnswer(text: "A Set \t", answerType: .correct),
         ]
     ),
     
@@ -1106,21 +1136,6 @@ let unserializedQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "When subclassing UICollectionViewCell and implementing the prepareForReuse() without calling the super.prepareForResue() the intended purpose of the method __________ ?",
-        questionSerialNum: 0,
-        explanation: "If you override the prepareForReuse() method in a subclass of UICollectionViewCell and you don't call super.prepareForReuse(), the default implementation of prepareForReuse() provided by UICollectionViewCell may not be executed.",
-        reference: "https://developer.apple.com/documentation/uikit/uicollectionreusableview/1620141-prepareforreuse",
-        difficulty: .medium,
-        topic: .uikit,
-        answers: [
-            IDQAnswer(text: "won't happen and you'll get an error", answerType: .wrong),
-            IDQAnswer(text: "will happen because the subclass by default overrides the parent class.", answerType: .wrong),
-            IDQAnswer(text: "may not happen as this is overriden by the UICollectionView's collectionView(_:willDisplay:forItemAt:) method", answerType: .wrong),
-            IDQAnswer(text: "may not happen as it's overriden by the parent class.", answerType: .correct),
-        ]
-    ),
-    
-    IDQQuestion(
         question: "How can you implement a dynamic font size in UILabel?",
         questionSerialNum: 0,
         explanation: "By setting the adjustsFontSizeToFitWidth property true and specifying a minimumScaleFactor the label's fontsize will dynamically be set based on the label’s bounding rectangle.",
@@ -1129,9 +1144,9 @@ let unserializedQuestionList: [IDQQuestion] = [
         topic: .uikit,
         answers: [
             IDQAnswer(text: "Dynamic font size is only available in SwiftUI", answerType: .wrong),
-            IDQAnswer(text: "Set the label's adjustsFontSizeToFit property to true. Set its minimumScaleSize and maximumScaleSize to some CGFLoat values.", answerType: .wrong),
-            IDQAnswer(text: "Set the label's adjustsFontSizeToFit property to true and its minimumScaleFactor property to a value greater than or equal to 0.", answerType: .wrong),
-            IDQAnswer(text: "Set the label's adjustsFontSizeToFitWidth property to true and its minimumScaleFactor property to a value greater than or equal to 0.", answerType: .correct),
+            IDQAnswer(text: "By setting the label's adjustsFontSizeToFit property to true. Set its minimumScaleSize and maximumScaleSize to some CGFLoat values.", answerType: .wrong),
+            IDQAnswer(text: "By setting the label's adjustsFontSizeToFit property to true and its minimumScaleFactor property to a value greater than or equal to 0.", answerType: .wrong),
+            IDQAnswer(text: "By setting the label's adjustsFontSizeToFitWidth property to true and its minimumScaleFactor property to a value greater than or equal to 0.", answerType: .correct),
         ]
     ),
     
@@ -1143,10 +1158,10 @@ let unserializedQuestionList: [IDQQuestion] = [
         difficulty: .veryEasy,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "Set the label's centerXAnchor property to centered", answerType: .wrong),
-            IDQAnswer(text: "Set the label's layer.frame.horizontalAlignment property to center", answerType: .wrong),
-            IDQAnswer(text: "Set the label's contentMode property to center.", answerType: .wrong),
-            IDQAnswer(text: "Set the label's textAlignment property to center.", answerType: .correct),
+            IDQAnswer(text: "By setting the label's centerXAnchor property to centered", answerType: .wrong),
+            IDQAnswer(text: "By setting the label's layer.frame.horizontalAlignment property to center", answerType: .wrong),
+            IDQAnswer(text: "By setting the label's contentMode property to center.", answerType: .wrong),
+            IDQAnswer(text: "By setting the label's textAlignment property to center.", answerType: .correct),
         ]
     ),
     
@@ -1188,8 +1203,8 @@ let unserializedQuestionList: [IDQQuestion] = [
         difficulty: .easy,
         topic: .uikit,
         answers: [
-            IDQAnswer(text: "Set isFirstResponder to true on a UIResponder object.", answerType: .wrong),
-            IDQAnswer(text: "Set isUserInteractionEnabled to true on a UIResponder object.", answerType: .wrong),
+            IDQAnswer(text: "By setting isFirstResponder to true on a UIResponder object.", answerType: .wrong),
+            IDQAnswer(text: "By setting isUserInteractionEnabled to true on a UIResponder object.", answerType: .wrong),
             IDQAnswer(text: "Call showKeyboard() on the view controller.", answerType: .wrong),
             IDQAnswer(text: "Call becomeFirstResponder() on a UITextField or UITextView.", answerType: .correct),
         ]

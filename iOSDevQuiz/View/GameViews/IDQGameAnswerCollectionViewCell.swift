@@ -22,7 +22,6 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     
     private let answerTextView: UITextView = {
         let textView = UITextView()
-        let paragraphStyle = NSMutableParagraphStyle()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textColor = IDQConstants.basicFontColor
         textView.isEditable = false
@@ -30,8 +29,7 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         textView.isUserInteractionEnabled = false
         textView.backgroundColor = .clear.withAlphaComponent(0.0)
         textView.contentMode = .topLeft
-        paragraphStyle.lineSpacing = 8
-        textView.font = IDQConstants.setFont(fontSize: 14, isBold: false)
+        textView.font = UIFont(name: "Kailasa Regular", size: 14)!
         textView.text = ""
         textView.isAccessibilityElement = true
         return textView
@@ -104,7 +102,8 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     public func configure(with answer: IDQAnswer, serial: Int) {
         guard !answer.text.isEmpty else { return }
         answerTextView.text = answer.text
-        answerTextView.configureFor(IDQConstants.keywords, fontSize: 14.0)
+        
+        answerTextView.configureFor(IDQConstants.keywords, fontSize: 14.0, keywordcolor: IDQConstants.highlightedDarkOrange)
         if serial >= 0 && serial < 4 {
             setupAnswerIcon(answerImageView, answerSerial: serial)
         } else {
