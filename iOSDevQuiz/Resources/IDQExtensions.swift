@@ -208,6 +208,32 @@ extension UIButton {
 
 extension UILabel {
     
+    func formatGradientLabel(gradientView: UIView) {
+        //gradientView.frame = self.frame //CGRect(x: self.layer.frame.minX, y: self.layer.frame.minY, width: self.layer.frame.size.width, height: self.layer.frame.size.height)
+        let attributedString = NSMutableAttributedString(string: self.text!)
+        attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(6.0), range: NSRange(location: 0, length: attributedString.length))
+        self.attributedText = attributedString
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = gradientView.bounds
+                
+        gradientLayer.colors = [UIColor.black.withAlphaComponent(1.0).cgColor,
+                                    UIColor.black.withAlphaComponent(0.0).cgColor]
+        
+        if UIScreen.main.traitCollection.userInterfaceStyle == .light {
+            gradientLayer.colors = [UIColor.init(displayP3Red: 255.0/255.0, green: 154.0/255.0, blue: 60.0/255.0, alpha: 1.0).cgColor, UIColor.init(displayP3Red: 226.0/255.0, green: 62.0/255.0, blue: 87.0/255.0, alpha: 1.0).cgColor]
+            } else {
+                gradientLayer.colors = [UIColor.init(displayP3Red: 161.0/255.0, green: 205.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor, UIColor.init(displayP3Red: 95.0/255.0, green: 48.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor]
+            }
+        
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        
+        gradientView.layer.addSublayer(gradientLayer)
+        
+        gradientView.mask = self
+    }
+    
     func configureFor(_ keywordColors: [String]) {
         guard let labelText = text else {
             return
@@ -240,25 +266,33 @@ extension UILabel {
 
 extension UITextView {
     
-    func configureFor(_ keywordColors: [String], fontSize: CGFloat) {
+    func configureFor(_ keywordColors: [String], fontSize: CGFloat, keywordcolor: UIColor) {
         guard let labelText = text else {
             return
         }
-        let color = IDQConstants.highlightedDarkOrange
+        let color = IDQConstants.basicFontColor
         let attributedString = NSMutableAttributedString(string: labelText)
         
+//        let style = NSMutableParagraphStyle()
+//        style.lineSpacing = 38
+//        let attributes = [NSAttributedString.Key.paragraphStyle : style]
+//        self.attributedText = NSAttributedString(string: text, attributes: attributes)
         
         let words = labelText.split(separator: " ")
         for word in words {
             if keywordColors.contains(String(word)) {
                 let range = (labelText as NSString).range(of: String(word))
-                attributedString.addAttribute(.foregroundColor, value: color, range: range)
-                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+                attributedString.addAttribute(.foregroundColor, value: keywordcolor, range: range)
+                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize-1, isBold: true), range: range)
             }
+//            } else {
+//                let range = (labelText as NSString).range(of: String(word))
+//                attributedString.addAttribute(.foregroundColor, value: color, range: range)
+//                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: false), range: range)
+//            }
         }
         attributedText = attributedString
     }
-    
 }
 
 extension Array where Element == UIColor {
@@ -334,6 +368,12 @@ extension Calendar {
         let numberOfDays = range.count
         return numberOfDays
     }
+}
+
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+   static let screenHeight = UIScreen.main.bounds.size.height
+   static let screenSize = UIScreen.main.bounds.size
 }
 
 extension Bundle {

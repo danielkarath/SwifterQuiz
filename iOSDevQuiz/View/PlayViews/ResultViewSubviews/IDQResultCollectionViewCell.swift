@@ -55,7 +55,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     
     private let questionLabel: UILabel = {
         let label = UILabel()
-        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.02227433 //0.01758499
+        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.01927433
         label.layer.zPosition = 8
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -120,7 +120,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
             questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             questionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -64),
             questionLabel.topAnchor.constraint(equalTo: difficultyLabel.bottomAnchor, constant: -2),
-            questionLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 90)
+            questionLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 100)
             
         ])
     }

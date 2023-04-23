@@ -32,9 +32,6 @@ class IDQResultView: UIView {
     
     private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
     
-    private var cellsAnimated: [Bool] = []
-
-    
     private let topBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -129,15 +126,6 @@ class IDQResultView: UIView {
     private func setupCollectionView() {
         questionsCollectionView.delegate = self
         questionsCollectionView.dataSource = self
-    }
-    
-    private func setupCellAnimation() {
-        guard quiz != nil, quiz?.questions.count ?? 0 > 0 else {
-            return
-        }
-        for question in quiz!.questions {
-            cellsAnimated.append(false)
-        }
     }
     
     //MARK: - Private
@@ -248,12 +236,6 @@ class IDQResultView: UIView {
             self.viewModel.saveToUserRecords(quiz)
         }
         
-//        DispatchQueue.global(qos: .utility).async {
-//            self.viewModel.evaulateStreak(for: quiz)
-//            self.viewModel.save(quiz: quiz)
-//            self.viewModel.saveToDaytimeActivity(quiz)
-//            self.viewModel.saveToUserRecords(quiz)
-//        }
     }
     
 }
@@ -261,7 +243,6 @@ class IDQResultView: UIView {
 extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        setupCellAnimation()
         return quiz?.questions.count ?? 10
     }
     
@@ -271,9 +252,6 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
         if quiz != nil {
             cell.configure(with: quiz!, index: indexPath.row)
-            if !cellsAnimated[indexPath.row] {
-                cell.alpha = 0.0
-            }
         }
         return cell
     }
@@ -293,19 +271,6 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? IDQResultCollectionViewCell else { return }
-        
-        if !cellsAnimated[indexPath.row] {
-            cellsAnimated[indexPath.row] = true
-            
-            collectionView.slide(cell, at: indexPath)
-        } else {
-            cell.alpha = 1.0
-            cell.transform = CGAffineTransform.identity
-        }
-        
-    }
+
 
 }

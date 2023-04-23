@@ -11,6 +11,7 @@ class StartButtonView: UIView {
         
     private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.01524033
     private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.02579132
+    private let titleBottomAnchor: CGFloat = UIScreen.main.bounds.height * 0.007034
     private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
     private let menuButtonHight: CGFloat = UIScreen.main.bounds.height * 0.05633803
     private let smallIconSize: CGFloat = UIScreen.main.bounds.height * 0.02813599
@@ -113,7 +114,7 @@ class StartButtonView: UIView {
             subTitle.centerYAnchor.constraint(equalTo: smallIconImageView.centerYAnchor, constant: smallIconSize * 0.125),
             subTitle.leadingAnchor.constraint(equalTo: smallIconImageView.trailingAnchor, constant: smallIconSize * 0.25),
             
-            mainTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
+            mainTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(titleBottomAnchor)),
             mainTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
         ])
     }

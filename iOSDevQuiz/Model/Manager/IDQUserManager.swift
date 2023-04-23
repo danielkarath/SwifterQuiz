@@ -55,6 +55,7 @@ final class IDQUserManager {
         print("\n\n------------------------------")
         print("\t\tUSER DATA\n")
         print("User name: \(user.firstName)")
+        print("Last play date: \(user.lastDatePlayed)")
         print("Total score: \(user.totalScore)")
         print("Total performance: \(user.performance)")
         print("number of games played: \(user.numberOfQuizesPlayed)")
@@ -134,15 +135,14 @@ final class IDQUserManager {
             print("Could not load user while trying to set streak")
             return
         }
-        
+
         guard let previousGameDate = user.lastDatePlayed else {
             print("Could not load previous game while trying to set streak")
             return
         }
-        
+
         let hasPlayedAlreadyToday = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
-        
-        print("EvaulateStreak: \nyesterdayDate: \(yesterdayDate)\ndidPlayYesterday: \(didPlayYesterday)\nhasPlayedAlreadyToday\(hasPlayedAlreadyToday)")
+
         if hasPlayedAlreadyToday {
             print("Streak is evaulated and no changes needed")
         } else if didPlayYesterday {
@@ -152,7 +152,7 @@ final class IDQUserManager {
             user.streak = 0
             saveToCoreData()
         }
-        print("_________________________")
+        
     }
     
     public func shouldAddToStreak() {
@@ -170,6 +170,10 @@ final class IDQUserManager {
         }
         
         let hasPlayedAlreadyToday = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
+        print("Previous game: \(previousGameDate)")
+        print("Current time: \(Date.currentTime)")
+        print("hasPlayedAlreadyToday: \(hasPlayedAlreadyToday)")
+        
         if hasPlayedAlreadyToday {
             print("The user has already played today")
             if user.streak < 1 {
