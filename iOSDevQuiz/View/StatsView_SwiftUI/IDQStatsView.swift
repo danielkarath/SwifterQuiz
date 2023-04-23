@@ -17,7 +17,6 @@ struct IDQStatsView: View {
     var streak: Double
         
     private let midOffset: CGFloat = {
-        print("\n\n\n midOffset for screen \(UIScreen.screenHeight).")
         if UIScreen.screenHeight < 700 {
             return 240
         } else if UIScreen.screenHeight < 880 {

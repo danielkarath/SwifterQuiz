@@ -87,11 +87,9 @@ final class IDQTabBarController: UITabBarController {
         
         serialQueue.async {
             didPlayYesterday = self.resultManager.didPlay(on: yesterdayDate)
-            print("Did fire self evaulateUserMetrics.serial.queue\nChecking if the user played yesterday: \(didPlayYesterday)")
         }
         serialQueue.async {
             guard didPlayYesterday != nil else {return}
-            print("Did fire self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday)")
             self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday!)
         }
     }

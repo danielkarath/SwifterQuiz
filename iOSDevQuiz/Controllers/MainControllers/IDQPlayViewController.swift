@@ -10,11 +10,18 @@ import UIKit
 final class IDQPlayViewController: UIViewController {
 
     private let playView = IDQPlayView()
-    
+        
     private let quizManager = IDQQuizManager()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        IDQUserActivityManager.shared.quizMenuCount()
+        playView.setupBookmarkedButton()
+        playView.shouldDisplayRateAppView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewDidLoad() {

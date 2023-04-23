@@ -224,15 +224,15 @@ class IDQResultView: UIView {
         let serialQueue = DispatchQueue(label: "saveMetrics.serial.queue")
 
         serialQueue.async {
-            print("Did fire self.viewModel.evaulateStreak()")
+            print("EvaulateStreak")
             self.viewModel.evaulateStreak()
-            print("Did fire self.viewModel.save(quiz: quiz)")
+            print("Save quiz")
             self.viewModel.save(quiz: quiz)
         }
         serialQueue.async {
-            print("Did fire viewModel.saveToDaytimeActivity(quiz)")
+            print("Save To DaytimeActivity")
             self.viewModel.saveToDaytimeActivity(quiz)
-            print("Did fire viewModel.saveToUserRecords(quiz)")
+            print("Save To User Records")
             self.viewModel.saveToUserRecords(quiz)
         }
         

@@ -102,7 +102,6 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     public func configure(with answer: IDQAnswer, serial: Int) {
         guard !answer.text.isEmpty else { return }
         answerTextView.text = answer.text
-        
         answerTextView.configureFor(IDQConstants.keywords, fontSize: 14.0, keywordcolor: IDQConstants.highlightedDarkOrange)
         if serial >= 0 && serial < 4 {
             setupAnswerIcon(answerImageView, answerSerial: serial)

@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IDQInAppPurchaseManager.shared.fetchProducts()
+        IDQUserActivityManager.shared.launchCount()
         ValueTransformer.setValueTransformer(IDQQuestionArrayValueTransformer(), forName: NSValueTransformerName(rawValue: "IDQQuestionArrayValueTransformer"))
         return true
     }
