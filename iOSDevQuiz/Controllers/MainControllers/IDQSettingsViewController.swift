@@ -85,7 +85,7 @@ final class IDQSettingsViewController: UIViewController {
             } else if option == .about {
                 print("Did tap about")
             } else {
-                print("Oppsie-poopsie")
+                print("Unknown URL case")
             }
             return
         }
@@ -119,7 +119,7 @@ final class IDQSettingsViewController: UIViewController {
                 UIApplication.shared.open(url)
             }
         }
-        
+        IDQUserActivityManager.shared.didRateApp()
     }
     
     private func showMailComposer() {

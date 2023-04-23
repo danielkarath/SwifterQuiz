@@ -270,26 +270,27 @@ extension UITextView {
         guard let labelText = text else {
             return
         }
-        let color = IDQConstants.basicFontColor
         let attributedString = NSMutableAttributedString(string: labelText)
         
-//        let style = NSMutableParagraphStyle()
-//        style.lineSpacing = 38
-//        let attributes = [NSAttributedString.Key.paragraphStyle : style]
-//        self.attributedText = NSAttributedString(string: text, attributes: attributes)
+        let pattern = "(?:\\b\\w+\\b|[():;])"
+        let regex: NSRegularExpression
+        do {
+            regex = try NSRegularExpression(pattern: pattern, options: [])
+        } catch {
+            print("Error creating regular expression: \(error.localizedDescription)")
+            return
+        }
         
-        let words = labelText.split(separator: " ")
-        for word in words {
+        let matches = regex.matches(in: labelText, options: [], range: NSRange(location: 0, length: labelText.count))
+        for match in matches {
+            let word = (labelText as NSString).substring(with: match.range)
             if keywordColors.contains(String(word)) {
-                let range = (labelText as NSString).range(of: String(word))
-                attributedString.addAttribute(.foregroundColor, value: keywordcolor, range: range)
-                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize-1, isBold: true), range: range)
+                attributedString.addAttribute(.foregroundColor, value: keywordcolor, range: match.range)
+                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize-1, isBold: true), range: match.range)
+            } else {
+                attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: match.range)
+                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: false), range: match.range)
             }
-//            } else {
-//                let range = (labelText as NSString).range(of: String(word))
-//                attributedString.addAttribute(.foregroundColor, value: color, range: range)
-//                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: false), range: range)
-//            }
         }
         attributedText = attributedString
     }

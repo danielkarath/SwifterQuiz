@@ -54,6 +54,8 @@ struct IDQConstants {
         "prefix(_:)",
         "becomeFirstResponder()",
         "showKeyboard()",
+        "UserDefault",
+        "integer(forKey:)",
         "append",
         "insert",
         "addElement",

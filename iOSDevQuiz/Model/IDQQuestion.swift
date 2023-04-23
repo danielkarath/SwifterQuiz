@@ -231,6 +231,21 @@ let unserializedQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
+        question: "What does UserDefaults.standard.integer(forKey:) return if the value for the key is absent?",
+        questionSerialNum: 0,
+        explanation: "The integer value associated with the specified key. If the specified key doesn‘t exist, this method returns 0.",
+        reference: "https://developer.apple.com/documentation/foundation/userdefaults/1407405-integer",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "nil", answerType: .wrong),
+            IDQAnswer(text: "Nothing, it throws an error", answerType: .wrong ),
+            IDQAnswer(text: "Nothing, but does not throw error", answerType: .wrong),
+            IDQAnswer(text: "0", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
         question: "What will be printed out by using the below code?\nlet abc = [\"A\", \"B\", \"A\", \"C\"]\nprint(abc.sorted(by: >=))",
         questionSerialNum: 0,
         explanation: "[\"C\", \"B\", \"A\", \"A\"]",

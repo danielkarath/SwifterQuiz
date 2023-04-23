@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 protocol IDQPlayViewDelegate: AnyObject {
     func idqPlayView(_ playView: IDQPlayView, didSelect game: IDQGame?)
@@ -20,6 +21,8 @@ class IDQPlayView: UIView { //852 393
     private let viewModel = IDQPlayViewViewModel()
         
     private let startButtonView = StartButtonView()
+    
+    private let rateTheAppView = IDQRateTheAppView()
     
     private var bookmarkedQuestions: [IDQQuestion]?
     
@@ -68,7 +71,7 @@ class IDQPlayView: UIView { //852 393
         label.text = "iOS Developer Quiz"
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.textColor = IDQConstants.highlightedDarkOrange
+        label.textColor = .clear.withAlphaComponent(0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -87,7 +90,7 @@ class IDQPlayView: UIView { //852 393
     private let bookmarkedQuestionsButton: UIButton = {
         let button = UIButton()
         let size: CGFloat = 40
-        let image = UIImage(systemName: "bookmark.fill")
+        let image = UIImage(systemName: "bookmark.fill")!
         let color = IDQConstants.highlightedDarkOrange
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -98,13 +101,14 @@ class IDQPlayView: UIView { //852 393
         button.setTitleColor(IDQConstants.highlightedDarkOrange, for: .normal)
         button.tintColor = color
         
+        let gradientImageView = GradientImageView(image: image)
+        gradientImageView.frame = CGRect(x: 0, y: 0, width: size * 0.60, height: size * 0.60)
+        gradientImageView.contentMode = .scaleAspectFit
+        gradientImageView.center = button.center
+        gradientImageView.isUserInteractionEnabled = false
         
-        var imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: 0, y: 0, width: size * 0.70, height: size * 0.70)
-        imageView.contentMode = .scaleAspectFit
-        button.addSubview(imageView)
-        
-        
+        button.addSubview(gradientImageView)
+
         return button
     }()
     
@@ -127,14 +131,10 @@ class IDQPlayView: UIView { //852 393
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
         startButtonView.addGestureRecognizer(tapGesture)
         bookmarkedQuestions = viewModel.fetchBookmarkedQuestions()
-        if !(bookmarkedQuestions?.isEmpty ?? true) {
-            bookmarkedQuestionsButton.isHidden = false
-        }
+        setupBookmarkedButton()
         titleLabel.font = IDQConstants.setFont(fontSize: titleHeight * 0.80, isBold: true)
         subTitle.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
 
-        print("UIScreen.main.bounds.height: \(UIScreen.main.bounds.height)")
-        print("UIScreen.main.bounds.width: \(UIScreen.main.bounds.width)")
     }
     
     required init?(coder: NSCoder) {
@@ -150,20 +150,14 @@ class IDQPlayView: UIView { //852 393
         topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
         topBackgroundView.layer.cornerRadius = topBackgroundSize/2
         bookmarkedQuestionsButton.addTarget(self, action: #selector(bookmarkedQuestionsButtonTapped(_:)), for: .touchUpInside)
+        rateTheAppView.delegate = self
 //        titleLabel.formatGradientLabel(gradientView: gradientView)
-    }
-    
-    private func setupBookmarkedButton() {
-        bookmarkedQuestions = viewModel.fetchBookmarkedQuestions()
-        if !(bookmarkedQuestions?.isEmpty ?? true) {
-            bookmarkedQuestionsButton.isHidden = false
-        }
     }
     
     //MARK: - Private
     
     private func setupConstraints() {
-        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, bookmarkedQuestionsButton)
+        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, bookmarkedQuestionsButton)
         NSLayoutConstraint.activate([
             topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -172,8 +166,8 @@ class IDQPlayView: UIView { //852 393
             
             bookmarkedQuestionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             bookmarkedQuestionsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            bookmarkedQuestionsButton.widthAnchor.constraint(equalToConstant: 50),
-            bookmarkedQuestionsButton.heightAnchor.constraint(equalToConstant: 50),
+            bookmarkedQuestionsButton.widthAnchor.constraint(equalToConstant: 60),
+            bookmarkedQuestionsButton.heightAnchor.constraint(equalToConstant: 60),
             
             appIconMiniImageView.heightAnchor.constraint(equalToConstant: appIconSize),
             appIconMiniImageView.widthAnchor.constraint(equalToConstant: appIconSize),
@@ -194,6 +188,11 @@ class IDQPlayView: UIView { //852 393
             startButtonView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
             startButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             startButtonView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
+            
+            rateTheAppView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
+            rateTheAppView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            rateTheAppView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            rateTheAppView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
             
             quizOptionsButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
             quizOptionsButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
@@ -247,6 +246,7 @@ class IDQPlayView: UIView { //852 393
         }
     }
     
+    
     @objc
     private func optionsButtonTapped(_ sender: UIButton) {
         
@@ -269,4 +269,69 @@ class IDQPlayView: UIView { //852 393
         let selectedGame = viewModel.didTapButton(for: .quicQuiz)
         delegate?.idqPlayView(self, didSelect: selectedGame)
     }
+    
+    //MARK: - Public
+    
+    public func setupBookmarkedButton() {
+        bookmarkedQuestions = viewModel.fetchBookmarkedQuestions()
+        if !(bookmarkedQuestions?.isEmpty ?? true) {
+            bookmarkedQuestionsButton.isHidden = false
+        }
+    }
+    
+    public func shouldDisplayRateAppView() {
+        if viewModel.shouldDisplay(view: rateTheAppView) && rateTheAppView.isHidden {
+            let yDistance: CGFloat = 1.80*menuButtonHight + 24
+            rateTheAppView.isHidden = false
+            UIView.animate(withDuration: 2.0, delay: 0.10, usingSpringWithDamping: 0.90, initialSpringVelocity: 0.10, options: [], animations: {
+                self.startButtonView.transform = CGAffineTransform(translationX: 0, y: yDistance)
+                self.rateTheAppView.alpha = 1.0
+            }, completion: nil)
+        } else if startButtonView.transform == .identity {
+            rateTheAppView.isHidden = true
+            rateTheAppView.alpha = 0.0
+        } else {
+            rateTheAppView.isHidden = false
+            rateTheAppView.alpha = 1.0
+        }
+    }
+    
+    public func shouldHideRateAppView() {
+        UIView.animate(withDuration: 0.4, delay: 0.10, usingSpringWithDamping: 0.90, initialSpringVelocity: 0.10, options: [], animations: {
+            self.rateTheAppView.alpha = 0.0
+        }, completion: { _ in
+            UIView.animate(withDuration: 1.0, animations: {
+                self.startButtonView.transform = CGAffineTransform(translationX: 0, y: 0)
+            }, completion: { _ in
+                self.rateTheAppView.isHidden = true
+            })
+        })
+    }
+}
+
+extension IDQPlayView: IDQRateTheAppViewDelegate {
+    func didTapClose() {
+        viewModel.didCloseRate()
+        shouldHideRateAppView()
+    }
+    
+    func didRateApp() {
+        guard  let scene = self.window?.windowScene else {
+            print("No scene found for Rate window")
+            return
+        }
+        let didRateApp = UserDefaults.standard.bool(forKey: "didRateApp")
+        
+        if !didRateApp {
+            SKStoreReviewController.requestReview(in: scene)
+        } else {
+            let urlString = "//itunes.apple.com/app/id\(IDQConstants.appID)"
+            if let url = URL(string: urlString) { ///itms-apps://itunes.apple.com
+                UIApplication.shared.open(url) 
+            }
+        }
+        viewModel.didRateApp()
+        shouldHideRateAppView()
+    }
+    
 }

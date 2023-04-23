@@ -415,7 +415,6 @@ final class IDQGameView: UIView {
     }
     
     @objc func appMovedToBackground() {
-        print("App moved to background!")
         if countDownView.isTimerRunning() {
             delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
             countDownView.stopTimer()
@@ -427,8 +426,6 @@ final class IDQGameView: UIView {
             UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
                 self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
             }, completion: nil)
-        } else {
-            print("But the timer was not running.")
         }
     }
     
@@ -460,9 +457,7 @@ final class IDQGameView: UIView {
         }
         
         if countDownView.timeSpent >= game.questionTimer.rawValue || didAnswer {
-            print("The question countdown did end")
         } else {
-            print("The question countdown did not end yet")
             countDownView.unpauseTimer(game: game)
             configure(overlay: overlayView)
         }

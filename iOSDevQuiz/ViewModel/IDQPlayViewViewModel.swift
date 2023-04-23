@@ -29,6 +29,34 @@ final class IDQPlayViewViewModel {
     
     //MARK: - Public
     
+    public let userDefaults = UserDefaults.standard
+    
+    public func shouldDisplay(view: UIView) -> Bool {
+        let launchCountKey = "launchCount"
+        let appLaunchCount = userDefaults.integer(forKey: launchCountKey)
+        
+        let menuLoadKey = "quizMenuCount"
+        let menuLoadCount = UserDefaults.standard.integer(forKey: menuLoadKey)
+        
+        let didRateAppKey = "didRateApp"
+        let didRateApp = UserDefaults.standard.bool(forKey: didRateAppKey)
+        
+        let didDismissRateMeKey = "didDismissRateMe"
+        let didDismissRateMe = UserDefaults.standard.bool(forKey: didDismissRateMeKey)
+        
+        if !didRateApp && !didDismissRateMe {
+            if appLaunchCount == 2 {
+                return true
+            } else if menuLoadCount == 2 ||  menuLoadCount % 7 == 0 {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
     public func didTapButton(for game: IDQGameType) -> IDQGame {
         switch game {
         case .quicQuiz:
@@ -48,6 +76,14 @@ final class IDQPlayViewViewModel {
         default:
             return idqGameList[0]
         }
+    }
+    
+    public func didCloseRate() {
+        IDQUserActivityManager.shared.toggle(boolean: .didDismissRate)
+    }
+    
+    public func didRateApp() {
+        IDQUserActivityManager.shared.toggle(boolean: .didrateApp)
     }
     
     public func fetchBookmarkedQuestions() -> [IDQQuestion] {
