@@ -121,6 +121,16 @@ final class IDQGameView: UIView {
     
     private let passButton: UIButton = {
         let button = UIButton()
+        
+        var fontSize: CGFloat = 20.0
+        if UIScreen.screenHeight < 980 {
+            fontSize = 20.0
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 22.0
+        } else {
+            fontSize = 24.0
+        }
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.alpha = 0.0
         let width: CGFloat = UIScreen.screenWidth - 50
@@ -128,7 +138,7 @@ final class IDQGameView: UIView {
         button.frame.size = CGSize(width: width, height: height)
         button.layer.cornerRadius = 8
         button.setTitleColor(IDQConstants.secondaryFontColor, for: .normal)
-        button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         button.setTitle("Pass", for: .normal)
         button.setTitle("Pass", for: .highlighted)
         button.layer.zPosition = 6
@@ -183,6 +193,17 @@ final class IDQGameView: UIView {
         let swipeGestureExitView = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeExitView(_:)))
         swipeGestureExitView.direction = .down
         exitView.addGestureRecognizer(swipeGestureExitView)
+        
+        var fontSize: CGFloat = 18.0
+        if UIScreen.screenHeight < 980 {
+            fontSize = 18.0
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 21.0
+        } else {
+            fontSize = 24.0
+        }
+        questionLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: false)
+        difficultyLabel.font = IDQConstants.setFont(fontSize: fontSize-4, isBold: true)
     }
     
     private func createCollectionView() -> UICollectionView {
@@ -209,6 +230,24 @@ final class IDQGameView: UIView {
     }
     
     private func setupConstraints() {
+        
+        var answerViewHeight: CGFloat = 300
+        var exitViewHeight: CGFloat = 350
+        var countDownViewSize: CGFloat = 40.0
+        if UIScreen.screenHeight < 980 {
+            countDownViewSize = 40.0
+            answerViewHeight = 300
+            exitViewHeight = 350
+        } else if UIScreen.screenHeight < 1100 {
+            countDownViewSize = 60.0
+            answerViewHeight = 350
+            exitViewHeight = 400
+        } else {
+            countDownViewSize = 80.0
+            answerViewHeight = 420
+            exitViewHeight = 480
+        }
+        
         addSubviews(spinner, overlayView, questionLabel, difficultyLabel, countDownView, passButton, questionNumberLabel, answerResultView, exitView, disableQuestionView)
         guard let collectionView = answerCollectionView else {
             return
@@ -228,8 +267,8 @@ final class IDQGameView: UIView {
             difficultyLabel.widthAnchor.constraint(equalToConstant: 96),
             difficultyLabel.heightAnchor.constraint(equalToConstant: 24),
             
-            countDownView.heightAnchor.constraint(equalToConstant: 40),
-            countDownView.widthAnchor.constraint(equalToConstant: 40),
+            countDownView.heightAnchor.constraint(equalToConstant: countDownViewSize),
+            countDownView.widthAnchor.constraint(equalToConstant: countDownViewSize),
             countDownView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
             countDownView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
 
@@ -253,15 +292,15 @@ final class IDQGameView: UIView {
             spinner.widthAnchor.constraint(equalToConstant: 32),
             spinner.heightAnchor.constraint(equalToConstant: 32),
             
-            answerResultView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300),
+            answerResultView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: answerViewHeight),
             answerResultView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             answerResultView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            answerResultView.heightAnchor.constraint(equalToConstant: 300),
+            answerResultView.heightAnchor.constraint(equalToConstant: answerViewHeight),
             
-            exitView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 350),
+            exitView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: exitViewHeight),
             exitView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             exitView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            exitView.heightAnchor.constraint(equalToConstant: 350),
+            exitView.heightAnchor.constraint(equalToConstant: exitViewHeight),
             
             disableQuestionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 350),
             disableQuestionView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -367,9 +406,16 @@ final class IDQGameView: UIView {
         } else {
             answerResultView.idqAnswerResultView(answerResultView, question: question!, answeredCorrectly: isCorrectlyAnswered)
         }
-       
+        var answerViewHeight: CGFloat = 240
+        if UIScreen.screenHeight < 980 {
+            answerViewHeight = 240
+        } else if UIScreen.screenHeight < 1100 {
+            answerViewHeight = 300
+        } else {
+            answerViewHeight = 350
+        }
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
-            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -answerViewHeight)
         }, completion: nil)
     }
     
@@ -408,9 +454,16 @@ final class IDQGameView: UIView {
         configure(overlay: overlayView)
         self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .passed)
         self.isCorrectArray.append(.passed)
-       
+        var answerViewHeight: CGFloat = 240
+        if UIScreen.screenHeight < 980 {
+            answerViewHeight = 240
+        } else if UIScreen.screenHeight < 1100 {
+            answerViewHeight = 300
+        } else {
+            answerViewHeight = 350
+        }
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
-            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
+            self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -answerViewHeight)
         }, completion: nil)
     }
     
@@ -422,9 +475,16 @@ final class IDQGameView: UIView {
             self.answerResultView.idqAnswerResultView(answerResultView, question: question!, didNotAnswer: .leftQuestion)
             self.vibrate(for: .error)
             self.isCorrectArray.append(.leftQuestion)
-
+            var answerViewHeight: CGFloat = 240
+            if UIScreen.screenHeight < 980 {
+                answerViewHeight = 240
+            } else if UIScreen.screenHeight < 1100 {
+                answerViewHeight = 300
+            } else {
+                answerViewHeight = 350
+            }
             UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.66, initialSpringVelocity: 0.2, options: [], animations: {
-                self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -240)
+                self.answerResultView.transform = CGAffineTransform(translationX: 0, y: -answerViewHeight)
             }, completion: nil)
         }
     }
@@ -444,8 +504,16 @@ final class IDQGameView: UIView {
             if overlayView.isHidden {
                 configure(overlay: overlayView)
             }
+            var answerViewHeight: CGFloat = 290
+            if UIScreen.screenHeight < 980 {
+                answerViewHeight = 290
+            } else if UIScreen.screenHeight < 1100 {
+                answerViewHeight = 350
+            } else {
+                answerViewHeight = 400
+            }
             UIView.animate(withDuration: 0.80, delay: 0.0, usingSpringWithDamping: 0.86, initialSpringVelocity: 0.2, options: [], animations: {
-                self.exitView.transform = CGAffineTransform(translationX: 0, y: -290)
+                self.exitView.transform = CGAffineTransform(translationX: 0, y: -answerViewHeight)
             }, completion: nil)
         }
     }
@@ -511,6 +579,15 @@ final class IDQGameView: UIView {
 
 extension IDQGameView {
     func layout(for section: Int) -> NSCollectionLayoutSection {
+        var height: CGFloat = 120
+        if UIScreen.screenHeight < 980 {
+            height = 120
+        } else if UIScreen.screenHeight < 1100 {
+            height = 140
+        } else {
+            height = 160
+        }
+        
         let item = NSCollectionLayoutItem(layoutSize: .init(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1))
@@ -525,7 +602,7 @@ extension IDQGameView {
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(120)),
+            heightDimension: .absolute(height)),
             subitems: [item]
         )
         
@@ -536,7 +613,7 @@ extension IDQGameView {
     
 }
 
-extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return question?.answers.count ?? 4
@@ -551,12 +628,6 @@ extension IDQGameView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         cell.configure(with: answers[indexPath.row], serial: indexPath.row)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenBounds = UIScreen.main.bounds
-        let width = (screenBounds.width-64)
-        return CGSize(width: width, height: width * 1.5)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

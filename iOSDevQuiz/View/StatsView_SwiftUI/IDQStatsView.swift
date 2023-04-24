@@ -29,10 +29,18 @@ struct IDQStatsView: View {
     private func getModifiedPadding(isLandscape: Bool) {
         var value: CGFloat?
         if isLandscape {
-            value = -1700
+            if UIScreen.screenHeight < 1300 {
+                value = -1700
+            } else {
+                value = -2000
+            }
         } else {
             if isInitiallyLandscape {
-                value = -1500
+                if UIScreen.screenHeight < 1300 {
+                    value = -1500
+                } else {
+                    value = -1800
+                }
             } else {
                 if UIScreen.screenHeight < 700 {
                     value = -800
@@ -40,8 +48,10 @@ struct IDQStatsView: View {
                     value = -820
                 } else if UIScreen.screenHeight < 1000 {
                     value = -860
-                } else {
+                } else if UIScreen.screenHeight < 1300 {
                     value = -1500
+                } else {
+                    value = -1800
                 }
             }
         }
@@ -51,10 +61,18 @@ struct IDQStatsView: View {
     private func getMidModifier(isLandscape: Bool) {
         var value: CGFloat?
         if isLandscape {
-            value = 130
+            if UIScreen.screenHeight < 1300 {
+                value = 130
+            } else {
+                value = 60
+            }
         } else {
             if isInitiallyLandscape {
-                value = 150
+                if UIScreen.screenHeight < 1300 {
+                    value = 150
+                } else {
+                    value = 70
+                }
             } else {
                 if UIScreen.screenHeight < 700 {
                     value = 240
@@ -101,11 +119,14 @@ struct IDQStatsView: View {
             getModifiedPadding(isLandscape: orientation)
             getMidModifier(isLandscape: orientation)
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-            orientation.toggle()
-            getModifiedPadding(isLandscape: orientation)
-            getMidModifier(isLandscape: orientation)
-        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
+            .debounce(for: 0.5, scheduler: DispatchQueue.main)) { _ in
+                if UIScreen.screenHeight > 1000 {
+                    orientation.toggle()
+                    getModifiedPadding(isLandscape: orientation)
+                    getMidModifier(isLandscape: orientation)
+                }
+            }
     }
     
 }

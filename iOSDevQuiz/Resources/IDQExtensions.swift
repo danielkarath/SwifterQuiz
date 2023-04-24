@@ -135,14 +135,14 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
 }
 
 extension UICollectionView {
-    func slide(_ cell: UICollectionViewCell, at indexPath: IndexPath, delay: Double = 0.6) {
+    func slide(_ cell: UICollectionViewCell, at indexPath: IndexPath, delay: Double = 0.014) {
         cell.transform = CGAffineTransform(translationX: -self.bounds.width, y: 0)
         
         // Calculate delay for this cell based on its index path
         let adjustedDelay = delay * Double(indexPath.item)
         
         // Apply animation to slide cell into view with delay
-        UIView.animate(withDuration: 0.60, delay: adjustedDelay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.40, options: [], animations: {
+        UIView.animate(withDuration: 1.20, delay: adjustedDelay, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.08, options: [], animations: {
             cell.transform = CGAffineTransform.identity
         }, completion: nil)
     }

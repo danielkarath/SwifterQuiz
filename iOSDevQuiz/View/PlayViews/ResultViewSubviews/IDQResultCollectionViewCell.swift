@@ -95,6 +95,13 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
         let difficultyLabelWidth: CGFloat = UIScreen.screenHeight * 0.09378664
         let isCorrectImageViewSize: CGFloat = UIScreen.screenHeight * 0.01641266
         
+        var questionTypeImageViewSize: CGFloat = frame.size.width/2.70
+        if UIScreen.screenWidth > 1000 {
+            questionTypeImageViewSize = frame.size.width/3.25
+        } else if UIScreen.screenHeight  > 1000 {
+            questionTypeImageViewSize = frame.size.width/4.0
+        }
+        
         NSLayoutConstraint.activate([
             
             imageOuterView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -104,8 +111,8 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
             
             questionTypeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 16),
             questionTypeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16),
-            questionTypeImageView.widthAnchor.constraint(equalToConstant: frame.size.width/2.70),
-            questionTypeImageView.heightAnchor.constraint(equalToConstant: frame.size.width/2.70),
+            questionTypeImageView.widthAnchor.constraint(equalToConstant: questionTypeImageViewSize),
+            questionTypeImageView.heightAnchor.constraint(equalToConstant: questionTypeImageViewSize),
             
             difficultyLabel.leadingAnchor.constraint(equalTo: isCorrectImageView.trailingAnchor, constant: 3),
             difficultyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: difficultyLabelWidth),

@@ -32,6 +32,14 @@ class IDQResultView: UIView {
     
     private let topBackgroundSize: CGFloat = UIScreen.screenWidth*3
     
+    private var menuButtonWidth: CGFloat = {
+        var value: CGFloat = (UIScreen.screenWidth - (50+32+16))
+        if UIScreen.screenWidth > 1100 {
+            var value: CGFloat = (UIScreen.screenHeight - (50+32+16))
+        }
+        return value
+    }()
+    
     private let topBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -67,12 +75,6 @@ class IDQResultView: UIView {
     private let menuButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.frame.size = CGSize(width: UIScreen.screenWidth-32-66, height: 50)
-        let color1: UIColor = IDQConstants.highlightedLightOrange
-        let color2: UIColor = IDQConstants.highlightedDarkOrange
-        button.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 8
         button.setTitleColor(IDQConstants.contentBackgroundColor, for: .normal)
         button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
         button.setTitle("Menu", for: .normal)
@@ -119,6 +121,11 @@ class IDQResultView: UIView {
 //        topBackgroundView.backgroundColor = IDQConstants.contentBackgroundColor
 //        topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
 //        topBackgroundView.layer.cornerRadius = topBackgroundSize/2
+        menuButton.frame.size = CGSize(width: menuButtonWidth, height: 50)
+        menuButton.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
+        menuButton.clipsToBounds = true
+        menuButton.layer.cornerRadius = 8
+        
         menuButton.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
         shareButton.addTarget(self, action: #selector(share(_:)), for: .touchUpInside)
     }
@@ -139,8 +146,8 @@ class IDQResultView: UIView {
         //var topOffset: CGFloat = topBackgroundSize/1.15
         
         if UIScreen.screenWidth > 1000 {
-            statsViewHeight = UIScreen.screenHeight * 0.14
-            statsViewWidth = UIScreen.screenHeight * 0.28
+            statsViewHeight = UIScreen.screenWidth * 0.14
+            statsViewWidth = UIScreen.screenWidth * 0.28
             //topOffset = topBackgroundSize/0.0005
         } else if UIScreen.screenHeight  > 1000 {
             statsViewHeight = UIScreen.screenHeight * 0.07033998
@@ -172,7 +179,7 @@ class IDQResultView: UIView {
             
             questionsSubTitleLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: 32),
             questionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
-            questionsSubTitleLabel.widthAnchor.constraint(equalToConstant: 160),
+            questionsSubTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
             questionsSubTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor+8),
             
             questionsCollectionView.topAnchor.constraint(equalTo: questionsSubTitleLabel.bottomAnchor, constant: 2),
@@ -187,7 +194,8 @@ class IDQResultView: UIView {
             
             menuButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
             menuButton.leadingAnchor.constraint(equalTo: shareButton.trailingAnchor, constant: 16),
-            menuButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            menuButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            //menuButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             menuButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }

@@ -17,7 +17,7 @@ class CountDownView: UIView {
     
     private let colors: [UIColor] = [IDQConstants.correctColor, IDQConstants.highlightedLightOrange, IDQConstants.errorColor]
     
-    private let viewSize: CGFloat = 40
+    private var viewSize: CGFloat = 40
     
     private var questionCountdownTimer = Timer()
     
@@ -50,6 +50,13 @@ class CountDownView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.contentBackgroundColor
+        if UIScreen.screenHeight < 980 {
+            viewSize = 40.0
+        } else if UIScreen.screenHeight < 1100 {
+            viewSize = 60.0
+        } else {
+            viewSize = 80.0
+        }
         self.layer.frame = CGRect(x: 0, y: 0, width: viewSize, height: viewSize)
         backgroundColor = IDQConstants.backgroundColor
         layer.cornerRadius = viewSize/2
@@ -141,12 +148,12 @@ class CountDownView: UIView {
                         self.countDownLabel.text = durationString
                         
                         if remainingTime == 10 {
-                            let targetSize: CGFloat = self.viewSize * 2.5
+                            let targetSize: CGFloat = self.viewSize * 5.0
                             self.circularView.pulseAnimation(targetSize: targetSize)
                             
                         }
                         if remainingTime == 5 {
-                            let targetSize: CGFloat = self.viewSize * 12.0
+                            let targetSize: CGFloat = self.viewSize * 14.50
                             self.circularView.pulseAnimation(targetSize: targetSize, duration: 1.60)
                         }
                     }
