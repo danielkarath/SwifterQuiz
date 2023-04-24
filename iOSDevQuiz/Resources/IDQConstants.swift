@@ -10,7 +10,7 @@ import UIKit
 /// The constants used everywhere in the app like UIColors, Font sizes, etc
 struct IDQConstants {
     
-    static let appID: String = " " //Add your App ID here
+    static let appID: String = "" //Add your App ID here
     
     //MARK: - AllowedDomains
     static let allowedDomainStrings: [String] = [

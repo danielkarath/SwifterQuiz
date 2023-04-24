@@ -55,7 +55,7 @@ final class IDQTimeView: UIView {
         var statsViewWidth: CGFloat = UIScreen.screenHeight * 0.10550996
         
         if UIScreen.screenHeight  > 1080 {
-            statsViewWidth = UIScreen.screenHeight * 0.14067995
+            statsViewWidth = UIScreen.screenWidth * 0.28
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         let color1: UIColor = IDQConstants.highlightedLightOrange
@@ -88,19 +88,19 @@ final class IDQTimeView: UIView {
     }
     
     private func setupConstraints() {
-        var statsViewHeight: CGFloat = UIScreen.screenHeight * 0.05627198
-        var descriptionViewTopAnchor: CGFloat = -(UIScreen.screenHeight * 0.03745252)
-        var scoreLabelSize: CGFloat = UIScreen.screenHeight * 0.09378664
-        var scoreLabelCenterY: CGFloat = UIScreen.screenHeight * 0.014068
-        var descriptionLabelHeight: CGFloat = UIScreen.screenHeight * 0.01875733
-        var descriptionLabelWidth: CGFloat = UIScreen.screenHeight * 0.07033998
-        var descriptionLabelTopAnchor: CGFloat = UIScreen.screenHeight * 0.00347233
+        let statsViewHeight: CGFloat = UIScreen.screenHeight * 0.05627198
+        let descriptionViewTopAnchor: CGFloat = -(UIScreen.screenHeight * 0.03745252)
+        let scoreLabelSize: CGFloat = UIScreen.screenHeight * 0.09378664
+        let scoreLabelCenterY: CGFloat = UIScreen.screenHeight * 0.014068
+        let descriptionLabelHeight: CGFloat = UIScreen.screenHeight * 0.01875733
+        let descriptionLabelWidth: CGFloat = UIScreen.screenHeight * 0.07033998
+        let descriptionLabelTopAnchor: CGFloat = UIScreen.screenHeight * 0.00347233
         var backgroundImageViewSize: CGFloat = UIScreen.screenHeight * 0.04220399
         var backgroundImageOffset: CGFloat = UIScreen.screenHeight * 0.007034
         
         if UIScreen.screenHeight  > 1080 {
-            backgroundImageViewSize = backgroundImageViewSize * 1.40
-            backgroundImageOffset = backgroundImageOffset * 1.40
+            backgroundImageViewSize = UIScreen.screenWidth * 0.12
+            backgroundImageOffset = UIScreen.screenWidth * 0.023
         }
         
         addSubviews(descriptionView, timeLabel, backgroundImageView)

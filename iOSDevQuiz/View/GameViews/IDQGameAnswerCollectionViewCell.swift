@@ -22,6 +22,16 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     
     private let answerTextView: UITextView = {
         let textView = UITextView()
+        
+        var fontSize: CGFloat = 14.0
+        if UIScreen.screenHeight < 980 {
+            fontSize = 14.0
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 18.0
+        } else {
+            fontSize = 20.0
+        }
+        
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textColor = IDQConstants.basicFontColor
         textView.isEditable = false
@@ -29,7 +39,7 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         textView.isUserInteractionEnabled = false
         textView.backgroundColor = .clear.withAlphaComponent(0.0)
         textView.contentMode = .topLeft
-        textView.font = UIFont(name: "Kailasa Regular", size: 14)!
+        textView.font = UIFont(name: "Kailasa Regular", size: fontSize)!
         textView.text = ""
         textView.isAccessibilityElement = true
         return textView
@@ -64,12 +74,22 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupConstraints() {
+        
+        var imageViewSize: CGFloat = 24.0
+        if UIScreen.screenHeight < 980 {
+            imageViewSize = 24.0
+        } else if UIScreen.screenHeight < 1100 {
+            imageViewSize = 28.0
+        } else {
+            imageViewSize = 32.0
+        }
+        
         addSubviews(answerTextView, answerImageView)
         NSLayoutConstraint.activate([
             answerImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             answerImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            answerImageView.widthAnchor.constraint(equalToConstant: 24),
-            answerImageView.heightAnchor.constraint(equalToConstant: 24),
+            answerImageView.widthAnchor.constraint(equalToConstant: imageViewSize),
+            answerImageView.heightAnchor.constraint(equalToConstant: imageViewSize),
             
             answerTextView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             answerTextView.leadingAnchor.constraint(equalTo: answerImageView.trailingAnchor, constant: 12),
@@ -101,8 +121,18 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
     
     public func configure(with answer: IDQAnswer, serial: Int) {
         guard !answer.text.isEmpty else { return }
+        
+        var fontSize: CGFloat = 14.0
+        if UIScreen.screenHeight < 980 {
+            fontSize = 14.0
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 18.0
+        } else {
+            fontSize = 20.0
+        }
+        
         answerTextView.text = answer.text
-        answerTextView.configureFor(IDQConstants.keywords, fontSize: 14.0, keywordcolor: IDQConstants.highlightedDarkOrange)
+        answerTextView.configureFor(IDQConstants.keywords, fontSize: fontSize, keywordcolor: IDQConstants.highlightedDarkOrange)
         if serial >= 0 && serial < 4 {
             setupAnswerIcon(answerImageView, answerSerial: serial)
         } else {

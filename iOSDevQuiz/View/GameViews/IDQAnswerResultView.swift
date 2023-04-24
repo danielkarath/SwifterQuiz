@@ -24,6 +24,30 @@ class IDQAnswerResultView: UIView {
     
     private var answerType: IDQAnswerType?
     
+    private var imageSize: CGFloat = {
+        var returnValue: CGFloat = 0
+        if UIScreen.screenHeight < 980 {
+            returnValue = 24
+        } else if UIScreen.screenHeight < 1100 {
+            returnValue = 34
+        } else {
+            returnValue = 40
+        }
+        return returnValue
+    }()
+    
+    private var actionButtonHeight: CGFloat = {
+        var returnValue: CGFloat = 50
+        if UIScreen.screenHeight < 980 {
+            returnValue = 50
+        } else if UIScreen.screenHeight < 1100 {
+            returnValue = 60
+        } else {
+            returnValue = 80
+        }
+        return returnValue
+    }()
+    
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 4
@@ -35,21 +59,37 @@ class IDQAnswerResultView: UIView {
     
     private let resultLabel: UILabel = {
         let label = UILabel()
+        var fontSize: CGFloat = 20
+        if UIScreen.screenHeight < 980 {
+            fontSize = 20
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 24
+        } else {
+            fontSize = 28
+        }
         label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .left
-        label.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        label.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let detailLabel: UILabel = {
         let label = UILabel()
+        var fontSize: CGFloat = 14
+        if UIScreen.screenHeight < 980 {
+            fontSize = 14
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 20
+        } else {
+            fontSize = 24
+        }
         label.text = "This is some explanation to the result so you can better understand it or whatever."
         label.numberOfLines = 0
         label.textAlignment = .left
         label.contentMode = .top
-        label.font = IDQConstants.setFont(fontSize: 14, isBold: false)
+        label.font = IDQConstants.setFont(fontSize: fontSize, isBold: false)
         label.textColor = IDQConstants.correctColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -57,8 +97,6 @@ class IDQAnswerResultView: UIView {
     
     private let referenceButton: UIButton = {
         let button = UIButton()
-        button.frame.size = CGSize(width: 24, height: 24)
-        button.clipsToBounds = true
         button.setTitle("", for: .normal)
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -67,8 +105,6 @@ class IDQAnswerResultView: UIView {
     
     private let bookmarkButton: UIButton = {
         let button = UIButton()
-        button.frame.size = CGSize(width: 24, height: 24)
-        button.clipsToBounds = true
         button.setTitle("", for: .normal)
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -77,8 +113,6 @@ class IDQAnswerResultView: UIView {
     
     private let discardQuestionButton: UIButton = {
         let button = UIButton()
-        button.frame.size = CGSize(width: 24, height: 24)
-        button.clipsToBounds = true
         button.setTitle("", for: .normal)
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -87,11 +121,19 @@ class IDQAnswerResultView: UIView {
     
     private let continueButton: UIButton = {
         let button = UIButton()
+        var fontSize: CGFloat = 20
+        if UIScreen.screenHeight < 980 {
+            fontSize = 20
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 24
+        } else {
+            fontSize = 28
+        }
         button.frame.size = CGSize(width: UIScreen.screenWidth-32, height: 40) //.size = CGSize(width: width, height: height)
         button.layer.cornerRadius = 8
         button.setTitleColor(IDQConstants.contentBackgroundColor, for: .normal)
         button.backgroundColor = IDQConstants.secondaryFontColor
-        button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         button.setTitle("CONTINUE", for: .normal)
         button.setTitle("CONTINUE", for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -113,6 +155,7 @@ class IDQAnswerResultView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupButtons()
         setupConstraints()
     }
     
@@ -129,26 +172,11 @@ class IDQAnswerResultView: UIView {
         backgroundColor = IDQConstants.contentBackgroundColor
         layer.cornerRadius = 16
         
-        referenceImageView.tintColor = IDQConstants.correctColor
-        referenceImageView.frame = CGRect(x: referenceButton.layer.frame.minX, y: referenceButton.layer.frame.minY, width: 24, height: 24)
-        referenceImageView.contentMode = .scaleAspectFit
-        referenceButton.addSubview(referenceImageView)
         if question?.reference != nil {
             referenceButton.isHidden = false
         } else {
             referenceButton.isHidden = true
         }
-        
-        bookmarkUnfilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
-        bookmarkFilledImageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: 24, height: 24)
-        bookmarkUnfilledImageView.contentMode = .scaleAspectFit
-        bookmarkFilledImageView.contentMode = .scaleAspectFit
-        bookmarkButton.addSubview(bookmarkUnfilledImageView)
-        
-        noSignImageView.tintColor = IDQConstants.correctColor
-        noSignImageView.frame = CGRect(x: discardQuestionButton.layer.frame.minX, y: discardQuestionButton.layer.frame.minY, width: 24, height: 24)
-        noSignImageView.contentMode = .scaleAspectFit
-        discardQuestionButton.addSubview(noSignImageView)
         
         discardQuestionButton.addTarget(self, action: #selector(discardQuestionButtonButtonTapped(_:)), for: .touchUpInside)
         referenceButton.addTarget(self, action: #selector(referenceButtonTapped(_:)), for: .touchUpInside)
@@ -156,45 +184,94 @@ class IDQAnswerResultView: UIView {
         continueButton.addTarget(self, action: #selector(continueButtonTapped(_:)), for: .touchUpInside)
     }
     
+    private func setupButtons() {
+        let buttons: [UIButton] = [bookmarkButton, discardQuestionButton, referenceButton]
+        let imageViews: [UIImageView] = [bookmarkUnfilledImageView, noSignImageView, referenceImageView, bookmarkFilledImageView]
+        
+        var i: Int = 0
+        for imageView in imageViews {
+            if i <= buttons.count - 1 {
+                let button = buttons[i]
+                imageView.tintColor = IDQConstants.correctColor
+                imageView.frame = CGRect(x: button.layer.frame.minX, y: button.layer.frame.minY, width: imageSize, height: imageSize)
+                imageView.contentMode = .scaleAspectFit
+                button.addSubview(imageView)
+                i += 1
+            } else {
+                imageView.tintColor = IDQConstants.correctColor
+                imageView.frame = CGRect(x: bookmarkButton.layer.frame.minX, y: bookmarkButton.layer.frame.minY, width: imageSize, height: imageSize)
+                imageView.contentMode = .scaleAspectFit
+                i = 0
+            }
+        }
+        
+        for button in buttons {
+            button.frame.size = CGSize(width: imageSize, height: imageSize)
+            button.clipsToBounds = true
+            
+        }
+    }
+    
     private func setupConstraints() {
+        var resultImageViewheight: CGFloat = 32
+        var resultImageViewoffset: CGFloat = 16
+        var resultLabelWidth: CGFloat = 160
+        var imageViewMidOffset: CGFloat = 16
+
+        if UIScreen.screenHeight < 980 {
+            resultImageViewheight = 32
+            resultImageViewoffset = 16
+            resultLabelWidth = 160
+            imageViewMidOffset = 16
+        } else if UIScreen.screenHeight < 1100 {
+            resultImageViewheight = 40
+            resultImageViewoffset = 20
+            resultLabelWidth = 200
+            imageViewMidOffset = 20
+        } else {
+            resultImageViewheight = 48
+            resultImageViewoffset = 24
+            resultLabelWidth = 230
+            imageViewMidOffset = 24
+        }
+        
+        
         addSubviews(resultLabel, resultImageView, continueButton, detailLabel, referenceButton, bookmarkButton, discardQuestionButton)
         NSLayoutConstraint.activate([
-            resultImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            resultImageView.widthAnchor.constraint(equalToConstant: 32),
-            resultImageView.heightAnchor.constraint(equalToConstant: 32),
-            resultImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            resultImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: resultImageViewoffset),
+            resultImageView.widthAnchor.constraint(equalToConstant: resultImageViewheight),
+            resultImageView.heightAnchor.constraint(equalToConstant: resultImageViewheight),
+            resultImageView.topAnchor.constraint(equalTo: topAnchor, constant: resultImageViewoffset),
             
             resultLabel.leadingAnchor.constraint(equalTo: resultImageView.trailingAnchor, constant: 12),
             resultLabel.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 2),
-            resultLabel.widthAnchor.constraint(equalToConstant: 160),
+            resultLabel.widthAnchor.constraint(equalToConstant: resultLabelWidth),
             resultLabel.heightAnchor.constraint(equalToConstant: 40),
-            
-            
             
             bookmarkButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
             bookmarkButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
-            bookmarkButton.heightAnchor.constraint(equalToConstant: 24),
-            bookmarkButton.widthAnchor.constraint(equalToConstant: 24),
+            bookmarkButton.heightAnchor.constraint(equalToConstant: imageSize),
+            bookmarkButton.widthAnchor.constraint(equalToConstant: imageSize),
             
             discardQuestionButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
-            discardQuestionButton.trailingAnchor.constraint(equalTo: bookmarkButton.leadingAnchor, constant: -16),
-            discardQuestionButton.heightAnchor.constraint(equalToConstant: 24),
-            discardQuestionButton.widthAnchor.constraint(equalToConstant: 24),
+            discardQuestionButton.trailingAnchor.constraint(equalTo: bookmarkButton.leadingAnchor, constant: -imageViewMidOffset),
+            discardQuestionButton.heightAnchor.constraint(equalToConstant: imageSize),
+            discardQuestionButton.widthAnchor.constraint(equalToConstant: imageSize),
             
             referenceButton.centerYAnchor.constraint(equalTo: resultImageView.centerYAnchor, constant: 0),
-            referenceButton.trailingAnchor.constraint(equalTo: discardQuestionButton.leadingAnchor, constant: -16),
-            referenceButton.heightAnchor.constraint(equalToConstant: 24),
-            referenceButton.widthAnchor.constraint(equalToConstant: 24),
+            referenceButton.trailingAnchor.constraint(equalTo: discardQuestionButton.leadingAnchor, constant: -imageViewMidOffset),
+            referenceButton.heightAnchor.constraint(equalToConstant: imageSize),
+            referenceButton.widthAnchor.constraint(equalToConstant: imageSize),
             
             detailLabel.topAnchor.constraint(equalTo: resultImageView.bottomAnchor, constant: 4),
-            detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: resultImageViewoffset),
+            detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -resultImageViewoffset),
             detailLabel.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -8),
             
             continueButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -92),
-            continueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            continueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            continueButton.heightAnchor.constraint(equalToConstant: 50)
+            continueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: resultImageViewoffset),
+            continueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -resultImageViewoffset),
+            continueButton.heightAnchor.constraint(equalToConstant: actionButtonHeight)
         ])
     }
     
@@ -255,6 +332,7 @@ class IDQAnswerResultView: UIView {
         self.backgroundColor = backgroundColor
         self.resultImageView.tintColor = tintColor
         self.referenceImageView.tintColor = tintColor
+        self.bookmarkUnfilledImageView.tintColor = tintColor
         self.bookmarkButton.tintColor = tintColor
         self.noSignImageView.tintColor = tintColor
         self.resultImageView.image = UIImage(systemName: iconName!)?.withTintColor(tintColor!, renderingMode: .alwaysTemplate)
