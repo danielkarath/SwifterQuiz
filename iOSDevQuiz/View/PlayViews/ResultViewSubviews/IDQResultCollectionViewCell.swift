@@ -33,7 +33,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     
     private let difficultyLabel: UILabel = {
         let label = UILabel()
-        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.01524033
+        let fontSize: CGFloat = UIScreen.screenHeight * 0.01524033
         label.layer.zPosition = 5
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -55,7 +55,7 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     
     private let questionLabel: UILabel = {
         let label = UILabel()
-        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.01927433
+        let fontSize: CGFloat = UIScreen.screenHeight * 0.01927433
         label.layer.zPosition = 8
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -91,9 +91,9 @@ final class IDQResultCollectionViewCell: UICollectionViewCell {
     }
     
     private func addConstraints() {
-        let difficultyLabelHeight: CGFloat = UIScreen.main.bounds.height * 0.03516999
-        let difficultyLabelWidth: CGFloat = UIScreen.main.bounds.height * 0.09378664
-        let isCorrectImageViewSize: CGFloat = UIScreen.main.bounds.height * 0.01641266
+        let difficultyLabelHeight: CGFloat = UIScreen.screenHeight * 0.03516999
+        let difficultyLabelWidth: CGFloat = UIScreen.screenHeight * 0.09378664
+        let isCorrectImageViewSize: CGFloat = UIScreen.screenHeight * 0.01641266
         
         NSLayoutConstraint.activate([
             

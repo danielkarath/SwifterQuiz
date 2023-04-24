@@ -25,7 +25,9 @@ final class IDQStatsViewViewModel: ObservableObject {
     
     public func setupGameTime(for gameTime: TimeInterval) -> TimeInterval {
         var returnValue: TimeInterval?
-        if gameTime >= 60 && gameTime < 3600 {
+        if gameTime < 60 {
+            returnValue = gameTime
+        } else if gameTime >= 60 && gameTime < 3600 {
             returnValue = gameTime/60
         } else {
             returnValue = gameTime/3600

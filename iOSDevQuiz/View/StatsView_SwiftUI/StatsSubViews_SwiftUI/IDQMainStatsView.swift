@@ -9,14 +9,17 @@ import SwiftUI
 
 struct IDQMainStatsView: View {
     
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    
     var totalScore: Double
     var totalPerformance: Double
     var streak: Double
     
     private let titleFont = IDQConstants.setFont(fontSize: 32, isBold: true)
-    private let sideBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 220 : 90
-    private let midBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 300 : 140
-    private let topPadding: CGFloat = UIScreen.screenHeight > 1080 ? 72 : 48
+    private let sideBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 135 : 90
+    private let midBoxSize: CGFloat = UIScreen.screenHeight > 1080 ? 210 : 140
+    private let topPadding: CGFloat = UIScreen.screenHeight > 1080 ? -16 : 48
     
     var body: some View {
         VStack {
@@ -31,6 +34,10 @@ struct IDQMainStatsView: View {
             .padding(.top, topPadding)
             Spacer()
         }
+    }
+    
+    private var isLandscape: Bool {
+        horizontalSizeClass == .regular && verticalSizeClass == .compact
     }
 }
 

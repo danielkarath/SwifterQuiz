@@ -9,14 +9,14 @@ import UIKit
 
 class StartButtonView: UIView {
         
-    private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.01524033
-    private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.02579132
-    private let titleBottomAnchor: CGFloat = UIScreen.main.bounds.height * 0.007034
-    private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
-    private let menuButtonHight: CGFloat = UIScreen.main.bounds.height * 0.05633803
-    private let smallIconSize: CGFloat = UIScreen.main.bounds.height * 0.02813599
-    private let backgroundImageBottomAnchor: CGFloat = UIScreen.main.bounds.height * 0.014068
-    private let backgroundImageTrailingAnchor: CGFloat = UIScreen.main.bounds.height * 0.02110199
+    private let subTitleHeight: CGFloat = UIScreen.screenHeight * 0.01524033
+    private let titleHeight: CGFloat = UIScreen.screenHeight * 0.02579132
+    private let titleBottomAnchor: CGFloat = UIScreen.screenHeight * 0.007034
+    private let menuButtonWidth: CGFloat = UIScreen.screenWidth * 0.80
+    private let menuButtonHight: CGFloat = UIScreen.screenHeight * 0.05633803
+    private let smallIconSize: CGFloat = UIScreen.screenHeight * 0.02813599
+    private let backgroundImageBottomAnchor: CGFloat = UIScreen.screenHeight * 0.014068
+    private let backgroundImageTrailingAnchor: CGFloat = UIScreen.screenHeight * 0.02110199
     private let menuButtonCornerRadius: CGFloat = 8.0
     
     private let backgroundImageView: UIImageView = {
@@ -97,7 +97,7 @@ class StartButtonView: UIView {
         addSubviews(backgroundImageView, smallIconImageView, subTitle, mainTitle)
         backgroundImageView.bounds = bounds
         
-        let backgroundImageSize: CGFloat = UIScreen.main.bounds.height * 0.11267606
+        let backgroundImageSize: CGFloat = UIScreen.screenHeight * 0.11267606
         
         NSLayoutConstraint.activate([
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: backgroundImageBottomAnchor),

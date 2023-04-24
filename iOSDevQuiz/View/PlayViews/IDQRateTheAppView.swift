@@ -16,14 +16,14 @@ class IDQRateTheAppView: UIView {
     
     public weak var delegate: IDQRateTheAppViewDelegate?
     
-    private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.01524033
-    private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.02579132
-    private let titleBottomAnchor: CGFloat = UIScreen.main.bounds.height * 0.007034
-    private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
-    private let menuButtonHight: CGFloat = UIScreen.main.bounds.height * 0.05633803
-    private let smallIconSize: CGFloat = UIScreen.main.bounds.height * 0.02813599
-    private let backgroundImageBottomAnchor: CGFloat = UIScreen.main.bounds.height * 0.017068
-    private let backgroundImageTrailingAnchor: CGFloat = UIScreen.main.bounds.height * 0.02210199
+    private let subTitleHeight: CGFloat = UIScreen.screenHeight * 0.01524033
+    private let titleHeight: CGFloat = UIScreen.screenHeight * 0.02579132
+    private let titleBottomAnchor: CGFloat = UIScreen.screenHeight * 0.007034
+    private let menuButtonWidth: CGFloat = UIScreen.screenWidth * 0.80
+    private let menuButtonHight: CGFloat = UIScreen.screenHeight * 0.05633803
+    private let smallIconSize: CGFloat = UIScreen.screenHeight * 0.02813599
+    private let backgroundImageBottomAnchor: CGFloat = UIScreen.screenHeight * 0.017068
+    private let backgroundImageTrailingAnchor: CGFloat = UIScreen.screenHeight * 0.02210199
     private let menuButtonCornerRadius: CGFloat = 8.0
     
     private let backgroundImageView: UIImageView = {
@@ -46,7 +46,7 @@ class IDQRateTheAppView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = IDQConstants.basicFontColor.withAlphaComponent(0.04)
         imageView.isAccessibilityElement = false
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.height * 0.02813599, height: UIScreen.main.bounds.height * 0.02813599)
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.screenHeight * 0.02813599, height: UIScreen.screenHeight * 0.02813599)
         imageView.clipsToBounds = true
 
         // Set the image
@@ -61,7 +61,7 @@ class IDQRateTheAppView: UIView {
         maskLayer.contents = image?.cgImage
 
         // Add inner padding
-        let padding: CGFloat = UIScreen.main.bounds.height * 0.02813599 * 0.15
+        let padding: CGFloat = UIScreen.screenHeight * 0.02813599 * 0.15
         let paddedFrame = CGRect(x: padding, y: padding, width: imageView.bounds.width - padding * 2, height: imageView.bounds.height - padding * 2)
 
         maskLayer.frame = paddedFrame
@@ -143,7 +143,7 @@ class IDQRateTheAppView: UIView {
         addSubviews(backgroundImageView, subTitle, mainTitle, closeButton, smallIconImageView)
         backgroundImageView.bounds = bounds
         
-        let backgroundImageSize: CGFloat = UIScreen.main.bounds.height * 0.11267606
+        let backgroundImageSize: CGFloat = UIScreen.screenHeight * 0.11267606
         
         NSLayoutConstraint.activate([
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: backgroundImageBottomAnchor),

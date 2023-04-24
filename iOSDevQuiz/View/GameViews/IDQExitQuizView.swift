@@ -54,7 +54,7 @@ class IDQExitQuizView: UIView {
     
     private let exitButton: UIButton = {
         let button = UIButton()
-        button.frame.size = CGSize(width: UIScreen.main.bounds.width-32, height: 50)
+        button.frame.size = CGSize(width: UIScreen.screenWidth-32, height: 50)
         button.layer.cornerRadius = 8
         button.setTitleColor(IDQConstants.contentBackgroundColor, for: .normal)
         button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
@@ -68,7 +68,7 @@ class IDQExitQuizView: UIView {
     
     private let rejoinButton: UIButton = {
         let button = UIButton()
-        button.frame.size = CGSize(width: UIScreen.main.bounds.width-32, height: 50) 
+        button.frame.size = CGSize(width: UIScreen.screenWidth-32, height: 50)
         button.layer.cornerRadius = 8
         button.setTitleColor(IDQConstants.basicFontColor, for: .normal)
         button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
@@ -99,7 +99,7 @@ class IDQExitQuizView: UIView {
     
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        self.layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 240)
+        self.layer.frame = CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 240)
         backgroundColor = IDQConstants.contentBackgroundColor
         layer.cornerRadius = 16
         exitButton.addTarget(self, action: #selector(exitButtonTapped(_:)), for: .touchUpInside)

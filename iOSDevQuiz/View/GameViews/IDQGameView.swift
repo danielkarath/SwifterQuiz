@@ -71,7 +71,7 @@ final class IDQGameView: UIView {
     
     private let overlayView: UIView = {
         let view = UIView()
-        view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        view.frame.size = CGSize(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
         view.backgroundColor = UIColor.black.withAlphaComponent(0.30)
         view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -123,7 +123,7 @@ final class IDQGameView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.alpha = 0.0
-        let width: CGFloat = UIScreen.main.bounds.width - 50
+        let width: CGFloat = UIScreen.screenWidth - 50
         let height: CGFloat = 40
         button.frame.size = CGSize(width: width, height: height)
         button.layer.cornerRadius = 8
@@ -221,7 +221,7 @@ final class IDQGameView: UIView {
             
             questionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 56),
             questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
-            questionLabel.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width-64)*0.95),
+            questionLabel.widthAnchor.constraint(equalToConstant: (UIScreen.screenWidth-64)*0.95),
             
             difficultyLabel.bottomAnchor.constraint(equalTo: questionLabel.topAnchor, constant: -2),
             difficultyLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
@@ -240,7 +240,7 @@ final class IDQGameView: UIView {
             
             passButton.centerYAnchor.constraint(equalTo: countDownView.centerYAnchor, constant: 0),
             passButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            passButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 50),
+            passButton.widthAnchor.constraint(equalToConstant: UIScreen.screenWidth - 50),
             passButton.heightAnchor.constraint(equalToConstant: 40),
             
             questionNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: -12),
@@ -594,7 +594,7 @@ extension IDQGameView: IDQAnswerResultViewDelegate {
         }
         
         UIView.animate(withDuration: 0.80, delay: 0.35, animations: {
-            self.disableQuestionView.transform = CGAffineTransform(translationX: 0, y: -(350 + UIScreen.main.bounds.height / 2 - 160))
+            self.disableQuestionView.transform = CGAffineTransform(translationX: 0, y: -(350 + UIScreen.screenHeight / 2 - 160))
         }, completion: nil)
     }
     

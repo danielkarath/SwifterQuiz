@@ -25,7 +25,7 @@ final class IDQTimeView: UIView {
 
     public let timeLabel: UILabel = {
         let label = UILabel()
-        var fontSize: CGFloat = UIScreen.main.bounds.height * 0.02461899
+        var fontSize: CGFloat = UIScreen.screenHeight * 0.02461899
         label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .center
@@ -38,7 +38,7 @@ final class IDQTimeView: UIView {
     
     private let timeDescriptionLabel: UILabel = {
         let label = UILabel()
-        var fontSize: CGFloat = UIScreen.main.bounds.height * 0.01524033
+        var fontSize: CGFloat = UIScreen.screenHeight * 0.01524033
         label.text = "Time"
         label.numberOfLines = 1
         label.textAlignment = .center
@@ -51,11 +51,11 @@ final class IDQTimeView: UIView {
     
     private let descriptionView: UIView = {
         let view = UIView()
-        var statsViewHeight: CGFloat = UIScreen.main.bounds.height * 0.05627198
-        var statsViewWidth: CGFloat = UIScreen.main.bounds.height * 0.10550996
+        var statsViewHeight: CGFloat = UIScreen.screenHeight * 0.05627198
+        var statsViewWidth: CGFloat = UIScreen.screenHeight * 0.10550996
         
-        if UIScreen.main.bounds.height  > 1080 {
-            statsViewWidth = UIScreen.main.bounds.height * 0.14067995
+        if UIScreen.screenHeight  > 1080 {
+            statsViewWidth = UIScreen.screenHeight * 0.14067995
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         let color1: UIColor = IDQConstants.highlightedLightOrange
@@ -88,17 +88,17 @@ final class IDQTimeView: UIView {
     }
     
     private func setupConstraints() {
-        var statsViewHeight: CGFloat = UIScreen.main.bounds.height * 0.05627198
-        var descriptionViewTopAnchor: CGFloat = -(UIScreen.main.bounds.height * 0.03745252)
-        var scoreLabelSize: CGFloat = UIScreen.main.bounds.height * 0.09378664
-        var scoreLabelCenterY: CGFloat = UIScreen.main.bounds.height * 0.014068
-        var descriptionLabelHeight: CGFloat = UIScreen.main.bounds.height * 0.01875733
-        var descriptionLabelWidth: CGFloat = UIScreen.main.bounds.height * 0.07033998
-        var descriptionLabelTopAnchor: CGFloat = UIScreen.main.bounds.height * 0.00347233
-        var backgroundImageViewSize: CGFloat = UIScreen.main.bounds.height * 0.04220399
-        var backgroundImageOffset: CGFloat = UIScreen.main.bounds.height * 0.007034
+        var statsViewHeight: CGFloat = UIScreen.screenHeight * 0.05627198
+        var descriptionViewTopAnchor: CGFloat = -(UIScreen.screenHeight * 0.03745252)
+        var scoreLabelSize: CGFloat = UIScreen.screenHeight * 0.09378664
+        var scoreLabelCenterY: CGFloat = UIScreen.screenHeight * 0.014068
+        var descriptionLabelHeight: CGFloat = UIScreen.screenHeight * 0.01875733
+        var descriptionLabelWidth: CGFloat = UIScreen.screenHeight * 0.07033998
+        var descriptionLabelTopAnchor: CGFloat = UIScreen.screenHeight * 0.00347233
+        var backgroundImageViewSize: CGFloat = UIScreen.screenHeight * 0.04220399
+        var backgroundImageOffset: CGFloat = UIScreen.screenHeight * 0.007034
         
-        if UIScreen.main.bounds.height  > 1080 {
+        if UIScreen.screenHeight  > 1080 {
             backgroundImageViewSize = backgroundImageViewSize * 1.40
             backgroundImageOffset = backgroundImageOffset * 1.40
         }
