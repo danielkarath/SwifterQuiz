@@ -109,7 +109,7 @@ extension UIView {
         }
         return nil
     }
-
+    
     
 }
 
@@ -216,15 +216,15 @@ extension UILabel {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gradientView.bounds
-                
+        
         gradientLayer.colors = [UIColor.black.withAlphaComponent(1.0).cgColor,
-                                    UIColor.black.withAlphaComponent(0.0).cgColor]
+                                UIColor.black.withAlphaComponent(0.0).cgColor]
         
         if UIScreen.main.traitCollection.userInterfaceStyle == .light {
             gradientLayer.colors = [UIColor.init(displayP3Red: 255.0/255.0, green: 154.0/255.0, blue: 60.0/255.0, alpha: 1.0).cgColor, UIColor.init(displayP3Red: 226.0/255.0, green: 62.0/255.0, blue: 87.0/255.0, alpha: 1.0).cgColor]
-            } else {
-                gradientLayer.colors = [UIColor.init(displayP3Red: 161.0/255.0, green: 205.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor, UIColor.init(displayP3Red: 95.0/255.0, green: 48.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor]
-            }
+        } else {
+            gradientLayer.colors = [UIColor.init(displayP3Red: 161.0/255.0, green: 205.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor, UIColor.init(displayP3Red: 95.0/255.0, green: 48.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor]
+        }
         
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
@@ -253,13 +253,13 @@ extension UILabel {
         }
         attributedText = attributedString
         
-//        for (word) in keywordColors {
-//            let range = (labelText as NSString).range(of: word)
-//            attributedString.addAttribute(.foregroundColor, value: color, range: range)
-//            attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
-//        }
-//
-//        attributedText = attributedString
+        //        for (word) in keywordColors {
+        //            let range = (labelText as NSString).range(of: word)
+        //            attributedString.addAttribute(.foregroundColor, value: color, range: range)
+        //            attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+        //        }
+        //
+        //        attributedText = attributedString
     }
     
 }
@@ -345,11 +345,11 @@ extension UIBarButtonItem {
         button.setTitle(title, for: .normal)
         button.setTitleColor(color, for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-
+        
         if let target = target, let action = action {
             button.addTarget(target, action: action, for: .touchUpInside)
         }
-
+        
         self.init(customView: button)
     }
 }
@@ -371,11 +371,43 @@ extension Calendar {
     }
 }
 
-extension UIScreen{
-   static let screenWidth = UIScreen.main.bounds.size.width
-   static let screenHeight = UIScreen.main.bounds.size.height
-   static let screenSize = UIScreen.main.bounds.size
+extension UIScreen {
+    
+    static var screenWidth: CGFloat {
+        let screenSize = UIScreen.main.bounds.size
+        if screenSize.width < screenSize.height {
+            return UIScreen.main.bounds.width
+        } else {
+            return UIScreen.main.bounds.height
+        }
+    }
+    
+    static var screenHeight: CGFloat {
+        let screenSize = UIScreen.main.bounds.size
+        if screenSize.width > screenSize.height {
+            return UIScreen.main.bounds.width
+        } else {
+            return UIScreen.main.bounds.height
+        }
+    }
+    
+    //static let screenWidth = UIScreen.main.bounds.width
+    //static let screenHeight = UIScreen.main.bounds.height
+    static let screenSize = UIScreen.main.bounds
+    
+    static var physicalScreenHeight: CGFloat {
+        let screenBounds = UIScreen.main.bounds.size
+        let isPortrait = UIApplication.shared.statusBarOrientation.isPortrait
+        return isPortrait ? max(screenBounds.width, screenBounds.height) : min(screenBounds.width, screenBounds.height)
+    }
+    
+    static var physicalScreenWidth: CGFloat {
+        let screenBounds = UIScreen.main.bounds.size
+        let isPortrait = UIApplication.shared.statusBarOrientation.isLandscape
+        return isPortrait ? max(screenBounds.width, screenBounds.height) : min(screenBounds.width, screenBounds.height)
+    }
 }
+
 
 extension Bundle {
     var appName: String? {
@@ -399,3 +431,9 @@ extension Notification.Name {
     static let exitQuizPressed = Notification.Name("ExitQuizPressedNotification")
 }
 
+extension UIDevice {
+    static var isLandscape: Bool {
+        let screenSize = UIScreen.main.bounds.size
+        return screenSize.width > screenSize.height
+    }
+}

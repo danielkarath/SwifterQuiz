@@ -124,7 +124,7 @@ final class IDQUserManager {
             daytimeGroupManager.generateDaytimeGroups()
         } else {
             print("There is already a user assigned.")
-            printUserRecord()
+            //printUserRecord()
         }
     }
     

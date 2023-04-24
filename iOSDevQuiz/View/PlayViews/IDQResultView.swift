@@ -30,7 +30,7 @@ class IDQResultView: UIView {
     
     private let percentageView = IDQPercentageView()
     
-    private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
+    private let topBackgroundSize: CGFloat = UIScreen.screenWidth*3
     
     private let topBackgroundView: UIView = {
         let view = UIView()
@@ -40,7 +40,7 @@ class IDQResultView: UIView {
     
     private let questionsSubTitleLabel: UILabel = {
         let label = UILabel()
-        let fontSize: CGFloat = UIScreen.main.bounds.height * 0.01524033
+        let fontSize: CGFloat = UIScreen.screenHeight * 0.01524033
         label.text = "Questions"
         label.numberOfLines = 1
         label.textAlignment = .left
@@ -67,7 +67,7 @@ class IDQResultView: UIView {
     private let menuButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.frame.size = CGSize(width: UIScreen.main.bounds.width-32-66, height: 50)
+        button.frame.size = CGSize(width: UIScreen.screenWidth-32-66, height: 50)
         let color1: UIColor = IDQConstants.highlightedLightOrange
         let color2: UIColor = IDQConstants.highlightedDarkOrange
         button.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
@@ -116,9 +116,9 @@ class IDQResultView: UIView {
         let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
-        topBackgroundView.backgroundColor = IDQConstants.contentBackgroundColor
-        topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
-        topBackgroundView.layer.cornerRadius = topBackgroundSize/2
+//        topBackgroundView.backgroundColor = IDQConstants.contentBackgroundColor
+//        topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
+//        topBackgroundView.layer.cornerRadius = topBackgroundSize/2
         menuButton.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
         shareButton.addTarget(self, action: #selector(share(_:)), for: .touchUpInside)
     }
@@ -132,34 +132,40 @@ class IDQResultView: UIView {
     
     private func setupConstraints() {
         
-        let collectionViewLeadingAnchor: CGFloat = UIScreen.main.bounds.height * 0.00937866
+        let collectionViewLeadingAnchor: CGFloat = UIScreen.screenHeight * 0.00937866
         
-        var statsViewHeight: CGFloat = UIScreen.main.bounds.height * 0.05627198
-        var statsViewWidth: CGFloat = UIScreen.main.bounds.height * 0.10550996
+        var statsViewHeight: CGFloat = UIScreen.screenHeight * 0.05627198
+        var statsViewWidth: CGFloat = UIScreen.screenHeight * 0.10550996
+        //var topOffset: CGFloat = topBackgroundSize/1.15
         
-        if UIScreen.main.bounds.height  > 1080 {
-            statsViewHeight = UIScreen.main.bounds.height * 0.07033998
-            statsViewWidth = UIScreen.main.bounds.height * 0.14067995
+        if UIScreen.screenWidth > 1000 {
+            statsViewHeight = UIScreen.screenHeight * 0.14
+            statsViewWidth = UIScreen.screenHeight * 0.28
+            //topOffset = topBackgroundSize/0.0005
+        } else if UIScreen.screenHeight  > 1000 {
+            statsViewHeight = UIScreen.screenHeight * 0.07033998
+            statsViewWidth = UIScreen.screenHeight * 0.14067995
+            //topOffset = topBackgroundSize/0.0005
         }
         
-        addSubviews(topBackgroundView, scoreView, timeView, percentageView, questionsSubTitleLabel, questionsCollectionView, menuButton, shareButton)
+        addSubviews(scoreView, timeView, percentageView, questionsSubTitleLabel, questionsCollectionView, menuButton, shareButton) //topBackgroundView
         NSLayoutConstraint.activate([
-            topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
-            topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
-            topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
+//            topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topOffset),
+//            topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+//            topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
+//            topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
             
-            scoreView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
+            scoreView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
             scoreView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor * 3.0),
             scoreView.widthAnchor.constraint(equalToConstant: statsViewWidth),
             scoreView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
-            timeView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
+            timeView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
             timeView.centerXAnchor.constraint(equalTo: centerXAnchor),
             timeView.widthAnchor.constraint(equalToConstant: statsViewWidth),
             timeView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
-            percentageView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: 32),
+            percentageView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
             percentageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor * 3.0),
             percentageView.widthAnchor.constraint(equalToConstant: statsViewWidth),
             percentageView.heightAnchor.constraint(equalToConstant: statsViewHeight),
@@ -203,6 +209,7 @@ class IDQResultView: UIView {
         questionsCollectionView.isUserInteractionEnabled = false
         questionsCollectionView.alpha = 0.0
         questionsSubTitleLabel.alpha = 0.0
+        
         DispatchQueue.main.async {
             self.viewModel.countAnimation(self.scoreView.quizScoreLabel, duration: 3.0, quiz: quiz)
         }
@@ -213,7 +220,7 @@ class IDQResultView: UIView {
             self.viewModel.performanceAnimation(self.percentageView.quizPercentageLabel, quiz: quiz)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.10) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.60) {
             self.questionsCollectionView.isUserInteractionEnabled = true
             UIView.animate(withDuration: 0.85) {
                 self.questionsCollectionView.alpha = 1.0
@@ -260,7 +267,9 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
         let screenBounds = UIScreen.main.bounds
         let width = (screenBounds.width-32)
         var height: CGFloat?
-        if UIScreen.main.bounds.height  > 1080 {
+        if UIScreen.screenWidth > 1000 {
+            height = width * 0.16
+        } else if UIScreen.physicalScreenHeight  > 1080 {
             height = width * 0.26
         } else {
             height = width * 0.40

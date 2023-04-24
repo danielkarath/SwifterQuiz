@@ -13,6 +13,8 @@ struct IDQAboutTextView: View {
     var description: String
     
     var body: some View {
+        let cellWidth: CGFloat = UIScreen.screenWidth < 1000 ? UIScreen.screenWidth * 0.95 : 720
+
         ZStack {
             Rectangle()
                 .foregroundColor(Color(IDQConstants.contentBackgroundColor))
@@ -34,14 +36,14 @@ struct IDQAboutTextView: View {
                             .frame(width: 22, height: 22)
                     }
                     Text(title)
-                        .frame(width: UIScreen.main.bounds.width - 96, height: 60, alignment: .leading)
+                        .frame(width: cellWidth - 96, height: 60, alignment: .leading)
                         .font(Font(IDQConstants.setFont(fontSize: 14, isBold: true)))
                         .foregroundColor(Color(IDQConstants.basicFontColor))
                         .padding(.top, 8)
                 }
                 .padding(.leading, 16)
                 Text(description)
-                    .frame(width: UIScreen.main.bounds.width - 68, height: 128, alignment: .leading)
+                    .frame(width: cellWidth - 68, height: 128, alignment: .leading)
                     .font(Font(IDQConstants.setFont(fontSize: 12, isBold: false)))
                     .foregroundColor(Color(IDQConstants.basicFontColor))
                     //.padding(.top, 8)

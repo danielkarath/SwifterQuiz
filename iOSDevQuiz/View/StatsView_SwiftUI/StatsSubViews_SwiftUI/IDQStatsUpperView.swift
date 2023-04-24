@@ -13,13 +13,8 @@ struct IDQStatsUpperView: View {
     let titleFont = IDQConstants.setFont(fontSize: 32, isBold: true)
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    darkerColor,
-                    lighterColor
-                ]),
-                startPoint: .top,
-                endPoint: .bottom)
+            CircleShape()
+            .background(Color(IDQConstants.backgroundColor))
             .edgesIgnoringSafeArea(.all)
         }
     }
@@ -28,5 +23,13 @@ struct IDQStatsUpperView: View {
 struct IDQStatsUpperView_Previews: PreviewProvider {
     static var previews: some View {
         IDQStatsUpperView()
+    }
+}
+
+struct CircleShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        Path { path in
+            path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.maxX, startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 360), clockwise: true)
+        }
     }
 }

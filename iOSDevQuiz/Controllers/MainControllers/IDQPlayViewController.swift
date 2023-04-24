@@ -8,9 +8,9 @@
 import UIKit
 
 final class IDQPlayViewController: UIViewController {
-
+    
     private let playView = IDQPlayView()
-        
+    
     private let quizManager = IDQQuizManager()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -18,6 +18,7 @@ final class IDQPlayViewController: UIViewController {
         IDQUserActivityManager.shared.quizMenuCount()
         playView.setupBookmarkedButton()
         playView.shouldDisplayRateAppView()
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -29,6 +30,19 @@ final class IDQPlayViewController: UIViewController {
         view.backgroundColor = IDQConstants.backgroundColor
         setupConstraints()
         playView.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    @objc func orientationDidChange() {
+        let orientation = UIDevice.current.orientation
+        print("Device orientation changed: \(orientation.rawValue)")
+        playView.setupConstraints()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+        UIDevice.current.endGeneratingDeviceOrientationNotifications()
     }
     
     private func setupConstraints() {
@@ -40,7 +54,7 @@ final class IDQPlayViewController: UIViewController {
             playView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
         ])
     }
-
+    
 }
 
 extension IDQPlayViewController: IDQPlayViewDelegate {

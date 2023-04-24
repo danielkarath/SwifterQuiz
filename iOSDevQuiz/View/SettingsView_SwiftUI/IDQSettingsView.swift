@@ -21,18 +21,19 @@ struct IDQSettingsView: View {
     
     var body: some View {
         let settingsTitleOpacity: CGFloat = colorScheme == .light ? 0.15 : 0.11
+        let cellWidth: CGFloat = UIScreen.screenWidth < 1000 ? UIScreen.screenWidth * 0.80 : 720
         
         ScrollView {
             Text("Settings")
-                .frame(width: UIScreen.main.bounds.width - 64, height: 50, alignment: .leading)
+                .frame(width: cellWidth, height: 50, alignment: .leading)
                 .font(Font(IDQConstants.setFont(fontSize: 46, isBold: true)))
                 .foregroundColor(Color(IDQConstants.secondaryFontColor.withAlphaComponent(settingsTitleOpacity)))
                 .kerning(2.35)
-                .padding(.bottom, -(UIScreen.main.bounds.height * 0.017))
+                .padding(.bottom, -(UIScreen.screenHeight * 0.017))
             LazyVStack(spacing: 20) {
                 ForEach(viewModel.cellViewModels) { viewModel in
                     IDQSettingsViewCell(cellTitle: viewModel.title, subTitle: viewModel.subtitle, image: Image(uiImage: viewModel.image!))
-                        .frame(width: UIScreen.main.bounds.width - 64, height: 80, alignment: .leading)
+                        .frame(width: cellWidth, height: 80, alignment: .leading)
                         .background(Color(IDQConstants.contentBackgroundColor))
                         .cornerRadius(16)
                         .simultaneousGesture(TapGesture().onEnded {

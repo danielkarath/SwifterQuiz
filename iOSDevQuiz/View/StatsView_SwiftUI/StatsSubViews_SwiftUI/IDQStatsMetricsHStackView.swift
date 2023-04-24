@@ -16,7 +16,7 @@ struct IDQStatsMetricsHStackView: View {
     var gameTimeText: String
     
     var body: some View {
-        HStack(spacing: CGFloat((UIScreen.main.bounds.width - 2 * 160-32)/3)) {
+        HStack(spacing: CGFloat((UIScreen.screenWidth - 2 * 160-32)/3)) {
             IDQStatsMetricBoxView(title: "quizes played", value: quizesPlayed, image: Image(systemName: "graduationcap.fill"), resultValueType: .wholeNum)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .cornerRadius(16)
@@ -26,7 +26,7 @@ struct IDQStatsMetricsHStackView: View {
                 .cornerRadius(16)
                 .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
         }
-        .padding(.top, CGFloat((UIScreen.main.bounds.width - 2 * 160-40)/3))
+        .padding(.top, CGFloat((UIScreen.screenWidth - 2 * 160-40)/3))
     }
 }
 

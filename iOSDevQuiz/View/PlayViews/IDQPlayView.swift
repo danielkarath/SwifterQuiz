@@ -26,20 +26,20 @@ class IDQPlayView: UIView { //852 393
     
     private var bookmarkedQuestions: [IDQQuestion]?
     
-    private let appIconTopAnchor: CGFloat = UIScreen.main.bounds.height * 0.018779
-    private let appIconSize: CGFloat = UIScreen.main.bounds.height * 0.075117
+    private let appIconTopAnchor: CGFloat = UIScreen.screenHeight * 0.018779
+    private let appIconSize: CGFloat = UIScreen.screenHeight * 0.075117
     
-    private let subTitleHeight: CGFloat = UIScreen.main.bounds.height * 0.019101
-    private let titleHeight: CGFloat = UIScreen.main.bounds.height * 0.030480
+    private let subTitleHeight: CGFloat = UIScreen.screenHeight * 0.019101
+    private let titleHeight: CGFloat = UIScreen.screenHeight * 0.030480
     
-    private let menuTopDistance: CGFloat = UIScreen.main.bounds.height * 0.0375586
+    private let menuTopDistance: CGFloat = UIScreen.screenHeight * 0.0375586
     
-    private let menuButtonWidth: CGFloat = UIScreen.main.bounds.width * 0.80
-    private let menuButtonHight: CGFloat = UIScreen.main.bounds.height * 0.05633803 //0.0375586       48
+    private let menuButtonWidth: CGFloat = UIScreen.screenWidth < 1000 ? UIScreen.screenWidth * 0.80 : 720
+    private let menuButtonHight: CGFloat = UIScreen.screenHeight * 0.05633803 //0.0375586       48
     private let menuButtonCornerRadius: CGFloat = 8.0
     private let menuButtonFontSize: CGFloat = 24.0
     
-    private let topBackgroundSize: CGFloat = UIScreen.main.bounds.width*3
+    private let topBackgroundSize: CGFloat = UIScreen.screenWidth*3
     
     private let gradientView = UIView()
     
@@ -127,6 +127,7 @@ class IDQPlayView: UIView { //852 393
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, bookmarkedQuestionsButton)
         setupConstraints()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
         startButtonView.addGestureRecognizer(tapGesture)
@@ -156,10 +157,19 @@ class IDQPlayView: UIView { //852 393
     
     //MARK: - Private
     
-    private func setupConstraints() {
-        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, bookmarkedQuestionsButton)
+    public func setupConstraints() {
+        NSLayoutConstraint.deactivate(gradientView.constraints)
+        NSLayoutConstraint.deactivate(topBackgroundView.constraints)
+        
+        var topOffset: CGFloat = topBackgroundSize/1.15
+        print("topOffset: \(topOffset)")
+        print("UIScreen.physicalScreenHeight: \(UIScreen.physicalScreenHeight)")
+        if UIScreen.physicalScreenHeight  > 1000 {
+            topOffset = topBackgroundSize/1.09
+        }
+        
         NSLayoutConstraint.activate([
-            topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topBackgroundSize/1.15),
+            topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topOffset),
             topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
             topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
@@ -175,12 +185,12 @@ class IDQPlayView: UIView { //852 393
             appIconMiniImageView.topAnchor.constraint(equalTo: topAnchor, constant: appIconTopAnchor),
             
             subTitle.heightAnchor.constraint(equalToConstant: subTitleHeight),
-            subTitle.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.60),
+            subTitle.widthAnchor.constraint(equalToConstant: UIScreen.screenWidth*0.60),
             subTitle.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             subTitle.topAnchor.constraint(equalTo: appIconMiniImageView.bottomAnchor, constant: 16),
             
             titleLabel.heightAnchor.constraint(equalToConstant: titleHeight),
-            titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width*0.80),
+            titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.screenWidth*0.80),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             titleLabel.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 0),
             
@@ -204,7 +214,6 @@ class IDQPlayView: UIView { //852 393
             questionBankButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             questionBankButton.topAnchor.constraint(equalTo: quizOptionsButton.bottomAnchor, constant: 14),
         ])
-        //playView.delegate = self
     }
     
     private func setupButtons(_ buttons: [UIButton], titles: [String]) {

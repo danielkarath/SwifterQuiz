@@ -26,6 +26,10 @@ final class IDQTabBarController: UITabBarController {
         automaticallyGenerateUser()
         evaulateUserMetrics()
         print("number of questions in total: \(fullQuestionList.count)")
+        print("UIScreen.screenWidth: \(UIScreen.screenWidth)")
+        print("UIScreen.physicalScreenWidth: \(UIScreen.physicalScreenWidth)")
+        print("UIScreen.screenHeight: \(UIScreen.screenHeight)")
+        print("UIScreen.physicalScreenHeight: \(UIScreen.physicalScreenHeight)")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -75,7 +79,7 @@ final class IDQTabBarController: UITabBarController {
     
     private func automaticallyGenerateUser() {
         DispatchQueue.global(qos: .utility).async {
-            self.userManager.createUser(name: "Daniel")
+            self.userManager.createUser(name: "User")
         }
     }
     
