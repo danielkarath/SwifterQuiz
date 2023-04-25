@@ -103,10 +103,12 @@ class IDQRateTheAppView: UIView {
     private let closeButton: UIButton = {
         let button = UIButton()
         button.frame.size = CGSize(width: 30, height: 30)
-        button.titleLabel?.font = IDQConstants.setFont(fontSize: 20, isBold: true)
+        button.titleLabel?.font = IDQConstants.setFont(fontSize: 16, isBold: false)
         button.backgroundColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.0)
-        button.setImage(UIImage(systemName: "x.circle"), for: .normal)
-        button.setImage(UIImage(systemName: "x.circle"), for: .highlighted)
+        button.setTitle("x", for: .normal)
+        button.setTitleColor(IDQConstants.secondaryFontColor, for: .normal)
+//        button.setImage(UIImage(systemName: "x.circle"), for: .normal)
+//        button.setImage(UIImage(systemName: "x.circle"), for: .highlighted)
         button.tintColor = IDQConstants.secondaryFontColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

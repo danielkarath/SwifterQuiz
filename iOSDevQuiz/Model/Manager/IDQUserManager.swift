@@ -129,6 +129,7 @@ final class IDQUserManager {
     }
     
     public func evaulateStreak(didPlayYesterday: Bool) {
+        print("Evaulating Streak")
         let calendar = Calendar.current
         let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime)!
         guard let user = fetchUser() else {
@@ -152,10 +153,12 @@ final class IDQUserManager {
             user.streak = 0
             saveToCoreData()
         }
+        print("LAST PLAY DATE: \(user.lastDatePlayed)")
         
     }
     
     public func shouldAddToStreak() {
+        print("Evaulating Streak")
         let calendar = Calendar.current
         guard let user = fetchUser() else {
             print("Could not load user while trying to set streak")

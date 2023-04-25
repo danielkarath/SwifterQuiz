@@ -33,9 +33,9 @@ class IDQResultView: UIView {
     private let topBackgroundSize: CGFloat = UIScreen.screenWidth*3
     
     private var menuButtonWidth: CGFloat = {
-        var value: CGFloat = (UIScreen.screenWidth - (50+32+16))
+        var value: CGFloat = (UIScreen.screenWidth - (50+64+16))
         if UIScreen.screenWidth > 1100 {
-            var value: CGFloat = (UIScreen.screenHeight - (50+32+16))
+            var value: CGFloat = (UIScreen.screenHeight - (50+64+16))
         }
         return value
     }()
@@ -138,32 +138,26 @@ class IDQResultView: UIView {
     //MARK: - Private
     
     private func setupConstraints() {
-        
+                
         let collectionViewLeadingAnchor: CGFloat = UIScreen.screenHeight * 0.00937866
         
         var statsViewHeight: CGFloat = UIScreen.screenHeight * 0.05627198
         var statsViewWidth: CGFloat = UIScreen.screenHeight * 0.10550996
-        //var topOffset: CGFloat = topBackgroundSize/1.15
+        var midoffset: CGFloat = UIScreen.screenHeight < 1080 ? 32 : 72
         
         if UIScreen.screenWidth > 1000 {
-            statsViewHeight = UIScreen.screenWidth * 0.14
-            statsViewWidth = UIScreen.screenWidth * 0.28
-            //topOffset = topBackgroundSize/0.0005
+            statsViewHeight = UIScreen.screenWidth * 0.1425655
+            statsViewWidth = UIScreen.screenWidth * 0.285131
         } else if UIScreen.screenHeight  > 1000 {
             statsViewHeight = UIScreen.screenHeight * 0.07033998
             statsViewWidth = UIScreen.screenHeight * 0.14067995
-            //topOffset = topBackgroundSize/0.0005
         }
         
-        addSubviews(scoreView, timeView, percentageView, questionsSubTitleLabel, questionsCollectionView, menuButton, shareButton) //topBackgroundView
+        addSubviews(scoreView, timeView, percentageView, questionsSubTitleLabel, questionsCollectionView, menuButton, shareButton)
         NSLayoutConstraint.activate([
-//            topBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: -topOffset),
-//            topBackgroundView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-//            topBackgroundView.widthAnchor.constraint(equalToConstant: topBackgroundSize),
-//            topBackgroundView.heightAnchor.constraint(equalToConstant: topBackgroundSize),
             
             scoreView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
-            scoreView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor * 3.0),
+            scoreView.trailingAnchor.constraint(equalTo: timeView.leadingAnchor, constant: -48),
             scoreView.widthAnchor.constraint(equalToConstant: statsViewWidth),
             scoreView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
@@ -173,29 +167,28 @@ class IDQResultView: UIView {
             timeView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
             percentageView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
-            percentageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor * 3.0),
+            percentageView.leadingAnchor.constraint(equalTo: timeView.trailingAnchor, constant: 48),
             percentageView.widthAnchor.constraint(equalToConstant: statsViewWidth),
             percentageView.heightAnchor.constraint(equalToConstant: statsViewHeight),
             
-            questionsSubTitleLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: 32),
+            questionsSubTitleLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: midoffset),
             questionsSubTitleLabel.heightAnchor.constraint(equalToConstant: 30),
-            questionsSubTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
-            questionsSubTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor+8),
-            
+            questionsSubTitleLabel.widthAnchor.constraint(equalToConstant: 160),
+            questionsSubTitleLabel.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 8),
+
             questionsCollectionView.topAnchor.constraint(equalTo: questionsSubTitleLabel.bottomAnchor, constant: 2),
             questionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor),
             questionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
             questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128),
-            
+
             shareButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            shareButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            shareButton.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 0),
             shareButton.widthAnchor.constraint(equalToConstant: 50),
             shareButton.heightAnchor.constraint(equalToConstant: 50),
             
             menuButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            menuButton.leadingAnchor.constraint(equalTo: shareButton.trailingAnchor, constant: 16),
+            menuButton.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 24+50),
             menuButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
-            //menuButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             menuButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
@@ -272,16 +265,18 @@ extension IDQResultView: UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenBounds = UIScreen.main.bounds
-        let width = (screenBounds.width-32)
+        
+        let width = UIScreen.screenWidth - ((UIScreen.screenHeight * 0.00937866) * 6)
+        
         var height: CGFloat?
         if UIScreen.screenWidth > 1000 {
-            height = width * 0.16
+            height = width * 0.18
         } else if UIScreen.physicalScreenHeight  > 1080 {
             height = width * 0.26
         } else {
             height = width * 0.40
         }
+
         return CGSize(width: width, height: height ?? width * 0.40)
     }
     
