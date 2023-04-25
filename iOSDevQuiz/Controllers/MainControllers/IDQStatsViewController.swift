@@ -43,10 +43,10 @@ final class IDQStatsViewController: UIViewController {
         
         let timeSpent: Double = user.totalPlayTime
         
-        let totalScore: Double = 89//Double(user.totalScore ?? 0)
-        let totalPerformance: Double = 0.8723 //(user.performance ?? 0)
-        let gamesPlayed: Double = 10 //Double(user.numberOfQuizesPlayed ?? 0)
-        let streak: Double = 7 //Double(user.streak ?? 0)
+        let totalScore: Double = Double(user.totalScore ?? 0)
+        let totalPerformance: Double = (user.performance ?? 0)
+        let gamesPlayed: Double = Double(user.numberOfQuizesPlayed ?? 0)
+        let streak: Double = Double(user.streak ?? 0)
         
         let statsSwiftUIVC = UIHostingController(
             rootView:

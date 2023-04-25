@@ -26,6 +26,9 @@ final class IDQTimeView: UIView {
     public let timeLabel: UILabel = {
         let label = UILabel()
         var fontSize: CGFloat = UIScreen.screenHeight * 0.02461899
+        if UIScreen.screenHeight  > 1080 {
+            fontSize = UIScreen.screenHeight * 0.05169988
+        }
         label.text = " "
         label.numberOfLines = 1
         label.textAlignment = .center
@@ -55,7 +58,7 @@ final class IDQTimeView: UIView {
         var statsViewWidth: CGFloat = UIScreen.screenHeight * 0.10550996
         
         if UIScreen.screenHeight  > 1080 {
-            statsViewWidth = UIScreen.screenWidth * 0.28
+            statsViewWidth = UIScreen.screenWidth * 0.285131
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         let color1: UIColor = IDQConstants.highlightedLightOrange
@@ -83,14 +86,14 @@ final class IDQTimeView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         //frame.size = CGSize(width: 70, height: 60)
         backgroundColor = IDQConstants.contentBackgroundColor
-        layer.cornerRadius = 4
+        layer.cornerRadius = UIScreen.screenHeight * 0.00468933
         clipsToBounds = true
     }
     
     private func setupConstraints() {
         let statsViewHeight: CGFloat = UIScreen.screenHeight * 0.05627198
         let descriptionViewTopAnchor: CGFloat = -(UIScreen.screenHeight * 0.03745252)
-        let scoreLabelSize: CGFloat = UIScreen.screenHeight * 0.09378664
+        let scoreLabelSize: CGFloat = UIScreen.screenHeight * 0.15
         let scoreLabelCenterY: CGFloat = UIScreen.screenHeight * 0.014068
         let descriptionLabelHeight: CGFloat = UIScreen.screenHeight * 0.01875733
         let descriptionLabelWidth: CGFloat = UIScreen.screenHeight * 0.07033998

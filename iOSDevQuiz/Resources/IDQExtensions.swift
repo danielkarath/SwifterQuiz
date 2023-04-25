@@ -25,6 +25,8 @@ extension UIView {
     
     func didHighlight(with color: UIColor) {
         let overlayView = UIView(frame: self.bounds)
+        overlayView.bounds = self.bounds
+        overlayView.layer.cornerRadius = self.layer.cornerRadius
         overlayView.backgroundColor = color
         overlayView.alpha = 0
         
@@ -272,7 +274,7 @@ extension UITextView {
         }
         let attributedString = NSMutableAttributedString(string: labelText)
         
-        let pattern = "(?:\\b\\w+\\b|[():;])"
+        let pattern = "(?:\\b\\w+\\b|[():;@|{}])"
         let regex: NSRegularExpression
         do {
             regex = try NSRegularExpression(pattern: pattern, options: [])
