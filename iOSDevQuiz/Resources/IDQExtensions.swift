@@ -43,6 +43,60 @@ extension UIView {
         })
     }
     
+    func startShimmerAnimation(duration: CFTimeInterval = 2.0, delay: CFTimeInterval = 6.0, direction: GradientDirection) {
+        let gradientColorOne = UIColor(white: 0.8, alpha: 0.10).cgColor
+        let gradientColorTwo = UIColor(white: 0.95, alpha: 0.50).cgColor
+        let totalDuration = duration + delay
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [gradientColorOne, gradientColorTwo, gradientColorOne]
+        
+        switch direction {
+        case .horizontal:
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        case .vertical:
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        case .bottomLeftToTopRight:
+            gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+        case .topLeftToBottomRight:
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        }
+        
+        gradientLayer.locations = [0.0, 0.5, 1.0]
+        gradientLayer.frame = self.bounds
+
+        let animation = CAKeyframeAnimation(keyPath: "locations")
+        animation.keyTimes = [0.0, (duration / totalDuration) as NSNumber, 1.0]
+        animation.values = [
+            [-1.0, -0.5, 0.0],
+            [1.0, 1.5, 2.0],
+            [1.0, 1.5, 2.0]
+        ]
+        animation.timingFunctions = [
+            CAMediaTimingFunction(name: .linear),
+            CAMediaTimingFunction(name: .default)
+        ]
+        animation.repeatCount = Float.infinity
+        animation.duration = totalDuration
+
+        gradientLayer.add(animation, forKey: "shimmer")
+        self.layer.addSublayer(gradientLayer)
+    }
+    
+    func stopShimmerAnimation() {
+        if let sublayers = self.layer.sublayers {
+            for layer in sublayers {
+                if layer.animation(forKey: "shimmer") != nil {
+                    layer.removeAnimation(forKey: "shimmer")
+                    layer.removeFromSuperlayer()
+                }
+            }
+        }
+    }
     
     /// Add custom CAGradientLayer to the UIView
     /// - Parameters:

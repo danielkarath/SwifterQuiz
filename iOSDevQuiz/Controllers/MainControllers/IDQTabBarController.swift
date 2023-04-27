@@ -73,7 +73,6 @@ final class IDQTabBarController: UITabBarController {
 
             j = j + 1
         }
-        
         setViewControllers(navControllers, animated: true)
     }
     
@@ -97,5 +96,4 @@ final class IDQTabBarController: UITabBarController {
             self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday!)
         }
     }
-    
 }
