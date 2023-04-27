@@ -44,6 +44,7 @@ struct IDQSettingsCellViewModel: Identifiable {
 
 
 enum IDQSettingsOption: CaseIterable {
+    case quizSettings
     case about
     case rateApp
     case contact
@@ -51,6 +52,8 @@ enum IDQSettingsOption: CaseIterable {
     
     var targetURL: URL? {
         switch self {
+        case .quizSettings:
+            return nil
         case .about:
             return nil
             //return URL(string: "https://danielkarath.com")
@@ -65,6 +68,8 @@ enum IDQSettingsOption: CaseIterable {
     
     var displayTitle: String {
         switch self {
+        case .quizSettings:
+            return "Quiz settings"
         case .about:
             return "About"
         case .rateApp:
@@ -79,6 +84,8 @@ enum IDQSettingsOption: CaseIterable {
     
     var displaySubtitle: String {
         switch self {
+        case .quizSettings:
+            return "Manage questions, topics, timers"
         case .about:
             return "Learn more about the app"
         case .rateApp:
@@ -93,6 +100,8 @@ enum IDQSettingsOption: CaseIterable {
     
     var iconImage: UIImage? {
         switch self {
+        case .quizSettings:
+            return UIImage(systemName: "gear.badge.questionmark")
         case .about:
             return UIImage(systemName: "person.fill")
         case .rateApp:

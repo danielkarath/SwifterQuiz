@@ -68,7 +68,7 @@ class IDQGameAnswerCollectionViewCell: UICollectionViewCell {
         let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 16
+        layer.cornerRadius = 14
         backgroundColor = IDQConstants.contentBackgroundColor
         clipsToBounds = true
     }

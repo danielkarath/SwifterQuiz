@@ -172,7 +172,7 @@ class IDQAnswerResultView: UIView {
         backgroundColor = IDQConstants.contentBackgroundColor
         layer.cornerRadius = 16
         
-        if question?.reference != nil {
+        if question?.referenceURLString != nil {
             referenceButton.isHidden = false
         } else {
             referenceButton.isHidden = true
@@ -283,6 +283,12 @@ class IDQAnswerResultView: UIView {
                 self.isBookmarked = false
             }
         }
+        
+        if referenceImageView.image != UIImage(systemName: "book.closed.fill") {
+            DispatchQueue.main.async {
+                self.referenceImageView.image = UIImage(systemName: "book.closed.fill")
+            }
+        }
     }
     
     private func configure(_view: IDQAnswerResultView, with design: IDQAnswerType) {
@@ -324,7 +330,7 @@ class IDQAnswerResultView: UIView {
             iconName = "clock.badge.exclamationmark"
         }
         
-        if question?.reference != nil {
+        if question?.referenceURLString != nil {
             referenceButton.isHidden = false
         } else {
             referenceButton.isHidden = true
@@ -332,6 +338,7 @@ class IDQAnswerResultView: UIView {
         self.backgroundColor = backgroundColor
         self.resultImageView.tintColor = tintColor
         self.referenceImageView.tintColor = tintColor
+        self.bookmarkFilledImageView.tintColor = tintColor
         self.bookmarkUnfilledImageView.tintColor = tintColor
         self.bookmarkButton.tintColor = tintColor
         self.noSignImageView.tintColor = tintColor
@@ -358,7 +365,7 @@ class IDQAnswerResultView: UIView {
     private func referenceButtonTapped(_ sender: UIButton) {
         guard let question = self.question, self.question != nil, answerType != nil else {return}
         
-        guard let referenceUrl = URL(string: question.reference!), IDQConstants.allowedDomainStrings.contains(referenceUrl.host ?? "") else {
+        guard let referenceUrl = URL(string: question.referenceURLString!), IDQConstants.allowedDomainStrings.contains(referenceUrl.host ?? "") else {
             print("The website is not allowed")
             return
         }
@@ -413,7 +420,12 @@ class IDQAnswerResultView: UIView {
     public func idqAnswerResultView(_ view: IDQAnswerResultView, question: IDQQuestion, answeredCorrectly: Bool) {
         resetView()
         self.question = question
-        detailLabel.text = question.explanation
+        if let reference = question.reference {
+            detailLabel.text = "\(question.explanation)\nSource: \(String(describing: reference.rawValue))"
+        } else {
+            detailLabel.text = question.explanation
+        }
+        
         if answeredCorrectly {
             configure(_view: self, with: .correct)
         } else{

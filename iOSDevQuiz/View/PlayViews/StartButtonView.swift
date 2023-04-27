@@ -17,7 +17,7 @@ class StartButtonView: UIView {
     private let smallIconSize: CGFloat = UIScreen.screenHeight * 0.02813599
     private let backgroundImageBottomAnchor: CGFloat = UIScreen.screenHeight * 0.014068
     private let backgroundImageTrailingAnchor: CGFloat = UIScreen.screenHeight * 0.02110199
-    private let menuButtonCornerRadius: CGFloat = 8.0
+    private let menuButtonCornerRadius: CGFloat = 14//UIScreen.screenHeight * 0.01172332943
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()

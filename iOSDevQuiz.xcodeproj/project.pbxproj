@@ -52,6 +52,7 @@
 		39267BB429E82923007DD96F /* IDQStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB329E82923007DD96F /* IDQStatsView.swift */; };
 		39267BB829E8364D007DD96F /* IDQQuizResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB729E8364D007DD96F /* IDQQuizResultManager.swift */; };
 		39267BBA29E839AD007DD96F /* IDQStatsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */; };
+		393047E229F91CA90067ED12 /* IDQQuizSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393047E129F91CA90067ED12 /* IDQQuizSettingsView.swift */; };
 		3932AE1C29EEA832003FFE8B /* IDQDaytimeActivityGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3932AE1B29EEA832003FFE8B /* IDQDaytimeActivityGroupManager.swift */; };
 		3942949229C37AEE00E15FE1 /* IDQQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942949129C37AEE00E15FE1 /* IDQQuiz.swift */; };
 		3948B15729B942D600E2841F /* IDQGameViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948B15629B942D600E2841F /* IDQGameViewViewModel.swift */; };
@@ -138,6 +139,7 @@
 		39267BB329E82923007DD96F /* IDQStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsView.swift; sourceTree = "<group>"; };
 		39267BB729E8364D007DD96F /* IDQQuizResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuizResultManager.swift; sourceTree = "<group>"; };
 		39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsViewViewModel.swift; sourceTree = "<group>"; };
+		393047E129F91CA90067ED12 /* IDQQuizSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuizSettingsView.swift; sourceTree = "<group>"; };
 		3932AE1B29EEA832003FFE8B /* IDQDaytimeActivityGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQDaytimeActivityGroupManager.swift; sourceTree = "<group>"; };
 		3942949129C37AEE00E15FE1 /* IDQQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuiz.swift; sourceTree = "<group>"; };
 		3948B15629B942D600E2841F /* IDQGameViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGameViewViewModel.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				3901B89029F0641900CEECA4 /* IDQSettingsViewCell.swift */,
 				3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */,
 				3901B88729EFF42600CEECA4 /* AboutViewSubviews_SwiftUI */,
+				393047E129F91CA90067ED12 /* IDQQuizSettingsView.swift */,
 			);
 			path = SettingsView_SwiftUI;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				39743AEC29D9AD0600D1C341 /* IDQExitQuizView.swift in Sources */,
 				39EA5AAD29F17EC700E52DB1 /* IDQInAppPurchaseManager.swift in Sources */,
 				39BFF81E29EDB9A500003E22 /* IDQDisableQuestionView.swift in Sources */,
+				393047E229F91CA90067ED12 /* IDQQuizSettingsView.swift in Sources */,
 				39F42DAB29F5826E00370125 /* IDQGradientImageView.swift in Sources */,
 				391DDB6D29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift in Sources */,
 				3920A1B229EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift in Sources */,

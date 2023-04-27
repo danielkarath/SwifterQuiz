@@ -48,7 +48,7 @@ class IDQBookmarkedQuestionTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        layer.cornerRadius = 16
+        layer.cornerRadius = 14
         questionLabel.text = nil
     }
     

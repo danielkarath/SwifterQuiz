@@ -14,6 +14,7 @@ struct IDQSettingsView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State private var isAboutViewVisible = false
+    @State private var isQuizSettingsVisible = false
     
     init(viewModel: IDQSettingsViewViewModel) {
         self.viewModel = viewModel
@@ -30,15 +31,17 @@ struct IDQSettingsView: View {
                 .foregroundColor(Color(IDQConstants.secondaryFontColor.withAlphaComponent(settingsTitleOpacity)))
                 .kerning(2.35)
                 .padding(.bottom, -(UIScreen.screenHeight * 0.017))
-            LazyVStack(spacing: 20) {
+            LazyVStack(spacing: 12) {
                 ForEach(viewModel.cellViewModels) { viewModel in
                     IDQSettingsViewCell(cellTitle: viewModel.title, subTitle: viewModel.subtitle, image: Image(uiImage: viewModel.image!))
                         .frame(width: cellWidth, height: 80, alignment: .leading)
                         .background(Color(IDQConstants.contentBackgroundColor))
-                        .cornerRadius(16)
+                        .cornerRadius(14)
                         .simultaneousGesture(TapGesture().onEnded {
                             if viewModel.type == .about {
                                 isAboutViewVisible.toggle()
+                            } else if viewModel.type == .quizSettings {
+                                isQuizSettingsVisible.toggle()
                             } else if viewModel.type == .donate {
                                 IDQInAppPurchaseManager.shared.purchase(.IDQ_BuyMeCoffee)
                             } else {
@@ -52,6 +55,11 @@ struct IDQSettingsView: View {
         .shadow(color: colorScheme == .light ? Color.gray.opacity(0.40) : Color.clear, radius: 13, x: -2, y: 8)
         .fullScreenCover(isPresented: $isAboutViewVisible, content: {
             IDQAboutView(isAboutViewVisible: $isAboutViewVisible)
+                .background(Color(IDQConstants.contentBackgroundColor))
+                .ignoresSafeArea()
+        })
+        .fullScreenCover(isPresented: $isQuizSettingsVisible, content: {
+            IDQQuizSettingsView(isQuizSettingsVisible: $isAboutViewVisible)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .ignoresSafeArea()
         })
