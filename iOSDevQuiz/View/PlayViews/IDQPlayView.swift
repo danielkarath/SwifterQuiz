@@ -146,6 +146,7 @@ class IDQPlayView: UIView { //852 393
         setupBookmarkedButton()
         titleLabel.font = IDQConstants.setFont(fontSize: titleHeight * 0.80, isBold: true)
         subTitle.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
+        quickQuizDescriptionLabel.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
     }
     
     required init?(coder: NSCoder) {

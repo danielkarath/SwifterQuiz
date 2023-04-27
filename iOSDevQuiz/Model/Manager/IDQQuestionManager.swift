@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-final class IDQQuestionManager {
+final class IDQQuestionManager: ObservableObject {
     
     enum QuestionArrayType {
         case bookmarked
@@ -30,7 +30,7 @@ final class IDQQuestionManager {
         }
     }
     
-    private func fetchQuestionArray(for type: QuestionArrayType) -> [IDQQuestion]? {
+    public func fetchQuestionArray(for type: QuestionArrayType) -> [IDQQuestion]? {
         var myUser: IDQUser?
         do {
             let user: [IDQUser] = try context.fetch(IDQUser.fetchRequest())

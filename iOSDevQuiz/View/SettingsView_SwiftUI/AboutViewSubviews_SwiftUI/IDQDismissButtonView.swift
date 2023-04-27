@@ -9,16 +9,18 @@ import SwiftUI
 
 struct IDQDismissButtonView: View {
     
-    @Binding var isAboutViewVisible: Bool
+    @Binding var isViewVisible: Bool
+    
+    var color: Color
     
     var body: some View {
         
         HStack(alignment: .center) {
             Button {
-                isAboutViewVisible = false
+                isViewVisible = false
             } label: {
                 Image(systemName: "xmark")
-                    .foregroundColor(.white)
+                    .foregroundColor(color)
                     .imageScale(.large)
                     .frame(width: 44, height: 44)
             }
@@ -29,6 +31,6 @@ struct IDQDismissButtonView: View {
 
 struct IDQDismissButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        IDQDismissButtonView(isAboutViewVisible: .constant(false))
+        IDQDismissButtonView(isViewVisible: .constant(false), color: .black)
     }
 }
