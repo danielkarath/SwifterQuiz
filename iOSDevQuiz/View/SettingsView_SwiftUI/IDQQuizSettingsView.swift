@@ -16,17 +16,20 @@ struct IDQQuizSettingsView: View {
     
     @Binding var isQuizSettingsVisible: Bool
     
-    var topPaddingModifier: CGFloat = UIScreen.screenHeight >= 700 ? 0.05 : 0.16
+    var topPaddingModifier: CGFloat = UIScreen.screenHeight >= 700 ? 0.05 : 0.03
     
-    var body: some View {
-        let cellWidth: CGFloat = UIScreen.screenWidth < 1000 ? UIScreen.screenWidth * 0.95 : 720
+    
+    var body: some View {        
         ZStack {
             Rectangle()
                 .fill(Color(IDQConstants.backgroundColor))
                 .ignoresSafeArea()
             VStack {
-                IDQDismissButtonView(isViewVisible: $isQuizSettingsVisible, color: Color(uiColor: IDQConstants.basicFontColor))
-                    .padding(.leading, cellWidth - 80)
+                HStack {
+                    Spacer()
+                    IDQDismissButtonView(isViewVisible: $isQuizSettingsVisible, color: Color(uiColor: IDQConstants.basicFontColor))
+                }
+                    .padding(.trailing, 16)
                     .padding(.top, UIScreen.screenHeight * topPaddingModifier)
                 Spacer()
                 VStack {
