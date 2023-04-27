@@ -87,6 +87,17 @@ class IDQPlayView: UIView { //852 393
         return label
     }()
     
+    private let quickQuizDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "10 multiple choice questions related to the Swift programming language"
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.textColor = IDQConstants.secondaryFontColor
+        label.font = IDQConstants.setFont(fontSize: 11, isBold: false)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let bookmarkedQuestionsButton: UIButton = {
         let button = UIButton()
         let size: CGFloat = 40
@@ -127,7 +138,7 @@ class IDQPlayView: UIView { //852 393
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, bookmarkedQuestionsButton)
+        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, bookmarkedQuestionsButton, quickQuizDescriptionLabel)
         setupConstraints()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
         startButtonView.addGestureRecognizer(tapGesture)
@@ -135,11 +146,19 @@ class IDQPlayView: UIView { //852 393
         setupBookmarkedButton()
         titleLabel.font = IDQConstants.setFont(fontSize: titleHeight * 0.80, isBold: true)
         subTitle.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
-
     }
     
     required init?(coder: NSCoder) {
         fatalError("IDQPlayView is unsupported!")
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        if window != nil {
+            startButtonView.startShimmerAnimation(duration: 0.5, delay: 6.00, direction: .topLeftToBottomRight)
+        } else {
+            startButtonView.stopShimmerAnimation()
+        }
     }
     
     private func setupView() {
@@ -198,6 +217,11 @@ class IDQPlayView: UIView { //852 393
             startButtonView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
             startButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             startButtonView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
+            
+            quickQuizDescriptionLabel.heightAnchor.constraint(equalToConstant: 30),
+            quickQuizDescriptionLabel.topAnchor.constraint(equalTo: startButtonView.bottomAnchor, constant: 4),
+            quickQuizDescriptionLabel.widthAnchor.constraint(equalToConstant: menuButtonWidth-12),
+            quickQuizDescriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             
             rateTheAppView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
             rateTheAppView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
@@ -294,6 +318,7 @@ class IDQPlayView: UIView { //852 393
             rateTheAppView.isHidden = false
             UIView.animate(withDuration: 2.0, delay: 0.10, usingSpringWithDamping: 0.90, initialSpringVelocity: 0.10, options: [], animations: {
                 self.startButtonView.transform = CGAffineTransform(translationX: 0, y: yDistance)
+                self.quickQuizDescriptionLabel.transform = CGAffineTransform(translationX: 0, y: yDistance)
                 self.rateTheAppView.alpha = 1.0
             }, completion: nil)
         } else if startButtonView.transform == .identity {
@@ -311,6 +336,7 @@ class IDQPlayView: UIView { //852 393
         }, completion: { _ in
             UIView.animate(withDuration: 1.0, animations: {
                 self.startButtonView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.quickQuizDescriptionLabel.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: { _ in
                 self.rateTheAppView.isHidden = true
             })

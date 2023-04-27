@@ -24,5 +24,16 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string></string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string></string>
+			<key>UIApplicationShortcutItemType</key>
+			<string></string>
+		</dict>
+	</array>
 </dict>
 </plist>
