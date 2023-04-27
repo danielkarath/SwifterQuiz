@@ -59,7 +59,7 @@ struct IDQSettingsView: View {
                 .ignoresSafeArea()
         })
         .fullScreenCover(isPresented: $isQuizSettingsVisible, content: {
-            IDQQuizSettingsView(isQuizSettingsVisible: $isAboutViewVisible)
+            IDQQuizSettingsView(isQuizSettingsVisible: $isQuizSettingsVisible)
                 .background(Color(IDQConstants.contentBackgroundColor))
                 .ignoresSafeArea()
         })

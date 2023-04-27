@@ -17,7 +17,6 @@ struct IDQConstants {
         "developer.apple.com",
         "docs.swift.org",
         "en.wikipedia.org",
-        "www.kodeco.com"
     ]
     
     //MARK: - Keywords

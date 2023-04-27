@@ -113,7 +113,7 @@ class IDQDisableQuestionView: UIView {
         
         setup(closeButton, with: xMarkImageView, tintColor: IDQConstants.basicFontColor)
         setup(reportButton, with: envelopeImageView, tintColor: IDQConstants.basicFontColor)
-        disableExplanationLabel.text = "By tapping disable you confirm to disable the question. Disabled questions will no longer be asked again unless you undo this action in the Settings menu.\n\nAlternatively you can report the question by tapping the envelop button. This action does not disable the question."
+        disableExplanationLabel.text = "By tapping disable you confirm to disable the question. Disabled questions will no longer be asked again unless you undo this action in the Quiz Settings menu.\n\nAlternatively you can report the question by tapping the envelop button. This action does not disable the question."
         
         disableButton.addTarget(self, action: #selector(disableButtonTapped(_:)), for: .touchUpInside)
         reportButton.addTarget(self, action: #selector(reportButtonTapped(_:)), for: .touchUpInside)

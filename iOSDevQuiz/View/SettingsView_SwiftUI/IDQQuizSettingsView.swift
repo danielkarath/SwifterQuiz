@@ -6,23 +6,69 @@
 //
 
 import SwiftUI
-
 struct IDQQuizSettingsView: View {
-    
     @Environment(\.colorScheme) var colorScheme
     
-    @ObservedObject var viewModel = IDQAboutViewViewModel()
+    @StateObject var viewModel = IDQQuestionManager()
+    @State private var questionArray: [IDQQuestion]?
+    @State private var selectedItemIndex: Int?
+    @State private var isConfirmationAlertPresented = false
     
     @Binding var isQuizSettingsVisible: Bool
     
-    var topPaddingModifier: CGFloat = UIScreen.screenHeight >= 700 ? 0.10 : 0.16
+    var topPaddingModifier: CGFloat = UIScreen.screenHeight >= 700 ? 0.05 : 0.16
     
     var body: some View {
         let cellWidth: CGFloat = UIScreen.screenWidth < 1000 ? UIScreen.screenWidth * 0.95 : 720
-        VStack {
-            IDQDismissButtonView(isAboutViewVisible: $isQuizSettingsVisible)
-                .padding(.leading, cellWidth - 80)
-                .padding(.top, UIScreen.screenHeight * topPaddingModifier)
+        ZStack {
+            Rectangle()
+                .fill(Color(IDQConstants.backgroundColor))
+                .ignoresSafeArea()
+            VStack {
+                IDQDismissButtonView(isViewVisible: $isQuizSettingsVisible, color: Color(uiColor: IDQConstants.basicFontColor))
+                    .padding(.leading, cellWidth - 80)
+                    .padding(.top, UIScreen.screenHeight * topPaddingModifier)
+                Spacer()
+                VStack {
+                    if let questions = questionArray {
+                        List(Array(questions.indices), id: \.self) { index in
+                            Button(action: {
+                                selectedItemIndex = index
+                                isConfirmationAlertPresented = true
+                            }, label: {
+                                Text(questions[index].question ?? "")
+                                    .font(Font(IDQConstants.setFont(fontSize: 16, isBold: false)))
+                                    .foregroundColor(Color(IDQConstants.basicFontColor))
+                            })
+                        }
+                        .background(Color(IDQConstants.backgroundColor))
+                        .scrollContentBackground(.hidden)
+                        .alert(isPresented: $isConfirmationAlertPresented, content: {
+                            let question = questionArray?[selectedItemIndex ?? 0]
+                            return Alert(
+                                title: Text("Restore question"),
+                                message: Text("Do you want to restore the question:\n\n \"\(question?.question ?? "")\""),
+                                primaryButton: .default(Text("Yes")) {
+                                    print("Question restored")
+                                    if let question = questionArray?[selectedItemIndex ?? 0] {
+                                        viewModel.removeDisable(question)
+                                        questionArray = viewModel.fetchQuestionArray(for: .disabled)
+                                    }
+                                },
+                                secondaryButton: .cancel(Text("No")) {
+                                    print("Question left in disabled")
+                                }
+                            )
+                        })
+                    } else {
+                        Text("No questions found")
+                    }
+                }
+                Spacer()
+            }
+        }
+        .onAppear() {
+            questionArray = viewModel.fetchQuestionArray(for: .disabled) ?? []
         }
     }
 }

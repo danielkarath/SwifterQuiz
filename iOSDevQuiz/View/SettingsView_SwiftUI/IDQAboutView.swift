@@ -31,7 +31,7 @@ struct IDQAboutView: View {
             AddCurve()
                 .fill(gradient)
             VStack(alignment: .center, spacing: 2) {
-                IDQDismissButtonView(isAboutViewVisible: $isAboutViewVisible)
+                IDQDismissButtonView(isViewVisible: $isAboutViewVisible, color: .white)
                     .padding(.leading, cellWidth - 80)
                     .padding(.top, UIScreen.screenHeight * topPaddingModifier)
                 Spacer(minLength: UIScreen.screenHeight * topSpacerModifier)
