@@ -254,14 +254,6 @@ extension UILabel {
             }
         }
         attributedText = attributedString
-        
-        //        for (word) in keywordColors {
-        //            let range = (labelText as NSString).range(of: word)
-        //            attributedString.addAttribute(.foregroundColor, value: color, range: range)
-        //            attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
-        //        }
-        //
-        //        attributedText = attributedString
     }
     
 }
@@ -269,12 +261,55 @@ extension UILabel {
 extension UITextView {
     
     func configureFor(_ keywordColors: [String], fontSize: CGFloat, keywordcolor: UIColor) {
+            guard let labelText = text else {
+                return
+            }
+            let attributedString = NSMutableAttributedString(string: labelText)
+            
+            // Apply formatting for regular expression pattern
+            let pattern = "(?:\\b\\w+\\b|[():;@|{}+-])"
+            let regex: NSRegularExpression
+            do {
+                regex = try NSRegularExpression(pattern: pattern, options: [])
+            } catch {
+                print("Error creating regular expression: \(error.localizedDescription)")
+                return
+            }
+            
+            let matches = regex.matches(in: labelText, options: [], range: NSRange(location: 0, length: labelText.count))
+            for match in matches {
+                let word = (labelText as NSString).substring(with: match.range)
+                if keywordColors.contains(word) {
+                    attributedString.addAttribute(.foregroundColor, value: keywordcolor, range: match.range)
+                    attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize-1, isBold: true), range: match.range)
+                } else {
+                    attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: match.range)
+                    attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: false), range: match.range)
+                }
+            }
+            
+            let color = IDQConstants.highlightedDarkOrange
+        for keyword in IDQConstants.keywords {
+                let range = (labelText as NSString).range(of: keyword)
+                if range.location != NSNotFound {
+                    attributedString.addAttribute(.foregroundColor, value: color, range: range)
+                    attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+                }
+            }
+            
+            attributedText = attributedString
+        }
+    
+    /*
+    func configureFor(_ keywordColors: [String], fontSize: CGFloat, keywordcolor: UIColor) {
         guard let labelText = text else {
             return
         }
         let attributedString = NSMutableAttributedString(string: labelText)
         
-        let pattern = "(?:\\b\\w+\\b|[():;@|{}])"
+        let pattern = "(?:\\b\\w+\\b|[():;@|{}*-])"
+        //let pattern = "(?:\\b(?:\(keywordColors.joined(separator: "|")))\\b|[():;@|{}+-])"
+
         let regex: NSRegularExpression
         do {
             regex = try NSRegularExpression(pattern: pattern, options: [])
@@ -296,6 +331,8 @@ extension UITextView {
         }
         attributedText = attributedString
     }
+     
+    */
 }
 
 extension Array where Element == UIColor {

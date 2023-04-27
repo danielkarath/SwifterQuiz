@@ -154,8 +154,8 @@ extension IDQBookmarkedQuestionsView: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         guard let questions = self.questions else {return}
         guard questions.count > indexPath.row else {return}
-        if questions[indexPath.row].reference != nil {
-            let urlString = questions[indexPath.row].reference
+        if questions[indexPath.row].referenceURLString != nil {
+            let urlString = questions[indexPath.row].referenceURLString
             guard let referenceUrl = URL(string: urlString!), IDQConstants.allowedDomainStrings.contains(referenceUrl.host ?? "") else {
                 print("The website is not allowed")
                 return
