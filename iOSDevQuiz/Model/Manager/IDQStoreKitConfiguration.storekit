@@ -1,0 +1,45 @@
+{
+  "identifier" : "666BD5BB",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "6448073909",
+      "localizations" : [
+        {
+          "description" : "Stöd utvecklingen av appen",
+          "displayName" : "Köp en kaffe till utvecklaren",
+          "locale" : "sv"
+        },
+        {
+          "description" : "Soutenir le développement de l'application",
+          "displayName" : "Acheter un café pour le dev",
+          "locale" : "fr"
+        },
+        {
+          "description" : "Support the development of the app",
+          "displayName" : "Buy a coffee for the developer",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "IDQ_BuyMeCoffee",
+      "referenceName" : "Buy Me A Coffee",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6448073782",
+    "_developerTeamID" : "L25LXZY6LR",
+    "_lastSynchronizedDate" : 703697447.70079505
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

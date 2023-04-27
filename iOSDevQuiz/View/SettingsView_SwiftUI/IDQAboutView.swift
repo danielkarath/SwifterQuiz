@@ -31,9 +31,12 @@ struct IDQAboutView: View {
             AddCurve()
                 .fill(gradient)
             VStack(alignment: .center, spacing: 2) {
-                IDQDismissButtonView(isViewVisible: $isAboutViewVisible, color: .white)
-                    .padding(.leading, cellWidth - 80)
-                    .padding(.top, UIScreen.screenHeight * topPaddingModifier)
+                HStack {
+                    Spacer()
+                    IDQDismissButtonView(isViewVisible: $isAboutViewVisible, color: .white)
+                }
+                .padding(.trailing, 16)
+                .padding(.top, UIScreen.screenHeight * topPaddingModifier)
                 Spacer(minLength: UIScreen.screenHeight * topSpacerModifier)
                 Text("iOS Dev Quiz")
                     .font(Font(IDQConstants.setFont(fontSize: 24, isBold: true)))
