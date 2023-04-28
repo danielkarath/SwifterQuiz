@@ -25,6 +25,10 @@ final class IDQQuizResultManager {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    private func isDate(_ date: Date, between startDate: Date, and endDate: Date) -> Bool {
+        return date >= startDate && date <= endDate
+    }
+    
     private func getRecordsCount() -> Int? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "IDQQuizResult")
         do {
@@ -92,7 +96,7 @@ final class IDQQuizResultManager {
             var results: [IDQQuizResult] = try context.fetch(IDQQuizResult.fetchRequest())
             if !results.isEmpty {
                 for result in results {
-                    if result.date == yesterdayDate {
+                    if isDate(result.date!, between: yesterdayDate, and: Date.currentTime) {
                         return true
                     }
                 }

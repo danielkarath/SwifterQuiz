@@ -35,7 +35,6 @@ struct IDQQuizSettingsView: View {
                 }
                 .padding(.trailing, 16)
                 .padding(.top, UIScreen.screenHeight * topPaddingModifier)
-                Spacer()
                 VStack {
                     if let questions = questionArray {
                         if !questions.isEmpty {
@@ -79,8 +78,10 @@ struct IDQQuizSettingsView: View {
                             .foregroundColor(Color(IDQConstants.basicFontColor))
                     }
                 }
+                .padding(.top, -16)
                 Spacer()
             }
+            .padding(.top, 16)
         }
         .onAppear() {
             questionArray = viewModel.fetchQuestionArray(for: .disabled) ?? []
