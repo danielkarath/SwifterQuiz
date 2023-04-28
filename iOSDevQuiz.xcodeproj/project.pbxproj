@@ -73,6 +73,8 @@
 		39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */; };
 		399DE06129F46EC9007BD3FF /* IDQGradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399DE06029F46EC9007BD3FF /* IDQGradientLabel.swift */; };
 		39AF9C4429CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */; };
+		39AFEEF029FBD2600034F532 /* IDQWeeklyPointsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AFEEEF29FBD2600034F532 /* IDQWeeklyPointsChartView.swift */; };
+		39AFEEF229FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AFEEF129FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift */; };
 		39BFF81C29EDA77600003E22 /* IDQQuestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BFF81B29EDA77600003E22 /* IDQQuestionManager.swift */; };
 		39BFF81E29EDB9A500003E22 /* IDQDisableQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BFF81D29EDB9A500003E22 /* IDQDisableQuestionView.swift */; };
 		39E0707D29EC719200AE1858 /* IDQTrophyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0707C29EC719200AE1858 /* IDQTrophyView.swift */; };
@@ -160,6 +162,8 @@
 		39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		399DE06029F46EC9007BD3FF /* IDQGradientLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGradientLabel.swift; sourceTree = "<group>"; };
 		39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		39AFEEEF29FBD2600034F532 /* IDQWeeklyPointsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQWeeklyPointsChartView.swift; sourceTree = "<group>"; };
+		39AFEEF129FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQWeeklyPointsChartViewViewModel.swift; sourceTree = "<group>"; };
 		39BFF81B29EDA77600003E22 /* IDQQuestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQQuestionManager.swift; sourceTree = "<group>"; };
 		39BFF81D29EDB9A500003E22 /* IDQDisableQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQDisableQuestionView.swift; sourceTree = "<group>"; };
 		39E0707C29EC719200AE1858 /* IDQTrophyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTrophyView.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 				391DDB6A29EB2917003AAD2D /* IDQStatsMetricsHStackView.swift */,
 				39E0707E29EC7EA800AE1858 /* IDQMainStatsView.swift */,
 				3920A18329EAB1CE001A1522 /* IDQStatsMetricBoxView.swift */,
+				39AFEEEF29FBD2600034F532 /* IDQWeeklyPointsChartView.swift */,
 				39E0707C29EC719200AE1858 /* IDQTrophyView.swift */,
 				39E0708029EC8F7000AE1858 /* IDQTargetView.swift */,
 				39E0708229EC9A7300AE1858 /* IDQStreakView.swift */,
@@ -386,6 +391,7 @@
 				3901BE7129D705930099CE86 /* IDQAnswerResultViewViewModel.swift */,
 				39267BB929E839AD007DD96F /* IDQStatsViewViewModel.swift */,
 				391DDB6C29EB2A48003AAD2D /* IDQStatsMetricBoxViewViewModel.swift */,
+				39AFEEF129FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift */,
 				3901B87D29EF1C0300CEECA4 /* IDQSettingsViewViewModel.swift */,
 			);
 			path = ViewModel;
@@ -540,6 +546,7 @@
 				3932AE1C29EEA832003FFE8B /* IDQDaytimeActivityGroupManager.swift in Sources */,
 				3952D1E129B8C6A10061C5C9 /* IDQPlayViewViewModel.swift in Sources */,
 				3914C91329B0D7E40001377B /* iOSDevQuiz.xcdatamodeld in Sources */,
+				39AFEEF229FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift in Sources */,
 				396793DD29E8961B00A476E2 /* IDQStatsUpperView.swift in Sources */,
 				39267BBA29E839AD007DD96F /* IDQStatsViewViewModel.swift in Sources */,
 				39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */,
@@ -559,6 +566,7 @@
 				3952D1E429B8C70D0061C5C9 /* IDQGame.swift in Sources */,
 				39F42DAD29F592E900370125 /* IDQUserActivityManager.swift in Sources */,
 				3901BE7229D705930099CE86 /* IDQAnswerResultViewViewModel.swift in Sources */,
+				39AFEEF029FBD2600034F532 /* IDQWeeklyPointsChartView.swift in Sources */,
 				39E0708329EC9A7300AE1858 /* IDQStreakView.swift in Sources */,
 				3920A1B129EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift in Sources */,
 				3914C90B29B0D7E40001377B /* SceneDelegate.swift in Sources */,

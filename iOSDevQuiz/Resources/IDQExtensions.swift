@@ -68,7 +68,7 @@ extension UIView {
         
         gradientLayer.locations = [0.0, 0.5, 1.0]
         gradientLayer.frame = self.bounds
-
+        
         let animation = CAKeyframeAnimation(keyPath: "locations")
         animation.keyTimes = [0.0, (duration / totalDuration) as NSNumber, 1.0]
         animation.values = [
@@ -82,7 +82,7 @@ extension UIView {
         ]
         animation.repeatCount = Float.infinity
         animation.duration = totalDuration
-
+        
         gradientLayer.add(animation, forKey: "shimmer")
         self.layer.addSublayer(gradientLayer)
     }
@@ -315,55 +315,13 @@ extension UILabel {
 extension UITextView {
     
     func configureFor(_ keywordColors: [String], fontSize: CGFloat, keywordcolor: UIColor) {
-            guard let labelText = text else {
-                return
-            }
-            let attributedString = NSMutableAttributedString(string: labelText)
-            
-            // Apply formatting for regular expression pattern
-            let pattern = "(?:\\b\\w+\\b|[():;@|{}+-])"
-            let regex: NSRegularExpression
-            do {
-                regex = try NSRegularExpression(pattern: pattern, options: [])
-            } catch {
-                print("Error creating regular expression: \(error.localizedDescription)")
-                return
-            }
-            
-            let matches = regex.matches(in: labelText, options: [], range: NSRange(location: 0, length: labelText.count))
-            for match in matches {
-                let word = (labelText as NSString).substring(with: match.range)
-                if keywordColors.contains(word) {
-                    attributedString.addAttribute(.foregroundColor, value: keywordcolor, range: match.range)
-                    attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize-1, isBold: true), range: match.range)
-                } else {
-                    attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: match.range)
-                    attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: false), range: match.range)
-                }
-            }
-            
-            let color = IDQConstants.highlightedDarkOrange
-        for keyword in IDQConstants.keywords {
-                let range = (labelText as NSString).range(of: keyword)
-                if range.location != NSNotFound {
-                    attributedString.addAttribute(.foregroundColor, value: color, range: range)
-                    attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
-                }
-            }
-            
-            attributedText = attributedString
-        }
-    
-    /*
-    func configureFor(_ keywordColors: [String], fontSize: CGFloat, keywordcolor: UIColor) {
         guard let labelText = text else {
             return
         }
         let attributedString = NSMutableAttributedString(string: labelText)
         
-        let pattern = "(?:\\b\\w+\\b|[():;@|{}*-])"
-        //let pattern = "(?:\\b(?:\(keywordColors.joined(separator: "|")))\\b|[():;@|{}+-])"
-
+        // Apply formatting for regular expression pattern
+        let pattern = "(?:\\b\\w+\\b|[():;@|{}+-])"
         let regex: NSRegularExpression
         do {
             regex = try NSRegularExpression(pattern: pattern, options: [])
@@ -375,7 +333,7 @@ extension UITextView {
         let matches = regex.matches(in: labelText, options: [], range: NSRange(location: 0, length: labelText.count))
         for match in matches {
             let word = (labelText as NSString).substring(with: match.range)
-            if keywordColors.contains(String(word)) {
+            if keywordColors.contains(word) {
                 attributedString.addAttribute(.foregroundColor, value: keywordcolor, range: match.range)
                 attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize-1, isBold: true), range: match.range)
             } else {
@@ -383,10 +341,18 @@ extension UITextView {
                 attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: false), range: match.range)
             }
         }
+        
+        let color = IDQConstants.highlightedDarkOrange
+        for keyword in IDQConstants.keywords {
+            let range = (labelText as NSString).range(of: keyword)
+            if range.location != NSNotFound {
+                attributedString.addAttribute(.foregroundColor, value: color, range: range)
+                attributedString.addAttribute(.font, value: IDQConstants.setFont(fontSize: fontSize, isBold: true), range: range)
+            }
+        }
+        
         attributedText = attributedString
     }
-     
-    */
 }
 
 extension Array where Element == UIColor {
@@ -452,6 +418,69 @@ extension Date {
         let now = Date()
         let secondsFromGMT = TimeZone.current.secondsFromGMT(for: now)
         return now.addingTimeInterval(TimeInterval(secondsFromGMT))
+    }
+    
+    static func currentDayOfWeek() -> String {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.timeZone = TimeZone.current
+        let dayOfWeek = dateFormatter.string(from: currentDate)
+        return dayOfWeek
+    }
+    
+    static func isSameDay(_ date1: Date, _ date2: Date) -> Bool {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date1)
+        guard let date1Midnight = calendar.date(from: components) else { return false }
+        
+        let components2 = calendar.dateComponents([.year, .month, .day], from: date2)
+        guard let date2Midnight = calendar.date(from: components2) else { return false }
+        
+        return date1Midnight == date2Midnight
+    }
+    
+    static func getTodayMidnightDate() -> Date? {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let now = Date()
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: now)
+        guard let midnight = calendar.date(from: dateComponents) else { return nil }
+        return midnight
+    }
+    
+    static func isDate(_ date: Date, between startDate: Date, and endDate: Date) -> Bool {
+        return date >= startDate && date <= endDate
+    }
+    
+    func startOfWeek() -> Date {
+        var calendar = Calendar.current
+        var returnValue: Date = Date()
+        calendar.timeZone = TimeZone.current
+        let components = calendar.dateComponents([.year, .month, .day, .weekday], from: self)
+        let daysFromMonday = (components.weekday! - calendar.firstWeekday + 7) % 7
+        var startOfWeekComponents = DateComponents()
+        startOfWeekComponents.year = components.year
+        startOfWeekComponents.month = components.month
+        startOfWeekComponents.day = components.day! - daysFromMonday
+        let startOfWeek = calendar.date(from: startOfWeekComponents)!
+        returnValue = calendar.startOfDay(for: startOfWeek)
+        let secondsFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
+        returnValue = returnValue.addingTimeInterval(secondsFromGMT)
+        return returnValue
+    }
+    
+    func datesForWeek() -> [Date] {
+        let startOfWeek = self.startOfWeek()
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        
+        return (0..<7).compactMap { (dayOffset) -> Date? in
+            var dateComponents = DateComponents()
+            dateComponents.day = dayOffset
+            return calendar.date(byAdding: dateComponents, to: startOfWeek)
+        }
     }
 }
 

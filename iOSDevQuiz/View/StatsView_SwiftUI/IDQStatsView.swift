@@ -12,6 +12,8 @@ struct IDQStatsView: View {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.colorScheme) var colorScheme
+
     
     var totalScore: Double
     var totalPerformance: Double
@@ -106,6 +108,10 @@ struct IDQStatsView: View {
                         Spacer(minLength: midOffset)
                         ScrollView(.vertical) {
                             IDQStatsMetricsHStackView(quizesPlayed: quizesPlayed, timeSpent: viewModel.setupGameTime(for: timeSpent), gameTimeText: viewModel.setupTextFor(totalGameTime: timeSpent))
+                            IDQWeeklyPointsChartView(title: "Weekly Score", image: Image(systemName: "crown.fill"))
+                                .background(Color(IDQConstants.contentBackgroundColor))
+                                .cornerRadius(16)
+                                .shadow(color: colorScheme == .light ? Color.gray.opacity(0.5) : Color.clear, radius: 5, x: 0, y: 5)
                         }
                         Spacer()
                     }

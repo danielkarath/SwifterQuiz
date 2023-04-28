@@ -26,10 +26,6 @@ final class IDQTabBarController: UITabBarController {
         automaticallyGenerateUser()
         evaulateUserMetrics()
         print("number of questions in total: \(fullQuestionList.count)")
-        print("UIScreen.screenWidth: \(UIScreen.screenWidth)")
-        print("UIScreen.physicalScreenWidth: \(UIScreen.physicalScreenWidth)")
-        print("UIScreen.screenHeight: \(UIScreen.screenHeight)")
-        print("UIScreen.physicalScreenHeight: \(UIScreen.physicalScreenHeight)")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
