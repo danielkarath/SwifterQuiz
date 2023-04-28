@@ -61,7 +61,7 @@ extension IDQGameResultViewController: IDQResultViewDelegate {
         let appID = IDQConstants.appID
         let appURLString = "https://apps.apple.com/app/id\(appID)"
         
-        let textToShare = "I scored \(quiz.totalScore) out of \(quiz.questions.count) in the iOS Developer Quiz!"
+        let textToShare = "I scored \(quiz.totalScore) out of \(quiz.questions.count) in the Swifter Quiz!"
         //let image = UIImage(imageLiteralResourceName: "appIconMiniature")
         
         UIGraphicsBeginImageContext(view.frame.size)

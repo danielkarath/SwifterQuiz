@@ -68,7 +68,7 @@ class IDQPlayView: UIView { //852 393
     
     private let titleLabel: GradientLabel = {
         let label = GradientLabel()
-        label.text = "iOS Developer Quiz"
+        label.text = "Swifter Quiz"
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = .clear.withAlphaComponent(0)
@@ -147,6 +147,10 @@ class IDQPlayView: UIView { //852 393
         titleLabel.font = IDQConstants.setFont(fontSize: titleHeight * 0.80, isBold: true)
         subTitle.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
         quickQuizDescriptionLabel.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appWillMoveToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+
     }
     
     required init?(coder: NSCoder) {
@@ -160,6 +164,16 @@ class IDQPlayView: UIView { //852 393
         } else {
             startButtonView.stopShimmerAnimation()
         }
+    }
+    
+    @objc
+    private func appMovedToBackground() {
+        startButtonView.stopShimmerAnimation()
+    }
+    
+    @objc
+    private func appWillMoveToForeground() {
+        startButtonView.startShimmerAnimation(duration: 0.5, delay: 6.00, direction: .topLeftToBottomRight)
     }
     
     private func setupView() {
@@ -219,7 +233,7 @@ class IDQPlayView: UIView { //852 393
             startButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             startButtonView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
             
-            quickQuizDescriptionLabel.heightAnchor.constraint(equalToConstant: 30),
+            quickQuizDescriptionLabel.heightAnchor.constraint(equalToConstant: 40),
             quickQuizDescriptionLabel.topAnchor.constraint(equalTo: startButtonView.bottomAnchor, constant: 4),
             quickQuizDescriptionLabel.widthAnchor.constraint(equalToConstant: menuButtonWidth-12),
             quickQuizDescriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),

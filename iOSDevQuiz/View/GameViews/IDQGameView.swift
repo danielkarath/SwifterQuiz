@@ -467,7 +467,8 @@ final class IDQGameView: UIView {
         }, completion: nil)
     }
     
-    @objc func appMovedToBackground() {
+    @objc
+    private func appMovedToBackground() {
         if countDownView.isTimerRunning() {
             delegate?.idqGameView(self, questionCounter: viewModel.quizRound)
             countDownView.stopTimer()

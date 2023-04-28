@@ -128,10 +128,34 @@ final class IDQUserManager {
         }
     }
     
+    private func isSameDay(_ date1: Date, _ date2: Date) -> Bool {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date1)
+        guard let date1Midnight = calendar.date(from: components) else { return false }
+        
+        let components2 = calendar.dateComponents([.year, .month, .day], from: date2)
+        guard let date2Midnight = calendar.date(from: components2) else { return false }
+        
+        return date1Midnight == date2Midnight
+    }
+    
+    func getTodayMidnightDate() -> Date? {
+        let calendar = Calendar.current
+        let now = Date()
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: now)
+        guard let midnight = calendar.date(from: dateComponents) else { return nil }
+        return midnight
+    }
+    
+    private func isDate(_ date: Date, between startDate: Date, and endDate: Date) -> Bool {
+        return date >= startDate && date <= endDate
+    }
+    
     public func evaulateStreak(didPlayYesterday: Bool) {
         print("Evaulating Streak")
         let calendar = Calendar.current
-        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime)!
+        let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime) ?? Date.currentTime.addingTimeInterval(-3600*24)
+        let midnight: Date = getTodayMidnightDate() ?? yesterdayDate.addingTimeInterval(60)
         guard let user = fetchUser() else {
             print("Could not load user while trying to set streak")
             return
@@ -141,9 +165,11 @@ final class IDQUserManager {
             print("Could not load previous game while trying to set streak")
             return
         }
-
-        let hasPlayedAlreadyToday = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
-
+        
+        let hasPlayedAlreadyToday = isDate(previousGameDate, between: midnight, and: Date.currentTime)
+        
+        
+        print("yesterdayDate: \(yesterdayDate)")
         if hasPlayedAlreadyToday {
             print("Streak is evaulated and no changes needed")
         } else if didPlayYesterday {
@@ -153,7 +179,7 @@ final class IDQUserManager {
             user.streak = 0
             saveToCoreData()
         }
-        print("LAST PLAY DATE: \(user.lastDatePlayed)")
+        print("LAST PLAY DATE: \(previousGameDate)")
         
     }
     
