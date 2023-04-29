@@ -16,8 +16,8 @@ struct IDQWeeklyPointsChartBarViewViewModel: Identifiable {
 
     private let quizResultManager = IDQQuizResultManager()
 
-
-    private func fetchResults(_ startingDate: Date, _ endingDate: Date) -> Int {
+    //MARK: - Public
+    public func fetchResults(_ startingDate: Date, _ endingDate: Date) -> Int {
         var returnValue: Int = 0
         guard let allResults: [IDQQuizResult] = quizResultManager.fetchResults() else {
             return returnValue
@@ -34,7 +34,6 @@ struct IDQWeeklyPointsChartBarViewViewModel: Identifiable {
         return returnValue
     }
     
-    //MARK: - Public
     
     public func generateThisWeeksResults(completion: @escaping ([IDQScoreForDay]) -> Void) {
         let datesForCurrentWeek: [Date] = Date().datesForWeek()
@@ -63,7 +62,6 @@ struct IDQWeeklyPointsChartBarViewViewModel: Identifiable {
             }
         }
     }
-
 }
 
 enum IDQDayOfWeek: String, CaseIterable {

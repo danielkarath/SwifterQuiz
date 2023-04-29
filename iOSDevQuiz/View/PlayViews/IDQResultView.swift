@@ -242,6 +242,7 @@ class IDQResultView: UIView {
             self.viewModel.saveToDaytimeActivity(quiz)
             print("Save To User Records")
             self.viewModel.saveToUserRecords(quiz)
+            print("Quiz Date: \(quiz.date)")
         }
         
     }
