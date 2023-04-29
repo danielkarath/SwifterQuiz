@@ -23,7 +23,7 @@ struct IDQAppIconView: View {
             Image(uiImage: IDQConstants.appIconMiniature)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 48, height: 48)
+                .frame(width: 80, height: 80)
         }
     }
 }
