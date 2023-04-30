@@ -16,7 +16,7 @@ struct IDQWeeklyPointsChangeView: View {
     var body: some View {
         let imageName: String = titleValue > 0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill"
         let size: CGFloat = 30
-        let titleText: String = titleValue < 0 ? "-\(titleValue)" : "+\(titleValue)"
+        let titleText: String = titleValue <= 0 ? "\(titleValue)" : "+\(titleValue)"
         
         HStack(spacing: 4) {
             Spacer()

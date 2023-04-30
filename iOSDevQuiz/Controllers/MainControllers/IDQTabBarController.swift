@@ -11,7 +11,6 @@ final class IDQTabBarController: UITabBarController {
     
     private let userManager = IDQUserManager()
     private let resultManager = IDQQuizResultManager()
-//    private let viewModel = IDQResultViewViewModel()
     
     private var fullBlurView: UIVisualEffectView = {
         let view = UIVisualEffectView(effect: UIBlurEffect(style: .automatic))
@@ -26,7 +25,7 @@ final class IDQTabBarController: UITabBarController {
         setupTabs()
         automaticallyGenerateUser()
         evaulateUserMetrics()
-//        addDummyData(daysAgo: -8, score: 4)
+
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -93,38 +92,39 @@ final class IDQTabBarController: UITabBarController {
             self.userManager.evaulateStreak(didPlayYesterday: didPlayYesterday!)
         }
     }
-//    
-//    private func addDummyData(daysAgo: TimeInterval, score: Int) {
-//        
-//        let quiz: IDQQuiz = IDQQuiz(gamestyle: .init(
-//            gameName: "Dummy",
-//            type: .basic,
-//            questionTimer: .gazelle,
-//            topics: [.basics],
-//            numberOfQuestions: 10
-//        ), questions: [
-//            (question: fullQuestionList[0], answerType: .correct),
-//            (question: fullQuestionList[1], answerType: .correct),
-//            (question: fullQuestionList[2], answerType: .correct),
-//            (question: fullQuestionList[3], answerType: .correct),
-//            (question: fullQuestionList[4], answerType: .correct),
-//            (question: fullQuestionList[5], answerType: .correct),
-//            (question: fullQuestionList[6], answerType: .correct),
-//            (question: fullQuestionList[7], answerType: .correct),
-//            (question: fullQuestionList[8], answerType: .correct),
-//            (question: fullQuestionList[9], answerType: .correct)
-//        ], totalScore: score, quizDuration: 158, date: Date.currentTime.addingTimeInterval(3600 * 24 * daysAgo))
-//        
-//        let serialQueue = DispatchQueue(label: "saveMetrics.serial.queue")
-//
-//        serialQueue.async {
-//            self.viewModel.evaulateStreak()
-//            self.viewModel.save(quiz: quiz)
-//        }
-//        serialQueue.async {
-//            self.viewModel.saveToDaytimeActivity(quiz)
-//            self.viewModel.saveToUserRecords(quiz)
-//        }
-//        
-//    }
+    
+    private func addDummyData(daysAgo: TimeInterval, score: Int) {
+        let viewModel = IDQResultViewViewModel()
+    
+        let quiz: IDQQuiz = IDQQuiz(gamestyle: .init(
+            gameName: "Dummy",
+            type: .basic,
+            questionTimer: .gazelle,
+            topics: [.basics],
+            numberOfQuestions: 10
+        ), questions: [
+            (question: fullQuestionList[0], answerType: .correct),
+            (question: fullQuestionList[1], answerType: .correct),
+            (question: fullQuestionList[2], answerType: .correct),
+            (question: fullQuestionList[3], answerType: .correct),
+            (question: fullQuestionList[4], answerType: .correct),
+            (question: fullQuestionList[5], answerType: .correct),
+            (question: fullQuestionList[6], answerType: .correct),
+            (question: fullQuestionList[7], answerType: .correct),
+            (question: fullQuestionList[8], answerType: .correct),
+            (question: fullQuestionList[9], answerType: .correct)
+        ], totalScore: score, quizDuration: 158, date: Date.currentTime.addingTimeInterval(3600 * 24 * daysAgo))
+        
+        let serialQueue = DispatchQueue(label: "saveMetrics.serial.queue")
+
+        serialQueue.async {
+            viewModel.evaulateStreak()
+            viewModel.save(quiz: quiz)
+        }
+        serialQueue.async {
+            viewModel.saveToDaytimeActivity(quiz)
+            viewModel.saveToUserRecords(quiz)
+        }
+        
+    }
 }

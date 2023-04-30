@@ -67,7 +67,7 @@ struct IDQWeeklyPointsChartView: View {
         } else {
             difference = thisWeeksPoints - previousWeeksPoints
         }
-        //scoreDifference = difference
+        
         return IDQWeeklyPointsChangeView(titleValue: difference, font: titleFont, fontColor: textColor)
             .frame(width: frameWidth/2)
     }
