@@ -19,6 +19,8 @@ struct IDQWeeklyPointsChartView: View {
     @State var scoreForDayArray: [IDQScoreForDay] = []
     @State var scoreDifference: Int = 0
     
+    let startOfLastWeek: Date = Date().startOfWeek().addingTimeInterval(-3600*24*7)
+    
     var gradient: LinearGradient {
         let leadingColor = Color(IDQConstants.highlightFontColor)
         let trailingColor = Color(IDQConstants.basicFontColor)
@@ -57,7 +59,16 @@ struct IDQWeeklyPointsChartView: View {
     private func chnageView(frameWidth: CGFloat) -> some View {
         let titleFont = Font(IDQConstants.setFont(fontSize: 14, isBold: false))
         let textColor = Color(uiColor: IDQConstants.basicFontColor)
-        return IDQWeeklyPointsChangeView(titleValue: scoreDifference, font: titleFont, fontColor: textColor)
+        let previousWeeksPoints: Int = viewModel.fetchResults(startOfLastWeek, Date().startOfWeek())
+        let thisWeeksPoints: Int = viewModel.fetchResults(Date().startOfWeek(), Date.currentTime)
+        var difference = 0
+        if previousWeeksPoints == 0 {
+            difference = thisWeeksPoints
+        } else {
+            difference = thisWeeksPoints - previousWeeksPoints
+        }
+        
+        return IDQWeeklyPointsChangeView(titleValue: difference, font: titleFont, fontColor: textColor)
             .frame(width: frameWidth/2)
     }
     
@@ -88,8 +99,7 @@ struct IDQWeeklyPointsChartView: View {
     private func fetchDataAndUpdateState() {
         viewModel.generateThisWeeksResults { results in
             scoreForDayArray = results
-            let startOfLastWeek: Date = Date().startOfWeek().addingTimeInterval(-3600*24*7)
-            scoreDifference = viewModel.fetchResults(startOfLastWeek, Date().startOfWeek().addingTimeInterval(-60))
+            //scoreDifference = Double(viewModel.fetchResults(startOfLastWeek, Date().startOfWeek().addingTimeInterval(-60)))
         }
     }
 }

@@ -62,7 +62,7 @@ enum IDQSettingsOption: CaseIterable {
         case .contact:
             return nil
         case .donate:
-            return URL(string: "https://github.com/danielkarath/iOSDevQuiz")
+            return URL(string: "https://github.com/danielkarath/SwifterQuiz")
         }
     }
     
