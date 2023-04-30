@@ -32,18 +32,57 @@ class StartButtonView: UIView {
         return imageView
     }()
     
+//    private let smallIconImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.layer.cornerRadius = 4
+//        imageView.backgroundColor = UIColor.black.withAlphaComponent(0.05)
+//
+//        let image = UIImage(systemName: "swift")?.withTintColor(IDQConstants.basicFontColor, renderingMode: .alwaysTemplate)
+//
+//        imageView.tintColor = .white
+//        imageView.image = image
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.isAccessibilityElement = false
+//        return imageView
+//    }()
+    
     private let smallIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 4
-        imageView.backgroundColor = UIColor.black.withAlphaComponent(0.05)
-        
-        let image = UIImage(systemName: "swift")?.withTintColor(IDQConstants.basicFontColor, renderingMode: .alwaysTemplate)
-        
-        imageView.tintColor = .white
-        imageView.image = image
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = IDQConstants.basicFontColor.withAlphaComponent(0.04)
         imageView.isAccessibilityElement = false
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.screenHeight * 0.02813599, height: UIScreen.screenHeight * 0.02813599)
+        imageView.clipsToBounds = true
+
+        // Set the image
+        let image = UIImage(systemName: "swift")?.withRenderingMode(.alwaysTemplate)
+
+        // Create a gradient layer
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = imageView.bounds
+
+        // Create a mask using the image
+        let maskLayer = CALayer()
+        maskLayer.contents = image?.cgImage
+
+        // Add inner padding
+        let padding: CGFloat = UIScreen.screenHeight * 0.02813599 * 0.15
+        let paddedFrame = CGRect(x: padding, y: padding, width: imageView.bounds.width - padding * 2, height: imageView.bounds.height - padding * 2)
+
+        maskLayer.frame = paddedFrame
+
+        gradientLayer.colors = [IDQConstants.whiteColor.cgColor, UIColor.white.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+
+        gradientLayer.mask = maskLayer
+
+        // Add the gradient layer to the image view's layer
+        imageView.layer.addSublayer(gradientLayer)
+
         return imageView
     }()
     

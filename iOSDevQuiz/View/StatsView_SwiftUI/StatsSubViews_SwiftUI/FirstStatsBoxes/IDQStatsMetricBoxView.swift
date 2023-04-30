@@ -16,6 +16,9 @@ struct IDQStatsMetricBoxView: View {
     var image: Image
     var resultValueType: IDQStatsMetricBoxViewViewModel.ResultValueType
     
+    private let height: CGFloat = UIScreen.screenHeight > 1080 ? 180 : 90
+    private let width: CGFloat = UIScreen.screenHeight > 1080 ? ((UIScreen.screenWidth)/3.80) : 160
+    
     private let titleFont = IDQConstants.setFont(fontSize: 18, isBold: false)
     private let valueFont = IDQConstants.setFont(fontSize: 40, isBold: true)
     private let textColor = IDQConstants.basicFontColor
@@ -24,7 +27,7 @@ struct IDQStatsMetricBoxView: View {
         ZStack {
             VStack {
                 Text(viewModel.convertToString(value: value, type: resultValueType))
-                    .frame(width: 160, height: 90, alignment: .center)
+                    .frame(width: width, height: 90, alignment: .center)
                     .font(Font(valueFont))
                     .foregroundColor(Color(textColor))
                     .kerning(2.35)

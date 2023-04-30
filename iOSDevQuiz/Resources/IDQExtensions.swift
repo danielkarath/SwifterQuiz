@@ -320,7 +320,6 @@ extension UITextView {
         }
         let attributedString = NSMutableAttributedString(string: labelText)
         
-        // Apply formatting for regular expression pattern
         let pattern = "(?:\\b\\w+\\b|[():;@|{}+-])"
         let regex: NSRegularExpression
         do {
