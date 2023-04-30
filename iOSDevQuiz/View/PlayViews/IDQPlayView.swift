@@ -41,6 +41,8 @@ class IDQPlayView: UIView { //852 393
     
     private let topBackgroundSize: CGFloat = UIScreen.screenWidth*3
     
+    private var isShimmerAnimationsOn: Bool = false
+    
     private let gradientView = UIView()
     
     private let spinner: UIActivityIndicatorView = {
@@ -156,24 +158,36 @@ class IDQPlayView: UIView { //852 393
     required init?(coder: NSCoder) {
         fatalError("IDQPlayView is unsupported!")
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func didMoveToWindow() {
         super.didMoveToWindow()
         if window != nil {
-            startButtonView.startShimmerAnimation(duration: 0.5, delay: 6.00, direction: .topLeftToBottomRight)
+            if !isShimmerAnimationsOn {
+                startButtonView.startShimmerAnimation(duration: 0.5, delay: 6.00, direction: .topLeftToBottomRight)
+                isShimmerAnimationsOn.toggle()
+            }
         } else {
+            isShimmerAnimationsOn = false
             startButtonView.stopShimmerAnimation()
         }
     }
     
     @objc
     private func appMovedToBackground() {
+        isShimmerAnimationsOn = false
         startButtonView.stopShimmerAnimation()
     }
     
     @objc
     private func appWillMoveToForeground() {
-        startButtonView.startShimmerAnimation(duration: 0.5, delay: 6.00, direction: .topLeftToBottomRight)
+        if !isShimmerAnimationsOn && window != nil {
+            startButtonView.startShimmerAnimation(duration: 0.5, delay: 6.00, direction: .topLeftToBottomRight)
+            isShimmerAnimationsOn.toggle()
+        }
     }
     
     private func setupView() {

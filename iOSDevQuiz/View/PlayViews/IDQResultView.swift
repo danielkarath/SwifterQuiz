@@ -105,6 +105,7 @@ class IDQResultView: UIView {
         setupView()
         setupConstraints()
         setupCollectionView()
+        setupMenuButton()
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
 //        addGestureRecognizer(tapGesture)
     }
@@ -114,17 +115,19 @@ class IDQResultView: UIView {
     }
     
     private func setupView() {
-        let color1: UIColor = IDQConstants.highlightedLightOrange
-        let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
+        menuButton.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(share(_:)), for: .touchUpInside)
+    }
+    
+    private func setupMenuButton() {
+        let color1: UIColor = IDQConstants.highlightedLightOrange
+        let color2: UIColor = IDQConstants.highlightedDarkOrange
         menuButton.frame.size = CGSize(width: menuButtonWidth, height: 50)
         menuButton.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
         menuButton.clipsToBounds = true
         menuButton.layer.cornerRadius = 8
-        
-        menuButton.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
-        shareButton.addTarget(self, action: #selector(share(_:)), for: .touchUpInside)
     }
     
     private func setupCollectionView() {
@@ -184,10 +187,14 @@ class IDQResultView: UIView {
             shareButton.heightAnchor.constraint(equalToConstant: 50),
             
             menuButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
-            menuButton.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 24+50),
+            menuButton.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 74),
             menuButton.trailingAnchor.constraint(equalTo: percentageView.trailingAnchor, constant: 0),
             menuButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+        self.layoutIfNeeded()
+        // Calculate the width of the menuButton
+        let width = percentageView.frame.maxX - scoreView.frame.minX - (24 + 50)
+        menuButtonWidth = width
     }
     
     @objc
