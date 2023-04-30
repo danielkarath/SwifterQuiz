@@ -14,20 +14,21 @@ struct IDQWeeklyPointsChangeView: View {
     
     
     var body: some View {
-        let imageName: String = titleValue < 1 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill"
+        let imageName: String = titleValue > 0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill"
         let size: CGFloat = 30
+        let titleText: String = titleValue < 0 ? "-\(titleValue)" : "+\(titleValue)"
         
-        HStack(spacing: -4) {
+        HStack(spacing: 4) {
             Spacer()
-            Text("\(titleValue)%")
-                .frame(width: size*1.30, height: size, alignment: .center)
+            Text(titleText)
+                .frame(width: size*2.50, height: size, alignment: .trailing)
                 .font(font)
                 .foregroundColor(fontColor)
                 .kerning(2.35)
             Image(systemName: imageName)
                 .resizable()
                 .scaledToFit()
-                .offset(y: -size/10)
+                .offset(y: -size/11)
                 .foregroundColor(Color(uiColor: IDQConstants.backgroundColor))
                 .frame(width: size/1.60, height: size/1.60, alignment: .center)
         }
@@ -38,6 +39,6 @@ struct IDQWeeklyPointsChangeView: View {
 
 struct IDQWeeklyPointsChangeView_Previews: PreviewProvider {
     static var previews: some View {
-        IDQWeeklyPointsChangeView(titleValue: 6, font: Font(IDQConstants.setFont(fontSize: 16, isBold: true)), fontColor: Color(uiColor: IDQConstants.basicFontColor))
+        IDQWeeklyPointsChangeView(titleValue: 216, font: Font(IDQConstants.setFont(fontSize: 16, isBold: true)), fontColor: Color(uiColor: IDQConstants.basicFontColor))
     }
 }

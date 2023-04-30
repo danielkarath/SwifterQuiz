@@ -54,7 +54,7 @@ enum IDQAboutOption: CaseIterable {
         case .website:
             return URL(string: "https://danielkarath.com")
         case .viewCode:
-            return URL(string: "https://github.com/danielkarath/iOSDevQuiz")
+            return URL(string: "https://github.com/danielkarath/SwifterQuiz")
         case .twitter:
             return URL(string: "https://twitter.com/DanielKarath")
         }
