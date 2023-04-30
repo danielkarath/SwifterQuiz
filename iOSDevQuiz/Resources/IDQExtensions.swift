@@ -49,6 +49,7 @@ extension UIView {
         let totalDuration = duration + delay
         
         let gradientLayer = CAGradientLayer()
+        gradientLayer.name = "shimmerGradient"
         gradientLayer.colors = [gradientColorOne, gradientColorTwo, gradientColorOne]
         
         switch direction {
@@ -92,6 +93,9 @@ extension UIView {
             for layer in sublayers {
                 if layer.animation(forKey: "shimmer") != nil {
                     layer.removeAnimation(forKey: "shimmer")
+                    layer.removeFromSuperlayer()
+                }
+                if layer.name == "shimmerGradient" {
                     layer.removeFromSuperlayer()
                 }
             }
@@ -468,6 +472,13 @@ extension Date {
         let secondsFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         returnValue = returnValue.addingTimeInterval(secondsFromGMT)
         return returnValue
+    }
+    
+    func usersFirstDayOfWeek() -> Int {
+        var calendar = Calendar.current
+        calendar.locale = Locale.current
+        let firstDayOfWeek = calendar.firstWeekday
+        return firstDayOfWeek
     }
     
     func datesForWeek() -> [Date] {

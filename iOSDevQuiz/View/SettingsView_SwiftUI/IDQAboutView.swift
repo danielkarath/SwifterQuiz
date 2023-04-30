@@ -38,7 +38,7 @@ struct IDQAboutView: View {
                 .padding(.trailing, 16)
                 .padding(.top, UIScreen.screenHeight * topPaddingModifier)
                 Spacer(minLength: UIScreen.screenHeight * topSpacerModifier)
-                Text("iOS Dev Quiz")
+                Text("Swifter Quiz")
                     .font(Font(IDQConstants.setFont(fontSize: 24, isBold: true)))
                     .foregroundColor(Color(IDQConstants.whiteColor))
                 Text("App version: \(appVersion)")

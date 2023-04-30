@@ -67,9 +67,7 @@ final class IDQUserManager {
                 print(disabledQuestion.question)
             }
         }
-        print("\nnumber of disabled questions: \(user.disabledQuestions.count)")
         if user.disabledQuestions.count != 0 {
-            print("The disabled questions are:")
             for question in user.disabledQuestions {
                 var bookmarkedQuestion: IDQQuestion = question as! IDQQuestion
                 print(bookmarkedQuestion.question)
@@ -152,7 +150,6 @@ final class IDQUserManager {
 //    }
     
     public func evaulateStreak(didPlayYesterday: Bool) {
-        print("Evaulating Streak")
         let calendar = Calendar.current
         let yesterdayDate = calendar.date(byAdding: .day, value: -1, to: Date.currentTime) ?? Date.currentTime.addingTimeInterval(-3600*24)
         let midnight: Date = Date.getTodayMidnightDate() ?? yesterdayDate.addingTimeInterval(60)
@@ -169,22 +166,17 @@ final class IDQUserManager {
         let hasPlayedAlreadyToday = Date.isDate(previousGameDate, between: midnight, and: Date.currentTime)
         
         
-        print("yesterdayDate: \(yesterdayDate)")
-        if hasPlayedAlreadyToday {
+        if hasPlayedAlreadyToday || didPlayYesterday {
             print("Streak is evaulated and no changes needed")
-        } else if didPlayYesterday {
-            print("Streak is evaulated and the player did play yesterday. No changes needed")
         } else {
             print("Streak is evaulated and the user's last game was not today or yesterday")
             user.streak = 0
             saveToCoreData()
         }
-        print("LAST PLAY DATE: \(previousGameDate)")
         
     }
     
     public func shouldAddToStreak() {
-        print("Evaulating Streak")
         let calendar = Calendar.current
         guard let user = fetchUser() else {
             print("Could not load user while trying to set streak")
@@ -199,18 +191,13 @@ final class IDQUserManager {
         }
         
         let hasPlayedAlreadyToday = calendar.isDate(Date.currentTime, equalTo: previousGameDate, toGranularity: .day)
-        print("Previous game: \(previousGameDate)")
-        print("Current time: \(Date.currentTime)")
-        print("hasPlayedAlreadyToday: \(hasPlayedAlreadyToday)")
         
         if hasPlayedAlreadyToday {
-            print("The user has already played today")
             if user.streak < 1 {
                 user.streak = 1
                 saveToCoreData()
             }
         } else {
-            print("The user has not yet played today. Increase streak value")
             user.streak += 1
             saveToCoreData()
         }

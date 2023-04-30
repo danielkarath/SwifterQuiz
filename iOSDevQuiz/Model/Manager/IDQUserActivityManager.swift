@@ -29,7 +29,6 @@ struct IDQUserActivityManager {
             let updatedLaunchCount = launchCount + 1
             userDefaults.set(updatedLaunchCount, forKey: "launchCount")
             userDefaults.setValue(false, forKey: "didDismissRateMe")
-            print("Did launch app for \(updatedLaunchCount) time!\n")
         }
     }
     

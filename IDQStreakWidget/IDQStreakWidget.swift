@@ -123,7 +123,7 @@ struct IDQStreakWidget: Widget {
         }
         .configurationDisplayName("My Streak")
         .description("Track your progress and tap to start a new quick quiz")
-        .supportedFamilies([.accessoryCircular])
+        .supportedFamilies([]) //accessoryCircular
     }
 }
 

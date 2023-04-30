@@ -25,7 +25,6 @@ final class IDQTabBarController: UITabBarController {
         setupTabs()
         automaticallyGenerateUser()
         evaulateUserMetrics()
-        print("number of questions in total: \(fullQuestionList.count)")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
