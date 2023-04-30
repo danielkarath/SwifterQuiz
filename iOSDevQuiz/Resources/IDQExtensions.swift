@@ -470,6 +470,13 @@ extension Date {
         return returnValue
     }
     
+    func usersFirstDayOfWeek() -> Int {
+        var calendar = Calendar.current
+        calendar.locale = Locale.current
+        let firstDayOfWeek = calendar.firstWeekday
+        return firstDayOfWeek
+    }
+    
     func datesForWeek() -> [Date] {
         let startOfWeek = self.startOfWeek()
         var calendar = Calendar.current

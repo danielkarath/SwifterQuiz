@@ -56,7 +56,6 @@ struct IDQQuizSettingsView: View {
                                     title: Text("Restore question"),
                                     message: Text("Do you want to restore the question:\n\n \"\(question?.question ?? "")\""),
                                     primaryButton: .default(Text("Yes")) {
-                                        print("Question restored")
                                         if let question = questionArray?[selectedItemIndex ?? 0] {
                                             viewModel.removeDisable(question)
                                             questionArray = viewModel.fetchQuestionArray(for: .disabled)

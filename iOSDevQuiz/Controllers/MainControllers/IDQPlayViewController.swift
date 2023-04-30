@@ -35,7 +35,6 @@ final class IDQPlayViewController: UIViewController {
     
     @objc func orientationDidChange() {
         let orientation = UIDevice.current.orientation
-        print("Device orientation changed: \(orientation.rawValue)")
         playView.setupConstraints()
     }
     

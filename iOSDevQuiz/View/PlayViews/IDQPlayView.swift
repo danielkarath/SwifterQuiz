@@ -196,8 +196,6 @@ class IDQPlayView: UIView { //852 393
         NSLayoutConstraint.deactivate(topBackgroundView.constraints)
         
         var topOffset: CGFloat = topBackgroundSize/1.15
-        print("topOffset: \(topOffset)")
-        print("UIScreen.physicalScreenHeight: \(UIScreen.physicalScreenHeight)")
         if UIScreen.physicalScreenHeight  > 1000 {
             topOffset = topBackgroundSize/1.09
         }

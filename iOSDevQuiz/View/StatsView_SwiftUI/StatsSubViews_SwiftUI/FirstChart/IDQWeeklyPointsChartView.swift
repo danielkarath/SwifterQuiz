@@ -89,8 +89,6 @@ struct IDQWeeklyPointsChartView: View {
         viewModel.generateThisWeeksResults { results in
             scoreForDayArray = results
             let startOfLastWeek: Date = Date().startOfWeek().addingTimeInterval(-3600*24*7)
-            print("Start of the week: \(Date().startOfWeek())")
-            print("Start of last week: \(startOfLastWeek)")
             scoreDifference = viewModel.fetchResults(startOfLastWeek, Date().startOfWeek().addingTimeInterval(-60))
         }
     }

@@ -38,7 +38,6 @@ struct IDQWeeklyPointsChartBarViewViewModel: Identifiable {
     public func generateThisWeeksResults(completion: @escaping ([IDQScoreForDay]) -> Void) {
         let datesForCurrentWeek: [Date] = Date().datesForWeek()
         var dayOfWeekScores: [IDQScoreForDay] = []
-        
         DispatchQueue.global(qos: .userInitiated).async {
             var i: Int = 0
             for dates in datesForCurrentWeek {
@@ -74,10 +73,17 @@ enum IDQDayOfWeek: String, CaseIterable {
     case saturday = "Sat"
     
     static func name(at index: Int) -> IDQDayOfWeek? {
-        guard index >= 0, index < IDQDayOfWeek.allCases.count else {
+        let localeFirstDay: Int = Date().usersFirstDayOfWeek()-1
+        var modifiedIndex: Int = index + localeFirstDay
+        
+        guard index >= 0 && index < IDQDayOfWeek.allCases.count else {
             return nil
         }
-        return IDQDayOfWeek.allCases[index]
+        
+        if modifiedIndex >= IDQDayOfWeek.allCases.count && localeFirstDay > 0 {
+            modifiedIndex = modifiedIndex - 7
+        }
+        return IDQDayOfWeek.allCases[modifiedIndex]
     }
 }
 
