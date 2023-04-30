@@ -88,12 +88,47 @@
 		39EA5AB229F19C3A00E52DB1 /* IDQHighlightEffectViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA5AB129F19C3A00E52DB1 /* IDQHighlightEffectViewModifier.swift */; };
 		39EE86F129FD2265009061D6 /* IDQWeeklyPointsChartViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE86F029FD2265009061D6 /* IDQWeeklyPointsChartViewTitle.swift */; };
 		39EE86F729FD2FD4009061D6 /* IDQWeeklyPointsChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE86F629FD2FD4009061D6 /* IDQWeeklyPointsChangeView.swift */; };
+		39EE86FF29FD976B009061D6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE86FE29FD976B009061D6 /* WidgetKit.framework */; };
+		39EE870129FD976B009061D6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE870029FD976B009061D6 /* SwiftUI.framework */; };
+		39EE870429FD976B009061D6 /* IDQStreakWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE870329FD976B009061D6 /* IDQStreakWidgetBundle.swift */; };
+		39EE870629FD976B009061D6 /* IDQStreakWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE870529FD976B009061D6 /* IDQStreakWidgetLiveActivity.swift */; };
+		39EE870829FD976B009061D6 /* IDQStreakWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EE870729FD976B009061D6 /* IDQStreakWidget.swift */; };
+		39EE870B29FD976C009061D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39EE870A29FD976C009061D6 /* Assets.xcassets */; };
+		39EE870D29FD976C009061D6 /* IDQStreakWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 39EE870929FD976B009061D6 /* IDQStreakWidget.intentdefinition */; };
+		39EE870E29FD976C009061D6 /* IDQStreakWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 39EE870929FD976B009061D6 /* IDQStreakWidget.intentdefinition */; };
+		39EE871129FD976C009061D6 /* IDQStreakWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 39EE86FC29FD976B009061D6 /* IDQStreakWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		39EE871629FDBC96009061D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3914C91429B0D7E50001377B /* Assets.xcassets */; };
+		39EE871729FDC1ED009061D6 /* iOSDevQuiz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3914C91129B0D7E40001377B /* iOSDevQuiz.xcdatamodeld */; };
 		39F42DA929F5818100370125 /* IDQRateTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F42DA829F5818100370125 /* IDQRateTheAppView.swift */; };
 		39F42DAB29F5826E00370125 /* IDQGradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F42DAA29F5826E00370125 /* IDQGradientImageView.swift */; };
 		39F42DAD29F592E900370125 /* IDQUserActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F42DAC29F592E900370125 /* IDQUserActivityManager.swift */; };
 		39FD9F5129F2A5C600FF1AD2 /* IDQBookmarkedQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD9F5029F2A5C600FF1AD2 /* IDQBookmarkedQuestionsViewController.swift */; };
 		39FD9F5329F2A64100FF1AD2 /* IDQBookmarkedQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD9F5229F2A64100FF1AD2 /* IDQBookmarkedQuestionsView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		39EE870F29FD976C009061D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3914C8FD29B0D7E40001377B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 39EE86FB29FD976B009061D6;
+			remoteInfo = IDQStreakWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		39EE871529FD976C009061D6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				39EE871129FD976C009061D6 /* IDQStreakWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQSettingsView.swift; sourceTree = "<group>"; };
@@ -180,6 +215,15 @@
 		39EA5AB129F19C3A00E52DB1 /* IDQHighlightEffectViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQHighlightEffectViewModifier.swift; sourceTree = "<group>"; };
 		39EE86F029FD2265009061D6 /* IDQWeeklyPointsChartViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQWeeklyPointsChartViewTitle.swift; sourceTree = "<group>"; };
 		39EE86F629FD2FD4009061D6 /* IDQWeeklyPointsChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQWeeklyPointsChangeView.swift; sourceTree = "<group>"; };
+		39EE86FC29FD976B009061D6 /* IDQStreakWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IDQStreakWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		39EE86FE29FD976B009061D6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		39EE870029FD976B009061D6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		39EE870329FD976B009061D6 /* IDQStreakWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStreakWidgetBundle.swift; sourceTree = "<group>"; };
+		39EE870529FD976B009061D6 /* IDQStreakWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStreakWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		39EE870729FD976B009061D6 /* IDQStreakWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStreakWidget.swift; sourceTree = "<group>"; };
+		39EE870929FD976B009061D6 /* IDQStreakWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = IDQStreakWidget.intentdefinition; sourceTree = "<group>"; };
+		39EE870A29FD976C009061D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		39EE870C29FD976C009061D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39F42DA829F5818100370125 /* IDQRateTheAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQRateTheAppView.swift; sourceTree = "<group>"; };
 		39F42DAA29F5826E00370125 /* IDQGradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGradientImageView.swift; sourceTree = "<group>"; };
 		39F42DAC29F592E900370125 /* IDQUserActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQUserActivityManager.swift; sourceTree = "<group>"; };
@@ -192,6 +236,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39EE86F929FD976B009061D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39EE870129FD976B009061D6 /* SwiftUI.framework in Frameworks */,
+				39EE86FF29FD976B009061D6 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +299,8 @@
 				3920A1A929EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift */,
 				3920A1AA29EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift */,
 				3914C90729B0D7E40001377B /* iOSDevQuiz */,
+				39EE870229FD976B009061D6 /* IDQStreakWidget */,
+				39EE86FD29FD976B009061D6 /* Frameworks */,
 				3914C90629B0D7E40001377B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -254,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				3914C90529B0D7E40001377B /* iOSDevQuiz.app */,
+				39EE86FC29FD976B009061D6 /* IDQStreakWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,6 +508,28 @@
 			path = FirstChart;
 			sourceTree = "<group>";
 		};
+		39EE86FD29FD976B009061D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39EE86FE29FD976B009061D6 /* WidgetKit.framework */,
+				39EE870029FD976B009061D6 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		39EE870229FD976B009061D6 /* IDQStreakWidget */ = {
+			isa = PBXGroup;
+			children = (
+				39EE870329FD976B009061D6 /* IDQStreakWidgetBundle.swift */,
+				39EE870529FD976B009061D6 /* IDQStreakWidgetLiveActivity.swift */,
+				39EE870729FD976B009061D6 /* IDQStreakWidget.swift */,
+				39EE870929FD976B009061D6 /* IDQStreakWidget.intentdefinition */,
+				39EE870A29FD976C009061D6 /* Assets.xcassets */,
+				39EE870C29FD976C009061D6 /* Info.plist */,
+			);
+			path = IDQStreakWidget;
+			sourceTree = "<group>";
+		};
 		39FD9F5629F2AFC500FF1AD2 /* BookmarkedQuestionViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,15 +549,34 @@
 				3914C90129B0D7E40001377B /* Sources */,
 				3914C90229B0D7E40001377B /* Frameworks */,
 				3914C90329B0D7E40001377B /* Resources */,
+				39EE871529FD976C009061D6 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				39EE871029FD976C009061D6 /* PBXTargetDependency */,
 			);
 			name = iOSDevQuiz;
 			productName = iOSDevQuiz;
 			productReference = 3914C90529B0D7E40001377B /* iOSDevQuiz.app */;
 			productType = "com.apple.product-type.application";
+		};
+		39EE86FB29FD976B009061D6 /* IDQStreakWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39EE871229FD976C009061D6 /* Build configuration list for PBXNativeTarget "IDQStreakWidgetExtension" */;
+			buildPhases = (
+				39EE86F829FD976B009061D6 /* Sources */,
+				39EE86F929FD976B009061D6 /* Frameworks */,
+				39EE86FA29FD976B009061D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IDQStreakWidgetExtension;
+			productName = IDQStreakWidgetExtension;
+			productReference = 39EE86FC29FD976B009061D6 /* IDQStreakWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -488,11 +585,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					3914C90429B0D7E40001377B = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					39EE86FB29FD976B009061D6 = {
+						CreatedOnToolsVersion = 14.3;
 					};
 				};
 			};
@@ -510,6 +610,7 @@
 			projectRoot = "";
 			targets = (
 				3914C90429B0D7E40001377B /* iOSDevQuiz */,
+				39EE86FB29FD976B009061D6 /* IDQStreakWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -521,6 +622,15 @@
 			files = (
 				3914C91829B0D7E50001377B /* LaunchScreen.storyboard in Resources */,
 				3914C91529B0D7E50001377B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39EE86FA29FD976B009061D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39EE871629FDBC96009061D6 /* Assets.xcassets in Resources */,
+				39EE870B29FD976C009061D6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +670,7 @@
 				39904E0029E0792E009F9380 /* IDQPercentageView.swift in Sources */,
 				39267BB429E82923007DD96F /* IDQStatsView.swift in Sources */,
 				39267BA929E81742007DD96F /* IDQUserManager.swift in Sources */,
+				39EE870E29FD976C009061D6 /* IDQStreakWidget.intentdefinition in Sources */,
 				39E2256F29B8F71500830F1A /* IDQGameView.swift in Sources */,
 				39FD9F5129F2A5C600FF1AD2 /* IDQBookmarkedQuestionsViewController.swift in Sources */,
 				39EE86F729FD2FD4009061D6 /* IDQWeeklyPointsChangeView.swift in Sources */,
@@ -618,7 +729,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		39EE86F829FD976B009061D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39EE870829FD976B009061D6 /* IDQStreakWidget.swift in Sources */,
+				39EE870429FD976B009061D6 /* IDQStreakWidgetBundle.swift in Sources */,
+				39EE870D29FD976C009061D6 /* IDQStreakWidget.intentdefinition in Sources */,
+				39EE870629FD976B009061D6 /* IDQStreakWidgetLiveActivity.swift in Sources */,
+				39EE871729FDC1ED009061D6 /* iOSDevQuiz.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		39EE871029FD976C009061D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 39EE86FB29FD976B009061D6 /* IDQStreakWidgetExtension */;
+			targetProxy = 39EE870F29FD976C009061D6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3914C91629B0D7E50001377B /* LaunchScreen.storyboard */ = {
@@ -749,6 +880,7 @@
 		3914C91D29B0D7E50001377B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -783,6 +915,7 @@
 		3914C91E29B0D7E50001377B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -814,6 +947,62 @@
 			};
 			name = Release;
 		};
+		39EE871329FD976C009061D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L25LXZY6LR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IDQStreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IDQStreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielkarath.TheSwifterQuiz.IDQStreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		39EE871429FD976C009061D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L25LXZY6LR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IDQStreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IDQStreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielkarath.TheSwifterQuiz.IDQStreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -831,6 +1020,15 @@
 			buildConfigurations = (
 				3914C91D29B0D7E50001377B /* Debug */,
 				3914C91E29B0D7E50001377B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39EE871229FD976C009061D6 /* Build configuration list for PBXNativeTarget "IDQStreakWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39EE871329FD976C009061D6 /* Debug */,
+				39EE871429FD976C009061D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

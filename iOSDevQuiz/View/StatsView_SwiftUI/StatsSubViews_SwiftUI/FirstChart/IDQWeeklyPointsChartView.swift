@@ -28,7 +28,7 @@ struct IDQWeeklyPointsChartView: View {
     }
     
     var body: some View {
-        let frameWidth: CGFloat = 320+CGFloat((UIScreen.screenWidth - 2 * 160-100)/3)
+        let frameWidth: CGFloat = UIScreen.screenHeight > 1080 ? (((UIScreen.screenWidth)/1.90) - 16) : 320+CGFloat((UIScreen.screenWidth - 2 * 160-100)/3)
         
         VStack {
             HStack {

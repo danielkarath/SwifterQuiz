@@ -35,7 +35,7 @@ class IDQResultView: UIView {
     private var menuButtonWidth: CGFloat = {
         var value: CGFloat = (UIScreen.screenWidth - (50+64+16))
         if UIScreen.screenWidth > 1100 {
-            var value: CGFloat = (UIScreen.screenHeight - (50+64+16))
+            var value: CGFloat = (UIScreen.screenWidth - (50+64+16))
         }
         return value
     }()
@@ -118,9 +118,6 @@ class IDQResultView: UIView {
         let color2: UIColor = IDQConstants.highlightedDarkOrange
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
-//        topBackgroundView.backgroundColor = IDQConstants.contentBackgroundColor
-//        topBackgroundView.frame.size = CGSize(width: topBackgroundSize, height: topBackgroundSize)
-//        topBackgroundView.layer.cornerRadius = topBackgroundSize/2
         menuButton.frame.size = CGSize(width: menuButtonWidth, height: 50)
         menuButton.gradient(color1.cgColor, color2.cgColor, direction: .bottomLeftToTopRight)
         menuButton.clipsToBounds = true
@@ -179,16 +176,16 @@ class IDQResultView: UIView {
             questionsCollectionView.topAnchor.constraint(equalTo: questionsSubTitleLabel.bottomAnchor, constant: 2),
             questionsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: collectionViewLeadingAnchor),
             questionsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -collectionViewLeadingAnchor),
-            questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -128),
+            questionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -98),
 
-            shareButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            shareButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
             shareButton.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 0),
             shareButton.widthAnchor.constraint(equalToConstant: 50),
             shareButton.heightAnchor.constraint(equalToConstant: 50),
             
-            menuButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            menuButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
             menuButton.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 24+50),
-            menuButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            menuButton.trailingAnchor.constraint(equalTo: percentageView.trailingAnchor, constant: 0),
             menuButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }

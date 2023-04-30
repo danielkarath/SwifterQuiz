@@ -27,7 +27,7 @@ final class IDQPercentageView: UIView {
         let label = UILabel()
         var fontSize: CGFloat = UIScreen.screenHeight * 0.02461899
         if UIScreen.screenHeight  > 1080 {
-            fontSize = UIScreen.screenHeight * 0.05169988
+            fontSize = UIScreen.screenHeight * 0.03769988
         }
         label.text = " "
         label.numberOfLines = 1
