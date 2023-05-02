@@ -22,6 +22,9 @@ struct IDQConstants {
     //MARK: - Keywords
     
     static let keywords: [String] = [
+        "self",
+        "weak",
+        "strong",
         "open",
         "public",
         "internal",
@@ -35,7 +38,6 @@ struct IDQConstants {
         "break",
         "pass",
         "override",
-        "init",
         "mutating",
         "switch",
         "deinit()",
