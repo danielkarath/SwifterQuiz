@@ -1148,6 +1148,38 @@ let unserializedQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "What is initialzer injection?",
+        questionSerialNum: 0,
+        explanation: "Initialzer Injection is a software design pattern where we're passing dependencies through the init() method from the parent class. Typically this is done when initializing views with models, network managers, etc.",
+        reference: .wikipedia,
+        referenceURLString: "https://en.wikipedia.org/wiki/Dependency_injection",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "When we're deferring object creation until needed to optimize performance.", answerType: .wrong),
+            IDQAnswer(text: "When we're providing dependencies to an object by setting properties directly on the object.", answerType: .wrong),
+            IDQAnswer(text: "When initializing properties directly in the class", answerType: .wrong),
+            IDQAnswer(text: "When we're passing dependencies via the init() method from the parent class.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What does a mutating function allow you to do when used inside a class?",
+        questionSerialNum: 0,
+        explanation: "Mutating functions cannot be used inside classes. Mutating functions are used with methods inside value types (struct or enum) to indicate that the method can modify the instance's properties. Using a mutating function in a class results in a compile-time error.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/methods/#Modifying-Value-Types-from-Within-Instance-Methods",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "Modify properties in a class without creating a new instance", answerType: .wrong),
+            IDQAnswer(text: "It allows you to modify the methods properties inside the method body", answerType: .wrong),
+            IDQAnswer(text: "Mutating functions cannot be used inside a class, as classes are value types.", answerType: .wrong),
+            IDQAnswer(text: "Mutating functions cannot be used inside a class, as classes are reference types.", answerType: .correct),
+        ]
+    ),
+    
     
     //MARK: - UIKit
     IDQQuestion(
