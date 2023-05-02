@@ -53,15 +53,15 @@ struct IDQQuizSettingsView: View {
                             .alert(isPresented: $isConfirmationAlertPresented, content: {
                                 let question = questionArray?[selectedItemIndex ?? 0]
                                 return Alert(
-                                    title: Text("Restore question"),
-                                    message: Text("Do you want to restore the question:\n\n \"\(question?.question ?? "")\""),
-                                    primaryButton: .default(Text("Yes")) {
+                                    title: Text("Enable question"),
+                                    message: Text("Do you want to enable the question:\n\n \"\(question?.question ?? "")\"\n\nThis action will restore the question, meaning that you may get this question again when taking quizes."),
+                                    primaryButton: .cancel(Text("Enable")) {
                                         if let question = questionArray?[selectedItemIndex ?? 0] {
                                             viewModel.removeDisable(question)
                                             questionArray = viewModel.fetchQuestionArray(for: .disabled)
                                         }
                                     },
-                                    secondaryButton: .cancel(Text("No")) {
+                                    secondaryButton: .default(Text("Keep disabled")) {
                                         print("Question left in disabled")
                                     }
                                 )

@@ -106,6 +106,22 @@ let unserializedQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
+        question: "How would you call the below function?\nfunc didGet(_ points: Int?)",
+        questionSerialNum: 0,
+        explanation: "didGet(5)\nThe function has an underscore as an external parameter label, which indicates that it does't have an external name when calling the function. Points is it's internal parameter label.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/functions/#Defining-and-Calling-Functions",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "didGet(points: nil) ", answerType: .wrong),
+            IDQAnswer(text: "didGet()", answerType: .wrong),
+            IDQAnswer(text: "didGet(points: 5)", answerType: .wrong ),
+            IDQAnswer(text: "didGet(5) ", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
         question: "__________ is the mechanism in object-oriented programming where a class can derive properties and behavior from a parent class.",
         questionSerialNum: 0,
         explanation: "In object-oriented programming, inheritance is the mechanism of basing an object or class upon another object or class.",
@@ -198,6 +214,22 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Use the filter() to filter out nil elements from the array.", answerType: .wrong),
             IDQAnswer(text: "Use the flatMap(_:) method to transform and filter out nil elements from the array.", answerType: .wrong ),
             IDQAnswer(text: "Use the compactMap(_:) method to transform and filter out nil elements from the array.", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "What are labeled statements in Swift?",
+        questionSerialNum: 0,
+        explanation: "Labeled Statements are statements with a name identifier, allowing control transfer statements to refer to them. You can use a statement label with the break keyword to end the execution of the labeled statement. This is mostly used in nested loops.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/controlflow#Labeled-Statements",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "Statements with a return type, referring to functions or methods that return a value.", answerType: .wrong),
+            IDQAnswer(text: "Statements using didSet and willSet, which are property observers in Swift.", answerType: .wrong),
+            IDQAnswer(text: "Statements inside a closure, executed in response to an event or asynchronously.", answerType: .wrong),
+            IDQAnswer(text: "Statements with a name identifier, allowing control transfer statements to refer to them.", answerType: .correct),
         ]
     ),
     
@@ -535,6 +567,22 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "A Dictionary \t", answerType: .wrong),
             IDQAnswer(text: "An Array \t", answerType: .wrong),
             IDQAnswer(text: "A Set \t", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "How would you create a new Set that contains all the elements that are contained in both Set a and Set b?\nlet a: Set = [1, 2, 3, 4, 5]\nlet b: Set = [0, 2, 4, 6, 8]",
+        questionSerialNum: 0,
+        explanation: "The let c = a.intersection(b) is the correct answer. The intersection(_:) returns a new set with the elements that are common to both this set and the given sequence. A a.filter { b.contains($0) } would also work, but it's not among the answers.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Fundamental-Set-Operations",
+        difficulty: .hard,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "let c = a.compactMap { b.contains($0) }", answerType: .wrong),
+            IDQAnswer(text: "let c = a.map { b.contains($0) }", answerType: .wrong),
+            IDQAnswer(text: "let c = a.union(b)", answerType: .wrong),
+            IDQAnswer(text: "let c = a.intersection(b)", answerType: .correct),
         ]
     ),
     
@@ -1084,6 +1132,22 @@ let unserializedQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    IDQQuestion(
+        question: "In which of the below cases can you avoid using a weak self?",
+        questionSerialNum: 0,
+        explanation: "Inside a UIView.animate closure [weak self] is not required because it is executed only once during the animation, and then it is deallocated from memory automatically.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/#How-ARC-Works",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "Inside a DispatchQueue.async block", answerType: .wrong),
+            IDQAnswer(text: "Inside a URLSession completion handler ", answerType: .wrong),
+            IDQAnswer(text: "You have to use in all of these options to avoid causing a retain cycle.", answerType: .wrong),
+            IDQAnswer(text: "Inside a UIView.animate block", answerType: .correct),
+        ]
+    ),
+    
     
     //MARK: - UIKit
     IDQQuestion(
@@ -1309,6 +1373,41 @@ let unserializedQuestionList: [IDQQuestion] = [
             IDQAnswer(text: "Call becomeFirstResponder() on a UITextField or UITextView.", answerType: .correct),
         ]
     ),
+    
+    IDQQuestion(
+        question: "How is it possible to get the image data in a PNG format of a UIImage?",
+        questionSerialNum: 0,
+        explanation: "Use the image.pngData() function to get the image Data in a PNG format.",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/uikit/uiimage/1624096-pngdata",
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "You have to convert it to a cgImage then use imagerawData(compressionQuality: .png).", answerType: .wrong),
+            IDQAnswer(text: "You have to convert it to a cgImage then use image.pngData().", answerType: .wrong),
+            IDQAnswer(text: "image.rawData(compressionQuality: .png)", answerType: .wrong),
+            IDQAnswer(text: "image.pngData()", answerType: .correct),
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "When working with a UIAlertController which has a \"saveAction\" and a \"cancelAction\" action, how would you highlight the save action?",
+        questionSerialNum: 0,
+        explanation: "By setting the UIAlertController prefferedAction property to saveAction. TThe preferred action receives the highlighting instead of the cancel button in this case regardless of the UIAction styles decalered when creating the action.",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/uikit/uialertcontroller/1620102-preferredaction",
+        difficulty: .medium,
+        topic: .uikit,
+        answers: [
+            IDQAnswer(text: "The easiest way to achieve this is to add attributedStrings to the UIActions and format them accordingly.", answerType: .wrong),
+            IDQAnswer(text: "By setting the saveAction style to preffered", answerType: .wrong),
+            IDQAnswer(text: "By setting the saveAction style to .default", answerType: .wrong),
+            IDQAnswer(text: "By setting the UIAlertController preferredAction property to saveAction", answerType: .correct),
+        ]
+    ),
+    
+    
+    //MARK: - SwiftUI
     
     IDQQuestion(
         question: "Which statment is true?",

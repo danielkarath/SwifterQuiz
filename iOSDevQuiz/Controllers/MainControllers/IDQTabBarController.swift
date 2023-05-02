@@ -25,7 +25,6 @@ final class IDQTabBarController: UITabBarController {
         setupTabs()
         automaticallyGenerateUser()
         evaulateUserMetrics()
-
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
