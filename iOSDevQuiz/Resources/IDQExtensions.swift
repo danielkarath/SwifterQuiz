@@ -324,7 +324,7 @@ extension UITextView {
         }
         let attributedString = NSMutableAttributedString(string: labelText)
         
-        let pattern = "(?:\\b\\w+\\b|[():;@|{}+-])"
+        let pattern = "(?:\\b\\w+\\b|[():.;@|{}+-])"
         let regex: NSRegularExpression
         do {
             regex = try NSRegularExpression(pattern: pattern, options: [])

@@ -11,7 +11,6 @@ import UIKit
 enum IDQGameType: CaseIterable {
     case basic
     case trueOrFalse
-    case countDown
     case specialist
     case custom
 }

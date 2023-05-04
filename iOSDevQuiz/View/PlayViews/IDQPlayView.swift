@@ -20,9 +20,11 @@ class IDQPlayView: UIView { //852 393
     
     private let viewModel = IDQPlayViewViewModel()
         
+    private let rateTheAppView = IDQRateTheAppView()
+    
     private let startButtonView = StartButtonView()
     
-    private let rateTheAppView = IDQRateTheAppView()
+    private let startTrueOrFalseButtonView = StartTrueOrFalseButtonView()
     
     private var bookmarkedQuestions: [IDQQuestion]?
     
@@ -100,6 +102,17 @@ class IDQPlayView: UIView { //852 393
         return label
     }()
     
+    private let trueOrFalseDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "One minute, infinite questions & only one life."
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.textColor = IDQConstants.secondaryFontColor
+        label.font = IDQConstants.setFont(fontSize: 11, isBold: false)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let bookmarkedQuestionsButton: UIButton = {
         let button = UIButton()
         let size: CGFloat = 40
@@ -140,15 +153,18 @@ class IDQPlayView: UIView { //852 393
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, bookmarkedQuestionsButton, quickQuizDescriptionLabel)
+        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, startTrueOrFalseButtonView, bookmarkedQuestionsButton, quickQuizDescriptionLabel, trueOrFalseDescriptionLabel)
         setupConstraints()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
-        startButtonView.addGestureRecognizer(tapGesture)
+        let quickQuizTapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
+        let trueOrFalseTapGesture = UITapGestureRecognizer(target: self, action: #selector(trueOrFalseViewTapped(_:)))
+        startButtonView.addGestureRecognizer(quickQuizTapGesture)
+        startTrueOrFalseButtonView.addGestureRecognizer(trueOrFalseTapGesture)
         bookmarkedQuestions = viewModel.fetchBookmarkedQuestions()
         setupBookmarkedButton()
         titleLabel.font = IDQConstants.setFont(fontSize: titleHeight * 0.80, isBold: true)
         subTitle.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
         quickQuizDescriptionLabel.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
+        trueOrFalseDescriptionLabel.font = IDQConstants.setFont(fontSize: subTitleHeight * 0.80, isBold: false)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appWillMoveToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -210,8 +226,10 @@ class IDQPlayView: UIView { //852 393
         NSLayoutConstraint.deactivate(topBackgroundView.constraints)
         
         var topOffset: CGFloat = topBackgroundSize/1.15
+        var descriptionLabelTopOffset: CGFloat = -10
         if UIScreen.physicalScreenHeight  > 1000 {
             topOffset = topBackgroundSize/1.09
+            descriptionLabelTopOffset = -4
         }
         
         NSLayoutConstraint.activate([
@@ -245,10 +263,20 @@ class IDQPlayView: UIView { //852 393
             startButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             startButtonView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
             
-            quickQuizDescriptionLabel.heightAnchor.constraint(equalToConstant: 40),
-            quickQuizDescriptionLabel.topAnchor.constraint(equalTo: startButtonView.bottomAnchor, constant: 4),
+            quickQuizDescriptionLabel.heightAnchor.constraint(equalToConstant: 60),
+            quickQuizDescriptionLabel.topAnchor.constraint(equalTo: startButtonView.bottomAnchor, constant: descriptionLabelTopOffset),
             quickQuizDescriptionLabel.widthAnchor.constraint(equalToConstant: menuButtonWidth-12),
             quickQuizDescriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            
+            startTrueOrFalseButtonView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
+            startTrueOrFalseButtonView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            startTrueOrFalseButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            startTrueOrFalseButtonView.topAnchor.constraint(equalTo: quickQuizDescriptionLabel.bottomAnchor, constant: menuTopDistance*0.60),
+            
+            trueOrFalseDescriptionLabel.heightAnchor.constraint(equalToConstant: 60),
+            trueOrFalseDescriptionLabel.topAnchor.constraint(equalTo: startTrueOrFalseButtonView.bottomAnchor, constant: descriptionLabelTopOffset),
+            trueOrFalseDescriptionLabel.widthAnchor.constraint(equalToConstant: menuButtonWidth-12),
+            trueOrFalseDescriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             
             rateTheAppView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
             rateTheAppView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
@@ -330,6 +358,14 @@ class IDQPlayView: UIView { //852 393
         delegate?.idqPlayView(self, didSelect: selectedGame)
     }
     
+    @objc
+    private func trueOrFalseViewTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        startTrueOrFalseButtonView.didHighlight(with: IDQConstants.contentBackgroundColor.withAlphaComponent(0.40))
+        let selectedGame = viewModel.didTapButton(for: .trueOrFalse)
+        delegate?.idqPlayView(self, didSelect: selectedGame)
+    }
+    
+    
     //MARK: - Public
     
     public func setupBookmarkedButton() {
@@ -346,6 +382,8 @@ class IDQPlayView: UIView { //852 393
             UIView.animate(withDuration: 2.0, delay: 0.10, usingSpringWithDamping: 0.90, initialSpringVelocity: 0.10, options: [], animations: {
                 self.startButtonView.transform = CGAffineTransform(translationX: 0, y: yDistance)
                 self.quickQuizDescriptionLabel.transform = CGAffineTransform(translationX: 0, y: yDistance)
+                self.startTrueOrFalseButtonView.transform = CGAffineTransform(translationX: 0, y: yDistance)
+                self.trueOrFalseDescriptionLabel.transform = CGAffineTransform(translationX: 0, y: yDistance)
                 self.rateTheAppView.alpha = 1.0
             }, completion: nil)
         } else if startButtonView.transform == .identity {
@@ -364,6 +402,8 @@ class IDQPlayView: UIView { //852 393
             UIView.animate(withDuration: 1.0, animations: {
                 self.startButtonView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.quickQuizDescriptionLabel.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.startTrueOrFalseButtonView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.trueOrFalseDescriptionLabel.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: { _ in
                 self.rateTheAppView.isHidden = true
             })

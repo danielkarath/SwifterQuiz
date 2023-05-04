@@ -10,7 +10,7 @@ import UIKit
 /// The constants used everywhere in the app like UIColors, Font sizes, etc
 struct IDQConstants {
     
-    static let appID: String = "" //Add your App ID here
+    static let appID: String = "6448073782" //Add your App ID here
     
     //MARK: - AllowedDomains
     static let allowedDomainStrings: [String] = [
@@ -33,10 +33,10 @@ struct IDQConstants {
         "protected",
         "do-while",
         "repeat-while",
-        "fallthrough",
-        "return",
-        "break",
-        "pass",
+//        "fallthrough",
+//        "return",
+//        "break",
+//        "pass",
         "override",
         "mutating",
         "switch",
@@ -267,6 +267,12 @@ struct IDQConstants {
     
     ///blackColor for fonts mostly
     static let blackColor = UIColor(red: 51/255, green: 51/255, blue: 54/255, alpha: 1.0)
+    
+    ///darkGreyColor for backgrounds mostly
+    static let darkGreyColor = UIColor(red: 91/255, green: 91/255, blue: 94/255, alpha: 1.0)
+    
+    ///darkGrey2Color for backgrounds mostly
+    static let darkGrey2Color = UIColor(red: 47/255, green: 47/255, blue: 50/255, alpha: 1.0)
     
     
     //MARK: - Images
