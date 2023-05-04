@@ -47,6 +47,7 @@
 		3920A1B129EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A1A929EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift */; };
 		3920A1B229EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A1AA29EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift */; };
 		3920A1B429EAFCA2001A1522 /* IDQDifficultyMetricManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A1B329EAFCA2001A1522 /* IDQDifficultyMetricManager.swift */; };
+		392371EF2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392371EE2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift */; };
 		392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392415C029BA9E9B006D6590 /* CountDownView.swift */; };
 		39267BA929E81742007DD96F /* IDQUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BA829E81742007DD96F /* IDQUserManager.swift */; };
 		39267BB429E82923007DD96F /* IDQStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BB329E82923007DD96F /* IDQStatsView.swift */; };
@@ -72,6 +73,7 @@
 		39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */; };
 		39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */; };
 		399DE06129F46EC9007BD3FF /* IDQGradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399DE06029F46EC9007BD3FF /* IDQGradientLabel.swift */; };
+		39AE63352A027AE4004A21ED /* IDQTrueOrFalseGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AE63342A027AE4004A21ED /* IDQTrueOrFalseGameView.swift */; };
 		39AF9C4429CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */; };
 		39AFEEF029FBD2600034F532 /* IDQWeeklyPointsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AFEEEF29FBD2600034F532 /* IDQWeeklyPointsChartView.swift */; };
 		39AFEEF229FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AFEEF129FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift */; };
@@ -173,6 +175,7 @@
 		3920A1A929EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQTopicMetrics+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3920A1AA29EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQTopicMetrics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3920A1B329EAFCA2001A1522 /* IDQDifficultyMetricManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQDifficultyMetricManager.swift; sourceTree = "<group>"; };
+		392371EE2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrueOrFalseButtonView.swift; sourceTree = "<group>"; };
 		392415C029BA9E9B006D6590 /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		39267BA829E81742007DD96F /* IDQUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQUserManager.swift; sourceTree = "<group>"; };
 		39267BB329E82923007DD96F /* IDQStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQStatsView.swift; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 		39962B2E29C9D28C001350F8 /* IDQResultViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultViewViewModel.swift; sourceTree = "<group>"; };
 		39962B3029C9EDA4001350F8 /* IDQResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		399DE06029F46EC9007BD3FF /* IDQGradientLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGradientLabel.swift; sourceTree = "<group>"; };
+		39AE63342A027AE4004A21ED /* IDQTrueOrFalseGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQTrueOrFalseGameView.swift; sourceTree = "<group>"; };
 		39AF9C4329CA22830005AF88 /* IDQResultCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQResultCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		39AFEEEF29FBD2600034F532 /* IDQWeeklyPointsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQWeeklyPointsChartView.swift; sourceTree = "<group>"; };
 		39AFEEF129FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQWeeklyPointsChartViewViewModel.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 				3914C93229B10B300001377B /* IDQPlayView.swift */,
 				3952D1DD29B8AC220061C5C9 /* StartButtonView.swift */,
 				39F42DA829F5818100370125 /* IDQRateTheAppView.swift */,
+				392371EE2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift */,
 				39962B2C29C9CD38001350F8 /* IDQResultView.swift */,
 				3905B24D29E03FFD00E3A632 /* ResultViewSubviews */,
 				39FD9F5629F2AFC500FF1AD2 /* BookmarkedQuestionViews */,
@@ -468,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				39E2256E29B8F71500830F1A /* IDQGameView.swift */,
+				39AE63342A027AE4004A21ED /* IDQTrueOrFalseGameView.swift */,
 				392415C029BA9E9B006D6590 /* CountDownView.swift */,
 				3909BBAB29BDFB7400A97F17 /* IDQGameAnswerCollectionViewCell.swift */,
 				396B6A9229C127990098A4E5 /* IDQAnswerResultView.swift */,
@@ -661,6 +667,7 @@
 				3905B24C29E0372A00E3A632 /* IDQScoreView.swift in Sources */,
 				3914C92529B0EB8A0001377B /* IDQGameViewController.swift in Sources */,
 				3901B87C29EF1A1A00CEECA4 /* IDQSettingsView.swift in Sources */,
+				39AE63352A027AE4004A21ED /* IDQTrueOrFalseGameView.swift in Sources */,
 				39F42DA929F5818100370125 /* IDQRateTheAppView.swift in Sources */,
 				39E0707D29EC719200AE1858 /* IDQTrophyView.swift in Sources */,
 				3920A1B029EAFBEE001A1522 /* IDQUser+CoreDataProperties.swift in Sources */,
@@ -717,6 +724,7 @@
 				3901B89129F0641900CEECA4 /* IDQSettingsViewCell.swift in Sources */,
 				3920A1AF29EAFBEE001A1522 /* IDQUser+CoreDataClass.swift in Sources */,
 				3920A1AE29EAFBEE001A1522 /* IDQQuizResult+CoreDataProperties.swift in Sources */,
+				392371EF2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift in Sources */,
 				3920A1AB29EAFBEE001A1522 /* IDQDifficultyMetrics+CoreDataClass.swift in Sources */,
 				399DE06129F46EC9007BD3FF /* IDQGradientLabel.swift in Sources */,
 				39EE86F129FD2265009061D6 /* IDQWeeklyPointsChartViewTitle.swift in Sources */,

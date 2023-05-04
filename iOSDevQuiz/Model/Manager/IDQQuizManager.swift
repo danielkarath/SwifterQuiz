@@ -17,7 +17,14 @@ final class IDQQuizManager {
         let disabledQuestions: [IDQQuestion] = user.disabledQuestions as! [IDQQuestion]
         var questions: [IDQQuestion] = []
         var optionalQuestions: [IDQQuestion] = []
-        for question in fullQuestionList {
+        
+        var questionList: [IDQQuestion] = fullQuestionList
+        if game.type == .trueOrFalse {
+            questionList = trueOrFalseQuestionList 
+        }
+        
+        
+        for question in questionList {
             
             if !disabledQuestions.contains(where: { $0.question == question.question }) {
                 if game.topics.contains(question.topic) {

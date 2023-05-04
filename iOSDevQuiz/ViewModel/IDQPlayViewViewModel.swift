@@ -22,7 +22,7 @@ final class IDQPlayViewViewModel {
     
     private let idqGameList: [IDQGame] = [
         IDQGame(gameName: "Default", type: .basic, questionTimer: .gazelle, topics: [.basics, .uikit], numberOfQuestions: 10),
-        IDQGame(gameName: "True Or False", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics, .cloudKit, .combine, .cloudKit], numberOfQuestions: 15),
+        IDQGame(gameName: "True Or False", type: .trueOrFalse, questionTimer: .zebra, topics: [.basics, .cloudKit, .combine, .cloudKit], numberOfQuestions: 10),
         IDQGame(gameName: "Count Down", type: .trueOrFalse, questionTimer: .cheetah, topics: [.basics], numberOfQuestions: 15),
         IDQGame(gameName: "Tester", type: .basic, questionTimer: .cheetah, topics: [.basics, .uikit], numberOfQuestions: 2),
     ]

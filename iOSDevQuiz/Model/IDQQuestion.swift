@@ -47,13 +47,13 @@ class IDQQuestionArrayValueTransformer: ValueTransformer {
     }
 }
 
-let fullQuestionList = unserializedQuestionList.enumerated().map { (index, question) in
+let fullQuestionList = quickQuizQuestionList.enumerated().map { (index, question) in
     var updatedQuestion = question
     updatedQuestion.questionSerialNum = index + 1
     return updatedQuestion
 }
 
-let unserializedQuestionList: [IDQQuestion] = [
+let quickQuizQuestionList: [IDQQuestion] = [
     
     //MARK: - Basics
     
@@ -1523,3 +1523,174 @@ let unserializedQuestionList: [IDQQuestion] = [
     
 ]
 
+
+
+
+
+
+
+
+//MARK: TRUE OR FALSE QUESTIONS
+
+
+
+
+let trueOrFalseQuestionList: [IDQQuestion] = [
+    
+    //MARK: - Basics
+    
+    IDQQuestion(
+        question: "The below print statement would return 4\n\nlet x = -8.0 % 2\nprint(x)",
+        questionSerialNum: 0,
+        explanation: "The reminder operator does not work with floating point numbers. The code would return an error.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/basicoperators#Remainder-Operator",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The below code contains an error.\n\n4 <> 5",
+        questionSerialNum: 0,
+        explanation: "It'd return an error. The unequal comparison operator in Swift is !=",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/basicoperators#Comparison-Operators",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In Swift it's possible to use emojis in variable names.",
+        questionSerialNum: 0,
+        explanation: "Initialization is the creation of a data object.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics#Naming-Constants-and-Variables",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The console would print out \"a\"\n\nlet apple = \"apple\"\nif apple.contains(\"a\") {\n    print(\"a\")\n}",
+        questionSerialNum: 0,
+        explanation: "True, the String type conforms to Collection protocol, meaning that a String can be treated as a collection of Characters. The contains method works on sequences so it works on Strings.",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/swift/string",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The below code contains an error\n\nvar a: Int = nil",
+        questionSerialNum: 0,
+        explanation: "True, It'd return an error because you can only assign nil to optional variable or constant. \nThe correct code would be var a: Int? = nil",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics#Optionals",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In Swift optionals of any type can be set to nil",
+        questionSerialNum: 0,
+        explanation: "True, you can assign the nil value to any optional type in Swift",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics#Optionals",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "You cannot declare a constant with a nil",
+        questionSerialNum: 0,
+        explanation: "False, you can assign the nil value to any optional type in Swift. You can assign it to variables or constants too.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics#Optionals",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In Swift the nil is a pointer to a non-existent object",
+        questionSerialNum: 0,
+        explanation: "False, In Swift nil is just the absence of an optionals value. In Objective-C, however, nil is indeed a pointer.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics#Optionals",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "A ternary conditional operator ensures that certain conditions are met before executing the rest of the code in a function or method. ",
+        questionSerialNum: 0,
+        explanation: "False, the ternary conditional operator uses three parts, a conditional and two possible values based on the conditional.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/basicoperators#Ternary-Conditional-Operator",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "A ternary conditional operator cannot use optinals in it's conditional.",
+        questionSerialNum: 0,
+        explanation: "True, the ternary conditional operator must return a value based on a conditional that cannot be nil.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/basicoperators#Ternary-Conditional-Operator",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The below code contains an error\n\nfor fruit in [..<5] {\n\tprint(fruit)\n}",
+        questionSerialNum: 0,
+        explanation: "False, the code is correct. You can use one-sided ranges in for statments. In the example above it iterates through the array as long as the index is smaller than 2",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/basicoperators#One-Sided-Ranges",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+]

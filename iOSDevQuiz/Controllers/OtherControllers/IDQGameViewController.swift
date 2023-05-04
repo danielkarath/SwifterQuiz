@@ -16,6 +16,7 @@ final class IDQGameViewController: UIViewController {
     //private let viewModel = IDQResultViewViewModel()
     
     private let qameView = IDQGameView()
+    private let trueOrFalseGameView = IDQTrueOrFalseGameView()
     
     private var quizRoundCounter: Int = 0
         
@@ -38,9 +39,17 @@ final class IDQGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = IDQConstants.backgroundColor
-        setupConstraints()
-        startQuiz()
+        if game.type == .basic {
+            setupConstraints(for: qameView)
+            startQuiz(with: qameView)
+        } else if game.type == .trueOrFalse {
+            setupConstraints(for: trueOrFalseGameView)
+            startQuiz(with: trueOrFalseGameView)
+        } else {
+            print("jajj")
+        }
         qameView.delegate = self
+        trueOrFalseGameView.delegate = self
         let chevronImage = UIImage(systemName: "chevron.left")!
         //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
         let menuButton = UIBarButtonItem(image: chevronImage, title: "End Quiz", color: IDQConstants.errorColor, target: self, action: #selector(menuButtonTapped))
@@ -49,19 +58,27 @@ final class IDQGameViewController: UIViewController {
         navigationItem.leftBarButtonItem = menuButton
     }
     
-    private func setupConstraints() {
-        view.addSubview(qameView)
+    private func setupConstraints(for selectedView: UIView) {
+        view.addSubview(selectedView)
         NSLayoutConstraint.activate([
-            qameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -16),
-            qameView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
-            qameView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0),
-            qameView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            selectedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -16),
+            selectedView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0),
+            selectedView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0),
+            selectedView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
         ])
     }
 
-    private func startQuiz() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.qameView.configure(with: self.questions, game: self.game)
+    private func startQuiz(with selectedView: UIView) {
+        if selectedView == qameView {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.qameView.configure(with: self.questions, game: self.game)
+            }
+        } else if selectedView == trueOrFalseGameView {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.trueOrFalseGameView.configure(with: self.questions, game: self.game)
+            }
+        } else {
+            print("jajjj again")
         }
     }
     
@@ -113,4 +130,23 @@ extension IDQGameViewController: IDQGameViewDelegate {
         detailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(detailVC, animated: true)
     }
+}
+
+extension IDQGameViewController: IDQTrueOrFalseGameViewDelegate {
+    func idqTrueOrFalseGameView(_ idqTrueOrFalseGameView: IDQTrueOrFalseGameView, didFinish quiz: IDQQuiz) {
+        let detailVC = IDQGameResultViewController(quiz: quiz)
+        detailVC.navigationItem.largeTitleDisplayMode = .never
+        detailVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func idqTrueOrFalseGameView(_ idqTrueOrFalseGameView: IDQTrueOrFalseGameView, didTapExit: Bool) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func idqTrueOrFalseGameView(_ idqTrueOrFalseGameView: IDQTrueOrFalseGameView, questionCounter: Int) {
+        quizRoundCounter = questionCounter
+    }
+    
+    
 }
