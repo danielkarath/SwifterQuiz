@@ -47,6 +47,14 @@ class IDQPlayView: UIView { //852 393
     
     private let gradientView = UIView()
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        let menuButtonWidth: CGFloat = UIScreen.screenWidth < 1000 ? UIScreen.screenWidth * 0.80 : 720
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentSize = CGSize(width: menuButtonWidth, height: menuButtonWidth + 20)
+        return scrollView
+    }()
+    
     private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.hidesWhenStopped = true
@@ -138,22 +146,13 @@ class IDQPlayView: UIView { //852 393
         return button
     }()
     
-    private let quizOptionsButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
-    
-    private let questionBankButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
-    
     //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        addSubviews(gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, quizOptionsButton, questionBankButton, startButtonView, rateTheAppView, startTrueOrFalseButtonView, bookmarkedQuestionsButton, quickQuizDescriptionLabel, trueOrFalseDescriptionLabel)
+        addSubviews(scrollView, gradientView, topBackgroundView, appIconMiniImageView, titleLabel, subTitle, bookmarkedQuestionsButton)
+        scrollView.addSubviews(rateTheAppView, startButtonView, quickQuizDescriptionLabel, startTrueOrFalseButtonView, trueOrFalseDescriptionLabel)
         setupConstraints()
         let quickQuizTapGesture = UITapGestureRecognizer(target: self, action: #selector(startViewTapped(_:)))
         let trueOrFalseTapGesture = UITapGestureRecognizer(target: self, action: #selector(trueOrFalseViewTapped(_:)))
@@ -258,10 +257,16 @@ class IDQPlayView: UIView { //852 393
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             titleLabel.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 0),
             
+            scrollView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
+            scrollView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            scrollView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            
             startButtonView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
             startButtonView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
             startButtonView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            startButtonView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
+            //startButtonView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
+            startButtonView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
             
             quickQuizDescriptionLabel.heightAnchor.constraint(equalToConstant: 60),
             quickQuizDescriptionLabel.topAnchor.constraint(equalTo: startButtonView.bottomAnchor, constant: descriptionLabelTopOffset),
@@ -281,17 +286,8 @@ class IDQPlayView: UIView { //852 393
             rateTheAppView.heightAnchor.constraint(equalToConstant: 1.80*menuButtonHight),
             rateTheAppView.widthAnchor.constraint(equalToConstant: menuButtonWidth),
             rateTheAppView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            rateTheAppView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
-            
-            quizOptionsButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
-            quizOptionsButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
-            quizOptionsButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            quizOptionsButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: CGFloat(56+menuButtonHight)),
-            
-            questionBankButton.heightAnchor.constraint(equalToConstant: menuButtonHight),
-            questionBankButton.widthAnchor.constraint(equalToConstant: menuButtonWidth),
-            questionBankButton.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            questionBankButton.topAnchor.constraint(equalTo: quizOptionsButton.bottomAnchor, constant: 14),
+            //rateTheAppView.topAnchor.constraint(equalTo: topBackgroundView.bottomAnchor, constant: menuTopDistance),
+            rateTheAppView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
         ])
     }
     
@@ -324,25 +320,6 @@ class IDQPlayView: UIView { //852 393
             button.backgroundColor = backgroundColor
             button.addAttributedTitle(title: title, fontSize: menuButtonFontSize, fontColor: IDQConstants.basicFontColor, highlightColor: IDQConstants.highlightFontColor)
         }
-        switch button {
-        case quizOptionsButton:
-            button.addTarget(self, action: #selector(optionsButtonTapped(_:)), for: .touchUpInside)
-        case questionBankButton:
-            button.addTarget(self, action: #selector(questionBankButtonTapped(_:)), for: .touchUpInside)
-        default:
-            print("ERROR - UNKNOWN value: Unknown button found while trying to setup setupButtons in IDQPlayView")
-        }
-    }
-    
-    
-    @objc
-    private func optionsButtonTapped(_ sender: UIButton) {
-        
-    }
-    
-    @objc
-    private func questionBankButtonTapped(_ sender: UIButton) {
-        
     }
     
     @objc func bookmarkedQuestionsButtonTapped(_ sender: UIButton){

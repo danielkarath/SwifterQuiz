@@ -48,6 +48,7 @@ class IDQTrueOrFalseGameView: UIView {
     private var questionStartDate: Date = Date.currentTime
     private var questionEndDate: Date?
     private var quizTimeSpent: TimeInterval = 0
+    private var tagNum: Int = 1
     
     private var didAnswer: Bool = false
     
@@ -130,6 +131,57 @@ class IDQTrueOrFalseGameView: UIView {
         label.textColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.15)
         label.font = IDQConstants.setFont(fontSize: 40, isBold: true)
         label.layer.zPosition = 2
+        return label
+    }()
+    
+    private let pointsIconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 4
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = IDQConstants.backgroundColor.withAlphaComponent(1.00)
+        imageView.isAccessibilityElement = false
+        imageView.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        imageView.clipsToBounds = true
+
+        // Set the image
+        let image = UIImage(systemName: "trophy.fill")?.withRenderingMode(.alwaysTemplate)
+
+        // Create a gradient layer
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = imageView.bounds
+
+        // Create a mask using the image
+        let maskLayer = CALayer()
+        maskLayer.contents = image?.cgImage
+
+        // Add inner padding
+        let padding: CGFloat = 4
+        let paddedFrame = CGRect(x: padding, y: padding, width: imageView.bounds.width - padding * 2, height: imageView.bounds.height - padding * 2)
+
+        maskLayer.frame = paddedFrame
+
+        gradientLayer.colors = [IDQConstants.highlightedLightOrange.cgColor, IDQConstants.highlightedDarkOrange.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+
+        gradientLayer.mask = maskLayer
+
+        // Add the gradient layer to the image view's layer
+        imageView.layer.addSublayer(gradientLayer)
+
+        return imageView
+    }()
+    
+    private var pointsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "0"
+        label.numberOfLines = 1
+        label.textAlignment = .right
+        label.textColor = IDQConstants.basicFontColor //.clear.withAlphaComponent(0)
+        label.font = IDQConstants.setFont(fontSize: 18, isBold: true)
+        label.layer.zPosition = 3
         return label
     }()
     
@@ -258,7 +310,7 @@ class IDQTrueOrFalseGameView: UIView {
     @objc
     private func orientationDidChange() {
         var fontSize: CGFloat = 13
-        if UIScreen.screenHeight < 980 {
+        if UIScreen.screenHeight < 900 {
             fontSize = 13.0
         } else if UIScreen.screenHeight < 1100 {
             fontSize = 18.0
@@ -312,7 +364,7 @@ class IDQTrueOrFalseGameView: UIView {
         updateShadow()
         
         var fontSize: CGFloat = 13.0
-        if UIScreen.screenHeight < 980 {
+        if UIScreen.screenHeight < 900 {
             fontSize = 13.0
         } else if UIScreen.screenHeight < 1100 {
             fontSize = 18.0
@@ -326,6 +378,7 @@ class IDQTrueOrFalseGameView: UIView {
         questionLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: false)
         questionNumberLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         difficultyLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
+        
     }
     
     private func updateShadow() {
@@ -374,7 +427,7 @@ class IDQTrueOrFalseGameView: UIView {
             cardWidth = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight * 0.40) : (UIScreen.screenHeight * 0.50)
         }
         
-        addSubviews(spinner, overlayView, decisionLabel, cardView, countDownView, answerResultView, exitView, trueGradient, falseGradient, trueDecisionIndicatorLabel, falseDecisionIndicatorLabel)
+        addSubviews(spinner, overlayView, decisionLabel, cardView, countDownView, answerResultView, exitView, trueGradient, falseGradient, trueDecisionIndicatorLabel, falseDecisionIndicatorLabel, pointsIconImageView, pointsLabel)
         cardView.addSubview(innerCardView)
         cardView.addSubview(cardBackgroundImageView)
         cardView.sendSubviewToBack(cardBackgroundImageView)
@@ -410,10 +463,18 @@ class IDQTrueOrFalseGameView: UIView {
             countDownView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             countDownView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             
+            pointsIconImageView.topAnchor.constraint(equalTo: topAnchor, constant: -16),
+            pointsIconImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            pointsIconImageView.widthAnchor.constraint(equalToConstant: 32),
+            pointsIconImageView.heightAnchor.constraint(equalToConstant: 32),
+            
+            pointsLabel.centerYAnchor.constraint(equalTo: pointsIconImageView.centerYAnchor, constant: 5),
+            pointsLabel.trailingAnchor.constraint(equalTo: pointsIconImageView.leadingAnchor, constant: -4),
+            pointsLabel.widthAnchor.constraint(equalToConstant: 60),
+            pointsLabel.heightAnchor.constraint(equalToConstant: 20),
+            
             cardView.topAnchor.constraint(equalTo: countDownView.bottomAnchor, constant: 24),
             cardView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            //cardView.heightAnchor.constraint(equalToConstant: cardHeight),
-            //cardView.widthAnchor.constraint(equalToConstant: cardWidth),
             
             cardBackgroundImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 2.5),
             cardBackgroundImageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 2.5),
@@ -472,7 +533,7 @@ class IDQTrueOrFalseGameView: UIView {
         cardViewOriginalTransform = cardView.transform
     }
     
-    func wiggleAnimation(view: UIView) {
+    private func wiggleAnimation(view: UIView) {
         let wiggleDistance: CGFloat = 40.0
         let wiggleDuration: TimeInterval = 0.60
         let rotationAngle: CGFloat = 0.06
@@ -652,13 +713,23 @@ class IDQTrueOrFalseGameView: UIView {
         quizTimeSpent += timeDifference
         
         if answer.answerType == .correct {
-            self.totalScore += 1
-            self.isCorrectArray.append(.correct)
+            totalScore += 1
+            
+            UIView.transition(with: pointsLabel,
+                              duration: 0.25,
+                              options: .transitionCrossDissolve,
+                              animations: { [weak self] in
+                self?.pointsLabel.text = String(self?.totalScore ?? 0)
+            }, completion: { _ in
+                
+            })
+            
+            isCorrectArray.append(.correct)
             spinner.startAnimating()
             configure(with: questions, game: game!)
         } else {
-            self.vibrate(for: .error)
-            self.isCorrectArray.append(.wrong)
+            vibrate(for: .error)
+            isCorrectArray.append(.wrong)
             displayResults()
             countDownView.stopTimer()
             configure(overlay: overlayView)
