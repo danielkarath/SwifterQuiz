@@ -184,8 +184,6 @@ final class IDQUserManager {
         }
         
         guard let previousGameDate = user.lastDatePlayed else {
-            user.streak = 1
-            saveToCoreData()
             print("Could not load previous game while trying to set streak")
             return
         }
@@ -195,11 +193,10 @@ final class IDQUserManager {
         if hasPlayedAlreadyToday {
             if user.streak < 1 {
                 user.streak = 1
-                saveToCoreData()
             }
         } else {
             user.streak += 1
-            saveToCoreData()
         }
+        saveToCoreData()
     }
 }

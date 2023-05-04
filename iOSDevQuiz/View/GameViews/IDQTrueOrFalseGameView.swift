@@ -62,6 +62,11 @@ class IDQTrueOrFalseGameView: UIView {
     private var cardViewOriginalCenter: CGPoint?
     private var cardViewOriginalTransform: CGAffineTransform?
     
+    private var cardHeight: CGFloat = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight*0.70) : (UIScreen.screenHeight*0.50)
+    private var cardWidth: CGFloat = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight * 0.40) : (UIScreen.screenHeight * 0.30)
+    private var cardViewWidthAnchor: NSLayoutConstraint!
+    private var cardViewHeightAnchor: NSLayoutConstraint!
+    
     private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.hidesWhenStopped = true
@@ -85,7 +90,7 @@ class IDQTrueOrFalseGameView: UIView {
     private let trueGradient: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.frame.size = CGSize(width: 100, height: UIScreen.screenHeight)
+        view.frame.size = CGSize(width: 250, height: UIScreen.screenHeight)
         view.backgroundColor = UIColor.clear.withAlphaComponent(0.00)
         view.alpha = 0.0
         view.layer.zPosition = 1
@@ -95,11 +100,37 @@ class IDQTrueOrFalseGameView: UIView {
     private let falseGradient: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.frame.size = CGSize(width: 100, height: UIScreen.screenHeight)
+        view.frame.size = CGSize(width: 250, height: UIScreen.screenHeight)
         view.backgroundColor = UIColor.clear.withAlphaComponent(0.00)
         view.alpha = 0.0
         view.layer.zPosition = 2
         return view
+    }()
+    
+    private let trueDecisionIndicatorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "True"
+        label.alpha = 1.0
+        label.numberOfLines = 1
+        label.textAlignment = .right
+        label.textColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.15)
+        label.font = IDQConstants.setFont(fontSize: 40, isBold: true)
+        label.layer.zPosition = 2
+        return label
+    }()
+    
+    private let falseDecisionIndicatorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "False"
+        label.alpha = 1.0
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.textColor = IDQConstants.secondaryFontColor.withAlphaComponent(0.15)
+        label.font = IDQConstants.setFont(fontSize: 40, isBold: true)
+        label.layer.zPosition = 2
+        return label
     }()
     
     private var decisionLabel: UILabel = {
@@ -110,8 +141,8 @@ class IDQTrueOrFalseGameView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = IDQConstants.basicFontColor //.clear.withAlphaComponent(0)
-        label.font = IDQConstants.setFont(fontSize: 24, isBold: true)
-        label.layer.zPosition = 2
+        label.font = IDQConstants.setFont(fontSize: 28, isBold: true)
+        label.layer.zPosition = 10
         return label
     }()
     
@@ -127,7 +158,7 @@ class IDQTrueOrFalseGameView: UIView {
         view.layer.zPosition = 3
         return view
     }()
-    
+     
     private let innerCardView: UIView = {
         let view = UIView()
         let cardHeight: CGFloat = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight*0.70) : (UIScreen.screenHeight*0.50)
@@ -215,19 +246,55 @@ class IDQTrueOrFalseGameView: UIView {
     //MARK: - deinit
     deinit {
         NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+        print("Traitcollection did change")
         updateShadow()
+    }
+    
+    @objc
+    private func orientationDidChange() {
+        var fontSize: CGFloat = 13
+        if UIScreen.screenHeight < 980 {
+            fontSize = 13.0
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 18.0
+        } else {
+            if !UIDevice.isLandscape {
+                fontSize = 18.0
+            } else {
+                fontSize = 24.0
+            }
+        }
+        if UIDevice.current.orientation.isPortrait {
+            cardHeight = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight*0.70) : (UIScreen.screenHeight*0.75)
+            cardWidth = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight * 0.40) : (UIScreen.screenHeight * 0.50)
+            if UIScreen.screenHeight > 1000 {
+                cardViewWidthAnchor.constant = cardWidth
+                cardViewHeightAnchor.constant = cardHeight
+            }
+        } else {
+            cardHeight = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight*0.70) : (UIScreen.screenHeight*0.50)
+            cardWidth = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight * 0.40) : (UIScreen.screenHeight * 0.30)
+            if UIScreen.screenHeight > 1000 {
+                cardViewWidthAnchor.constant = cardWidth
+                cardViewHeightAnchor.constant = cardHeight
+            }
+        }
+        difficultyLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
+        questionNumberLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
+        questionLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: false)
     }
     
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = IDQConstants.backgroundColor
         NotificationCenter.default.addObserver(self, selector: #selector(didTapExit), name: .exitQuizPressed, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside(_:)))
@@ -240,21 +307,25 @@ class IDQTrueOrFalseGameView: UIView {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         cardView.addGestureRecognizer(panGestureRecognizer)
         
-        var fontSize: CGFloat = 18.0
-        if UIScreen.screenHeight < 980 {
-            fontSize = 18.0
-        } else if UIScreen.screenHeight < 1100 {
-            fontSize = 21.0
-        } else {
-            fontSize = 24.0
-        }
-        
         trueGradient.gradient((IDQConstants.backgroundColor).withAlphaComponent(0.0).cgColor, IDQConstants.correctColor.withAlphaComponent(0.50).cgColor, direction: .horizontal)
         falseGradient.gradient(IDQConstants.errorColor.withAlphaComponent(0.50).cgColor, (IDQConstants.backgroundColor).withAlphaComponent(0.0).cgColor, direction: .horizontal)
-        
-        questionLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: false)
-        difficultyLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
         updateShadow()
+        
+        var fontSize: CGFloat = 13.0
+        if UIScreen.screenHeight < 980 {
+            fontSize = 13.0
+        } else if UIScreen.screenHeight < 1100 {
+            fontSize = 18.0
+        } else {
+            if UIDevice.isLandscape {
+                fontSize = 18.0
+            } else {
+                fontSize = 24.0
+            }
+        }
+        questionLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: false)
+        questionNumberLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
+        difficultyLabel.font = IDQConstants.setFont(fontSize: fontSize, isBold: true)
     }
     
     private func updateShadow() {
@@ -273,12 +344,14 @@ class IDQTrueOrFalseGameView: UIView {
             let foregroundImage = UIImage(named: "cardViewForeground")!
             self.cardBackgroundImageView.image = foregroundImage
             self.cardView.sendSubviewToBack(self.cardBackgroundImageView)
-        }, completion: nil)
+        }, completion: {_ in
+            if self.viewModel.quizRound == 1 {
+                self.wiggleAnimation(view: self.cardView)
+            }
+        })
     }
     
     private func setupConstraints() {
-        let cardHeight: CGFloat = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight*0.70) : (UIScreen.screenHeight*0.50)
-        let cardWidth: CGFloat = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight * 0.40) : (UIScreen.screenHeight * 0.30)
         var answerViewHeight: CGFloat = 300
         var exitViewHeight: CGFloat = 350
         var countDownViewSize: CGFloat = 40.0
@@ -296,7 +369,12 @@ class IDQTrueOrFalseGameView: UIView {
             exitViewHeight = 480
         }
         
-        addSubviews(spinner, overlayView, decisionLabel, cardView, countDownView, answerResultView, exitView, trueGradient, falseGradient) //disableQuestionView
+        if !UIDevice.isLandscape {
+            cardHeight = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight*0.70) : (UIScreen.screenHeight*0.75)
+            cardWidth = UIScreen.screenHeight < 1000 ? (UIScreen.screenHeight * 0.40) : (UIScreen.screenHeight * 0.50)
+        }
+        
+        addSubviews(spinner, overlayView, decisionLabel, cardView, countDownView, answerResultView, exitView, trueGradient, falseGradient, trueDecisionIndicatorLabel, falseDecisionIndicatorLabel)
         cardView.addSubview(innerCardView)
         cardView.addSubview(cardBackgroundImageView)
         cardView.sendSubviewToBack(cardBackgroundImageView)
@@ -309,13 +387,23 @@ class IDQTrueOrFalseGameView: UIView {
             
             trueGradient.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             trueGradient.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            trueGradient.widthAnchor.constraint(equalToConstant: 100),
+            trueGradient.widthAnchor.constraint(equalToConstant: 250),
             trueGradient.heightAnchor.constraint(equalToConstant: UIScreen.screenHeight),
             
             falseGradient.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             falseGradient.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            falseGradient.widthAnchor.constraint(equalToConstant: 100),
+            falseGradient.widthAnchor.constraint(equalToConstant: 250),
             falseGradient.heightAnchor.constraint(equalToConstant: UIScreen.screenHeight),
+            
+            falseDecisionIndicatorLabel.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12),
+            falseDecisionIndicatorLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: -16),
+            falseDecisionIndicatorLabel.widthAnchor.constraint(equalToConstant: 160),
+            falseDecisionIndicatorLabel.heightAnchor.constraint(equalToConstant: 64),
+            
+            trueDecisionIndicatorLabel.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12),
+            trueDecisionIndicatorLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: 16),
+            trueDecisionIndicatorLabel.heightAnchor.constraint(equalToConstant: 64),
+            trueDecisionIndicatorLabel.widthAnchor.constraint(equalToConstant: 160),
             
             countDownView.heightAnchor.constraint(equalToConstant: countDownViewSize),
             countDownView.widthAnchor.constraint(equalToConstant: countDownViewSize),
@@ -324,35 +412,35 @@ class IDQTrueOrFalseGameView: UIView {
             
             cardView.topAnchor.constraint(equalTo: countDownView.bottomAnchor, constant: 24),
             cardView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            cardView.heightAnchor.constraint(equalToConstant: cardHeight),
-            cardView.widthAnchor.constraint(equalToConstant: cardWidth),
+            //cardView.heightAnchor.constraint(equalToConstant: cardHeight),
+            //cardView.widthAnchor.constraint(equalToConstant: cardWidth),
             
-            cardBackgroundImageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            cardBackgroundImageView.centerYAnchor.constraint(equalTo: cardView.centerYAnchor, constant: 0),
-            cardBackgroundImageView.heightAnchor.constraint(equalToConstant: cardHeight - 5),
-            cardBackgroundImageView.widthAnchor.constraint(equalToConstant: cardWidth - 5),
+            cardBackgroundImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 2.5),
+            cardBackgroundImageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 2.5),
+            cardBackgroundImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -2.5),
+            cardBackgroundImageView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -2.5),
             
-            innerCardView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
-            innerCardView.centerYAnchor.constraint(equalTo: cardView.centerYAnchor, constant: 0),
-            innerCardView.heightAnchor.constraint(equalToConstant: cardHeight - 5),
-            innerCardView.widthAnchor.constraint(equalToConstant: cardWidth - 5),
+            innerCardView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 2.5),
+            innerCardView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 2.5),
+            innerCardView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -2.5),
+            innerCardView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -2.5),
             
-            questionLabel.centerXAnchor.constraint(equalTo: innerCardView.centerXAnchor, constant: 0),
-            questionLabel.centerYAnchor.constraint(equalTo: innerCardView.centerYAnchor, constant: -32),
-            questionLabel.heightAnchor.constraint(equalToConstant: cardWidth-32),
-            questionLabel.widthAnchor.constraint(equalToConstant: cardWidth-80),
+            questionLabel.centerYAnchor.constraint(equalTo: innerCardView.centerYAnchor, constant: -48),
+            questionLabel.leadingAnchor.constraint(equalTo: innerCardView.leadingAnchor, constant: 32),
+            questionLabel.trailingAnchor.constraint(equalTo: innerCardView.trailingAnchor, constant: -32),
+            questionLabel.bottomAnchor.constraint(equalTo: innerCardView.bottomAnchor, constant: -64),
             
             questionNumberLabel.topAnchor.constraint(equalTo: innerCardView.topAnchor, constant: 8),
             questionNumberLabel.trailingAnchor.constraint(equalTo: innerCardView.trailingAnchor, constant: -16),
-            questionNumberLabel.widthAnchor.constraint(equalToConstant: 30),
+            questionNumberLabel.widthAnchor.constraint(equalToConstant: 50),
             questionNumberLabel.heightAnchor.constraint(equalToConstant: 24),
             
             difficultyLabel.topAnchor.constraint(equalTo: innerCardView.topAnchor, constant: 8),
             difficultyLabel.leadingAnchor.constraint(equalTo: innerCardView.leadingAnchor, constant: 16),
-            difficultyLabel.widthAnchor.constraint(equalToConstant: 96),
+            difficultyLabel.widthAnchor.constraint(equalToConstant: 130),
             difficultyLabel.heightAnchor.constraint(equalToConstant: 24),
             
-            decisionLabel.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 16),
+            decisionLabel.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 20),
             decisionLabel.widthAnchor.constraint(equalToConstant: 130),
             decisionLabel.heightAnchor.constraint(equalToConstant: 40),
             decisionLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
@@ -373,15 +461,21 @@ class IDQTrueOrFalseGameView: UIView {
             exitView.heightAnchor.constraint(equalToConstant: exitViewHeight),
             
         ])
+        
+        cardViewWidthAnchor = cardView.widthAnchor.constraint(equalToConstant: cardWidth)
+        cardViewHeightAnchor = cardView.heightAnchor.constraint(equalToConstant: cardHeight)
+        
+        cardViewWidthAnchor.isActive = true
+        cardViewHeightAnchor.isActive = true
+        
         cardViewOriginalCenter = cardView.center
         cardViewOriginalTransform = cardView.transform
-        wiggleAnimation(view: cardView)
     }
     
     func wiggleAnimation(view: UIView) {
-        let wiggleDistance: CGFloat = 25.0
-        let wiggleDuration: TimeInterval = 0.4
-        let rotationAngle: CGFloat = 0.03
+        let wiggleDistance: CGFloat = 40.0
+        let wiggleDuration: TimeInterval = 0.60
+        let rotationAngle: CGFloat = 0.06
         
         // Create the left wiggle transform
         let leftTransform = CGAffineTransform(translationX: -wiggleDistance, y: 0).rotated(by: -rotationAngle)
@@ -718,7 +812,7 @@ class IDQTrueOrFalseGameView: UIView {
         questionLabel.configureFor(IDQConstants.keywords)
         if viewModel.isLastQuestion(game: game) {
             if viewModel.quizRound == 1 {
-                countDownView.setupTimer(game: game, delay: 1.40)
+                countDownView.setupTimer(game: game, delay: 1.80)
             }
             self.question = questions[viewModel.quizRound-1]
             questionNumberLabel.text = String(viewModel.quizRound)
