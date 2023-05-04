@@ -207,7 +207,12 @@ final class IDQResultViewViewModel {
     }
     
     public func performanceAnimation(_ label: UILabel, quiz: IDQQuiz) {
-        let maxScore = quiz.questions.count
+        let game = quiz.gamestyle
+        var maxModifier: Int = 0
+        if game.type == .trueOrFalse && quiz.questions.count > 1 && quiz.questions.count >= trueOrFalseQuestionList.count {
+            maxModifier = 1
+        }
+        let maxScore = quiz.questions.count - maxModifier
         let userScore = quiz.totalScore
         let performance: Double = Double(Double(userScore)/Double(maxScore))*100
         

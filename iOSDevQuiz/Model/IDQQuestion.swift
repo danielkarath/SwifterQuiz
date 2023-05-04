@@ -1554,7 +1554,7 @@ let trueOrFalseQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "The below code contains an error.\n\n4 <> 5",
+        question: "The below code contains an ERROR.\n\n4 <> 5",
         questionSerialNum: 0,
         explanation: "It'd return an error. The unequal comparison operator in Swift is !=",
         reference: .swiftDocumentation,
@@ -1596,7 +1596,7 @@ let trueOrFalseQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "The below code contains an error\n\nvar a: Int = nil",
+        question: "The below code contains an ERROR\n\nvar a: Int = nil",
         questionSerialNum: 0,
         explanation: "True, It'd return an error because you can only assign nil to optional variable or constant. \nThe correct code would be var a: Int? = nil",
         reference: .swiftDocumentation,
@@ -1680,11 +1680,249 @@ let trueOrFalseQuestionList: [IDQQuestion] = [
     ),
     
     IDQQuestion(
-        question: "The below code contains an error\n\nfor fruit in [..<5] {\n\tprint(fruit)\n}",
+        question: "The below code contains an ERROR\n\nfor fruit in [..<5] {\n\tprint(fruit)\n}",
         questionSerialNum: 0,
         explanation: "False, the code is correct. You can use one-sided ranges in for statments. In the example above it iterates through the array as long as the index is smaller than 2",
         reference: .swiftDocumentation,
         referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/basicoperators#One-Sided-Ranges",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The below code contains an ERROR\n\nvar scores = Array(repeating: 5, count: 8)",
+        questionSerialNum: 0,
+        explanation: "In Swift it's possible to initialize a default array. In the code example an Array of Intigers is generated with 8 elements. Each element has the value 5",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Creating-an-Array-with-a-Default-Value",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The first item of an Array in Swift has the index 0",
+        questionSerialNum: 0,
+        explanation: "The first item in the array has an index of 0, not 1. Arrays in Swift are always zero-indexed.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Accessing-and-Modifying-an-Array",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The number 2 will be printed on the console:\nlet numbers = [1, 2, 3, 4, 5]\nprint(numbers.first)",
+        questionSerialNum: 0,
+        explanation: "The first instance property returns the first element of a collection\nIn this case the number 1 is the first which'd have the index 0",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/swift/array/first",
+        difficulty: .veryEasy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Sets conform to the Hashable protocol by default",
+        questionSerialNum: 0,
+        explanation: "Sets conform to the Hasable protocol by default.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Hash-Values-for-Set-Types",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Arrays conform to the Hashable protocol by default",
+        questionSerialNum: 0,
+        explanation: "No, by default Sets conform to the Hasable protocol.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Hash-Values-for-Set-Types",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "A common attribute of Arrays and Sets is that they both contain an order collection of items.",
+        questionSerialNum: 0,
+        explanation: "No, Arrays have an orderd list of items but Sets don't.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Sets",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Sets can only store unique values of the same type",
+        questionSerialNum: 0,
+        explanation: "Yes, Sets can only store unique values of the same type.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Sets",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The below code does NOT contain ERRORs\n\nvar a: Set = [1, 2, 3]\nvar b: Set = [1, 4, 8]\nvar c = a + b",
+        questionSerialNum: 0,
+        explanation: "False, because you cannot use binary operators on Sets. Instead you can use the union function. This prevents the Sets from forming duplicated values.",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/swift/set#2845530",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The sorted() method converts a Set into an Array by descending order.",
+        questionSerialNum: 0,
+        explanation: "It's false. Although the sorted() method does convert Sets into Array but it's order is ascending by default.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Iterating-Over-a-Set",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "The sorted() method converts a Set into an Array by descending order.",
+        questionSerialNum: 0,
+        explanation: "It's false. Although the sorted() method does convert Sets into Array but it's order is ascending by default.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Iterating-Over-a-Set",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Generally, Sets can be searched faster because of the uniqueness of their elements.",
+        questionSerialNum: 0,
+        explanation: "Since Sets guarantee unique elements, there is no need to perform additional checks when inserting an element. In contrast, ensuring uniqueness in Arrays requires extra work.",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/swift/set#2845530",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In the below code, the modifiedPrimes has a type of Array<String>\n\nvar primes: Set = [2, 3, 5, 7, 11]\nlet modifiedPrimes = primes.map(String.init)",
+        questionSerialNum: 0,
+        explanation: "This is true. By default sequence operations return an Array or a type-erasing collection wrapper when used on Sets",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/swift/set#2845530",
+        difficulty: .medium,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "A common attribute of Dictionaries and Sets is that they both contain an unordered collection of items.",
+        questionSerialNum: 0,
+        explanation: "This is true.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Dictionaries",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "In a dictionary each value must be associated with a unique key which acts as an identifier for that value.",
+        questionSerialNum: 0,
+        explanation: "This is true.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Dictionaries",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "false", answerType: .wrong),
+            IDQAnswer(text: "true", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Dictionaries have a fixed size.",
+        questionSerialNum: 0,
+        explanation: "This is false. Tuples have a fixed size, dictionaries are dynamic just like Arrays and Sets.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Creating-an-Empty-Dictionary",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Dictionaries have a fixed size.",
+        questionSerialNum: 0,
+        explanation: "This is false. Tuples have a fixed size, dictionaries are dynamic just like Arrays and Sets.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Creating-an-Empty-Dictionary",
+        difficulty: .easy,
+        topic: .basics,
+        answers: [
+            IDQAnswer(text: "true", answerType: .wrong),
+            IDQAnswer(text: "false", answerType: .correct)
+        ]
+    ),
+    
+    IDQQuestion(
+        question: "Dictionaries can have different types in them",
+        questionSerialNum: 0,
+        explanation: "This is false. Tuples have different types, dictionaries can't.",
+        reference: .swiftDocumentation,
+        referenceURLString: "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes#Dictionaries",
         difficulty: .easy,
         topic: .basics,
         answers: [

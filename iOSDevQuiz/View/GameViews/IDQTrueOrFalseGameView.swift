@@ -350,6 +350,7 @@ class IDQTrueOrFalseGameView: UIView {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside(_:)))
+        cardView.addGestureRecognizer(tapGesture)
         overlayView.addGestureRecognizer(tapGesture)
         
         let swipeGestureExitView = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeExitView(_:)))
@@ -393,7 +394,7 @@ class IDQTrueOrFalseGameView: UIView {
     }
     
     private func cardFlipAnimation() {
-        UIView.transition(with: cardView, duration: 0.50, options: .transitionFlipFromLeft, animations: {
+        UIView.transition(with: self.cardView, duration: 0.50, options: .transitionFlipFromLeft, animations: {
             let foregroundImage = UIImage(named: "cardViewForeground")!
             self.cardBackgroundImageView.image = foregroundImage
             self.cardView.sendSubviewToBack(self.cardBackgroundImageView)
@@ -561,7 +562,7 @@ class IDQTrueOrFalseGameView: UIView {
     }
     
     private func startViewAnimations() {
-        guard let question = question else { return }
+        guard let question = question, let game = self.game else { return }
         self.spinner.stopAnimating()
         self.didAnswer = false
         self.difficultyLabel.text = question.difficulty.rawValue
@@ -575,18 +576,44 @@ class IDQTrueOrFalseGameView: UIView {
         }
         self.answers = shuffledAnswers
         
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            UIView.animate(withDuration: 0.50, delay: 0.0) {
-                self.answerResultView.isHidden = false
-                self.cardFlipAnimation()
+        if viewModel.quizRound != 1 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
+                UIView.animate(withDuration: 0.30) {
+                    self.cardView.alpha = 1.0
+                }
             }
             
-            UIView.animate(withDuration: 0.25, delay: 0.20) {
-                self.innerCardView.alpha = 1.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.00) {
+                UIView.animate(withDuration: 0.50, delay: 0.50) {
+                    self.answerResultView.isHidden = false
+                    self.cardFlipAnimation()
+                }
+                
+                UIView.animate(withDuration: 0.25, delay: 0.10) {
+                    self.innerCardView.alpha = 1.0
+                }
+                
+                UIView.animate(withDuration: 0.60, delay: 1.20) {
+                    self.countDownView.alpha = 1.0
+                    self.countDownView.unpauseTimer(game: game)
+                }
             }
             
-            UIView.animate(withDuration: 0.60, delay: 0.50) {
-                self.countDownView.alpha = 1.0
+            
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                UIView.animate(withDuration: 0.50, delay: 0.50) {
+                    self.answerResultView.isHidden = false
+                    self.cardFlipAnimation()
+                }
+                
+                UIView.animate(withDuration: 0.25, delay: 0.10) {
+                    self.innerCardView.alpha = 1.0
+                }
+                
+                UIView.animate(withDuration: 0.60, delay: 1.20) {
+                    self.countDownView.alpha = 1.0
+                }
             }
         }
         
@@ -688,6 +715,13 @@ class IDQTrueOrFalseGameView: UIView {
                         didAnswer(answer: answer)
                     }
                 }
+                trueGradient.alpha = 0.0
+                falseGradient.alpha = 0.0
+                cardView.alpha = 0.0
+                UIView.animate(withDuration: 0.25) {
+                    self.cardView.center = self.cardViewOriginalCenter!
+                    self.cardView.transform = originalTransform
+                }
             } else if xPosition > (self.center.x + threshold) {
                 print("True")
                 for answer in question.answers {
@@ -695,19 +729,28 @@ class IDQTrueOrFalseGameView: UIView {
                         didAnswer(answer: answer)
                     }
                 }
-            }
-            trueGradient.alpha = 0.0
-            falseGradient.alpha = 0.0
-            UIView.animate(withDuration: 0.25) {
-                self.cardView.center = self.cardViewOriginalCenter!
-                self.cardView.transform = originalTransform
+                trueGradient.alpha = 0.0
+                falseGradient.alpha = 0.0
+                cardView.alpha = 0.0
+                UIView.animate(withDuration: 0.25) {
+                    self.cardView.center = self.cardViewOriginalCenter!
+                    self.cardView.transform = originalTransform
+                }
+            } else {
+                trueGradient.alpha = 0.0
+                falseGradient.alpha = 0.0
+                UIView.animate(withDuration: 0.25) {
+                    self.cardView.center = self.cardViewOriginalCenter!
+                    self.cardView.transform = originalTransform
+                }
             }
         }
     }
     
     private func didAnswer(answer: IDQAnswer) {
         guard let question = self.question else {return}
-        
+        delegate?.idqTrueOrFalseGameView(self, questionCounter: viewModel.quizRound)
+        countDownView.pauseTimer()
         questionEndDate = Date.currentTime
         let timeDifference = (questionEndDate?.timeIntervalSince(questionStartDate))!
         quizTimeSpent += timeDifference

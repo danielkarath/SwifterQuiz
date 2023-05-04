@@ -68,6 +68,10 @@ final class IDQGameViewViewModel {
         if adjustedQuizDuration < 0 {
             adjustedQuizDuration = 0
         }
+        var totalScoreModifier = 0
+        if questions.count > 1 {
+            totalScoreModifier = 1
+        }
         let questionsTuple = createQuestionTuples(with: questions, with: answerArray, for: game)
         let quiz = IDQQuiz(
             gamestyle: game,

@@ -15,7 +15,7 @@ final class IDQGameViewController: UIViewController {
         
     //private let viewModel = IDQResultViewViewModel()
     
-    private let qameView = IDQGameView()
+    private let gameView = IDQGameView()
     private let trueOrFalseGameView = IDQTrueOrFalseGameView()
     
     private var quizRoundCounter: Int = 0
@@ -40,18 +40,17 @@ final class IDQGameViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = IDQConstants.backgroundColor
         if game.type == .basic {
-            setupConstraints(for: qameView)
-            startQuiz(with: qameView)
+            setupConstraints(for: gameView)
+            startQuiz(with: gameView)
         } else if game.type == .trueOrFalse {
             setupConstraints(for: trueOrFalseGameView)
             startQuiz(with: trueOrFalseGameView)
         } else {
             print("jajj")
         }
-        qameView.delegate = self
+        gameView.delegate = self
         trueOrFalseGameView.delegate = self
         let chevronImage = UIImage(systemName: "chevron.left")!
-        //let menuButton = UIBarButtonItem(title: "Menu", image: chevronImage, target: self, action: #selector(menuButtonTapped))
         let menuButton = UIBarButtonItem(image: chevronImage, title: "End Quiz", color: IDQConstants.errorColor, target: self, action: #selector(menuButtonTapped))
         menuButton.titlePositionAdjustment(for: .default)
         menuButton.title = "End Quiz"
@@ -69,9 +68,9 @@ final class IDQGameViewController: UIViewController {
     }
 
     private func startQuiz(with selectedView: UIView) {
-        if selectedView == qameView {
+        if selectedView == gameView {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.qameView.configure(with: self.questions, game: self.game)
+                self.gameView.configure(with: self.questions, game: self.game)
             }
         } else if selectedView == trueOrFalseGameView {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
