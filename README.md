@@ -1,5 +1,7 @@
 # SwifterQuiz
 
+<img width="1145" alt="Github Swifter Banner" src="https://user-images.githubusercontent.com/26801446/236675380-536b558d-b2f3-48f3-8788-3c0deb3a35fa.png">
+
 A trivia style app that tests your Swift knowledge on the go. It was built with both SwiftUI & UIKit and does not contain any 3rd party dependencies.
 
 # About
