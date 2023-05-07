@@ -15,6 +15,7 @@ I added a timer to these quizes so to make the quiz resemble more to a technical
 <p align="center">
   <img width="200" alt="BaseBackground_2796x1290_1" src="https://user-images.githubusercontent.com/26801446/236674182-30c80c1b-383e-4c30-8f8a-4f1707479802.png" />
   <img width="200" alt="BaseBackground_2796x1290_2" src="https://user-images.githubusercontent.com/26801446/236674198-30df0ab5-cf27-4f63-8f88-5cab0ccbf417.png" />
+  <img width="200" alt="BaseBackground_2208x1242_3" src="https://user-images.githubusercontent.com/26801446/236674624-6dd30dec-9df9-4ed5-b942-de33e7c6773a.png" />
 </p>
 
 # What I learned?
