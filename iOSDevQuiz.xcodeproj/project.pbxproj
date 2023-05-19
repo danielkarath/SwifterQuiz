@@ -47,6 +47,8 @@
 		3920A1B129EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A1A929EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift */; };
 		3920A1B229EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A1AA29EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift */; };
 		3920A1B429EAFCA2001A1522 /* IDQDifficultyMetricManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920A1B329EAFCA2001A1522 /* IDQDifficultyMetricManager.swift */; };
+		392216D52A17993600A9D4FE /* IDQDonationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392216D42A17993600A9D4FE /* IDQDonationResultView.swift */; };
+		392216D92A17A58500A9D4FE /* IDQParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392216D82A17A58500A9D4FE /* IDQParticle.swift */; };
 		392371EF2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392371EE2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift */; };
 		392415C129BA9E9B006D6590 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392415C029BA9E9B006D6590 /* CountDownView.swift */; };
 		39267BA929E81742007DD96F /* IDQUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39267BA829E81742007DD96F /* IDQUserManager.swift */; };
@@ -175,6 +177,8 @@
 		3920A1A929EAFBEE001A1522 /* IDQTopicMetrics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQTopicMetrics+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3920A1AA29EAFBEE001A1522 /* IDQTopicMetrics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDQTopicMetrics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3920A1B329EAFCA2001A1522 /* IDQDifficultyMetricManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQDifficultyMetricManager.swift; sourceTree = "<group>"; };
+		392216D42A17993600A9D4FE /* IDQDonationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQDonationResultView.swift; sourceTree = "<group>"; };
+		392216D82A17A58500A9D4FE /* IDQParticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQParticle.swift; sourceTree = "<group>"; };
 		392371EE2A018F09005EDA8D /* StartTrueOrFalseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrueOrFalseButtonView.swift; sourceTree = "<group>"; };
 		392415C029BA9E9B006D6590 /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		39267BA829E81742007DD96F /* IDQUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQUserManager.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				3901B87B29EF1A1A00CEECA4 /* IDQSettingsView.swift */,
+				392216D42A17993600A9D4FE /* IDQDonationResultView.swift */,
 				3901B89029F0641900CEECA4 /* IDQSettingsViewCell.swift */,
 				3901B88129EF33EE00CEECA4 /* IDQAboutView.swift */,
 				3901B88729EFF42600CEECA4 /* AboutViewSubviews_SwiftUI */,
@@ -363,6 +368,7 @@
 				3914C92F29B0FBE90001377B /* IDQExtensions.swift */,
 				39EA5AB129F19C3A00E52DB1 /* IDQHighlightEffectViewModifier.swift */,
 				399DE06029F46EC9007BD3FF /* IDQGradientLabel.swift */,
+				392216D82A17A58500A9D4FE /* IDQParticle.swift */,
 				39F42DAA29F5826E00370125 /* IDQGradientImageView.swift */,
 			);
 			path = Resources;
@@ -656,7 +662,9 @@
 				3952D1E929B8DA530061C5C9 /* IDQAnswer.swift in Sources */,
 				3901B88429EFE74A00CEECA4 /* IDQDismissButtonView.swift in Sources */,
 				3914C93029B0FBE90001377B /* IDQExtensions.swift in Sources */,
+				392216D92A17A58500A9D4FE /* IDQParticle.swift in Sources */,
 				3960970F29EEA7BF0061F658 /* IDQDaytimeActivityGroup+CoreDataClass.swift in Sources */,
+				392216D52A17993600A9D4FE /* IDQDonationResultView.swift in Sources */,
 				39962B2D29C9CD38001350F8 /* IDQResultView.swift in Sources */,
 				39962B2F29C9D28C001350F8 /* IDQResultViewViewModel.swift in Sources */,
 				39EA5AB229F19C3A00E52DB1 /* IDQHighlightEffectViewModifier.swift in Sources */,

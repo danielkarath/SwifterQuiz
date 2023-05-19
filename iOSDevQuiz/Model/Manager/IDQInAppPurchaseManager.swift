@@ -7,18 +7,34 @@
 
 import Foundation
 import StoreKit
+import Combine
 
-final class IDQInAppPurchaseManager: NSObject {
+final class IDQInAppPurchaseManager: NSObject, ObservableObject {
+    
+    override init() {
+        super.init()
+        SKPaymentQueue.default().add(self)
+    }
     
     enum IDQProduct: String, CaseIterable {
         case IDQ_BuyMeCoffee
         
+    }
+    
+    enum PurchaseState {
+        case none
+        case purchasing
+        case purchased
+        case failed
+        case restored
     }
         
     //MARK: - Public
     static let shared = IDQInAppPurchaseManager()
     
     public var products: [SKProduct] = []
+    @Published public var purchaseState: PurchaseState = .none
+    @Published public var purchaseError: SKError?
     
     public func fetchProducts() {
         //DispatchQueue.global(qos: .background).async {
@@ -50,14 +66,17 @@ extension IDQInAppPurchaseManager: SKPaymentTransactionObserver {
             switch $0.transactionState {
             case .purchasing:
                 if let product = IDQProduct(rawValue: $0.payment.productIdentifier) {
+                    purchaseState = .purchasing
                     print("Atempting to purchase the product: \(product.rawValue)")
                 }
             case .purchased:
                 if let product = IDQProduct(rawValue: $0.payment.productIdentifier) {
+                    purchaseState = .purchased
                     print("Successful transaction for the product: \(product.rawValue)")
                 }
                 SKPaymentQueue.default().finishTransaction($0)
             case .failed:
+                purchaseState = .failed
                 if let error = $0.error as? SKError {
                     switch error.code {
                     case .paymentCancelled:
@@ -76,10 +95,13 @@ extension IDQInAppPurchaseManager: SKPaymentTransactionObserver {
                 }
                 SKPaymentQueue.default().finishTransaction($0)
             case .restored:
+                purchaseState = .restored
                 SKPaymentQueue.default().finishTransaction($0)
             case .deferred:
+                purchaseState = .none
                 break
             @unknown default:
+                purchaseState = .none
                 break
             }
         }

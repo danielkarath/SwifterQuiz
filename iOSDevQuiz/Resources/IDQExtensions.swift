@@ -6,7 +6,54 @@
 //
 
 import UIKit
+import SwiftUI
 import MessageUI
+
+extension View {
+    @ViewBuilder
+    func particleEffect(systemImagename: String, font: Font, activeTint: Color, inactiveTint: Color, status: Bool) -> some View {
+        self
+            .modifier(
+                ParticleModifier(sytemImagename: systemImagename, font: font, status: status, activeTint: activeTint, inactiveTint: inactiveTint)
+            )
+    }
+    
+}
+
+fileprivate struct ParticleModifier: ViewModifier {
+    var sytemImagename: String
+    var font: Font
+    var status: Bool
+    var activeTint: Color
+    var inactiveTint: Color
+    @State private var particles: [IDQParticle] = []
+    
+    func body(content: Content) -> some View {
+        content
+            .overlay(alignment: .top) {
+                ZStack {
+                    ForEach(particles) { particle in
+                        Image(systemName: sytemImagename)
+                            .foregroundColor(status ? activeTint : inactiveTint)
+                            .scaleEffect(particle.scale)
+                            .offset(x: particle.randomX, y: particle.randomY)
+                            .opacity(particle.opacity)
+                            .opacity(status ? 1 : 0)
+                            .animation(.none, value: status)
+                    }
+                }
+                .onAppear {
+                    if particles.isEmpty {
+                        for _ in 0...15 {
+                            let particle = IDQParticle()
+                            particles.append(particle)
+                        }
+                    }
+                }
+            }
+    }
+    
+}
 
 extension UIView {
     

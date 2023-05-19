@@ -1521,10 +1521,27 @@ let quickQuizQuestionList: [IDQQuestion] = [
         ]
     ),
     
+    
+    //MARK: - RxSwift
+
+
+    IDQQuestion(
+        question: "When comparing RxSwift's Observable to Swift's Sequence the main advatage of Observable is that __________",
+        questionSerialNum: 0,
+        explanation: "The possible color schemes, corresponding to the light and dark appearances.",
+        reference: .appleDocumentation,
+        referenceURLString: "https://developer.apple.com/documentation/swiftui/colorscheme",
+        difficulty: .easy,
+        topic: .swiftui,
+        answers: [
+            IDQAnswer(text: "The UserInterfaceStyle environment value", answerType: .wrong),
+            IDQAnswer(text: "The traitCollectionDidChange method inside the onAppear(perform:) method", answerType: .wrong),
+            IDQAnswer(text: "The UserInterfaceStyle property value", answerType: .wrong),
+            IDQAnswer(text: "The ColorScheme environment value", answerType: .correct),
+        ]
+    ),
+    
 ]
-
-
-
 
 
 

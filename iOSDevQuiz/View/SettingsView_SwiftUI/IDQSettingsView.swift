@@ -10,11 +10,15 @@ import SwiftUI
 struct IDQSettingsView: View {
     
     let viewModel: IDQSettingsViewViewModel
+    @StateObject private var purchaseManager = IDQInAppPurchaseManager.shared
     
     @Environment(\.colorScheme) var colorScheme
     
     @State private var isAboutViewVisible = false
     @State private var isQuizSettingsVisible = false
+    @State private var showResultView = false
+    @State private var resultTitle = ""
+    @State private var resultMessage = ""
     
     init(viewModel: IDQSettingsViewViewModel) {
         self.viewModel = viewModel
@@ -37,6 +41,7 @@ struct IDQSettingsView: View {
                         .frame(width: cellWidth, height: 80, alignment: .leading)
                         .background(Color(IDQConstants.contentBackgroundColor))
                         .cornerRadius(14)
+                        //.particleEffect(systemImagename: "heart.fill", font: Font(IDQConstants.setFont(fontSize: 20, isBold: true)), activeTint: .red, inactiveTint: .gray, status: true)
                         .simultaneousGesture(TapGesture().onEnded {
                             if viewModel.type == .about {
                                 isAboutViewVisible.toggle()
@@ -64,6 +69,28 @@ struct IDQSettingsView: View {
                 .ignoresSafeArea()
         })
         .background(Color(IDQConstants.backgroundColor))
+        
+        .onReceive(purchaseManager.$purchaseState) { state in
+            switch state {
+            case .purchased:
+                resultTitle = "Thank you"
+                resultMessage = "Thank you for supporting my work!"
+                showResultView = true
+            case .failed:
+                guard let error = purchaseManager.purchaseError else { return }
+                resultTitle = "Failed"
+                resultMessage = "The purchase failed with error: \(error.localizedDescription)"
+                showResultView = true
+            default:
+                break
+            }
+        }
+        .fullScreenCover(isPresented: $showResultView) {
+            IDQDonationResultView(title: resultTitle, message: resultMessage) {
+                showResultView = false
+            }
+        }
+        
     }
 }
 
