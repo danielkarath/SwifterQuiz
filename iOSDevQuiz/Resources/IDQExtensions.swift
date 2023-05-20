@@ -18,6 +18,10 @@ extension View {
             )
     }
     
+    func shimmering() -> some View {
+        self.modifier(ShimmeringViewModifier())
+    }
+
 }
 
 fileprivate struct ParticleModifier: ViewModifier {

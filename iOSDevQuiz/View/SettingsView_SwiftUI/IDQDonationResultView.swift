@@ -13,9 +13,9 @@ struct IDQDonationResultView: View {
     var dismissAction: () -> Void
     
     private enum AnimationProperties {
-        static let animationSpeed: Double = 4.0
-        static let timerDuration: TimeInterval = 3.0
-        static let blurRadius: CGFloat = 130
+        static let animationSpeed: Double = 11.60
+        static let timerDuration: TimeInterval = 12.0
+        static let blurRadius: CGFloat = 100
     }
     @State private var timer = Timer.publish(every: AnimationProperties.timerDuration, on: .main, in: .common).autoconnect()
     
@@ -30,6 +30,34 @@ struct IDQDonationResultView: View {
         Text(message)
             .font(Font(IDQConstants.setFont(fontSize: 18, isBold: false)))
     }
+    
+    var okButton: some View {
+        ZStack {
+            Color.white.opacity(0.014)
+                .frame(width: 152, height: 42)
+                .blendMode(.difference)
+                .blendMode(.hue)
+                .modifier(ShimmeringViewModifier())
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.white.opacity(0.018), lineWidth: 2.20)
+                )
+            
+            Button(action: {
+                dismissAction()
+            }) {
+                Text("Return")
+                    .font(Font(IDQConstants.setFont(fontSize: 18, isBold: true)))
+                    .padding()
+                    .foregroundColor(.white)
+                    .blendMode(.difference)
+                    .overlay(Text("Return").font(Font(IDQConstants.setFont(fontSize: 18, isBold: true))).blendMode(.hue))
+                    .overlay(Text("Return").font(Font(IDQConstants.setFont(fontSize: 18, isBold: true))).foregroundColor(.black).blendMode(.overlay))
+            }
+        }
+    }
+
     
     var body: some View {
         ZStack {
@@ -52,18 +80,24 @@ struct IDQDonationResultView: View {
                     .blendMode(.difference)
                     .overlay(bodyText.blendMode(.hue))
                     .overlay(bodyText.foregroundColor(.black).blendMode(.overlay))
-                Button("OK") {
-                    dismissAction()
-                }
+                
+                okButton
+                .blendMode(.difference)
+                .overlay(okButton.blendMode(.hue))
+                .overlay(okButton.foregroundColor(.black).blendMode(.overlay))
                 .padding()
             }
         }
         .background(GradientColors.backgroundColor)
         .onAppear {
-            
+            animateCircle()
+            timer = Timer.publish(every: AnimationProperties.timerDuration, on: .main, in: .common).autoconnect()
         }
         .onDisappear {
             timer.upstream.connect().cancel()
+        }
+        .onReceive(timer) { _ in
+            animateCircle()
         }
     }
     private func animateCircle() {
@@ -137,7 +171,7 @@ private class CircleAnimator: ObservableObject {
     }
     
     static func generateRandomPosition() -> CGPoint {
-        return CGPoint(x: CGFloat.random(in: 0...1), y: CGFloat.random(in: 0...1))
+        return CGPoint(x: CGFloat.random(in: 0.10...0.90), y: CGFloat.random(in: 0.10...0.90))
     }
     
 }

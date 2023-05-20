@@ -106,6 +106,7 @@
 		39F42DA929F5818100370125 /* IDQRateTheAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F42DA829F5818100370125 /* IDQRateTheAppView.swift */; };
 		39F42DAB29F5826E00370125 /* IDQGradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F42DAA29F5826E00370125 /* IDQGradientImageView.swift */; };
 		39F42DAD29F592E900370125 /* IDQUserActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F42DAC29F592E900370125 /* IDQUserActivityManager.swift */; };
+		39F8CEFE2A18E2F000F310F9 /* IDQShimmeringViewMOdifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F8CEFD2A18E2F000F310F9 /* IDQShimmeringViewMOdifier.swift */; };
 		39FD9F5129F2A5C600FF1AD2 /* IDQBookmarkedQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD9F5029F2A5C600FF1AD2 /* IDQBookmarkedQuestionsViewController.swift */; };
 		39FD9F5329F2A64100FF1AD2 /* IDQBookmarkedQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD9F5229F2A64100FF1AD2 /* IDQBookmarkedQuestionsView.swift */; };
 /* End PBXBuildFile section */
@@ -235,6 +236,7 @@
 		39F42DA829F5818100370125 /* IDQRateTheAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQRateTheAppView.swift; sourceTree = "<group>"; };
 		39F42DAA29F5826E00370125 /* IDQGradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQGradientImageView.swift; sourceTree = "<group>"; };
 		39F42DAC29F592E900370125 /* IDQUserActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQUserActivityManager.swift; sourceTree = "<group>"; };
+		39F8CEFD2A18E2F000F310F9 /* IDQShimmeringViewMOdifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQShimmeringViewMOdifier.swift; sourceTree = "<group>"; };
 		39FD9F5029F2A5C600FF1AD2 /* IDQBookmarkedQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQBookmarkedQuestionsViewController.swift; sourceTree = "<group>"; };
 		39FD9F5229F2A64100FF1AD2 /* IDQBookmarkedQuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDQBookmarkedQuestionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -367,6 +369,7 @@
 				3914C92229B0DCE60001377B /* IDQConstants.swift */,
 				3914C92F29B0FBE90001377B /* IDQExtensions.swift */,
 				39EA5AB129F19C3A00E52DB1 /* IDQHighlightEffectViewModifier.swift */,
+				39F8CEFD2A18E2F000F310F9 /* IDQShimmeringViewMOdifier.swift */,
 				399DE06029F46EC9007BD3FF /* IDQGradientLabel.swift */,
 				392216D82A17A58500A9D4FE /* IDQParticle.swift */,
 				39F42DAA29F5826E00370125 /* IDQGradientImageView.swift */,
@@ -704,6 +707,7 @@
 				3952D1E129B8C6A10061C5C9 /* IDQPlayViewViewModel.swift in Sources */,
 				3914C91329B0D7E40001377B /* iOSDevQuiz.xcdatamodeld in Sources */,
 				39AFEEF229FBD2EC0034F532 /* IDQWeeklyPointsChartViewViewModel.swift in Sources */,
+				39F8CEFE2A18E2F000F310F9 /* IDQShimmeringViewMOdifier.swift in Sources */,
 				396793DD29E8961B00A476E2 /* IDQStatsUpperView.swift in Sources */,
 				39267BBA29E839AD007DD96F /* IDQStatsViewViewModel.swift in Sources */,
 				39962B3129C9EDA4001350F8 /* IDQResultCollectionViewCell.swift in Sources */,
